@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Coach Obs">
+  <meta name="theme-color" content="#FF6B00">
+  <title>Coach Obs — India T293</title>
+  <link rel="manifest" href="manifest_obs.json">
+  <link rel="apple-touch-icon" href="icon_obs_192.png">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d1117;color:#e6edf3;min-height:100vh;display:flex;flex-direction:column;user-select:none;-webkit-user-select:none}
+
+    /* ── HEADER ── */
+    .hdr{background:#161b22;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #FF6B00;position:sticky;top:0;z-index:100}
+    .hdr-left{display:flex;align-items:center;gap:10px}
+    .hdr-logo{width:28px;height:28px;background:#FF6B00;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+    .hdr-title{font-size:17px;font-weight:700;color:#e6edf3}
+    .hdr-sub{font-size:10px;color:#8b949e;margin-top:1px}
+    .hdr-badge{background:#f85149;color:#fff;border-radius:10px;padding:2px 8px;font-size:11px;font-weight:700;min-width:22px;text-align:center}
+    .lang-toggle{display:flex;border:1px solid #30363d;border-radius:8px;overflow:hidden;flex-shrink:0}
+    .lang-btn{padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer;background:#21262d;color:#8b949e;border:none;transition:all .15s;line-height:1}
+    .lang-btn.active{background:#FF6B00;color:#fff}
+
+    /* ── TABS ── */
+    .tabs{display:flex;background:#161b22;border-bottom:1px solid #30363d;position:sticky;top:53px;z-index:99}
+    .tab{flex:1;padding:10px 4px;text-align:center;cursor:pointer;font-size:12px;color:#8b949e;border-bottom:2px solid transparent;transition:all .2s;font-weight:500}
+    .tab.active{color:#FF6B00;border-bottom-color:#FF6B00;background:#1a1208}
+
+    /* ── CONTENT ── */
+    .content{flex:1;overflow-y:auto;padding:12px 12px 24px;-webkit-overflow-scrolling:touch}
+    .pane{display:none}
+    .pane.active{display:block}
+
+    /* ── SECTION LABELS ── */
+    .sec-lbl{font-size:11px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;margin:0 0 8px}
+    .sec-wrap{margin-bottom:14px}
+
+    /* ── ATHLETE GRID ── */
+    .ath-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .ath-btn{background:#1c2128;border:2px solid #30363d;border-radius:10px;padding:8px 3px 7px;cursor:pointer;text-align:center;transition:all .15s;position:relative}
+    .ath-name{font-size:10px;font-weight:600;line-height:1.3;display:block;color:#c9d1d9}
+    .ath-code{font-size:9px;color:#8b949e;display:block;margin-top:2px}
+    .ath-cls{font-size:8px;margin-top:3px;padding:1px 5px;border-radius:3px;display:inline-block;font-weight:600}
+    .ath-btn.u17 .ath-cls{background:#1f3a7a;color:#79c0ff}
+    .ath-btn.u15 .ath-cls{background:#1a3a1a;color:#7ee787}
+    .ath-btn.sel{border-color:#FF6B00;background:#1f1208}
+    .ath-btn.sel .ath-name{color:#FF6B00}
+    .ath-btn.sel::after{content:'✓';position:absolute;top:3px;right:4px;font-size:9px;color:#FF6B00}
+    .ath-all-btn{grid-column:1/-1;background:#21262d;border:1px solid #30363d;border-radius:8px;padding:7px;font-size:12px;color:#8b949e;cursor:pointer;text-align:center;transition:all .15s}
+    .ath-all-btn.sel{background:#1a1208;border-color:#FF6B00;color:#FF6B00}
+
+    /* ── CATEGORY CHIPS ── */
+    .cat-row{display:flex;flex-wrap:wrap;gap:5px}
+    .cat-chip{background:#21262d;border:1px solid #30363d;border-radius:16px;padding:5px 11px;font-size:12px;cursor:pointer;transition:all .15s;color:#c9d1d9;font-weight:500}
+    .cat-chip.sel{background:#FF6B00;border-color:#FF6B00;color:#fff;font-weight:600}
+
+    /* ── TEXT AREA ── */
+    .obs-textarea{width:100%;min-height:90px;background:#1c2128;border:1px solid #30363d;border-radius:10px;padding:11px;font-size:14px;color:#e6edf3;resize:vertical;font-family:inherit;line-height:1.55;-webkit-appearance:none}
+    .obs-textarea:focus{outline:none;border-color:#FF6B00;box-shadow:0 0 0 2px rgba(255,107,0,.15)}
+    .obs-textarea::placeholder{color:#484f58}
+
+    /* ── MIC BUTTON ── */
+    .mic-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0}
+    .mic-btn{width:76px;height:76px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:30px;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.5);-webkit-appearance:none;flex-shrink:0}
+    .mic-btn.idle{background:linear-gradient(135deg,#1f6feb,#0d4d99)}
+    .mic-btn.recording{background:linear-gradient(135deg,#f85149,#c0392b);animation:pulse 1.2s infinite}
+    .mic-btn.nosupport{background:#21262d;opacity:.5;cursor:not-allowed}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(248,81,73,.5)}60%{box-shadow:0 0 0 14px rgba(248,81,73,0)}100%{box-shadow:0 0 0 0 rgba(248,81,73,0)}}
+    .mic-status{font-size:12px;color:#8b949e;text-align:center;line-height:1.4;max-width:200px}
+    .mic-status.rec{color:#f85149;font-weight:600}
+    .mic-hint{font-size:11px;color:#484f58;text-align:center}
+
+    /* ── SAVE BUTTON ── */
+    .save-btn{width:100%;padding:14px;background:linear-gradient(135deg,#238636,#196d2d);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-appearance:none;margin-top:4px}
+    .save-btn:active{transform:scale(.97);opacity:.9}
+
+    /* ── FLASH ── */
+    .flash{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#238636;color:#fff;padding:9px 22px;border-radius:22px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+    .flash.show{opacity:1}
+    .flash.warn{background:#9e6a03}
+    .flash.err{background:#da3633}
+
+    /* ── LOG ── */
+    .log-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+    .log-filter{flex:1;background:#1c2128;border:1px solid #30363d;border-radius:8px;padding:8px 10px;font-size:13px;color:#e6edf3;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238b949e' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+    .log-count{font-size:12px;color:#8b949e;white-space:nowrap;font-weight:500}
+    .obs-card{background:#1c2128;border:1px solid #30363d;border-radius:10px;padding:11px 12px;margin-bottom:8px;position:relative;transition:border-color .15s}
+    .obs-card:hover{border-color:#484f58}
+    .obs-hdr{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:7px;padding-right:24px}
+    .obs-time{font-size:11px;color:#8b949e;font-weight:500}
+    .obs-ath-badge{font-size:11px;font-weight:700;background:#2d1a0a;color:#FF6B00;padding:2px 8px;border-radius:10px}
+    .obs-ath-none{font-size:11px;color:#484f58}
+    .obs-cat-badge{font-size:10px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;padding:2px 8px;border-radius:10px}
+    .obs-sync-ok{font-size:10px;color:#3fb950;font-weight:600}
+    .obs-sync-no{font-size:10px;color:#484f58}
+    .obs-text{font-size:13px;line-height:1.6;color:#c9d1d9;word-break:break-word}
+    .obs-del{position:absolute;top:9px;right:9px;background:none;border:none;color:#484f58;font-size:15px;cursor:pointer;padding:3px 5px;line-height:1;border-radius:4px;transition:color .15s,-webkit-tap-highlight-color .15s}
+    .obs-del:active{color:#f85149}
+    .empty-state{text-align:center;padding:50px 20px;color:#484f58}
+    .empty-icon{font-size:44px;display:block;margin-bottom:10px}
+    .empty-txt{font-size:14px}
+
+    /* ── SYNC TAB ── */
+    .sync-block{background:#1c2128;border:1px solid #30363d;border-radius:10px;padding:14px;margin-bottom:12px}
+    .sync-block label{font-size:11px;color:#8b949e;font-weight:600;text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:7px}
+    .url-input{width:100%;background:#0d1117;border:1px solid #30363d;border-radius:7px;padding:9px 10px;font-size:11px;color:#79c0ff;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
+    .url-input:focus{outline:none;border-color:#FF6B00}
+    .url-hint{font-size:10px;color:#484f58;margin-top:6px;line-height:1.4}
+    .stats-row{display:flex;gap:12px}
+    .stat-box{flex:1;background:#0d1117;border-radius:8px;padding:10px;text-align:center}
+    .stat-num{font-size:26px;font-weight:700;color:#FF6B00;line-height:1}
+    .stat-lbl{font-size:11px;color:#8b949e;margin-top:3px}
+    .sync-now-btn{width:100%;padding:13px;background:linear-gradient(135deg,#1f6feb,#0d4d99);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;transition:all .2s;margin-bottom:8px}
+    .sync-now-btn:active{transform:scale(.97)}
+    .sync-now-btn.ok{background:linear-gradient(135deg,#238636,#196d2d)}
+    .sync-now-btn.fail{background:linear-gradient(135deg,#da3633,#a01e1b)}
+    .sync-log-box{background:#0d1117;border-radius:7px;padding:9px;font-size:11px;color:#8b949e;font-family:'SF Mono',Menlo,monospace;max-height:110px;overflow-y:auto;line-height:1.6}
+    .div-line{height:1px;background:#30363d;margin:12px 0}
+    .danger-row{display:flex;gap:8px}
+    .danger-btn{flex:1;padding:10px;background:none;border:1px solid #da3633;border-radius:8px;color:#da3633;font-size:12px;font-weight:600;cursor:pointer;-webkit-appearance:none;transition:all .15s}
+    .danger-btn:active{background:#2d1115}
+
+    /* ── GOOGLE SHEETS SETUP GUIDE ── */
+    .guide-toggle{font-size:12px;color:#1f6feb;text-align:center;padding:6px;cursor:pointer;display:block}
+    .guide-box{display:none;background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:12px;margin-top:8px;font-size:11px;color:#8b949e;line-height:1.7}
+    .guide-box.open{display:block}
+    .guide-box ol{padding-left:16px}
+    .guide-box li{margin-bottom:4px}
+    .guide-box code{background:#21262d;padding:1px 5px;border-radius:3px;color:#79c0ff;font-size:10px}
+
+    /* ── DIVIDER ── */
+    .section-div{display:flex;align-items:center;gap:8px;margin:10px 0}
+    .section-div span{font-size:11px;color:#484f58;white-space:nowrap}
+    .section-div::before,.section-div::after{content:'';flex:1;height:1px;background:#21262d}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-logo">🎙️</div>
+    <div>
+      <div class="hdr-title">Coach Obs</div>
+      <div class="hdr-sub">India T293 · On-water tool</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="lang-ko" onclick="setLang('ko-KR')">한</button>
+      <button class="lang-btn" id="lang-en" onclick="setLang('en-US')">EN</button>
+    </div>
+    <div id="badge" class="hdr-badge" style="display:none">0</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" id="tab-record" onclick="showTab('record')">📝 기록</div>
+  <div class="tab" id="tab-log" onclick="showTab('log')">📋 로그</div>
+  <div class="tab" id="tab-sync" onclick="showTab('sync')">☁️ 동기화</div>
+</div>
+
+<div class="content">
+
+  <!-- ════════════════ RECORD TAB ════════════════ -->
+  <div class="pane active" id="pane-record">
+
+    <div class="sec-wrap">
+      <div class="sec-lbl">선수 선택</div>
+      <div class="ath-grid" id="ath-grid">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <div class="sec-wrap">
+      <div class="sec-lbl">카테고리</div>
+      <div class="cat-row" id="cat-row">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <div class="sec-wrap">
+      <div class="sec-lbl">관찰 내용</div>
+      <textarea class="obs-textarea" id="obs-txt"
+        placeholder="음성 녹음 결과가 자동으로 입력됩니다. 직접 입력도 가능합니다." rows="4"></textarea>
+    </div>
+
+    <div class="mic-wrap">
+      <button class="mic-btn idle" id="mic-btn" onclick="toggleVoice()">🎙️</button>
+      <div class="mic-status" id="mic-status">탭하여 음성 입력 시작</div>
+      <div class="mic-hint" id="mic-hint">음성 인식 중 말하면 실시간으로 텍스트가 입력됩니다</div>
+    </div>
+
+    <div class="section-div"><span>또는 직접 입력 후 저장</span></div>
+
+    <button class="save-btn" onclick="saveObs()">💾 관찰 저장</button>
+
+  </div>
+
+  <!-- ════════════════ LOG TAB ════════════════ -->
+  <div class="pane" id="pane-log">
+    <div class="log-toolbar">
+      <select class="log-filter" id="filter-ath" onchange="renderLog()">
+        <option value="">👥 전체 선수</option>
+      </select>
+      <div class="log-count" id="log-count">0건</div>
+    </div>
+    <div id="obs-list"></div>
+  </div>
+
+  <!-- ════════════════ SYNC TAB ════════════════ -->
+  <div class="pane" id="pane-sync">
+
+    <div class="sync-block">
+      <div style="display:flex;gap:10px" class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="sync-count">0</div>
+          <div class="stat-lbl">동기화 대기</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="synced-count">0</div>
+          <div class="stat-lbl">동기화 완료</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="total-count">0</div>
+          <div class="stat-lbl">전체 기록</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sync-block">
+      <label>Google Apps Script URL</label>
+      <input class="url-input" type="url" id="sheets-url"
+        placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+        oninput="saveSheetUrl()">
+      <div class="url-hint">⚠️ Google Sheets 연동 없이도 로컬 저장은 항상 동작합니다.<br>URL 설정은 선택사항입니다.</div>
+      <span class="guide-toggle" onclick="toggleGuide()">📋 Google Sheets 연동 설정 방법 보기 ▾</span>
+      <div class="guide-box" id="guide-box">
+        <ol>
+          <li>Google Sheets 새 파일 생성</li>
+          <li>헤더 행 추가: <code>timestamp | athlete | code | category | text | synced_at</code></li>
+          <li>메뉴 → 확장 프로그램 → Apps Script</li>
+          <li>아래 코드 붙여넣기:<br>
+<code>function doPost(e){
+  const data = JSON.parse(e.postData.contents);
+  const sheet = SpreadsheetApp.getActiveSheet();
+  data.observations.forEach(o=>{
+    sheet.appendRow([o.ts,o.athlete||'',o.athleteCode||'',
+      o.category,o.text,new Date().toISOString()]);
+  });
+  return ContentService.createTextOutput('ok');
+}</code></li>
+          <li>배포 → 새 배포 → 웹 앱 → 액세스: 모든 사용자 → 배포</li>
+          <li>배포 URL을 위 입력창에 붙여넣기</li>
+        </ol>
+      </div>
+    </div>
+
+    <button class="sync-now-btn" id="sync-now-btn" onclick="syncToSheets()">
+      ☁️ 지금 동기화
+    </button>
+    <div class="sync-log-box" id="sync-log">동기화 로그가 여기에 표시됩니다</div>
+
+    <div class="div-line"></div>
+
+    <div class="danger-row">
+      <button class="danger-btn" onclick="clearSynced()">✓ 동기화완료 삭제</button>
+      <button class="danger-btn" onclick="clearAll()">⚠️ 전체 삭제</button>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="flash" id="flash"></div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+//  CONSTANTS
+// ════════════════════════════════════════════════════════════
+const ATHLETES = [
+  { name: 'Mohit',     fullName: 'Mohit Mhatre',         code: 'IND16',  cls: 'U17', gender: 'M' },
+  { name: 'Soham',     fullName: 'Soham Rajput',          code: 'IND261', cls: 'U17', gender: 'M' },
+  { name: 'Rashmita',  fullName: 'Rashmita Thimiti',      code: 'IND18',  cls: 'U17', gender: 'F' },
+  { name: 'Tejasvi',   fullName: 'Tejasvi Prajapati',     code: 'IND39',  cls: 'U17', gender: 'F' },
+  { name: 'Udaiveer',  fullName: 'Udaiveer Singh Johal',  code: 'IND01',  cls: 'U15', gender: 'M' },
+  { name: 'Vihaan',    fullName: 'Vihaan Prakash',        code: 'IND7',   cls: 'U15', gender: 'M' },
+  { name: 'Vaishnavi', fullName: 'Vaishnavi Kajale',      code: 'IND02',  cls: 'U15', gender: 'F' },
+  { name: 'Priyanshi', fullName: 'Priyanshi Patil',       code: 'IND11',  cls: 'U15', gender: 'F' }
+];
+
+const CATEGORIES = ['기술','전술','스타트','체력','멘탈','장비','풍향/세기','튜닝','일반'];
+
+const STORAGE_KEY  = 'quickobs_v1';
+const URL_KEY      = 'quickobs_sheets_url';
+const LANG_KEY     = 'quickobs_lang';
+
+let currentLang = localStorage.getItem(LANG_KEY) || 'ko-KR';
+
+// ════════════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════════════
+let observations   = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+let currentAthlete = null;   // athlete code string or null
+let currentCat     = '일반';
+let recognition    = null;
+let isRecording    = false;
+let baseText       = '';     // accumulated final text before current recognition session
+
+// ════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════
+function init() {
+  renderAthletes();
+  renderCategories();
+  renderLog();
+  updateBadge();
+  updateSyncCounts();
+
+  // Restore URL
+  document.getElementById('sheets-url').value = localStorage.getItem(URL_KEY) || '';
+
+  // Populate log filter
+  const sel = document.getElementById('filter-ath');
+  ATHLETES.forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a.code;
+    opt.textContent = a.name + ' (' + a.code + ')';
+    sel.appendChild(opt);
+  });
+
+  initSpeech();
+  applyLangUI();
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  applyLangUI();
+  // Restart recognition with new language if currently recording
+  if (isRecording) {
+    stopRecording();
+    if (recognition) {
+      recognition.lang = lang;
+      setTimeout(startRecording, 300);
+    }
+  } else if (recognition) {
+    recognition.lang = lang;
+  }
+}
+
+function applyLangUI() {
+  const isKo = currentLang === 'ko-KR';
+  document.getElementById('lang-ko').classList.toggle('active', isKo);
+  document.getElementById('lang-en').classList.toggle('active', !isKo);
+  const hint = document.getElementById('mic-hint');
+  if (hint) hint.textContent = isKo
+    ? '한국어 음성 인식 · 전문용어 영어 혼용 가능'
+    : 'English voice recognition active';
+}
+
+// ════════════════════════════════════════════════════════════
+//  ATHLETES
+// ════════════════════════════════════════════════════════════
+function renderAthletes() {
+  const grid = document.getElementById('ath-grid');
+  grid.innerHTML = ATHLETES.map(a => `
+    <div class="ath-btn ${a.cls.toLowerCase()}" id="ath-${a.code}" onclick="selectAthlete('${a.code}')">
+      <span class="ath-name">${a.name}</span>
+      <span class="ath-code">${a.code}</span>
+      <span class="ath-cls">${a.cls} ${a.gender}</span>
+    </div>
+  `).join('');
+}
+
+function selectAthlete(code) {
+  if (currentAthlete === code) {
+    currentAthlete = null;
+  } else {
+    currentAthlete = code;
+  }
+  document.querySelectorAll('.ath-btn').forEach(b => b.classList.remove('sel'));
+  if (currentAthlete) {
+    document.getElementById('ath-' + currentAthlete)?.classList.add('sel');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  CATEGORIES
+// ════════════════════════════════════════════════════════════
+function renderCategories() {
+  const row = document.getElementById('cat-row');
+  row.innerHTML = CATEGORIES.map(c => `
+    <div class="cat-chip${c === currentCat ? ' sel' : ''}" onclick="selectCat('${c}')">${c}</div>
+  `).join('');
+}
+
+function selectCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-chip').forEach(c => {
+    c.classList.toggle('sel', c.textContent === cat);
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+//  SPEECH RECOGNITION
+// ════════════════════════════════════════════════════════════
+function initSpeech() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    document.getElementById('mic-btn').className = 'mic-btn nosupport';
+    document.getElementById('mic-btn').textContent = '🚫';
+    document.getElementById('mic-status').textContent = '음성 인식 미지원 브라우저 (Chrome/Safari 권장)';
+    document.getElementById('mic-hint').textContent = '직접 텍스트 입력을 사용해 주세요';
+    return;
+  }
+
+  recognition = new SR();
+  recognition.continuous    = true;
+  recognition.interimResults = true;
+  recognition.lang          = currentLang;
+
+  recognition.onstart = () => {
+    isRecording = true;
+    baseText = document.getElementById('obs-txt').value;
+    document.getElementById('mic-btn').className = 'mic-btn recording';
+    document.getElementById('mic-btn').textContent = '⏹';
+    setMicStatus('🔴 녹음 중... 말씀하세요', true);
+  };
+
+  recognition.onresult = (e) => {
+    let interim = '';
+    let addedFinal = baseText;
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript;
+      if (e.results[i].isFinal) {
+        addedFinal = (addedFinal ? addedFinal + ' ' : '') + t.trim();
+      } else {
+        interim += t;
+      }
+    }
+    baseText = addedFinal;
+    document.getElementById('obs-txt').value = addedFinal + (interim ? ' ' + interim : '');
+  };
+
+  recognition.onerror = (e) => {
+    console.warn('Speech error:', e.error);
+    if (e.error === 'not-allowed') {
+      setMicStatus('마이크 권한을 허용해 주세요', false);
+      showFlash('마이크 권한 필요', 'warn');
+    } else if (e.error === 'no-speech') {
+      // continue — this is normal
+    } else {
+      setMicStatus('오류 발생: ' + e.error, false);
+    }
+    if (e.error !== 'no-speech' && e.error !== 'aborted') {
+      stopRecording();
+    }
+  };
+
+  recognition.onend = () => {
+    // Auto-restart to keep continuous recording
+    if (isRecording) {
+      try { recognition.start(); }
+      catch(err) { stopRecording(); }
+    }
+  };
+}
+
+function toggleVoice() {
+  if (!recognition) return;
+  if (isRecording) {
+    stopRecording();
+  } else {
+    startRecording();
+  }
+}
+
+function startRecording() {
+  if (!recognition) return;
+  try { recognition.start(); }
+  catch(e) { console.log('Start error:', e); }
+}
+
+function stopRecording() {
+  isRecording = false;
+  if (recognition) {
+    try { recognition.stop(); } catch(e) {}
+  }
+  document.getElementById('mic-btn').className = 'mic-btn idle';
+  document.getElementById('mic-btn').textContent = '🎙️';
+  setMicStatus('탭하여 음성 입력 시작', false);
+}
+
+function setMicStatus(msg, isRec) {
+  const el = document.getElementById('mic-status');
+  el.textContent = msg;
+  el.className = 'mic-status' + (isRec ? ' rec' : '');
+}
+
+// ════════════════════════════════════════════════════════════
+//  SAVE OBSERVATION
+// ════════════════════════════════════════════════════════════
+function saveObs() {
+  const txt = document.getElementById('obs-txt').value.trim();
+  if (!txt) {
+    showFlash('관찰 내용을 입력하세요', 'warn');
+    return;
+  }
+
+  if (isRecording) stopRecording();
+
+  const ath = ATHLETES.find(a => a.code === currentAthlete);
+  const entry = {
+    id:          Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+    ts:          new Date().toISOString(),
+    athlete:     ath ? ath.fullName : null,
+    athleteCode: currentAthlete || null,
+    category:    currentCat,
+    text:        txt,
+    synced:      false
+  };
+
+  observations.unshift(entry);
+  persist();
+  updateBadge();
+  updateSyncCounts();
+
+  // Reset text area + base
+  document.getElementById('obs-txt').value = '';
+  baseText = '';
+
+  const label = ath ? ath.name + ' 저장됨 ✓' : '저장됨 ✓';
+  showFlash(label, 'ok');
+}
+
+// ════════════════════════════════════════════════════════════
+//  LOG / RENDER
+// ════════════════════════════════════════════════════════════
+function renderLog() {
+  const filterCode = document.getElementById('filter-ath')?.value || '';
+  const filtered = filterCode
+    ? observations.filter(o => o.athleteCode === filterCode)
+    : observations;
+
+  const list = document.getElementById('obs-list');
+  document.getElementById('log-count').textContent = filtered.length + '건';
+
+  if (!filtered.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <span class="empty-icon">📋</span>
+        <div class="empty-txt">저장된 관찰 기록이 없습니다</div>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(o => `
+    <div class="obs-card" id="card-${o.id}">
+      <button class="obs-del" onclick="deleteObs('${o.id}')">✕</button>
+      <div class="obs-hdr">
+        <span class="obs-time">${formatTime(o.ts)}</span>
+        ${o.athlete
+          ? `<span class="obs-ath-badge">${o.athlete.split(' ')[0]}</span>`
+          : `<span class="obs-ath-none">선수 미지정</span>`}
+        <span class="obs-cat-badge">${o.category}</span>
+        <span class="${o.synced ? 'obs-sync-ok' : 'obs-sync-no'}">${o.synced ? '☁✓' : '⏳'}</span>
+      </div>
+      <div class="obs-text">${escHtml(o.text)}</div>
+    </div>
+  `).join('');
+}
+
+function deleteObs(id) {
+  if (!confirm('이 기록을 삭제할까요?')) return;
+  observations = observations.filter(o => o.id !== id);
+  persist();
+  renderLog();
+  updateBadge();
+  updateSyncCounts();
+}
+
+// ════════════════════════════════════════════════════════════
+//  SYNC
+// ════════════════════════════════════════════════════════════
+function saveSheetUrl() {
+  localStorage.setItem(URL_KEY, document.getElementById('sheets-url').value.trim());
+}
+
+async function syncToSheets() {
+  const url = localStorage.getItem(URL_KEY)?.trim();
+  if (!url) {
+    addSyncLog('❌ Apps Script URL을 먼저 입력하세요');
+    showFlash('URL 먼저 입력', 'warn');
+    return;
+  }
+
+  const unsynced = observations.filter(o => !o.synced);
+  if (!unsynced.length) {
+    addSyncLog('✅ 동기화할 새 기록이 없습니다');
+    showFlash('이미 동기화 완료', 'ok');
+    return;
+  }
+
+  const btn = document.getElementById('sync-now-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ 동기화 중...';
+  addSyncLog('📤 ' + unsynced.length + '건 전송 중...');
+
+  try {
+    const resp = await fetch(url, {
+      method:  'POST',
+      mode:    'no-cors',   // Apps Script requires this from external origins
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ observations: unsynced, source: 'quick_obs' })
+    });
+
+    // no-cors returns opaque response — treat as success
+    const syncedIds = new Set(unsynced.map(o => o.id));
+    observations = observations.map(o =>
+      syncedIds.has(o.id) ? { ...o, synced: true } : o
+    );
+    persist();
+    renderLog();
+    updateBadge();
+    updateSyncCounts();
+
+    btn.className  = 'sync-now-btn ok';
+    btn.textContent = '✅ 동기화 완료';
+    addSyncLog('✅ ' + unsynced.length + '건 전송 완료 (Google Sheets 확인 바람)');
+    showFlash(unsynced.length + '건 동기화 완료', 'ok');
+
+  } catch (e) {
+    btn.className  = 'sync-now-btn fail';
+    btn.textContent = '❌ 실패';
+    addSyncLog('❌ 오류: ' + e.message);
+    showFlash('동기화 실패: ' + e.message, 'err');
+  }
+
+  setTimeout(() => {
+    btn.className  = 'sync-now-btn';
+    btn.textContent = '☁️ 지금 동기화';
+    btn.disabled   = false;
+  }, 2500);
+}
+
+function addSyncLog(msg) {
+  const el = document.getElementById('sync-log');
+  const t  = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  el.innerHTML = '<span style="color:#484f58">[' + t + ']</span> ' + escHtml(msg) + '\n' + el.innerHTML;
+}
+
+function clearSynced() {
+  const n = observations.filter(o => o.synced).length;
+  if (!n) { showFlash('삭제할 기록 없음', 'warn'); return; }
+  if (!confirm(n + '건의 동기화 완료 기록을 삭제할까요?')) return;
+  observations = observations.filter(o => !o.synced);
+  persist();
+  renderLog();
+  updateBadge();
+  updateSyncCounts();
+  showFlash(n + '건 삭제 완료');
+}
+
+function clearAll() {
+  if (!observations.length) { showFlash('기록 없음', 'warn'); return; }
+  if (!confirm('모든 관찰 기록(' + observations.length + '건)을 삭제할까요?\n이 작업은 복구할 수 없습니다.')) return;
+  observations = [];
+  persist();
+  renderLog();
+  updateBadge();
+  updateSyncCounts();
+  showFlash('전체 삭제 완료');
+}
+
+// ════════════════════════════════════════════════════════════
+//  UI UTILITIES
+// ════════════════════════════════════════════════════════════
+function showTab(tab) {
+  ['record', 'log', 'sync'].forEach(t => {
+    document.getElementById('pane-' + t).classList.toggle('active', t === tab);
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+  if (tab === 'log')  renderLog();
+  if (tab === 'sync') updateSyncCounts();
+}
+
+function updateBadge() {
+  const n = observations.filter(o => !o.synced).length;
+  const el = document.getElementById('badge');
+  el.textContent = n;
+  el.style.display = n > 0 ? '' : 'none';
+}
+
+function updateSyncCounts() {
+  const unsynced = observations.filter(o => !o.synced).length;
+  const synced   = observations.filter(o =>  o.synced).length;
+  document.getElementById('sync-count').textContent   = unsynced;
+  document.getElementById('synced-count').textContent = synced;
+  document.getElementById('total-count').textContent  = observations.length;
+}
+
+function persist() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+}
+
+function formatTime(iso) {
+  const d = new Date(iso);
+  const mo = (d.getMonth() + 1);
+  const da = d.getDate();
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  return mo + '/' + da + ' ' + hh + ':' + mm;
+}
+
+function escHtml(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+}
+
+let flashTimer = null;
+function showFlash(msg, type) {
+  const el = document.getElementById('flash');
+  el.textContent = msg;
+  el.className = 'flash show' + (type === 'warn' ? ' warn' : type === 'err' ? ' err' : '');
+  if (flashTimer) clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+function toggleGuide() {
+  const box = document.getElementById('guide-box');
+  box.classList.toggle('open');
+}
+
+// ════════════════════════════════════════════════════════════
+//  SERVICE WORKER REGISTRATION (PWA)
+// ════════════════════════════════════════════════════════════
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw_obs.js')
+      .then(r => console.log('SW registered:', r.scope))
+      .catch(e => console.log('SW failed:', e));
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+//  START
+// ════════════════════════════════════════════════════════════
+init();
+</script>
+</body>
+</html>
