@@ -1,0 +1,27 @@
+{
+  "name": "Coach Obs — India T293",
+  "short_name": "Coach Obs",
+  "description": "On-water athlete observation tool for India T293 coaching team. Voice recording + offline storage + Google Sheets sync.",
+  "start_url": "quick_obs.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#FF6B00",
+  "lang": "ko",
+  "categories": ["sports", "productivity"],
+  "icons": [
+    {
+      "src": "icon_obs_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon_obs_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
