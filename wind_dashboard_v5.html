@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0C3282">
+<link rel="manifest" href="manifest_wind.json">
+<link rel="apple-touch-icon" href="icon_wind_192.png">
 <title>Wind Dashboard v5 — India T293</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -136,25 +140,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="content">
   <div class="cards">
-    <div class="card"><div class="card-val" id="c-speed">—</div><div class="card-unit">knots</div><div class="card-label">풍속</div></div>
-    <div class="card"><div class="card-val" id="c-dir">—</div><div class="card-unit" id="c-deg">—</div><div class="card-label">풍향</div></div>
-    <div class="card"><div class="card-val" id="c-pump">—</div><div class="card-unit" id="c-pump-sub">—</div><div class="card-label">펌핑</div></div>
-    <div class="card"><div class="card-val" id="c-shift">—</div><div class="card-unit" id="c-shift-sub">—</div><div class="card-label">시프트</div></div>
+    <div class="card"><div class="card-val" id="c-speed">—</div><div class="card-unit">knots</div><div class="card-label">SPEED</div></div>
+    <div class="card"><div class="card-val" id="c-dir">—</div><div class="card-unit" id="c-deg">—</div><div class="card-label">DIR</div></div>
+    <div class="card"><div class="card-val" id="c-pump">—</div><div class="card-unit" id="c-pump-sub">—</div><div class="card-label">PUMP</div></div>
+    <div class="card"><div class="card-val" id="c-shift">—</div><div class="card-unit" id="c-shift-sub">—</div><div class="card-label">SHIFT</div></div>
   </div>
 
   <div class="section" id="course-section" style="display:none">
-    <div class="sec-title">🏁 레이스 코스 시뮬레이션 <span class="sec-badge" style="background:#1a2a3a;color:#79c0ff">LIVE</span></div>
+    <div class="sec-title">🏁 Race Course Simulation <span class="sec-badge" style="background:#1a2a3a;color:#79c0ff">LIVE</span></div>
     <div class="course-wrap">
       <canvas class="course-canvas" id="course-canvas"></canvas>
       <div class="course-info" id="course-info"></div>
       <div class="course-legend">
-        <div class="cl-item"><div class="cl-line" style="background:#7ee787"></div>STB 레이라인</div>
-        <div class="cl-item"><div class="cl-line" style="background:#f85149"></div>PORT 레이라인</div>
-        <div class="cl-item"><div class="cl-line" style="background:#79c0ff;height:2px;border-top:2px dashed #79c0ff"></div>최적 경로</div>
-        <div class="cl-item"><div class="cl-line" style="background:rgba(255,107,0,.4)"></div>유리한 사이드</div>
+        <div class="cl-item"><div class="cl-line" style="background:#7ee787"></div>STB Layline</div>
+        <div class="cl-item"><div class="cl-line" style="background:#f85149"></div>PORT Layline</div>
+        <div class="cl-item"><div class="cl-line" style="background:#79c0ff;height:2px;border-top:2px dashed #79c0ff"></div>Optimal Path</div>
+        <div class="cl-item"><div class="cl-line" style="background:rgba(255,107,0,.4)"></div>Favored Side</div>
       </div>
       <div style="width:100%;margin-top:12px">
-        <div style="font-size:11px;font-weight:700;color:#FF6B00;margin-bottom:6px">📊 전략 우선순위 평가 <span style="font-size:8px;color:#d0d7de;font-weight:400">(일반 세일링 이론 기반 추정 — 책/실측 데이터로 보정 필요)</span></div>
+        <div style="font-size:11px;font-weight:700;color:#FF6B00;margin-bottom:6px">📊 Strategy Priority Assessment <span style="font-size:8px;color:#d0d7de;font-weight:400">(Based on general sailing theory — calibrate with actual data)</span></div>
         <div class="strat-grid" id="strat-grid"></div>
       </div>
       <div class="tactic-section" id="tactic-section"></div>
@@ -165,20 +169,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <!-- ═══ FORECAST STRIP ═══ -->
   <div class="fc-section" id="fc-section">
     <div class="fc-title">
-      <span>📡 시간별 예보 <span class="fc-badge">ECMWF via Open-Meteo</span></span>
+      <span>📡 Hourly Forecast <span class="fc-badge">ECMWF via Open-Meteo</span></span>
       <span class="fc-loc" id="fc-loc" onclick="shareLocation()" style="display:flex;align-items:center;gap:4px">
-        <span style="background:#FF6B00;color:#fff;font-size:8px;padding:2px 6px;border-radius:8px;font-weight:700">📍 실시간 위치 공유</span>
+        <span style="background:#1a2a3a;color:#79c0ff;font-size:8px;padding:2px 6px;border-radius:8px;font-weight:700">📍 Foça, Turkey</span>
       </span>
     </div>
     <div class="fc-scroll" id="fc-scroll">
       <div class="fc-strip" id="fc-strip">
-        <div style="padding:20px;color:#8b949e;font-size:11px">예보 로딩 중...</div>
+        <div style="padding:20px;color:#8b949e;font-size:11px">Loading forecast...</div>
       </div>
     </div>
   </div>
 
   <div class="section" id="tl-section">
-    <div class="sec-title">💨 풍속 · 풍향 타임라인 <span class="sec-badge" style="background:#1f3a7a;color:#79c0ff">Beaufort Color</span></div>
+    <div class="sec-title">💨 Wind Speed · Direction Timeline <span class="sec-badge" style="background:#1f3a7a;color:#79c0ff">Beaufort Color</span></div>
     <div class="tl-scroll" id="tl-scroll"><canvas class="tl-canvas" id="tl-canvas"></canvas></div>
     <div class="zoom-row">
       <button class="zoom-btn" onclick="zoomIn()">＋</button>
@@ -186,17 +190,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="zoom-btn" onclick="zoomOut()">－</button>
       <button class="zoom-btn" onclick="zoomFit()" style="width:auto;padding:0 10px;font-size:11px">FIT</button>
     </div>
-    <div class="zoom-hint">두 손가락 줌 · 좌우 스크롤</div>
+    <div class="zoom-hint">Pinch to zoom · Scroll</div>
     <div class="legend" id="legend-area"></div>
   </div>
 
   <div class="section">
-    <div class="sec-title">🧠 바람 패턴 분석 · 예측 <span class="sec-badge" style="background:#3a1a2a;color:#f778ba">AI</span></div>
+    <div class="sec-title">🧠 Wind Pattern Analysis · Prediction <span class="sec-badge" style="background:#3a1a2a;color:#f778ba">AI</span></div>
     <div class="pred-panel" id="pred-panel"></div>
   </div>
 
   <div class="section">
-    <div class="sec-title">📋 기록 로그 <span class="sec-badge" style="background:#1a2a1a;color:#7ee787">Detail</span></div>
+    <div class="sec-title">📋 Record Log <span class="sec-badge" style="background:#1a2a1a;color:#7ee787">Detail</span></div>
     <div id="log-area"></div>
   </div>
 
@@ -233,16 +237,16 @@ function windShift(p,c){let d=c-p;if(d>180)d-=360;if(d<-180)d+=360;if(Math.abs(d
 // Sub-planing(daggerboard DOWN) → wider pointing, slower
 // Planing(daggerboard UP) → narrower pointing possible at speed, better VMG
 function t293TackAngle(ws){
-  // T293: 대거보드 DOWN = 서브플래닝 (약풍~중풍, 넓은 각도)
-  // 대거보드 UP = 플래닝 (강풍, 좁은 각도, 높은 VMG)
-  if(ws<=4)return{tack:110,half:55,mode:'SUB-PLANING',dagger:'DOWN',desc:'대거보드↓ 저풍속'};
-  if(ws<=7)return{tack:105,half:52.5,mode:'SUB-PLANING',dagger:'DOWN',desc:'대거보드↓ 약풍'};
-  if(ws<=9)return{tack:100,half:50,mode:'SUB-PLANING',dagger:'DOWN',desc:'대거보드↓ 중풍'};
-  if(ws<=11)return{tack:95,half:47.5,mode:'TRANSITION',dagger:'PULLING UP',desc:'전환구간 대거↑중'};
-  if(ws<=13)return{tack:90,half:45,mode:'PLANING',dagger:'UP',desc:'플래닝'};
-  if(ws<=16)return{tack:85,half:42.5,mode:'FULL PLANE',dagger:'UP',desc:'완전 플래닝'};
-  if(ws<=20)return{tack:90,half:45,mode:'OVERPOWERED',dagger:'UP',desc:'오버파워'};
-  return{tack:95,half:47.5,mode:'SURVIVAL',dagger:'UP',desc:'서바이벌'};
+  // T293: Daggerboard DOWN = sub-planing (light-med wind, wider angle)
+  // Daggerboard UP = planing (strong wind, narrower angle, better VMG)
+  if(ws<=4)return{tack:110,half:55,mode:'SUB-PLANING',dagger:'DOWN',desc:'Dagger↓ Light'};
+  if(ws<=7)return{tack:105,half:52.5,mode:'SUB-PLANING',dagger:'DOWN',desc:'Dagger↓ Low'};
+  if(ws<=9)return{tack:100,half:50,mode:'SUB-PLANING',dagger:'DOWN',desc:'Dagger↓ Med'};
+  if(ws<=11)return{tack:95,half:47.5,mode:'TRANSITION',dagger:'PULLING UP',desc:'Transition Dagger↑'};
+  if(ws<=13)return{tack:90,half:45,mode:'PLANING',dagger:'UP',desc:'Planing'};
+  if(ws<=16)return{tack:85,half:42.5,mode:'FULL PLANE',dagger:'UP',desc:'Full Planing'};
+  if(ws<=20)return{tack:90,half:45,mode:'OVERPOWERED',dagger:'UP',desc:'Overpowered'};
+  return{tack:95,half:47.5,mode:'SURVIVAL',dagger:'UP',desc:'Survival'};
 }
 
 // ═══ WIND ANALYSIS ═══
@@ -280,33 +284,36 @@ function analyzeWind(data){
 }
 
 // ═══ FOÇA VENUE DATA ═══
-// Foça: 서향 만(W-facing bay), NE 바람 우세, 4월 thermal cycle
-// 아침 약풍→오후 강풍, Meltemi 시즌 전이라 비교적 안정
-// ═══ FORECAST — Open-Meteo (무료, API키 불필요) ═══
+// Foça: W-facing bay, NE wind dominant, April thermal cycle
+// Morning light → afternoon strong, pre-Meltemi season relatively stable
+// ═══ FORECAST — Open-Meteo (free, no API key required) ═══
 const FC_PRESETS={
   'Foça, Turkey':{lat:38.67,lon:26.75},
-  '궁평리, Korea':{lat:37.05,lon:126.68}
+  'Gungpyeong, Korea':{lat:37.05,lon:126.68}
 };
-let fcLoc={name:'GPS 감지 중...',lat:null,lon:null};
+let fcLoc={name:'Detecting GPS...',lat:null,lon:null};
 let fcData=null;
 
 function initForecastLocation(){
-  // GPS 위치 자동 감지
+  // Start with Foça default immediately, update if GPS succeeds
+  let gpsResolved=false;
+  // Load Foça forecast right away (don't wait for GPS)
+  fcLoc=Object.assign({name:'Foça, Turkey'},FC_PRESETS['Foça, Turkey']);
+  fetchForecast();
+  // Then try GPS in parallel
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
-      pos=>{fcLoc.lat=pos.coords.latitude;fcLoc.lon=pos.coords.longitude;fcLoc.name='📍 '+fcLoc.lat.toFixed(3)+', '+fcLoc.lon.toFixed(3);
+      pos=>{gpsResolved=true;fcLoc.lat=pos.coords.latitude;fcLoc.lon=pos.coords.longitude;fcLoc.name='📍 '+fcLoc.lat.toFixed(3)+', '+fcLoc.lon.toFixed(3);
         document.getElementById('fc-loc').innerHTML='<span style="background:#238636;color:#fff;font-size:8px;padding:2px 6px;border-radius:8px">'+fcLoc.name+'</span>';fetchForecast();},
-      ()=>{fcLoc=Object.assign({name:'Foça, Turkey'},FC_PRESETS['Foça, Turkey']);document.getElementById('fc-loc').innerHTML='<span style="background:#1a2a3a;color:#79c0ff;font-size:8px;padding:2px 6px;border-radius:8px">📍 실시간 위치 공유</span>';fetchForecast();},
+      ()=>{},
       {enableHighAccuracy:false,timeout:8000}
     );
-  } else {
-    fcLoc=Object.assign({name:'Foça, Turkey'},FC_PRESETS['Foça, Turkey']);fetchForecast();
   }
 }
 
 function shareLocation(){
   const el=document.getElementById('fc-loc');
-  el.innerHTML='<span style="background:#333;color:#ffa657;font-size:8px;padding:2px 6px;border-radius:8px">📡 감지 중...</span>';
+  el.innerHTML='<span style="background:#333;color:#ffa657;font-size:8px;padding:2px 6px;border-radius:8px">📡 Detecting...</span>';
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
       pos=>{
@@ -321,11 +328,11 @@ function shareLocation(){
           el.innerHTML='<span style="background:#238636;color:#fff;font-size:8px;padding:2px 6px;border-radius:8px">'+fcLoc.name+'</span>';
         },{enableHighAccuracy:true});
       },
-      err=>{el.innerHTML='<span style="background:#d02020;color:#fff;font-size:8px;padding:2px 6px;border-radius:8px">위치 허용 필요</span>';},
+      err=>{el.innerHTML='<span style="background:#d02020;color:#fff;font-size:8px;padding:2px 6px;border-radius:8px">Location required</span>';},
       {enableHighAccuracy:true,timeout:10000}
     );
   } else {
-    el.innerHTML='<span style="color:#f85149;font-size:9px">GPS 미지원</span>';
+    el.innerHTML='<span style="color:#f85149;font-size:9px">GPS not supported</span>';
   }
 }
 
@@ -336,7 +343,7 @@ async function fetchForecast(){
     const res=await fetch(url);
     const json=await res.json();
     fcData=json;renderForecast(json);
-  }catch(e){document.getElementById('fc-strip').innerHTML='<div style="padding:20px;color:#f85149;font-size:11px">예보 로딩 실패: '+e.message+'</div>';}
+  }catch(e){document.getElementById('fc-strip').innerHTML='<div style="padding:20px;color:#f85149;font-size:11px">Forecast error: '+e.message+'</div>';}
 }
 
 function renderForecast(json){
@@ -366,7 +373,7 @@ function renderForecast(json){
     const ax=Math.sin(arrowRad)*6, ay=-Math.cos(arrowRad)*6;
     const svg=`<svg class="fc-arrow" viewBox="-10 -10 20 20"><line x1="${-ax}" y1="${-ay}" x2="${ax}" y2="${ay}" stroke="${col}" stroke-width="2" stroke-linecap="round"/><polygon points="${ax},${ay} ${ax-Math.cos(arrowRad)*3+Math.sin(arrowRad)*2},${ay-Math.sin(arrowRad)*3-Math.cos(arrowRad)*2} ${ax-Math.cos(arrowRad)*3-Math.sin(arrowRad)*2},${ay-Math.sin(arrowRad)*3+Math.cos(arrowRad)*2}" fill="${col}"/></svg>`;
     html+=`<div class="fc-col${isNow?' fc-now':''}">
-      <div class="fc-time">${hr}시</div>
+      <div class="fc-time">${hr}:00</div>
       ${svg}
       <div class="fc-kn" style="color:${col}">${ws}</div>
       <div class="fc-gust" style="color:${gcol}">G${gust}</div>
@@ -382,33 +389,33 @@ function renderForecast(json){
 setInterval(fetchForecast,30*60*1000);
 
 const FOCA={
-  coastDir:270, // 해안선 방향 (서향)
-  thermalPeak:15, // thermal peak 시간 (15:00)
-  thermalDir:30, // thermal 바람 방향 (NE)
-  tidalRange:0.3, // 조수 범위 (m) — 에게해 미미
-  sheltered:true // 만 안에 위치 — 파도 보호
+  coastDir:270, // Coast direction (W-facing)
+  thermalPeak:15, // Thermal peak time (15:00)
+  thermalDir:30, // Thermal wind direction (NE)
+  tidalRange:0.3, // Tidal range (m) — Aegean minimal
+  sheltered:true // Bay protected — wave protection
 };
 
-// ═══ STRATEGY PRIORITIES (일반 세일링 이론 + Foça 데이터) ═══
+// ═══ STRATEGY PRIORITIES (General sailing theory + Foça data) ═══
 function assessPriorities(a,ws){
   const p={strength:{s:0,i:'💨',n:'STRENGTH',d:''},oscillation:{s:0,i:'🔄',n:'OSC',d:''},windBend:{s:0,i:'🌀',n:'W.BEND',d:''},persistent:{s:0,i:'➡️',n:'PERSIST',d:''},tide:{s:0,i:'🌊',n:'TIDE',d:''},waves:{s:0,i:'〰️',n:'WAVES',d:''},lineBias:{s:0,i:'📏',n:'L.BIAS',d:''},courseBias:{s:0,i:'🗺️',n:'C.BIAS',d:''}};
   if(!a)return p;
-  // STRENGTH: 약풍에서는 속도가 방향보다 중요
-  if(ws<=6){p.strength.s=4;p.strength.d='약풍: 속도>방향';}else if(ws<=12){p.strength.s=2;p.strength.d='중풍: 방향 중요';}else{p.strength.s=3;p.strength.d='강풍: 택킹로스↑';}
-  if(a.speedRange>5){p.strength.s=Math.min(5,p.strength.s+1);p.strength.d+=' (변동 '+Math.round(a.speedRange)+'kn)';}
+  // STRENGTH: Speed matters more than direction in light wind
+  if(ws<=6){p.strength.s=4;p.strength.d='Light: Speed>Direction';}else if(ws<=12){p.strength.s=2;p.strength.d='Med: Direction matters';}else{p.strength.s=3;p.strength.d='Strong: Tacking loss↑';}
+  if(a.speedRange>5){p.strength.s=Math.min(5,p.strength.s+1);p.strength.d+=' (Range '+Math.round(a.speedRange)+'kn)';}
   // OSCILLATION
-  if(a.dirType==='oscillating'){p.oscillation.s=a.oscAmplitude>8?5:a.oscAmplitude>5?4:3;p.oscillation.d=a.oscAmplitude+'° / ~'+a.oscPeriodMin+'분 주기';}else{p.oscillation.s=a.oscAmplitude>3?2:1;p.oscillation.d='미미';}
-  // WIND BEND: Foça 해안 효과 — 해안 가까울수록 바람이 수직으로 꺾임
+  if(a.dirType==='oscillating'){p.oscillation.s=a.oscAmplitude>8?5:a.oscAmplitude>5?4:3;p.oscillation.d=a.oscAmplitude+'° / ~'+a.oscPeriodMin+'min cycle';}else{p.oscillation.s=a.oscAmplitude>3?2:1;p.oscillation.d='Minimal';}
+  // WIND BEND: Foça coast effect — wind bends perpendicular to coast when close
   const coastEffect=Math.abs(a.lastDir-FOCA.coastDir);
-  if(coastEffect<45){p.windBend.s=3;p.windBend.d='해안↔풍향 근접: 벤드 가능';}else{p.windBend.s=2;p.windBend.d='Foça 서향만 (현장확인)';}
+  if(coastEffect<45){p.windBend.s=3;p.windBend.d='Coast-wind bend likely';}else{p.windBend.s=2;p.windBend.d='Foça W-bay (check onsite)';}
   // PERSISTENT
-  if(a.dirType.startsWith('persistent')){p.persistent.s=Math.abs(a.cumShift)>20?5:Math.abs(a.cumShift)>10?4:3;p.persistent.d=a.cumShift+'° 누적';}else{p.persistent.s=1;p.persistent.d='미감지';}
-  // TIDE: 에게해 조수 미미
-  p.tide.s=1;p.tide.d='에게해 조수 '+FOCA.tidalRange+'m (무시)';
-  // WAVES: Foça 만 안은 보호됨
-  if(ws>15){p.waves.s=FOCA.sheltered?2:3;p.waves.d=FOCA.sheltered?'만 보호 (약화)':'파도 영향';}else if(ws>10){p.waves.s=2;p.waves.d='약간';}else{p.waves.s=1;p.waves.d='미미';}
+  if(a.dirType.startsWith('persistent')){p.persistent.s=Math.abs(a.cumShift)>20?5:Math.abs(a.cumShift)>10?4:3;p.persistent.d=a.cumShift+'° cumulative';}else{p.persistent.s=1;p.persistent.d='Not detected';}
+  // TIDE: Aegean tidal range minimal
+  p.tide.s=1;p.tide.d='Aegean tide '+FOCA.tidalRange+'m (negligible)';
+  // WAVES: Foça bay protected
+  if(ws>15){p.waves.s=FOCA.sheltered?2:3;p.waves.d=FOCA.sheltered?'Bay protected (mild)':'Wave impact';}else if(ws>10){p.waves.s=2;p.waves.d='Mild';}else{p.waves.s=1;p.waves.d='Minimal';}
   // LINE BIAS & COURSE BIAS
-  p.lineBias.s=3;p.lineBias.d='현장 컴퍼스 측정';p.courseBias.s=2;p.courseBias.d='코스 설정 후 확인';
+  p.lineBias.s=3;p.lineBias.d='Compass check onsite';p.courseBias.s=2;p.courseBias.d='Check after course set';
   return p;
 }
 
@@ -425,29 +432,29 @@ function calcLineBias(windDir,avgDir){
 
 // ═══ FAVORED SIDE (separate from start!) ═══
 function calcFavoredSide(a){
-  if(!a)return{side:'—',reason:'데이터 부족',confidence:0,color:'#d0d7de'};
-  if(a.dirType==='persistent_right')return{side:'RIGHT',reason:'퍼시스턴트 우측 — 새 풍향 쪽으로',confidence:a.dirConf,color:'#7ee787'};
-  if(a.dirType==='persistent_left')return{side:'LEFT',reason:'퍼시스턴트 좌측 — 새 풍향 쪽으로',confidence:a.dirConf,color:'#f85149'};
+  if(!a)return{side:'—',reason:'Insufficient data',confidence:0,color:'#d0d7de'};
+  if(a.dirType==='persistent_right')return{side:'RIGHT',reason:'Persistent right — sail to new wind',confidence:a.dirConf,color:'#7ee787'};
+  if(a.dirType==='persistent_left')return{side:'LEFT',reason:'Persistent left — sail to new wind',confidence:a.dirConf,color:'#f85149'};
   if(a.dirType==='oscillating'){
     const ls=a.shifts[a.shifts.length-1];
-    if(ls>0)return{side:'LEFT (다음)',reason:'현재 우측 시프트→좌측 예상',confidence:Math.round(a.dirConf*.8),color:'#f85149'};
-    return{side:'RIGHT (다음)',reason:'현재 좌측 시프트→우측 예상',confidence:Math.round(a.dirConf*.8),color:'#7ee787'};
+    if(ls>0)return{side:'LEFT (next)',reason:'Current R shift → expect L next',confidence:Math.round(a.dirConf*.8),color:'#f85149'};
+    return{side:'RIGHT (next)',reason:'Current L shift → expect R next',confidence:Math.round(a.dirConf*.8),color:'#7ee787'};
   }
-  return{side:'—',reason:'안정 — 라인바이어스로 판단',confidence:50,color:'#d0d7de'};
+  return{side:'—',reason:'Stable — use line bias',confidence:50,color:'#d0d7de'};
 }
 
 // ═══ RELIABILITY ═══
 function calcReliability(data,a){
   const f=[];
-  f.push({name:'데이터 양',score:Math.min(100,(data.length/20)*100),desc:data.length+'/20'});
+  f.push({name:'Data Volume',score:Math.min(100,(data.length/20)*100),desc:data.length+'/20'});
   const first=data[0].time,last=data[data.length-1].time;
   const span=(parseInt(last.split(':')[0])*60+parseInt(last.split(':')[1]))-(parseInt(first.split(':')[0])*60+parseInt(first.split(':')[1]));
-  f.push({name:'관측 시간',score:Math.min(100,(span/60)*100),desc:span+'분/60분'});
-  f.push({name:'패턴 신뢰',score:a?(a.dirConf+a.speedConf)/2:0,desc:a?'풍향'+a.dirConf+'%':'분석중'});
-  f.push({name:'지형 데이터',score:20,desc:'수동 입력 필요'});
-  f.push({name:'조류 데이터',score:10,desc:'미입력'});
+  f.push({name:'Obs Time',score:Math.min(100,(span/60)*100),desc:span+'min/60min'});
+  f.push({name:'Pattern Conf.',score:a?(a.dirConf+a.speedConf)/2:0,desc:a?'Dir'+a.dirConf+'%':'Analyzing'});
+  f.push({name:'Terrain Data',score:20,desc:'Manual input needed'});
+  f.push({name:'Current Data',score:10,desc:'Not entered'});
   const overall=f.reduce((s,x)=>s+x.score,0)/f.length;
-  const imp=['풍향 데이터 15개+ 축적','45분+ 관측','현장 지형/해안선 효과 수동 입력','조류/해류 데이터','다른 날 같은 시간대 비교','GPS 트랙으로 실제 VMG 검증'];
+  const imp=['15+ wind direction entries','45min+ observation','Manual terrain/coast input','Tide/current data','Compare same time other days','Verify VMG with GPS track'];
   return{factors:f,overall:Math.round(overall),improvements:imp};
 }
 
@@ -495,7 +502,7 @@ function drawRaceCourse(data){
   const dpr=devicePixelRatio||1,W=Math.min(380,window.innerWidth-40),H=Math.round(W*1.4);
   cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';
   ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
-  if(data.length<2){ctx.fillStyle='#d0d7de';ctx.font='12px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText('데이터 2개 이상 필요',W/2,H/2);return;}
+  if(data.length<2){ctx.fillStyle='#d0d7de';ctx.font='12px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText('Need 2+ data points',W/2,H/2);return;}
 
   const last=data[data.length-1],ws=last.speed,wc=windColor(ws);
   const a=data.length>=5?analyzeWind(data):null;
@@ -613,7 +620,7 @@ function drawRaceCourse(data){
     let sx2=cx;
     if(lb.favoredEnd.includes('PORT'))sx2=pinx+15;else if(lb.favoredEnd.includes('STBD'))sx2=cbx-15;
 
-    // 첫 번째 택: 유리한 사이드로 (goR → 포트택=우상향, !goR → 스타보드택=좌상향)
+    // 첫 번째 택: Favored Side로 (goR → 포트택=우상향, !goR → 스타보드택=좌상향)
     const firstTan=goR?tanPort:tanStbd;
     const firstDir=goR?1:-1;
     // 두 번째 택: 반대 방향 (마크 접근)
@@ -688,7 +695,7 @@ function drawRaceCourse(data){
   ctx.restore();
 
   // T293 info
-  ctx.fillStyle='#79c0ff';ctx.font='bold 11px -apple-system,sans-serif';ctx.textAlign='left';ctx.fillText('T293 '+ti.mode,mk1x+14,mk1y+22);ctx.fillStyle='#e6edf3';ctx.font='bold 10px -apple-system,sans-serif';ctx.fillText('택킹 '+ti.tack+'° (½='+ti.half+'°)',mk1x+14,mk1y+35);ctx.fillText('대거보드 '+ti.dagger,mk1x+14,mk1y+48);
+  ctx.fillStyle='#79c0ff';ctx.font='bold 11px -apple-system,sans-serif';ctx.textAlign='left';ctx.fillText('T293 '+ti.mode,mk1x+14,mk1y+22);ctx.fillStyle='#e6edf3';ctx.font='bold 10px -apple-system,sans-serif';ctx.fillText('Tack '+ti.tack+'° (½='+ti.half+'°)',mk1x+14,mk1y+35);ctx.fillText('Dagger '+ti.dagger,mk1x+14,mk1y+48);
 
   // Update panels
   updateCourseInfo(data,a,lb,fs,ti);updateStratPriorities(a,ws);updateTactics(a,lb,fs,ti);updateReliability(data,a);
@@ -698,10 +705,10 @@ function updateCourseInfo(data,a,lb,fs,ti){
   const el=document.getElementById('course-info');
   const bc=lb.favoredEnd==='CENTER'?'#d0d7de':'#FF6B00',sc=fs.color||'#d0d7de';
   el.innerHTML=`
-    <div class="ci-card"><div class="ci-label">📏 스타트 유리 위치</div><div class="ci-val" style="color:${bc}">${lb.favoredEnd}</div><div class="ci-sub">${lb.absBias}° 바이어스 · ~${lb.gainBL}BL 이득</div></div>
-    <div class="ci-card"><div class="ci-label">🧭 유리한 사이드</div><div class="ci-val" style="color:${sc}">${fs.side}</div><div class="ci-sub">신뢰도 ${fs.confidence}%</div></div>
-    <div class="ci-card"><div class="ci-label">⛵ T293 택킹 각도</div><div class="ci-val" style="color:#79c0ff">${ti.tack}°</div><div class="ci-sub">${ti.desc} · 대거 ${ti.dagger}</div></div>
-    <div class="ci-card"><div class="ci-label">📐 VMG 최적 각도</div><div class="ci-val" style="color:#79c0ff">${ti.half}°</div><div class="ci-sub">${ti.mode} · 택킹½ 추정값</div></div>`;
+    <div class="ci-card"><div class="ci-label">📏 Favored Start</div><div class="ci-val" style="color:${bc}">${lb.favoredEnd}</div><div class="ci-sub">${lb.absBias}° bias · ~${lb.gainBL}BL gain</div></div>
+    <div class="ci-card"><div class="ci-label">🧭 Favored Side</div><div class="ci-val" style="color:${sc}">${fs.side}</div><div class="ci-sub">Conf. ${fs.confidence}%</div></div>
+    <div class="ci-card"><div class="ci-label">⛵ T293 Tack Angle</div><div class="ci-val" style="color:#79c0ff">${ti.tack}°</div><div class="ci-sub">${ti.desc} · Dagger ${ti.dagger}</div></div>
+    <div class="ci-card"><div class="ci-label">📐 VMG Optimal Angle</div><div class="ci-val" style="color:#79c0ff">${ti.half}°</div><div class="ci-sub">${ti.mode} · tacking½ est.</div></div>`;
 }
 
 function updateStratPriorities(a,ws){
@@ -713,62 +720,62 @@ function updateStratPriorities(a,ws){
 function updateTactics(a,lb,fs,ti){
   const el=document.getElementById('tactic-section');if(!a){el.innerHTML='';return;}
   let sr=[],br=[];
-  if(lb.favoredEnd.includes('PORT')){sr.push({i:'🟠',t:`핀(PORT) ${lb.absBias}° 유리 — 핀 근처 출발`,g:'PIN START',c:'#ffa657'});if(lb.absBias>=10)sr.push({i:'⚠️',t:`${lb.gainBL}BL+ 차이 — 핀 필수!`,g:'STRONG',c:'#f85149'});}
-  else if(lb.favoredEnd.includes('STBD')){sr.push({i:'🔵',t:`RC(STBD) ${lb.absBias}° 유리 — RC 근처 출발`,g:'RC START',c:'#79c0ff'});if(lb.absBias>=10)sr.push({i:'⚠️',t:`${lb.gainBL}BL+ 차이 — RC 필수!`,g:'STRONG',c:'#f85149'});}
-  else sr.push({i:'⚪',t:'라인 균형 — 유리한 사이드 방향에서 출발',g:'FLEXIBLE',c:'#d0d7de'});
+  if(lb.favoredEnd.includes('PORT')){sr.push({i:'🟠',t:`PIN(PORT) ${lb.absBias}° favored — start near PIN`,g:'PIN START',c:'#ffa657'});if(lb.absBias>=10)sr.push({i:'⚠️',t:`${lb.gainBL}BL+ diff — PIN mandatory!`,g:'STRONG',c:'#f85149'});}
+  else if(lb.favoredEnd.includes('STBD')){sr.push({i:'🔵',t:`RC(STBD) ${lb.absBias}° favored — start near RC`,g:'RC START',c:'#79c0ff'});if(lb.absBias>=10)sr.push({i:'⚠️',t:`${lb.gainBL}BL+ diff — RC mandatory!`,g:'STRONG',c:'#f85149'});}
+  else sr.push({i:'⚪',t:'Line balanced — start toward favored side',g:'FLEXIBLE',c:'#d0d7de'});
 
   if(a.dirType==='oscillating'){
-    br.push({i:'🔄',t:`오실레이션 ${a.oscAmplitude}° / ~${a.oscPeriodMin}분 — 헤더에서 즉시 택!`,g:'TACK ON HEADER',c:'#79c0ff'});
-    br.push({i:'⏱️',t:'리프트 유지, 헤더 오면 택 — 시프트와 동기화',g:'PLAY SHIFTS',c:'#ffa657'});
+    br.push({i:'🔄',t:`Oscillation ${a.oscAmplitude}° / ~${a.oscPeriodMin}min — tack on header!`,g:'TACK ON HEADER',c:'#79c0ff'});
+    br.push({i:'⏱️',t:'Hold lift, tack on header — sync with shifts',g:'PLAY SHIFTS',c:'#ffa657'});
     const ls=a.shifts[a.shifts.length-1];
-    if(ls>0)br.push({i:'⬅️',t:'다음 좌측 시프트 예상 → 좌측에서 택 대기',g:'EXPECT LEFT',c:'#f85149'});
-    else br.push({i:'➡️',t:'다음 우측 시프트 예상 → 우측에서 택 대기',g:'EXPECT RIGHT',c:'#7ee787'});
+    if(ls>0)br.push({i:'⬅️',t:'Expect left shift → wait to tack from left',g:'EXPECT LEFT',c:'#f85149'});
+    else br.push({i:'➡️',t:'Expect right shift → wait to tack from right',g:'EXPECT RIGHT',c:'#7ee787'});
   }else if(a.dirType==='persistent_right'){
-    br.push({i:'➡️',t:'퍼시스턴트 우측 — 새 풍향(우측) 쪽 먼저!',g:'GO RIGHT',c:'#7ee787'});
-    br.push({i:'⛵',t:'헤더 감수 → 우측으로 — 짧은 코스 = 이득',g:'SAIL INTO HDR',c:'#7ee787'});
+    br.push({i:'➡️',t:'Persistent right — go to new wind first!',g:'GO RIGHT',c:'#7ee787'});
+    br.push({i:'⛵',t:'Take header → go right — shorter course = gain',g:'SAIL INTO HDR',c:'#7ee787'});
   }else if(a.dirType==='persistent_left'){
-    br.push({i:'⬅️',t:'퍼시스턴트 좌측 — 새 풍향(좌측) 쪽 먼저!',g:'GO LEFT',c:'#f85149'});
-    br.push({i:'⛵',t:'헤더 감수 → 좌측으로 — 짧은 코스 = 이득',g:'SAIL INTO HDR',c:'#f85149'});
-  }else br.push({i:'⚓',t:'안정 바람 — 중앙 코스 유지',g:'MID COURSE',c:'#d0d7de'});
+    br.push({i:'⬅️',t:'Persistent left — go to new wind first!',g:'GO LEFT',c:'#f85149'});
+    br.push({i:'⛵',t:'Take header → go left — shorter course = gain',g:'SAIL INTO HDR',c:'#f85149'});
+  }else br.push({i:'⚓',t:'Stable wind — hold mid course',g:'MID COURSE',c:'#d0d7de'});
 
-  br.push({i:'🏄',t:`${ti.desc}: 택킹 ${ti.tack}° / VMG ${ti.half}°`,g:ti.mode,c:'#79c0ff'});
-  if(ti.dagger==='DOWN')br.push({i:'📌',t:'대거보드↓ — 택킹 로스 작음, 안정적 포인팅',g:'DAGGER DN',c:'#d0d7de'});
-  else if(ti.mode==='PLANING'||ti.mode==='FULL PLANE')br.push({i:'🚀',t:'플래닝 중! VMG 최대 — 불필요한 택 최소화',g:'MIN TACKS',c:'#7ee787'});
-  br.push({i:'🔶',t:'마크1 라운딩: 안쪽 확보 — STB 접근 시 권리',g:'MARK ROOM',c:'#FF6B00'});
-  // Comfort Zone 원칙
-  br.push({i:'🎯',t:'코스 중앙(Comfort Zone) 유지 — 레이라인은 막다른 골목!',g:'STAY CENTER',c:'#79c0ff'});
-  // Foça thermal cycle 정보
+  br.push({i:'🏄',t:`${ti.desc}: Tack ${ti.tack}° / VMG Optimal ${ti.half}°`,g:ti.mode,c:'#79c0ff'});
+  if(ti.dagger==='DOWN')br.push({i:'📌',t:'Dagger↓ — low tacking loss, stable pointing',g:'DAGGER DN',c:'#d0d7de'});
+  else if(ti.mode==='PLANING'||ti.mode==='FULL PLANE')br.push({i:'🚀',t:'Planing! Max VMG — minimize tacks',g:'MIN TACKS',c:'#7ee787'});
+  br.push({i:'🔶',t:'Mark 1 rounding: secure inside — STB approach rights',g:'MARK ROOM',c:'#FF6B00'});
+  // Comfort Zone principle
+  br.push({i:'🎯',t:'Stay mid-course (Comfort Zone) — laylines are dead ends!',g:'STAY CENTER',c:'#79c0ff'});
+  // Foça thermal cycle info
   const now=new Date(),hr=now.getHours();
-  if(hr<11)br.push({i:'🌤️',t:'Foça 오전: 약풍→점진적 강화 예상 (thermal build-up)',g:'THERMAL',c:'#ffa657'});
-  else if(hr<15)br.push({i:'☀️',t:'Foça 오후: thermal peak 접근 중 — 풍속 상승 대비',g:'PEAK WIND',c:'#FF6B00'});
-  else br.push({i:'🌅',t:'Foça 늦은 오후: 풍속 하강 시작 가능',g:'WIND DROP',c:'#d0d7de'});
+  if(hr<11)br.push({i:'🌤️',t:'Foça AM: light→building (thermal build-up)',g:'THERMAL',c:'#ffa657'});
+  else if(hr<15)br.push({i:'☀️',t:'Foça PM: approaching thermal peak — expect more wind',g:'PEAK WIND',c:'#FF6B00'});
+  else br.push({i:'🌅',t:'Foça late PM: wind may start dropping',g:'WIND DROP',c:'#d0d7de'});
 
   el.innerHTML=`
-    <div class="tac-card"><div class="tac-title">📏 스타트 전략 (라인 바이어스 기반)</div>${sr.map(r=>`<div class="tac-row"><span style="font-size:14px">${r.i}</span><span style="flex:1">${r.t}</span><span class="action-tag" style="background:${r.c}22;color:${r.c}">${r.g}</span></div>`).join('')}</div>
-    <div class="tac-card"><div class="tac-title">🧭 비트 전략 (유리한 사이드 + 패턴 + Foça)</div>${br.map(r=>`<div class="tac-row"><span style="font-size:14px">${r.i}</span><span style="flex:1">${r.t}</span><span class="action-tag" style="background:${r.c}22;color:${r.c}">${r.g}</span></div>`).join('')}</div>`;
+    <div class="tac-card"><div class="tac-title">📏 Start Strategy (Line Bias)</div>${sr.map(r=>`<div class="tac-row"><span style="font-size:14px">${r.i}</span><span style="flex:1">${r.t}</span><span class="action-tag" style="background:${r.c}22;color:${r.c}">${r.g}</span></div>`).join('')}</div>
+    <div class="tac-card"><div class="tac-title">🧭 Beat Strategy (Favored Side + Pattern + Foça)</div>${br.map(r=>`<div class="tac-row"><span style="font-size:14px">${r.i}</span><span style="flex:1">${r.t}</span><span class="action-tag" style="background:${r.c}22;color:${r.c}">${r.g}</span></div>`).join('')}</div>`;
 }
 
 function updateReliability(data,a){
   const el=document.getElementById('rel-wrap');const r=calcReliability(data,a);
   const oc=r.overall>=60?'#7ee787':r.overall>=40?'#ffa657':'#f85149';
-  el.innerHTML=`<div class="tac-card"><div class="tac-title">🔬 시뮬레이션 신뢰도: <span style="color:${oc}">${r.overall}%</span></div>
+  el.innerHTML=`<div class="tac-card"><div class="tac-title">🔬 Simulation Confidence: <span style="color:${oc}">${r.overall}%</span></div>
     ${r.factors.map(f=>{const c=f.score>=60?'#7ee787':f.score>=40?'#ffa657':'#f85149';return`<div class="rel-bar"><div class="rel-label">${f.name}</div><div class="rel-track"><div class="rel-fill" style="width:${f.score}%;background:${c}"></div></div><div class="rel-val" style="color:${c}">${Math.round(f.score)}%</div></div>`;}).join('')}
-    <div style="margin-top:10px;font-size:10px;color:#d0d7de;font-weight:600">📈 신뢰도 올리려면:</div>
+    <div style="margin-top:10px;font-size:10px;color:#d0d7de;font-weight:600">📈 To improve confidence:</div>
     ${r.improvements.map(i=>`<div style="font-size:10px;color:#e6edf3;padding:2px 0">• ${i}</div>`).join('')}</div>`;
 }
 
 // ═══ PREDICTION PANEL ═══
 function drawPrediction(data){
   const panel=document.getElementById('pred-panel');
-  if(data.length<5){panel.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#d0d7de;font-size:12px;padding:20px">데이터 5개 이상 필요</div>';return;}
+  if(data.length<5){panel.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#d0d7de;font-size:12px;padding:20px">Need 5+ data points</div>';return;}
   const a=analyzeWind(data);
-  const dl={oscillating:{i:'🔄',n:'오실레이션',d:`~${a.oscAmplitude}° / ~${a.oscPeriodMin}분`,c:'#79c0ff'},persistent_right:{i:'➡️',n:'우측 퍼시스턴트',d:`총 ${a.cumShift}°`,c:'#7ee787'},persistent_left:{i:'⬅️',n:'좌측 퍼시스턴트',d:`총 ${a.cumShift}°`,c:'#f85149'},stable:{i:'⚓',n:'안정',d:'변화 거의 없음',c:'#d0d7de'}}[a.dirType];
-  const sl={building:{i:'📈',n:'강해지는 중',d:`+${a.speedTrend}kn`,c:'#7ee787'},dying:{i:'📉',n:'약해지는 중',d:`${a.speedTrend}kn`,c:'#f85149'},gusty:{i:'💨',n:'돌풍성',d:'불규칙',c:'#ffa657'},steady:{i:'➖',n:'일정',d:'변화 적음',c:'#d0d7de'}}[a.speedType];
+  const dl={oscillating:{i:'🔄',n:'Oscillating',d:`~${a.oscAmplitude}° / ~${a.oscPeriodMin}min`,c:'#79c0ff'},persistent_right:{i:'➡️',n:'Persistent Right',d:`${a.cumShift}° total`,c:'#7ee787'},persistent_left:{i:'⬅️',n:'Persistent Left',d:`${a.cumShift}° total`,c:'#f85149'},stable:{i:'⚓',n:'Stable',d:'Minimal change',c:'#d0d7de'}}[a.dirType];
+  const sl={building:{i:'📈',n:'Building',d:`+${a.speedTrend}kn`,c:'#7ee787'},dying:{i:'📉',n:'Dying',d:`${a.speedTrend}kn`,c:'#f85149'},gusty:{i:'💨',n:'Gusty',d:'Irregular',c:'#ffa657'},steady:{i:'➖',n:'Steady',d:'Low variation',c:'#d0d7de'}}[a.speedType];
   const pc=windColor(a.predSpeed);
   panel.innerHTML=`
-    <div class="pred-card"><div class="pred-label">풍향 패턴</div><div class="pred-type" style="color:${dl.c}">${dl.i} ${dl.n}</div><div class="pred-desc">${dl.d}</div><div class="pred-conf" style="background:${dl.c}22;color:${dl.c}">신뢰도 ${a.dirConf}%</div></div>
-    <div class="pred-card"><div class="pred-label">풍속 패턴</div><div class="pred-type" style="color:${sl.c}">${sl.i} ${sl.n}</div><div class="pred-desc">${sl.d}</div><div class="pred-conf" style="background:${sl.c}22;color:${sl.c}">신뢰도 ${a.speedConf}%</div>
-      <div style="margin-top:8px;font-size:11px;color:#e6edf3"><strong>예측:</strong> ~${a.predSpeed}kn / ${a.predDir}° <span style="color:${pc}">■</span> <span class="log-tag" style="background:${pc}22;color:${pc}">${a.predPump.z}</span></div></div>`;
+    <div class="pred-card"><div class="pred-label">Dir Pattern</div><div class="pred-type" style="color:${dl.c}">${dl.i} ${dl.n}</div><div class="pred-desc">${dl.d}</div><div class="pred-conf" style="background:${dl.c}22;color:${dl.c}">Conf. ${a.dirConf}%</div></div>
+    <div class="pred-card"><div class="pred-label">Speed Pattern</div><div class="pred-type" style="color:${sl.c}">${sl.i} ${sl.n}</div><div class="pred-desc">${sl.d}</div><div class="pred-conf" style="background:${sl.c}22;color:${sl.c}">Conf. ${a.speedConf}%</div>
+      <div style="margin-top:8px;font-size:11px;color:#e6edf3"><strong>Predict:</strong> ~${a.predSpeed}kn / ${a.predDir}° <span style="color:${pc}">■</span> <span class="log-tag" style="background:${pc}22;color:${pc}">${a.predPump.z}</span></div></div>`;
 }
 
 // ═══ LOG ═══
@@ -778,7 +785,7 @@ function drawLog(data){
     const i=data.length-1-ri,pz=pumpZone(d.speed),c=windColor(d.speed);
     const s=i>0?windShift(data[i-1].dir,d.dir):{t:'—',cls:'tag-n',dir:'—'};
     const el=document.createElement('div');el.className='log-entry';
-    el.innerHTML=`<div class="log-time">${d.time}</div><div class="log-arrow" style="transform:rotate(${d.dir+180}deg);color:${c}">➤</div><div class="log-info"><div class="log-main">${d.name} (${d.dir}°) · <strong>${d.speed}kn</strong> <span class="log-tag" style="background:${c}22;color:${c}">${pz.z} ${pz.l}</span><span class="shift-tag ${s.cls}">${s.t}</span></div><div class="log-sub">거스트 ${d.gust}kn · Bft ${bftFromKn(d.speed)}</div></div><div class="log-bar-wrap"><div class="log-bar" style="width:${(d.speed/MAX_KN)*100}%;background:${c}"></div></div>`;
+    el.innerHTML=`<div class="log-time">${d.time}</div><div class="log-arrow" style="transform:rotate(${d.dir+180}deg);color:${c}">➤</div><div class="log-info"><div class="log-main">${d.name} (${d.dir}°) · <strong>${d.speed}kn</strong> <span class="log-tag" style="background:${c}22;color:${c}">${pz.z} ${pz.l}</span><span class="shift-tag ${s.cls}">${s.t}</span></div><div class="log-sub">Gust ${d.gust}kn · Bft ${bftFromKn(d.speed)}</div></div><div class="log-bar-wrap"><div class="log-bar" style="width:${(d.speed/MAX_KN)*100}%;background:${c}"></div></div>`;
     area.appendChild(el);
   });
 }
@@ -841,7 +848,7 @@ function loadCoachObs(){
   const windObs=obs.filter(o=>o.category&&(o.category.includes('풍향')||o.category.toLowerCase().includes('wind')));
 
   if(!windObs.length){
-    alert('No wind observations found in Coach Obs.\n\nUse Coach Obs → Wind category to record wind data.\nExample: "310도 9노트" or "NW 12kn"');
+    alert('No wind observations found in Coach Obs.\n\nUse Coach Obs → Wind category to record wind data.\nExample: "310° 9kn" or "NW 12kn"');
     return;
   }
 
@@ -857,7 +864,7 @@ function loadCoachObs(){
   });
 
   if(!parsed.length){
-    alert('Wind observations found but could not parse direction/speed.\n\nFormat: "310도 9노트" or "NW 12kn"');
+    alert('Wind observations found but could not parse direction/speed.\n\nFormat: "310° 9kn" or "NW 12kn"');
     return;
   }
 
@@ -878,6 +885,7 @@ if(new URLSearchParams(location.search).get('auto')==='true'){
 }
 
 drawLegend();renderAll(windData);initForecastLocation();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw_wind.js').catch(()=>{});}
 </script>
 </body>
 </html>

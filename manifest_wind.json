@@ -1,0 +1,24 @@
+{
+  "name": "Wind Dashboard - India T293",
+  "short_name": "Wind",
+  "description": "Real-time wind tracking for Techno293 coaching",
+  "start_url": "./wind_dashboard_v5.html",
+  "display": "standalone",
+  "background_color": "#0C3282",
+  "theme_color": "#0C3282",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon_wind_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon_wind_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
