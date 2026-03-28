@@ -25,58 +25,121 @@
     .lang-btn{padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer;background:#21262d;color:#8b949e;border:none;transition:all .15s;line-height:1}
     .lang-btn.active{background:#FF6B00;color:#fff}
 
-    /* ── TABS ── */
+    /* ── MAIN TABS ── */
     .tabs{display:flex;background:#161b22;border-bottom:1px solid #30363d;position:sticky;top:53px;z-index:99}
     .tab{flex:1;padding:10px 4px;text-align:center;cursor:pointer;font-size:12px;color:#8b949e;border-bottom:2px solid transparent;transition:all .2s;font-weight:500}
     .tab.active{color:#FF6B00;border-bottom-color:#FF6B00;background:#1a1208}
+
+    /* ── SUB TABS (Weather / Athletes) ── */
+    .sub-tabs{display:flex;background:#161b22;border-bottom:1px solid #21262d;gap:0}
+    .sub-tab{flex:1;padding:9px 4px;text-align:center;cursor:pointer;font-size:13px;color:#8b949e;font-weight:600;border-bottom:2px solid transparent;transition:all .15s}
+    .sub-tab.active{color:#58a6ff;border-bottom-color:#58a6ff;background:#0d1926}
+    .sub-tab:first-child.active{color:#3fb950;border-bottom-color:#3fb950;background:#0d1912}
 
     /* ── CONTENT ── */
     .content{flex:1;overflow-y:auto;padding:12px 12px 24px;-webkit-overflow-scrolling:touch}
     .pane{display:none}
     .pane.active{display:block}
+    .sub-pane{display:none}
+    .sub-pane.active{display:block}
 
     /* ── SECTION LABELS ── */
     .sec-lbl{font-size:11px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.6px;margin:0 0 8px}
     .sec-wrap{margin-bottom:14px}
 
-    /* ── ATHLETE GRID ── */
-    .ath-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-    .ath-btn{background:#1c2128;border:2px solid #30363d;border-radius:10px;padding:8px 3px 7px;cursor:pointer;text-align:center;transition:all .15s;position:relative}
-    .ath-name{font-size:10px;font-weight:600;line-height:1.3;display:block;color:#c9d1d9}
-    .ath-code{font-size:9px;color:#8b949e;display:block;margin-top:2px}
-    .ath-cls{font-size:8px;margin-top:3px;padding:1px 5px;border-radius:3px;display:inline-block;font-weight:600}
-    .ath-btn.u17 .ath-cls{background:#1f3a7a;color:#79c0ff}
-    .ath-btn.u15 .ath-cls{background:#1a3a1a;color:#7ee787}
-    .ath-btn.sel{border-color:#FF6B00;background:#1f1208}
-    .ath-btn.sel .ath-name{color:#FF6B00}
-    .ath-btn.sel::after{content:'✓';position:absolute;top:3px;right:4px;font-size:9px;color:#FF6B00}
-    .ath-all-btn{grid-column:1/-1;background:#21262d;border:1px solid #30363d;border-radius:8px;padding:7px;font-size:12px;color:#8b949e;cursor:pointer;text-align:center;transition:all .15s}
-    .ath-all-btn.sel{background:#1a1208;border-color:#FF6B00;color:#FF6B00}
+    /* ═══════════════════════════════════════════
+       WEATHER SECTION
+    ═══════════════════════════════════════════ */
 
-    /* ── CATEGORY CHIPS ── */
-    .cat-row{display:flex;flex-wrap:wrap;gap:5px}
-    .cat-chip{background:#21262d;border:1px solid #30363d;border-radius:16px;padding:5px 11px;font-size:12px;cursor:pointer;transition:all .15s;color:#c9d1d9;font-weight:500}
-    .cat-chip.sel{background:#FF6B00;border-color:#FF6B00;color:#fff;font-weight:600}
+    /* Wind Zone Grid */
+    .wz-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+    .wz-btn{padding:7px 2px;border:2px solid #30363d;border-radius:10px;background:#1c2128;text-align:center;cursor:pointer;transition:all .15s}
+    .wz-btn .wz-kn{font-size:.85rem;font-weight:800;color:#e6edf3}
+    .wz-btn .wz-skill{font-size:.56rem;font-weight:700;margin-top:2px;line-height:1.2;padding:1px 4px;border-radius:4px;display:inline-block}
+    .wz-btn .wz-lbl{font-size:.52rem;color:#8b949e;margin-top:1px;line-height:1.2}
+    .wz-btn.sel{border-color:#FF6B00;background:#1f1208}
+    .wz-btn.sel .wz-kn{color:#FF6B00}
+    .sk-a{background:#3d2200;color:#ffab40}
+    .sk-ab{background:#3d3200;color:#ffd740}
+    .sk-b{background:#1a3a1a;color:#7ee787}
+    .sk-bc{background:#1a2a4a;color:#79c0ff}
+    .sk-c{background:#2a1a3a;color:#d2a8ff}
+    .sk-sail{background:#0a3038;color:#56d4dd}
+    .sk-storm{background:#3d1a1a;color:#f85149}
 
-    /* ── TEXT AREA ── */
-    .obs-textarea{width:100%;min-height:90px;background:#1c2128;border:1px solid #30363d;border-radius:10px;padding:11px;font-size:14px;color:#e6edf3;resize:vertical;font-family:inherit;line-height:1.55;-webkit-appearance:none}
-    .obs-textarea:focus{outline:none;border-color:#FF6B00;box-shadow:0 0 0 2px rgba(255,107,0,.15)}
-    .obs-textarea::placeholder{color:#484f58}
+    /* Direction Input (0-360°) */
+    .dir-input-wrap{background:#1c2128;border:2px solid #30363d;border-radius:12px;padding:10px}
+    .dir-btns{display:flex;align-items:center;justify-content:center;gap:6px}
+    .dir-step{width:38px;height:34px;border-radius:8px;border:1px solid #30363d;background:#21262d;color:#c9d1d9;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s}
+    .dir-step:active{background:#30363d}
+    .dir-val-box{display:flex;align-items:center;gap:2px}
+    .dir-deg{width:58px;text-align:center;background:#0d1117;border:2px solid #30363d;border-radius:10px;padding:7px 2px;font-size:1.1rem;font-weight:800;color:#e6edf3;font-family:inherit;-webkit-appearance:none}
+    .dir-deg:focus{border-color:#FF6B00;outline:none}
+    .dir-deg-unit{font-size:.8rem;color:#8b949e;font-weight:700}
+    .dir-compass{text-align:center;margin-top:6px;font-size:1rem;font-weight:700;color:#FF6B00;min-height:24px}
+    .dir-compass .dir-arrow{font-size:1.1rem;margin-right:4px}
+    .dir-compass .dir-name{color:#c9d1d9;font-size:.85rem}
 
-    /* ── MIC BUTTON ── */
-    .mic-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0}
-    .mic-btn{width:76px;height:76px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:30px;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.5);-webkit-appearance:none;flex-shrink:0}
-    .mic-btn.idle{background:linear-gradient(135deg,#1f6feb,#0d4d99)}
-    .mic-btn.recording{background:linear-gradient(135deg,#f85149,#c0392b);animation:pulse 1.2s infinite}
-    .mic-btn.nosupport{background:#21262d;opacity:.5;cursor:not-allowed}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(248,81,73,.5)}60%{box-shadow:0 0 0 14px rgba(248,81,73,0)}100%{box-shadow:0 0 0 0 rgba(248,81,73,0)}}
-    .mic-status{font-size:12px;color:#8b949e;text-align:center;line-height:1.4;max-width:200px}
-    .mic-status.rec{color:#f85149;font-weight:600}
-    .mic-hint{font-size:11px;color:#484f58;text-align:center}
+    /* Scale buttons (wave / current strength) */
+    .env-scale{display:flex;gap:4px}
+    .env-scale-btn{flex:1;padding:8px 2px;border:2px solid #30363d;border-radius:10px;background:#1c2128;text-align:center;cursor:pointer;transition:all .15s}
+    .env-scale-btn .s-num{display:block;font-size:.9rem;font-weight:700;color:#e6edf3}
+    .env-scale-btn .s-lbl{display:block;font-size:.52rem;color:#8b949e;line-height:1.2;margin-top:1px}
+    .env-scale-btn.sel{border-color:#FF6B00;background:#1f1208}
+    .env-scale-btn.sel .s-num{color:#FF6B00}
 
-    /* ── SAVE BUTTON ── */
-    .save-btn{width:100%;padding:14px;background:linear-gradient(135deg,#238636,#196d2d);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-appearance:none;margin-top:4px}
-    .save-btn:active{transform:scale(.97);opacity:.9}
+    /* Num input (temp) */
+    .num-row{display:flex;align-items:center;gap:6px}
+    .num-btn{width:36px;height:36px;border-radius:50%;border:2px solid #30363d;background:#1c2128;color:#e6edf3;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+    .num-btn:active{background:#30363d}
+    .num-val{width:55px;text-align:center;background:#0d1117;border:2px solid #30363d;border-radius:10px;padding:8px 4px;font-size:1rem;font-weight:700;color:#e6edf3;font-family:inherit;-webkit-appearance:none}
+    .num-val:focus{border-color:#FF6B00;outline:none}
+    .num-unit{font-size:.78rem;color:#8b949e}
+
+    /* Field row */
+    .env-field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+    .env-field{margin-bottom:0}
+    .env-field label{font-size:.78rem;font-weight:700;color:#c9d1d9;display:block;margin-bottom:6px}
+    .env-hint{font-size:.68rem;color:#8b949e;margin-bottom:6px;line-height:1.4}
+    .env-sub-lbl{font-size:.68rem;font-weight:700;color:#8b949e;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+
+    /* Weather voice note */
+    .wx-note-area{width:100%;min-height:60px;background:#1c2128;border:1px solid #30363d;border-radius:10px;padding:10px;font-size:13px;color:#e6edf3;resize:vertical;font-family:inherit;line-height:1.5;-webkit-appearance:none}
+    .wx-note-area:focus{outline:none;border-color:#FF6B00;box-shadow:0 0 0 2px rgba(255,107,0,.15)}
+    .wx-note-area::placeholder{color:#484f58}
+
+    /* Save Weather button */
+    .save-wx-btn{width:100%;padding:13px;background:linear-gradient(135deg,#238636,#196d2d);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-appearance:none;margin-top:8px}
+    .save-wx-btn:active{transform:scale(.97);opacity:.9}
+
+    /* ═══════════════════════════════════════════
+       ATHLETE OBSERVATION CARDS
+    ═══════════════════════════════════════════ */
+    .ath-card{background:#1c2128;border:2px solid #30363d;border-radius:12px;padding:12px;margin-bottom:8px;transition:border-color .15s}
+    .ath-card:focus-within{border-color:#FF6B00}
+    .ath-card-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .ath-card-num{width:26px;height:26px;border-radius:50%;background:#FF6B00;color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ath-card-name{font-size:.85rem;font-weight:700;color:#e6edf3;flex:1}
+    .ath-card-cls{font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:600}
+    .ath-cls-u17{background:#1f3a7a;color:#79c0ff}
+    .ath-cls-u15{background:#1a3a1a;color:#7ee787}
+    .ath-card-code{font-size:.7rem;color:#8b949e;margin-left:4px}
+    .ath-tag-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+    .ath-tag{font-size:.7rem;padding:3px 8px;border:1px solid #30363d;border-radius:12px;background:#21262d;color:#8b949e;cursor:pointer;transition:all .1s;font-weight:600}
+    .ath-tag.sel{background:#58a6ff;border-color:#58a6ff;color:#fff}
+    .ath-input-row{display:flex;gap:6px;align-items:flex-start}
+    .ath-input-row textarea{flex:1}
+    .ath-txt{width:100%;padding:8px 10px;border:2px solid #30363d;border-radius:8px;font-size:.82rem;font-family:inherit;resize:none;min-height:56px;outline:none;color:#e6edf3;background:#0d1117;line-height:1.5}
+    .ath-txt:focus{border-color:#FF6B00}
+    .ath-txt::placeholder{color:#484f58}
+    .ath-voice-btn{width:44px;height:44px;border-radius:50%;border:2px solid #30363d;background:#1c2128;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;transition:all .2s}
+    .ath-voice-btn.recording{border-color:#f85149;background:#2d1115;animation:pulse-rec 1s infinite}
+    .ath-voice-status{font-size:.62rem;color:#8b949e;text-align:center;margin-top:2px;min-height:14px}
+    @keyframes pulse-rec{0%,100%{box-shadow:0 0 0 0 rgba(248,81,73,.4)}50%{box-shadow:0 0 0 8px rgba(248,81,73,0)}}
+
+    /* Save All Athletes btn */
+    .save-ath-btn{width:100%;padding:13px;background:linear-gradient(135deg,#1f6feb,#0d4d99);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-appearance:none;margin-top:10px}
+    .save-ath-btn:active{transform:scale(.97);opacity:.9}
 
     /* ── FLASH ── */
     .flash{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#238636;color:#fff;padding:9px 22px;border-radius:22px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.4)}
@@ -90,15 +153,21 @@
     .log-count{font-size:12px;color:#8b949e;white-space:nowrap;font-weight:500}
     .obs-card{background:#1c2128;border:1px solid #30363d;border-radius:10px;padding:11px 12px;margin-bottom:8px;position:relative;transition:border-color .15s}
     .obs-card:hover{border-color:#484f58}
+    .obs-card.wx-entry{border-left:3px solid #3fb950}
+    .obs-card.ath-entry{border-left:3px solid #58a6ff}
     .obs-hdr{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:7px;padding-right:24px}
     .obs-time{font-size:11px;color:#8b949e;font-weight:500}
+    .obs-type-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+    .obs-type-wx{background:#0d2818;color:#3fb950}
+    .obs-type-ath{background:#0d1926;color:#58a6ff}
     .obs-ath-badge{font-size:11px;font-weight:700;background:#2d1a0a;color:#FF6B00;padding:2px 8px;border-radius:10px}
-    .obs-ath-none{font-size:11px;color:#484f58}
     .obs-cat-badge{font-size:10px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;padding:2px 8px;border-radius:10px}
     .obs-sync-ok{font-size:10px;color:#3fb950;font-weight:600}
     .obs-sync-no{font-size:10px;color:#484f58}
     .obs-text{font-size:13px;line-height:1.6;color:#c9d1d9;word-break:break-word}
-    .obs-del{position:absolute;top:9px;right:9px;background:none;border:none;color:#484f58;font-size:15px;cursor:pointer;padding:3px 5px;line-height:1;border-radius:4px;transition:color .15s,-webkit-tap-highlight-color .15s}
+    .obs-wx-data{font-size:12px;line-height:1.7;color:#c9d1d9}
+    .obs-wx-data .wx-tag{display:inline-block;background:#21262d;border:1px solid #30363d;border-radius:6px;padding:1px 7px;font-size:11px;margin:1px 2px;font-weight:600}
+    .obs-del{position:absolute;top:9px;right:9px;background:none;border:none;color:#484f58;font-size:15px;cursor:pointer;padding:3px 5px;line-height:1;border-radius:4px;transition:color .15s}
     .obs-del:active{color:#f85149}
     .empty-state{text-align:center;padding:50px 20px;color:#484f58}
     .empty-icon{font-size:44px;display:block;margin-bottom:10px}
@@ -136,6 +205,11 @@
     .section-div{display:flex;align-items:center;gap:8px;margin:10px 0}
     .section-div span{font-size:11px;color:#484f58;white-space:nowrap}
     .section-div::before,.section-div::after{content:'';flex:1;height:1px;background:#21262d}
+
+    /* ── TIMESTAMP ROW ── */
+    .wx-ts-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .wx-ts{font-size:12px;color:#8b949e}
+    .wx-ts b{color:#e6edf3}
   </style>
 </head>
 <body>
@@ -151,18 +225,18 @@
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <div class="lang-toggle">
-      <button class="lang-btn active" id="lang-ko" onclick="setLang('ko-KR')">한</button>
-      <button class="lang-btn" id="lang-en" onclick="setLang('en-US')">EN</button>
+      <button class="lang-btn" id="lang-ko" onclick="setLang('ko-KR')">한</button>
+      <button class="lang-btn active" id="lang-en" onclick="setLang('en-US')">EN</button>
     </div>
     <div id="badge" class="hdr-badge" style="display:none">0</div>
   </div>
 </div>
 
-<!-- TABS -->
+<!-- MAIN TABS -->
 <div class="tabs">
-  <div class="tab active" id="tab-record" onclick="showTab('record')">📝 기록</div>
-  <div class="tab" id="tab-log" onclick="showTab('log')">📋 로그</div>
-  <div class="tab" id="tab-sync" onclick="showTab('sync')">☁️ 동기화</div>
+  <div class="tab active" id="tab-record" onclick="showTab('record')">📝 Record</div>
+  <div class="tab" id="tab-log" onclick="showTab('log')">📋 Log</div>
+  <div class="tab" id="tab-sync" onclick="showTab('sync')">☁️ Sync</div>
 </div>
 
 <div class="content">
@@ -170,45 +244,185 @@
   <!-- ════════════════ RECORD TAB ════════════════ -->
   <div class="pane active" id="pane-record">
 
-    <div class="sec-wrap">
-      <div class="sec-lbl">선수 선택</div>
-      <div class="ath-grid" id="ath-grid">
+    <!-- Sub-tabs: Weather / Athletes -->
+    <div class="sub-tabs">
+      <div class="sub-tab active" id="stab-wx" onclick="showSubTab('wx')">🌊 Weather</div>
+      <div class="sub-tab" id="stab-ath" onclick="showSubTab('ath')">👥 Athletes</div>
+    </div>
+
+    <!-- ──── WEATHER SUB-PANE ──── -->
+    <div class="sub-pane active" id="spane-wx" style="padding-top:12px">
+
+      <div class="wx-ts-row">
+        <div class="wx-ts" id="wx-ts-display">⏰ <b id="wx-clock">--:--</b></div>
+        <button style="background:#21262d;border:1px solid #30363d;border-radius:6px;padding:4px 10px;font-size:11px;color:#8b949e;cursor:pointer" onclick="updateWxClock()">🔄 Now</button>
+      </div>
+
+      <!-- Wind Speed Zone -->
+      <div class="sec-wrap">
+        <div class="sec-lbl">Wind Speed Zone</div>
+        <div class="env-hint">Select the zone that best matches the wind</div>
+        <div class="wz-grid">
+          <div class="wz-btn" onclick="selWZ(0)">
+            <div class="wz-kn">≤3 kn</div>
+            <div class="wz-skill sk-a">Skill A</div>
+            <div class="wz-lbl">Max Power<br>Big pump</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(1)">
+            <div class="wz-kn">4–6 kn</div>
+            <div class="wz-skill sk-ab">Skill A→B</div>
+            <div class="wz-lbl">Transitioning<br>to rhythm</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(2)">
+            <div class="wz-kn">7–9 kn</div>
+            <div class="wz-skill sk-b">Skill B</div>
+            <div class="wz-lbl">Rhythmic<br>Endurance</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(3)">
+            <div class="wz-kn">10–12 kn</div>
+            <div class="wz-skill sk-bc">Skill B→C</div>
+            <div class="wz-lbl">Power +<br>Endurance</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(4)">
+            <div class="wz-kn">13–17 kn</div>
+            <div class="wz-skill sk-c">Skill C</div>
+            <div class="wz-lbl">Power Endurance<br>Explosive</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(5)">
+            <div class="wz-kn">18–23 kn</div>
+            <div class="wz-skill sk-sail">Sailing</div>
+            <div class="wz-lbl">Sail skill<br>dominant</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(6)">
+            <div class="wz-kn">24–30 kn</div>
+            <div class="wz-skill sk-sail">Sailing+</div>
+            <div class="wz-lbl">Full trim<br>control</div>
+          </div>
+          <div class="wz-btn" onclick="selWZ(7)">
+            <div class="wz-kn">30+ kn</div>
+            <div class="wz-skill sk-storm">Storm</div>
+            <div class="wz-lbl">Control<br>only</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wind Direction (0-360°) -->
+      <div class="sec-wrap">
+        <div class="sec-lbl">Wind Direction</div>
+        <div class="env-hint">Wind comes FROM this direction (meteorological convention)</div>
+        <div class="dir-input-wrap">
+          <div class="dir-btns">
+            <button class="dir-step" onclick="stepDir('windDeg',-10)">−10</button>
+            <button class="dir-step" onclick="stepDir('windDeg',-5)">−5</button>
+            <div class="dir-val-box">
+              <input class="dir-deg" type="number" id="windDeg" value="" min="0" max="360" placeholder="---" oninput="updateDirDisplay('windDeg','wind')">
+              <span class="dir-deg-unit">°</span>
+            </div>
+            <button class="dir-step" onclick="stepDir('windDeg',5)">+5</button>
+            <button class="dir-step" onclick="stepDir('windDeg',10)">+10</button>
+          </div>
+          <div class="dir-compass" id="windDeg-compass">Enter 0–360°</div>
+        </div>
+      </div>
+
+      <!-- Wave + Air Temp row -->
+      <div class="env-field-row">
+        <div class="env-field">
+          <label>Wave / Chop</label>
+          <div class="env-scale" id="wave-scale">
+            <div class="env-scale-btn" onclick="selEnvScale('wave',1,this)"><span class="s-num">1</span><span class="s-lbl">Flat</span></div>
+            <div class="env-scale-btn" onclick="selEnvScale('wave',2,this)"><span class="s-num">2</span><span class="s-lbl">Ripple</span></div>
+            <div class="env-scale-btn" onclick="selEnvScale('wave',3,this)"><span class="s-num">3</span><span class="s-lbl">Chop</span></div>
+            <div class="env-scale-btn" onclick="selEnvScale('wave',4,this)"><span class="s-num">4</span><span class="s-lbl">Waves</span></div>
+            <div class="env-scale-btn" onclick="selEnvScale('wave',5,this)"><span class="s-num">5</span><span class="s-lbl">Big</span></div>
+          </div>
+        </div>
+        <div class="env-field">
+          <label>Air Temp</label>
+          <div class="num-row">
+            <button class="num-btn" onclick="stepTemp('airTemp',-1)">−</button>
+            <input class="num-val" type="number" id="airTemp" value="22" min="-5" max="50">
+            <span class="num-unit">°C</span>
+            <button class="num-btn" onclick="stepTemp('airTemp',1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tidal Current -->
+      <div class="sec-wrap">
+        <div class="sec-lbl">🌊 Tidal Current</div>
+        <div class="env-hint">Arrow = direction current flows <b>toward</b> · N↑ = flowing northward</div>
+
+        <div class="env-field-row" style="margin-bottom:8px">
+          <div class="env-field">
+            <div class="env-sub-lbl">Strength</div>
+            <div class="env-scale" id="cur-str-scale">
+              <div class="env-scale-btn" onclick="selEnvScale('curStr',1,this)"><span class="s-num">1</span><span class="s-lbl">Slack<br>≤0.5kt</span></div>
+              <div class="env-scale-btn" onclick="selEnvScale('curStr',2,this)"><span class="s-num">2</span><span class="s-lbl">Weak<br>~1kt</span></div>
+              <div class="env-scale-btn" onclick="selEnvScale('curStr',3,this)"><span class="s-num">3</span><span class="s-lbl">Mod<br>~2kt</span></div>
+              <div class="env-scale-btn" onclick="selEnvScale('curStr',4,this)"><span class="s-num">4</span><span class="s-lbl">Strong<br>~3kt</span></div>
+              <div class="env-scale-btn" onclick="selEnvScale('curStr',5,this)"><span class="s-num">5</span><span class="s-lbl">V.Strong<br>&gt;3kt</span></div>
+            </div>
+          </div>
+          <div class="env-field">
+            <div class="env-sub-lbl">Water Temp</div>
+            <div class="num-row" style="margin-top:4px">
+              <button class="num-btn" onclick="stepTemp('waterTemp',-1)">−</button>
+              <input class="num-val" type="number" id="waterTemp" value="18" min="0" max="40">
+              <span class="num-unit">°C</span>
+              <button class="num-btn" onclick="stepTemp('waterTemp',1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="env-sub-lbl">Flow Direction (where current flows toward)</div>
+        <div class="dir-input-wrap">
+          <div class="dir-btns">
+            <button class="dir-step" onclick="stepDir('curDeg',-10)">−10</button>
+            <button class="dir-step" onclick="stepDir('curDeg',-5)">−5</button>
+            <div class="dir-val-box">
+              <input class="dir-deg" type="number" id="curDeg" value="" min="0" max="360" placeholder="---" oninput="updateDirDisplay('curDeg','current')">
+              <span class="dir-deg-unit">°</span>
+            </div>
+            <button class="dir-step" onclick="stepDir('curDeg',5)">+5</button>
+            <button class="dir-step" onclick="stepDir('curDeg',10)">+10</button>
+          </div>
+          <div class="dir-compass" id="curDeg-compass">Enter 0–360°</div>
+        </div>
+      </div>
+
+      <!-- Additional weather notes (voice) -->
+      <div class="sec-wrap">
+        <div class="sec-lbl">Additional Notes</div>
+        <textarea class="wx-note-area" id="wx-note" placeholder="Voice or text: wind shifts, gusts, cloud patterns..." rows="2"></textarea>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+          <button class="ath-voice-btn" id="wx-voice-btn" onclick="toggleWxVoice()" style="width:40px;height:40px;font-size:1rem">🎙️</button>
+          <div class="ath-voice-status" id="wx-voice-status" style="text-align:left"></div>
+        </div>
+      </div>
+
+      <button class="save-wx-btn" onclick="saveWeather()">🌊 Save Weather Report</button>
+    </div>
+
+    <!-- ──── ATHLETES SUB-PANE ──── -->
+    <div class="sub-pane" id="spane-ath" style="padding-top:12px">
+      <div id="ath-card-grid">
         <!-- rendered by JS -->
       </div>
+      <button class="save-ath-btn" onclick="saveAllAthleteObs()">💾 Save All Observations</button>
     </div>
-
-    <div class="sec-wrap">
-      <div class="sec-lbl">카테고리</div>
-      <div class="cat-row" id="cat-row">
-        <!-- rendered by JS -->
-      </div>
-    </div>
-
-    <div class="sec-wrap">
-      <div class="sec-lbl">관찰 내용</div>
-      <textarea class="obs-textarea" id="obs-txt"
-        placeholder="음성 녹음 결과가 자동으로 입력됩니다. 직접 입력도 가능합니다." rows="4"></textarea>
-    </div>
-
-    <div class="mic-wrap">
-      <button class="mic-btn idle" id="mic-btn" onclick="toggleVoice()">🎙️</button>
-      <div class="mic-status" id="mic-status">탭하여 음성 입력 시작</div>
-      <div class="mic-hint" id="mic-hint">음성 인식 중 말하면 실시간으로 텍스트가 입력됩니다</div>
-    </div>
-
-    <div class="section-div"><span>또는 직접 입력 후 저장</span></div>
-
-    <button class="save-btn" onclick="saveObs()">💾 관찰 저장</button>
 
   </div>
 
   <!-- ════════════════ LOG TAB ════════════════ -->
   <div class="pane" id="pane-log">
     <div class="log-toolbar">
-      <select class="log-filter" id="filter-ath" onchange="renderLog()">
-        <option value="">👥 전체 선수</option>
+      <select class="log-filter" id="filter-type" onchange="renderLog()">
+        <option value="">📊 All Records</option>
+        <option value="weather">🌊 Weather Only</option>
+        <option value="athlete">👥 Athlete Only</option>
       </select>
-      <div class="log-count" id="log-count">0건</div>
+      <div class="log-count" id="log-count">0</div>
     </div>
     <div id="obs-list"></div>
   </div>
@@ -220,15 +434,15 @@
       <div style="display:flex;gap:10px" class="stats-row">
         <div class="stat-box">
           <div class="stat-num" id="sync-count">0</div>
-          <div class="stat-lbl">동기화 대기</div>
+          <div class="stat-lbl">Pending Sync</div>
         </div>
         <div class="stat-box">
           <div class="stat-num" id="synced-count">0</div>
-          <div class="stat-lbl">동기화 완료</div>
+          <div class="stat-lbl">Synced</div>
         </div>
         <div class="stat-box">
           <div class="stat-num" id="total-count">0</div>
-          <div class="stat-lbl">전체 기록</div>
+          <div class="stat-lbl">Total Records</div>
         </div>
       </div>
     </div>
@@ -238,39 +452,53 @@
       <input class="url-input" type="url" id="sheets-url"
         placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
         oninput="saveSheetUrl()">
-      <div class="url-hint">⚠️ Google Sheets 연동 없이도 로컬 저장은 항상 동작합니다.<br>URL 설정은 선택사항입니다.</div>
-      <span class="guide-toggle" onclick="toggleGuide()">📋 Google Sheets 연동 설정 방법 보기 ▾</span>
+      <div class="url-hint">Local storage always works even without Google Sheets integration.<br>URL configuration is optional.</div>
+      <span class="guide-toggle" onclick="toggleGuide()">Setup Guide ▾</span>
       <div class="guide-box" id="guide-box">
         <ol>
-          <li>Google Sheets 새 파일 생성</li>
-          <li>헤더 행 추가: <code>timestamp | athlete | code | category | text | synced_at</code></li>
-          <li>메뉴 → 확장 프로그램 → Apps Script</li>
-          <li>아래 코드 붙여넣기:<br>
+          <li>Create new Google Sheets file</li>
+          <li>Add 2 sheets: <code>Weather</code> and <code>Athlete_Obs</code></li>
+          <li><code>Weather</code> headers: <code>timestamp | wind_zone | wind_deg | wind_dir | wave | air_temp | cur_str | cur_deg | cur_dir | water_temp | notes | synced_at</code></li>
+          <li><code>Athlete_Obs</code> headers: <code>timestamp | athlete | code | categories | text | synced_at</code></li>
+          <li>Menu → Extensions → Apps Script</li>
+          <li>Paste code below:<br>
 <code>function doPost(e){
-  const data = JSON.parse(e.postData.contents);
-  const sheet = SpreadsheetApp.getActiveSheet();
-  data.observations.forEach(o=>{
-    sheet.appendRow([o.ts,o.athlete||'',o.athleteCode||'',
-      o.category,o.text,new Date().toISOString()]);
-  });
+  const d = JSON.parse(e.postData.contents);
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if(d.type==='weather'){
+    const ws=ss.getSheetByName('Weather');
+    const w=d.data;
+    ws.appendRow([w.ts,w.wind_zone||'',w.wind_deg||'',
+      w.wind_dir||'',w.wave||'',w.air_temp||'',
+      w.cur_str||'',w.cur_deg||'',w.cur_dir||'',
+      w.water_temp||'',w.notes||'',
+      new Date().toISOString()]);
+  } else {
+    const as=ss.getSheetByName('Athlete_Obs');
+    d.data.forEach(o=>{
+      as.appendRow([o.ts,o.athlete||'',o.code||'',
+        o.categories||'',o.text,
+        new Date().toISOString()]);
+    });
+  }
   return ContentService.createTextOutput('ok');
 }</code></li>
-          <li>배포 → 새 배포 → 웹 앱 → 액세스: 모든 사용자 → 배포</li>
-          <li>배포 URL을 위 입력창에 붙여넣기</li>
+          <li>Deploy → New deployment → Web app → Access: All users → Deploy</li>
+          <li>Paste deployment URL above</li>
         </ol>
       </div>
     </div>
 
     <button class="sync-now-btn" id="sync-now-btn" onclick="syncToSheets()">
-      ☁️ 지금 동기화
+      ☁️ Sync Now
     </button>
-    <div class="sync-log-box" id="sync-log">동기화 로그가 여기에 표시됩니다</div>
+    <div class="sync-log-box" id="sync-log">Sync log will be displayed here</div>
 
     <div class="div-line"></div>
 
     <div class="danger-row">
-      <button class="danger-btn" onclick="clearSynced()">✓ 동기화완료 삭제</button>
-      <button class="danger-btn" onclick="clearAll()">⚠️ 전체 삭제</button>
+      <button class="danger-btn" onclick="clearSynced()">✓ Delete Synced</button>
+      <button class="danger-btn" onclick="clearAll()">⚠️ Delete All</button>
     </div>
 
   </div>
@@ -294,290 +522,554 @@ const ATHLETES = [
   { name: 'Priyanshi', fullName: 'Priyanshi Patil',       code: 'IND11',  cls: 'U15', gender: 'F' }
 ];
 
-const CATEGORIES = ['기술','전술','스타트','체력','멘탈','장비','풍향/세기','튜닝','일반'];
+const ATH_TAGS = ['Technique','Tactics','Start','Fitness','Mental','Equipment'];
 
-const STORAGE_KEY  = 'quickobs_v1';
+const WIND_ZONES = [
+  { kn: '≤3 kn', skill: 'A' },
+  { kn: '4–6 kn', skill: 'A→B' },
+  { kn: '7–9 kn', skill: 'B' },
+  { kn: '10–12 kn', skill: 'B→C' },
+  { kn: '13–17 kn', skill: 'C' },
+  { kn: '18–23 kn', skill: 'Sailing' },
+  { kn: '24–30 kn', skill: 'Sailing+' },
+  { kn: '30+ kn', skill: 'Storm' }
+];
+
+const STORAGE_KEY  = 'coachobs_v2';
 const URL_KEY      = 'quickobs_sheets_url';
 const LANG_KEY     = 'quickobs_lang';
 
-let currentLang = localStorage.getItem(LANG_KEY) || 'ko-KR';
+let currentLang = localStorage.getItem(LANG_KEY) || 'en-US';
 
 // ════════════════════════════════════════════════════════════
 //  STATE
 // ════════════════════════════════════════════════════════════
-let observations   = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-let currentAthlete = null;   // athlete code string or null
-let currentCat     = '일반';
-let recognition    = null;
-let isRecording    = false;
-let baseText       = '';     // accumulated final text before current recognition session
+let observations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+// Migrate from v1 if needed
+if (!observations.length) {
+  const v1 = JSON.parse(localStorage.getItem('quickobs_v1') || '[]');
+  if (v1.length) {
+    observations = v1.map(o => ({ ...o, type: 'athlete' }));
+    persist();
+  }
+}
+
+// Weather state
+const wx = {
+  windZone: null,    // index 0-7
+  windDeg: null,     // 0-360 degrees
+  wave: null,        // 1-5
+  curStr: null,      // 1-5
+  curDeg: null,      // 0-360 degrees
+};
+
+// Per-athlete observation state
+const athTags = {};   // { code: Set of selected tags }
+const athVoice = {};  // { code: SpeechRecognition instance }
+
+// Weather voice
+let wxVoiceRec = null;
+let wxVoiceActive = false;
+let wxVoiceBase = '';
 
 // ════════════════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════════════════
 function init() {
-  renderAthletes();
-  renderCategories();
+  renderAthleteCards();
   renderLog();
   updateBadge();
   updateSyncCounts();
+  updateWxClock();
 
-  // Restore URL
   document.getElementById('sheets-url').value = localStorage.getItem(URL_KEY) || '';
-
-  // Populate log filter
-  const sel = document.getElementById('filter-ath');
-  ATHLETES.forEach(a => {
-    const opt = document.createElement('option');
-    opt.value = a.code;
-    opt.textContent = a.name + ' (' + a.code + ')';
-    sel.appendChild(opt);
-  });
-
-  initSpeech();
   applyLangUI();
+
+  // Update clock every 30s
+  setInterval(updateWxClock, 30000);
+}
+
+function updateWxClock() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('wx-clock').textContent = hh + ':' + mm;
 }
 
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem(LANG_KEY, lang);
   applyLangUI();
-  // Restart recognition with new language if currently recording
-  if (isRecording) {
-    stopRecording();
-    if (recognition) {
-      recognition.lang = lang;
-      setTimeout(startRecording, 300);
-    }
-  } else if (recognition) {
-    recognition.lang = lang;
-  }
 }
 
 function applyLangUI() {
   const isKo = currentLang === 'ko-KR';
   document.getElementById('lang-ko').classList.toggle('active', isKo);
   document.getElementById('lang-en').classList.toggle('active', !isKo);
-  const hint = document.getElementById('mic-hint');
-  if (hint) hint.textContent = isKo
-    ? '한국어 음성 인식 · 전문용어 영어 혼용 가능'
-    : 'English voice recognition active';
 }
 
 // ════════════════════════════════════════════════════════════
-//  ATHLETES
+//  TAB MANAGEMENT
 // ════════════════════════════════════════════════════════════
-function renderAthletes() {
-  const grid = document.getElementById('ath-grid');
-  grid.innerHTML = ATHLETES.map(a => `
-    <div class="ath-btn ${a.cls.toLowerCase()}" id="ath-${a.code}" onclick="selectAthlete('${a.code}')">
-      <span class="ath-name">${a.name}</span>
-      <span class="ath-code">${a.code}</span>
-      <span class="ath-cls">${a.cls} ${a.gender}</span>
-    </div>
-  `).join('');
+function showTab(tab) {
+  ['record', 'log', 'sync'].forEach(t => {
+    document.getElementById('pane-' + t).classList.toggle('active', t === tab);
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+  if (tab === 'log')  renderLog();
+  if (tab === 'sync') updateSyncCounts();
 }
 
-function selectAthlete(code) {
-  if (currentAthlete === code) {
-    currentAthlete = null;
-  } else {
-    currentAthlete = code;
-  }
-  document.querySelectorAll('.ath-btn').forEach(b => b.classList.remove('sel'));
-  if (currentAthlete) {
-    document.getElementById('ath-' + currentAthlete)?.classList.add('sel');
-  }
-}
-
-// ════════════════════════════════════════════════════════════
-//  CATEGORIES
-// ════════════════════════════════════════════════════════════
-function renderCategories() {
-  const row = document.getElementById('cat-row');
-  row.innerHTML = CATEGORIES.map(c => `
-    <div class="cat-chip${c === currentCat ? ' sel' : ''}" onclick="selectCat('${c}')">${c}</div>
-  `).join('');
-}
-
-function selectCat(cat) {
-  currentCat = cat;
-  document.querySelectorAll('.cat-chip').forEach(c => {
-    c.classList.toggle('sel', c.textContent === cat);
+function showSubTab(sub) {
+  ['wx', 'ath'].forEach(s => {
+    document.getElementById('spane-' + s).classList.toggle('active', s === sub);
+    document.getElementById('stab-' + s).classList.toggle('active', s === sub);
   });
 }
 
 // ════════════════════════════════════════════════════════════
-//  SPEECH RECOGNITION
+//  WEATHER INPUTS
 // ════════════════════════════════════════════════════════════
-function initSpeech() {
+function selWZ(idx) {
+  if (wx.windZone === idx) { wx.windZone = null; } else { wx.windZone = idx; }
+  document.querySelectorAll('.wz-btn').forEach((b, i) => b.classList.toggle('sel', i === wx.windZone));
+}
+
+// ═══════════════════════════════════════════
+// DIRECTION (0-360°) UTILITIES
+// ═══════════════════════════════════════════
+const COMPASS_16 = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+// Arrows for the direction the wind BLOWS TO (opposite of source): N wind(0°) blows south ↓
+const WIND_ARROWS = ['↓','↙','↙','←','←','←','↖','↑','↑','↗','↗','→','→','→','↘','↓'];
+// Arrows for current flow direction: N(0°) flows northward ↑
+const CUR_ARROWS =  ['↑','↗','↗','→','→','→','↘','↓','↓','↙','↙','←','←','←','↖','↑'];
+
+function degToCompass(deg) {
+  const d = ((deg % 360) + 360) % 360;
+  const idx = Math.round(d / 22.5) % 16;
+  return { name: COMPASS_16[idx], idx: idx };
+}
+
+function getDirArrow(deg, type) {
+  const d = ((deg % 360) + 360) % 360;
+  const idx = Math.round(d / 22.5) % 16;
+  return type === 'wind' ? WIND_ARROWS[idx] : CUR_ARROWS[idx];
+}
+
+function formatDirDisplay(deg, type) {
+  if (deg === null || deg === undefined || isNaN(deg)) return '';
+  const c = degToCompass(deg);
+  const arrow = getDirArrow(deg, type);
+  return `${arrow} ${c.name} (${Math.round(deg)}°)`;
+}
+
+function stepDir(inputId, delta) {
+  const inp = document.getElementById(inputId);
+  let val = parseInt(inp.value);
+  if (isNaN(val)) val = 0;
+  val = ((val + delta) % 360 + 360) % 360;
+  inp.value = val;
+  const type = inputId === 'windDeg' ? 'wind' : 'current';
+  wx[inputId === 'windDeg' ? 'windDeg' : 'curDeg'] = val;
+  updateDirDisplay(inputId, type);
+}
+
+function updateDirDisplay(inputId, type) {
+  const inp = document.getElementById(inputId);
+  const label = document.getElementById(inputId + '-compass');
+  let val = parseInt(inp.value);
+  if (isNaN(val) || inp.value === '') {
+    wx[inputId === 'windDeg' ? 'windDeg' : 'curDeg'] = null;
+    label.innerHTML = 'Enter 0–360°';
+    return;
+  }
+  val = ((val % 360) + 360) % 360;
+  wx[inputId === 'windDeg' ? 'windDeg' : 'curDeg'] = val;
+  const c = degToCompass(val);
+  const arrow = getDirArrow(val, type);
+  const blowsLabel = type === 'wind' ? ' · blows ' + degToCompass((val + 180) % 360).name : '';
+  label.innerHTML = `<span class="dir-arrow">${arrow}</span> <span class="dir-name">${c.name}</span> <span style="color:#8b949e;font-size:.78rem">${val}°${blowsLabel}</span>`;
+}
+
+function selEnvScale(field, val, el) {
+  if (wx[field] === val) {
+    wx[field] = null;
+    el.classList.remove('sel');
+  } else {
+    wx[field] = val;
+    const parent = el.parentElement;
+    parent.querySelectorAll('.env-scale-btn').forEach(b => b.classList.remove('sel'));
+    el.classList.add('sel');
+  }
+}
+
+function stepTemp(id, delta) {
+  const inp = document.getElementById(id);
+  inp.value = Math.max(parseInt(inp.min), Math.min(parseInt(inp.max), parseInt(inp.value || 0) + delta));
+}
+
+// ════════════════════════════════════════════════════════════
+//  WEATHER VOICE NOTE
+// ════════════════════════════════════════════════════════════
+function toggleWxVoice() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) {
-    document.getElementById('mic-btn').className = 'mic-btn nosupport';
-    document.getElementById('mic-btn').textContent = '🚫';
-    document.getElementById('mic-status').textContent = '음성 인식 미지원 브라우저 (Chrome/Safari 권장)';
-    document.getElementById('mic-hint').textContent = '직접 텍스트 입력을 사용해 주세요';
+  if (!SR) { showFlash('Voice not supported', 'warn'); return; }
+
+  const btn = document.getElementById('wx-voice-btn');
+  const status = document.getElementById('wx-voice-status');
+  const textarea = document.getElementById('wx-note');
+
+  if (wxVoiceActive) {
+    wxVoiceActive = false;
+    if (wxVoiceRec) { try { wxVoiceRec.stop(); } catch(e){} }
+    btn.classList.remove('recording');
+    btn.textContent = '🎙️';
+    status.textContent = '';
     return;
   }
 
-  recognition = new SR();
-  recognition.continuous    = true;
-  recognition.interimResults = true;
-  recognition.lang          = currentLang;
+  wxVoiceRec = new SR();
+  wxVoiceRec.lang = currentLang;
+  wxVoiceRec.continuous = true;
+  wxVoiceRec.interimResults = true;
+  wxVoiceBase = textarea.value;
+  wxVoiceActive = true;
 
-  recognition.onstart = () => {
-    isRecording = true;
-    baseText = document.getElementById('obs-txt').value;
-    document.getElementById('mic-btn').className = 'mic-btn recording';
-    document.getElementById('mic-btn').textContent = '⏹';
-    setMicStatus('🔴 녹음 중... 말씀하세요', true);
+  wxVoiceRec.onstart = () => {
+    btn.classList.add('recording');
+    btn.textContent = '⏹️';
+    status.textContent = '🔴 Listening...';
   };
 
-  recognition.onresult = (e) => {
-    let interim = '';
-    let addedFinal = baseText;
+  wxVoiceRec.onresult = (e) => {
+    let final = wxVoiceBase, interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       const t = e.results[i][0].transcript;
-      if (e.results[i].isFinal) {
-        addedFinal = (addedFinal ? addedFinal + ' ' : '') + t.trim();
-      } else {
-        interim += t;
-      }
+      if (e.results[i].isFinal) { final = (final ? final + ' ' : '') + t.trim(); }
+      else { interim += t; }
     }
-    baseText = addedFinal;
-    document.getElementById('obs-txt').value = addedFinal + (interim ? ' ' + interim : '');
+    wxVoiceBase = final;
+    textarea.value = final + (interim ? ' ' + interim : '');
   };
 
-  recognition.onerror = (e) => {
-    console.warn('Speech error:', e.error);
-    if (e.error === 'not-allowed') {
-      setMicStatus('마이크 권한을 허용해 주세요', false);
-      showFlash('마이크 권한 필요', 'warn');
-    } else if (e.error === 'no-speech') {
-      // continue — this is normal
-    } else {
-      setMicStatus('오류 발생: ' + e.error, false);
-    }
+  wxVoiceRec.onerror = (e) => {
     if (e.error !== 'no-speech' && e.error !== 'aborted') {
-      stopRecording();
+      wxVoiceActive = false;
+      btn.classList.remove('recording');
+      btn.textContent = '🎙️';
+      status.textContent = 'Error: ' + e.error;
+      setTimeout(() => status.textContent = '', 3000);
     }
   };
 
-  recognition.onend = () => {
-    // Auto-restart to keep continuous recording
-    if (isRecording) {
-      try { recognition.start(); }
-      catch(err) { stopRecording(); }
+  wxVoiceRec.onend = () => {
+    if (wxVoiceActive) {
+      try { wxVoiceRec.start(); } catch(e) {
+        wxVoiceActive = false;
+        btn.classList.remove('recording');
+        btn.textContent = '🎙️';
+        status.textContent = '';
+      }
+    } else {
+      btn.classList.remove('recording');
+      btn.textContent = '🎙️';
+      status.textContent = '';
     }
   };
-}
 
-function toggleVoice() {
-  if (!recognition) return;
-  if (isRecording) {
-    stopRecording();
-  } else {
-    startRecording();
-  }
-}
-
-function startRecording() {
-  if (!recognition) return;
-  try { recognition.start(); }
-  catch(e) { console.log('Start error:', e); }
-}
-
-function stopRecording() {
-  isRecording = false;
-  if (recognition) {
-    try { recognition.stop(); } catch(e) {}
-  }
-  document.getElementById('mic-btn').className = 'mic-btn idle';
-  document.getElementById('mic-btn').textContent = '🎙️';
-  setMicStatus('탭하여 음성 입력 시작', false);
-}
-
-function setMicStatus(msg, isRec) {
-  const el = document.getElementById('mic-status');
-  el.textContent = msg;
-  el.className = 'mic-status' + (isRec ? ' rec' : '');
+  wxVoiceRec.start();
 }
 
 // ════════════════════════════════════════════════════════════
-//  SAVE OBSERVATION
+//  SAVE WEATHER
 // ════════════════════════════════════════════════════════════
-function saveObs() {
-  const txt = document.getElementById('obs-txt').value.trim();
-  if (!txt) {
-    showFlash('관찰 내용을 입력하세요', 'warn');
+function saveWeather() {
+  // At least one field should be filled
+  const note = document.getElementById('wx-note').value.trim();
+  if (wx.windZone === null && wx.windDeg === null && wx.wave === null &&
+      wx.curStr === null && wx.curDeg === null && !note) {
+    showFlash('Select at least one weather field', 'warn');
     return;
   }
 
-  if (isRecording) stopRecording();
+  if (wxVoiceActive) toggleWxVoice();
 
-  const ath = ATHLETES.find(a => a.code === currentAthlete);
   const entry = {
-    id:          Date.now() + '_' + Math.random().toString(36).slice(2, 7),
-    ts:          new Date().toISOString(),
-    athlete:     ath ? ath.fullName : null,
-    athleteCode: currentAthlete || null,
-    category:    currentCat,
-    text:        txt,
-    synced:      false
+    id:    Date.now() + '_wx_' + Math.random().toString(36).slice(2,6),
+    ts:    new Date().toISOString(),
+    type:  'weather',
+    wind_zone: wx.windZone !== null ? WIND_ZONES[wx.windZone].kn + ' (' + WIND_ZONES[wx.windZone].skill + ')' : null,
+    wind_zone_idx: wx.windZone,
+    wind_deg: wx.windDeg,
+    wind_dir: wx.windDeg !== null ? degToCompass(wx.windDeg).name : null,
+    wave: wx.wave,
+    air_temp: parseInt(document.getElementById('airTemp').value),
+    cur_str: wx.curStr,
+    cur_deg: wx.curDeg,
+    cur_dir: wx.curDeg !== null ? degToCompass(wx.curDeg).name : null,
+    water_temp: parseInt(document.getElementById('waterTemp').value),
+    notes: note || null,
+    synced: false
   };
 
   observations.unshift(entry);
   persist();
   updateBadge();
-  updateSyncCounts();
+  showFlash('Weather saved ✓', 'ok');
 
-  // Reset text area + base
-  document.getElementById('obs-txt').value = '';
-  baseText = '';
+  // Reset selections
+  wx.windZone = null; wx.windDeg = null; wx.wave = null; wx.curStr = null; wx.curDeg = null;
+  document.querySelectorAll('.wz-btn, .env-scale-btn').forEach(b => b.classList.remove('sel'));
+  document.getElementById('windDeg').value = '';
+  document.getElementById('curDeg').value = '';
+  document.getElementById('windDeg-compass').innerHTML = 'Enter 0–360°';
+  document.getElementById('curDeg-compass').innerHTML = 'Enter 0–360°';
+  document.getElementById('wx-note').value = '';
+  wxVoiceBase = '';
+}
 
-  const label = ath ? ath.name + ' 저장됨 ✓' : '저장됨 ✓';
-  showFlash(label, 'ok');
+// ════════════════════════════════════════════════════════════
+//  ATHLETE CARDS
+// ════════════════════════════════════════════════════════════
+function renderAthleteCards() {
+  const grid = document.getElementById('ath-card-grid');
+  grid.innerHTML = ATHLETES.map((a, idx) => {
+    athTags[a.code] = new Set();
+    const clsCls = a.cls === 'U17' ? 'ath-cls-u17' : 'ath-cls-u15';
+    return `
+      <div class="ath-card" id="ath-card-${a.code}">
+        <div class="ath-card-hdr">
+          <div class="ath-card-num">${idx + 1}</div>
+          <div class="ath-card-name">${a.name}</div>
+          <span class="ath-card-cls ${clsCls}">${a.cls}</span>
+          <span class="ath-card-code">${a.code}</span>
+        </div>
+        <div class="ath-tag-row" id="ath-tags-${a.code}">
+          ${ATH_TAGS.map(t => `<span class="ath-tag" onclick="toggleAthTag(this,'${a.code}','${t}')">${t}</span>`).join('')}
+        </div>
+        <div class="ath-input-row">
+          <textarea class="ath-txt" id="ath-txt-${a.code}"
+            placeholder="Observations for ${a.name}..."></textarea>
+          <div style="display:flex;flex-direction:column;align-items:center;margin-top:2px">
+            <button class="ath-voice-btn" id="ath-vbtn-${a.code}" onclick="toggleAthVoice('${a.code}')" title="Voice input">🎙️</button>
+            <div class="ath-voice-status" id="ath-vstat-${a.code}"></div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleAthTag(el, code, tag) {
+  if (athTags[code].has(tag)) {
+    athTags[code].delete(tag);
+    el.classList.remove('sel');
+  } else {
+    athTags[code].add(tag);
+    el.classList.add('sel');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  PER-ATHLETE VOICE
+// ════════════════════════════════════════════════════════════
+function toggleAthVoice(code) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { showFlash('Voice not supported', 'warn'); return; }
+
+  const btn = document.getElementById('ath-vbtn-' + code);
+  const status = document.getElementById('ath-vstat-' + code);
+  const textarea = document.getElementById('ath-txt-' + code);
+
+  // If already recording this athlete, stop
+  if (athVoice[code]) {
+    try { athVoice[code].stop(); } catch(e){}
+    delete athVoice[code];
+    btn.classList.remove('recording');
+    btn.textContent = '🎙️';
+    status.textContent = '';
+    return;
+  }
+
+  const rec = new SR();
+  rec.lang = currentLang;
+  rec.continuous = true;
+  rec.interimResults = true;
+  athVoice[code] = rec;
+
+  let baseText = textarea.value;
+  let alive = true;
+
+  rec.onstart = () => {
+    btn.classList.add('recording');
+    btn.textContent = '⏹️';
+    status.textContent = 'Listening...';
+  };
+
+  rec.onresult = (e) => {
+    let final = baseText, interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript;
+      if (e.results[i].isFinal) { final = (final ? final + ' ' : '') + t.trim(); }
+      else { interim += t; }
+    }
+    baseText = final;
+    textarea.value = final + (interim ? ' ' + interim : '');
+  };
+
+  rec.onerror = (e) => {
+    if (e.error !== 'no-speech' && e.error !== 'aborted') {
+      alive = false;
+      stopAthVoice(code);
+    }
+  };
+
+  rec.onend = () => {
+    if (alive && athVoice[code]) {
+      try { rec.start(); } catch(e) { stopAthVoice(code); }
+    } else {
+      stopAthVoice(code);
+    }
+  };
+
+  rec.start();
+}
+
+function stopAthVoice(code) {
+  const btn = document.getElementById('ath-vbtn-' + code);
+  const status = document.getElementById('ath-vstat-' + code);
+  if (btn) { btn.classList.remove('recording'); btn.textContent = '🎙️'; }
+  if (status) setTimeout(() => { if (status) status.textContent = ''; }, 2000);
+  if (athVoice[code]) { try { athVoice[code].stop(); } catch(e){} }
+  delete athVoice[code];
+}
+
+// ════════════════════════════════════════════════════════════
+//  SAVE ALL ATHLETE OBSERVATIONS
+// ════════════════════════════════════════════════════════════
+function saveAllAthleteObs() {
+  let count = 0;
+
+  // Stop all active recordings
+  Object.keys(athVoice).forEach(code => stopAthVoice(code));
+
+  ATHLETES.forEach(a => {
+    const txt = document.getElementById('ath-txt-' + a.code)?.value.trim();
+    if (!txt) return;
+
+    const tags = athTags[a.code] ? [...athTags[a.code]] : [];
+    const entry = {
+      id:         Date.now() + '_' + a.code + '_' + Math.random().toString(36).slice(2,6),
+      ts:         new Date().toISOString(),
+      type:       'athlete',
+      athlete:    a.fullName,
+      athleteCode: a.code,
+      categories: tags.join(', '),
+      text:       txt,
+      synced:     false
+    };
+    observations.unshift(entry);
+    count++;
+  });
+
+  if (!count) {
+    showFlash('No observations to save', 'warn');
+    return;
+  }
+
+  persist();
+  updateBadge();
+  showFlash(count + ' athlete obs saved ✓', 'ok');
+
+  // Reset all cards
+  ATHLETES.forEach(a => {
+    const ta = document.getElementById('ath-txt-' + a.code);
+    if (ta) ta.value = '';
+    athTags[a.code] = new Set();
+  });
+  document.querySelectorAll('.ath-tag').forEach(t => t.classList.remove('sel'));
 }
 
 // ════════════════════════════════════════════════════════════
 //  LOG / RENDER
 // ════════════════════════════════════════════════════════════
 function renderLog() {
-  const filterCode = document.getElementById('filter-ath')?.value || '';
-  const filtered = filterCode
-    ? observations.filter(o => o.athleteCode === filterCode)
+  const filterType = document.getElementById('filter-type')?.value || '';
+  const filtered = filterType
+    ? observations.filter(o => o.type === filterType)
     : observations;
 
   const list = document.getElementById('obs-list');
-  document.getElementById('log-count').textContent = filtered.length + '건';
+  document.getElementById('log-count').textContent = filtered.length;
 
   if (!filtered.length) {
     list.innerHTML = `
       <div class="empty-state">
         <span class="empty-icon">📋</span>
-        <div class="empty-txt">저장된 관찰 기록이 없습니다</div>
+        <div class="empty-txt">No saved records</div>
       </div>`;
     return;
   }
 
-  list.innerHTML = filtered.map(o => `
-    <div class="obs-card" id="card-${o.id}">
+  list.innerHTML = filtered.map(o => {
+    if (o.type === 'weather') return renderWxCard(o);
+    return renderAthCard(o);
+  }).join('');
+}
+
+function renderWxCard(o) {
+  let tags = [];
+  if (o.wind_zone) tags.push('💨 ' + o.wind_zone);
+  if (o.wind_deg != null) {
+    tags.push('🧭 Wind: ' + formatDirDisplay(o.wind_deg, 'wind'));
+  } else if (o.wind_dir) {
+    tags.push('🧭 Wind: ' + o.wind_dir);
+  }
+  if (o.wave) tags.push('🌊 Wave: ' + o.wave + '/5');
+  if (o.air_temp != null) tags.push('🌡 Air: ' + o.air_temp + '°C');
+  if (o.cur_str) tags.push('🌀 Current: ' + o.cur_str + '/5');
+  if (o.cur_deg != null) {
+    tags.push('➡ Flow: ' + formatDirDisplay(o.cur_deg, 'current'));
+  } else if (o.cur_dir) {
+    tags.push('➡ Flow: ' + o.cur_dir);
+  }
+  if (o.water_temp != null) tags.push('💧 Water: ' + o.water_temp + '°C');
+
+  return `
+    <div class="obs-card wx-entry" id="card-${o.id}">
       <button class="obs-del" onclick="deleteObs('${o.id}')">✕</button>
       <div class="obs-hdr">
         <span class="obs-time">${formatTime(o.ts)}</span>
+        <span class="obs-type-badge obs-type-wx">🌊 Weather</span>
+        <span class="${o.synced ? 'obs-sync-ok' : 'obs-sync-no'}">${o.synced ? '☁✓' : '⏳'}</span>
+      </div>
+      <div class="obs-wx-data">
+        ${tags.map(t => `<span class="wx-tag">${escHtml(t)}</span>`).join(' ')}
+      </div>
+      ${o.notes ? `<div class="obs-text" style="margin-top:6px;font-style:italic;color:#8b949e">${escHtml(o.notes)}</div>` : ''}
+    </div>`;
+}
+
+function renderAthCard(o) {
+  return `
+    <div class="obs-card ath-entry" id="card-${o.id}">
+      <button class="obs-del" onclick="deleteObs('${o.id}')">✕</button>
+      <div class="obs-hdr">
+        <span class="obs-time">${formatTime(o.ts)}</span>
+        <span class="obs-type-badge obs-type-ath">👥 Athlete</span>
         ${o.athlete
           ? `<span class="obs-ath-badge">${o.athlete.split(' ')[0]}</span>`
-          : `<span class="obs-ath-none">선수 미지정</span>`}
-        <span class="obs-cat-badge">${o.category}</span>
+          : ''}
+        ${o.categories ? o.categories.split(', ').map(c =>
+          `<span class="obs-cat-badge">${escHtml(c)}</span>`).join('') : ''}
         <span class="${o.synced ? 'obs-sync-ok' : 'obs-sync-no'}">${o.synced ? '☁✓' : '⏳'}</span>
       </div>
       <div class="obs-text">${escHtml(o.text)}</div>
-    </div>
-  `).join('');
+    </div>`;
 }
 
 function deleteObs(id) {
-  if (!confirm('이 기록을 삭제할까요?')) return;
+  if (!confirm('Delete this record?')) return;
   observations = observations.filter(o => o.id !== id);
   persist();
   renderLog();
@@ -595,32 +1087,47 @@ function saveSheetUrl() {
 async function syncToSheets() {
   const url = localStorage.getItem(URL_KEY)?.trim();
   if (!url) {
-    addSyncLog('❌ Apps Script URL을 먼저 입력하세요');
-    showFlash('URL 먼저 입력', 'warn');
+    addSyncLog('❌ Please enter Apps Script URL first');
+    showFlash('Enter URL first', 'warn');
     return;
   }
 
   const unsynced = observations.filter(o => !o.synced);
   if (!unsynced.length) {
-    addSyncLog('✅ 동기화할 새 기록이 없습니다');
-    showFlash('이미 동기화 완료', 'ok');
+    addSyncLog('✅ No new records to sync');
+    showFlash('Already synced', 'ok');
     return;
   }
 
   const btn = document.getElementById('sync-now-btn');
   btn.disabled = true;
-  btn.textContent = '⏳ 동기화 중...';
-  addSyncLog('📤 ' + unsynced.length + '건 전송 중...');
+  btn.textContent = '⏳ Syncing...';
+
+  // Split by type and send separately
+  const wxEntries = unsynced.filter(o => o.type === 'weather');
+  const athEntries = unsynced.filter(o => o.type === 'athlete');
+  let success = true;
 
   try {
-    const resp = await fetch(url, {
-      method:  'POST',
-      mode:    'no-cors',   // Apps Script requires this from external origins
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ observations: unsynced, source: 'quick_obs' })
-    });
+    if (wxEntries.length) {
+      addSyncLog('📤 Sending ' + wxEntries.length + ' weather records...');
+      for (const w of wxEntries) {
+        await fetch(url, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'weather', data: w, source: 'coach_obs' })
+        });
+      }
+    }
+    if (athEntries.length) {
+      addSyncLog('📤 Sending ' + athEntries.length + ' athlete records...');
+      await fetch(url, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'athlete', data: athEntries, source: 'coach_obs' })
+      });
+    }
 
-    // no-cors returns opaque response — treat as success
     const syncedIds = new Set(unsynced.map(o => o.id));
     observations = observations.map(o =>
       syncedIds.has(o.id) ? { ...o, synced: true } : o
@@ -630,66 +1137,58 @@ async function syncToSheets() {
     updateBadge();
     updateSyncCounts();
 
-    btn.className  = 'sync-now-btn ok';
-    btn.textContent = '✅ 동기화 완료';
-    addSyncLog('✅ ' + unsynced.length + '건 전송 완료 (Google Sheets 확인 바람)');
-    showFlash(unsynced.length + '건 동기화 완료', 'ok');
+    btn.className = 'sync-now-btn ok';
+    btn.textContent = '✅ Synced';
+    addSyncLog('✅ ' + unsynced.length + ' records sent');
+    showFlash(unsynced.length + ' records synced', 'ok');
 
   } catch (e) {
-    btn.className  = 'sync-now-btn fail';
-    btn.textContent = '❌ 실패';
-    addSyncLog('❌ 오류: ' + e.message);
-    showFlash('동기화 실패: ' + e.message, 'err');
+    success = false;
+    btn.className = 'sync-now-btn fail';
+    btn.textContent = '❌ Failed';
+    addSyncLog('❌ Error: ' + e.message);
+    showFlash('Sync failed', 'err');
   }
 
   setTimeout(() => {
-    btn.className  = 'sync-now-btn';
-    btn.textContent = '☁️ 지금 동기화';
-    btn.disabled   = false;
+    btn.className = 'sync-now-btn';
+    btn.textContent = '☁️ Sync Now';
+    btn.disabled = false;
   }, 2500);
 }
 
 function addSyncLog(msg) {
   const el = document.getElementById('sync-log');
-  const t  = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const t  = new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
   el.innerHTML = '<span style="color:#484f58">[' + t + ']</span> ' + escHtml(msg) + '\n' + el.innerHTML;
 }
 
 function clearSynced() {
   const n = observations.filter(o => o.synced).length;
-  if (!n) { showFlash('삭제할 기록 없음', 'warn'); return; }
-  if (!confirm(n + '건의 동기화 완료 기록을 삭제할까요?')) return;
+  if (!n) { showFlash('No records to delete', 'warn'); return; }
+  if (!confirm('Delete ' + n + ' synced records?')) return;
   observations = observations.filter(o => !o.synced);
   persist();
   renderLog();
   updateBadge();
   updateSyncCounts();
-  showFlash(n + '건 삭제 완료');
+  showFlash(n + ' records deleted');
 }
 
 function clearAll() {
-  if (!observations.length) { showFlash('기록 없음', 'warn'); return; }
-  if (!confirm('모든 관찰 기록(' + observations.length + '건)을 삭제할까요?\n이 작업은 복구할 수 없습니다.')) return;
+  if (!observations.length) { showFlash('No records', 'warn'); return; }
+  if (!confirm('Delete all records (' + observations.length + ')?\nThis action cannot be undone.')) return;
   observations = [];
   persist();
   renderLog();
   updateBadge();
   updateSyncCounts();
-  showFlash('전체 삭제 완료');
+  showFlash('All records deleted');
 }
 
 // ════════════════════════════════════════════════════════════
 //  UI UTILITIES
 // ════════════════════════════════════════════════════════════
-function showTab(tab) {
-  ['record', 'log', 'sync'].forEach(t => {
-    document.getElementById('pane-' + t).classList.toggle('active', t === tab);
-    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
-  });
-  if (tab === 'log')  renderLog();
-  if (tab === 'sync') updateSyncCounts();
-}
-
 function updateBadge() {
   const n = observations.filter(o => !o.synced).length;
   const el = document.getElementById('badge');
@@ -732,8 +1231,7 @@ function showFlash(msg, type) {
 }
 
 function toggleGuide() {
-  const box = document.getElementById('guide-box');
-  box.classList.toggle('open');
+  document.getElementById('guide-box').classList.toggle('open');
 }
 
 // ════════════════════════════════════════════════════════════
