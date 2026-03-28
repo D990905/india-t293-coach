@@ -1,11 +1,10 @@
 // ════════════════════════════════════════════════════════════
 //  Coach Obs Service Worker — India T293
-//  Offline-first caching strategy
+//  Network-first caching strategy (always get latest)
 // ════════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'quickobs-v1';
+const CACHE_NAME = 'quickobs-v2';
 
-// Files to cache for offline use
 const PRECACHE_URLS = [
   'quick_obs.html',
   'manifest_obs.json',
@@ -23,14 +22,13 @@ self.addEventListener('install', event => {
       })
       .then(() => self.skipWaiting())
       .catch(err => {
-        console.warn('[SW] Pre-cache failed (some files may not exist yet):', err);
-        // Don't fail installation even if some files missing
+        console.warn('[SW] Pre-cache failed:', err);
         return self.skipWaiting();
       })
   );
 });
 
-// ── ACTIVATE: Clean old caches ─────────────────────────────
+// ── ACTIVATE: Clean ALL old caches ─────────────────────────
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
@@ -48,41 +46,31 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ── FETCH: Cache-first for app files, network-first for API ──
+// ── FETCH: Network-first (always try fresh, fallback to cache) ──
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Google Apps Script requests — always network (no-cors, never cache)
+  // Google Apps Script — let browser handle directly
   if (url.hostname.includes('script.google.com')) {
-    return; // Let browser handle directly
+    return;
   }
 
-  // For app shell files — cache-first
   event.respondWith(
-    caches.match(event.request)
-      .then(cached => {
-        if (cached) return cached;
-
-        // Not in cache — fetch from network and cache it
-        return fetch(event.request)
-          .then(response => {
-            // Only cache successful same-origin responses
-            if (
-              response &&
-              response.status === 200 &&
-              response.type === 'basic'
-            ) {
-              const responseClone = response.clone();
-              caches.open(CACHE_NAME).then(cache => {
-                cache.put(event.request, responseClone);
-              });
-            }
-            return response;
-          })
-          .catch(() => {
-            // Offline fallback — return main app shell
-            return caches.match('quick_obs.html');
+    fetch(event.request)
+      .then(response => {
+        // Got network response — cache it and return
+        if (response && response.status === 200 && response.type === 'basic') {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, clone);
           });
+        }
+        return response;
+      })
+      .catch(() => {
+        // Network failed — fallback to cache (offline mode)
+        return caches.match(event.request)
+          .then(cached => cached || caches.match('quick_obs.html'));
       })
   );
 });
