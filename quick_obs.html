@@ -461,30 +461,7 @@
           <li><code>Weather</code> headers: <code>timestamp | wind_zone | wind_deg | wind_dir | wave | air_temp | cur_str | cur_deg | cur_dir | water_temp | notes | synced_at</code></li>
           <li><code>Athlete_Obs</code> headers: <code>timestamp | athlete | code | categories | text | synced_at</code></li>
           <li>Menu → Extensions → Apps Script</li>
-          <li>Paste code below:<br>
-<code>function doPost(e){
-  const d = JSON.parse(e.postData.contents);
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  if(d.type==='weather'){
-    const ws=ss.getSheetByName('Weather');
-    const w=d.data;
-    ws.appendRow([w.ts,w.wind_zone||'',w.wind_deg||'',
-      w.wind_dir||'',w.wave||'',w.air_temp||'',
-      w.cur_str||'',w.cur_deg||'',w.cur_dir||'',
-      w.water_temp||'',w.notes||'',
-      new Date().toISOString()]);
-  } else {
-    const as=ss.getSheetByName('Athlete_Obs');
-    d.data.forEach(o=>{
-      as.appendRow([o.ts,o.athlete||'',o.code||'',
-        o.categories||'',o.text,
-        new Date().toISOString()]);
-    });
-  }
-  return ContentService.createTextOutput('ok');
-}</code></li>
-          <li>Deploy → New deployment → Web app → Access: All users → Deploy</li>
-          <li>Paste deployment URL above</li>
+          <li>See Code_Unified.gs for the complete backend code. Deploy as Web App and paste URL above.</li>
         </ol>
       </div>
     </div>
@@ -536,7 +513,7 @@ const WIND_ZONES = [
 ];
 
 const STORAGE_KEY  = 'coachobs_v2';
-const URL_KEY      = 'quickobs_sheets_url';
+const URL_KEY      = 'india_t293_script_url';
 const LANG_KEY     = 'quickobs_lang';
 
 let currentLang = localStorage.getItem(LANG_KEY) || 'en-US';
@@ -1115,7 +1092,7 @@ async function syncToSheets() {
         await fetch(url, {
           method: 'POST', mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'weather', data: w, source: 'coach_obs' })
+          body: JSON.stringify({ action: 'coachObsWeather', payload: w })
         });
       }
     }
@@ -1124,7 +1101,7 @@ async function syncToSheets() {
       await fetch(url, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'athlete', data: athEntries, source: 'coach_obs' })
+        body: JSON.stringify({ action: 'coachObsAthlete', payload: athEntries })
       });
     }
 

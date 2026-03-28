@@ -1,0 +1,3710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>India T293 — Training Log</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="IND T293 Log">
+<meta name="theme-color" content="#0a3a1e">
+<link rel="manifest" href="manifest_training.json">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a2a6e;--blue:#1a73e8;--green:#0a3a1e;--green-l:#34a853;
+  --orange:#fbbc04;--red:#ea4335;--purple:#9c27b0;
+  --bg:#f0f4f8;--card:#fff;--text:#202124;--sub:#5f6368;
+  --border:#e8eaed;--r:14px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
+
+/* ─── HEADER ─── */
+.hdr{background:linear-gradient(135deg,#0a3a1e,#1a6e3a);color:#fff;
+  padding:16px 20px 12px;text-align:center;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.hdr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px}
+.hdr-flag{font-size:1.5rem;line-height:1}
+.hdr-title{font-size:1.05rem;font-weight:800}
+.hdr-sub{font-size:.72rem;opacity:.8}
+.hdr-badge{display:flex;gap:8px;justify-content:center;margin-top:6px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:.72rem}
+.badge.live{background:#34a853;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+
+/* ─── PROGRESS ─── */
+.progress-wrap{background:#e8eaed;height:4px;position:sticky;top:72px;z-index:99}
+.progress-bar{height:100%;background:var(--green-l);transition:width .4s ease;width:0%}
+
+/* ─── LAYOUT ─── */
+.section{max-width:520px;margin:0 auto;padding:14px 14px 0}
+.card{background:var(--card);border-radius:var(--r);padding:16px 14px;
+  margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.card-title{font-size:.78rem;font-weight:700;color:var(--green-l);
+  text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px;
+  padding-bottom:8px;border-bottom:2px solid var(--border);
+  display:flex;align-items:center;gap:6px}
+.card-title .icon{font-size:1rem}
+
+/* ─── FIELDS ─── */
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--text)}
+.field .hint{font-size:.71rem;color:var(--sub);margin-bottom:5px;margin-top:-3px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+/* ─── DROPDOWNS ─── */
+select{width:100%;padding:11px 12px;border:2px solid var(--border);border-radius:10px;
+  font-size:.92rem;font-weight:600;background:#fff;color:var(--text);
+  -webkit-appearance:none;appearance:none;outline:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235f6368' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+  padding-right:36px}
+select:focus{border-color:var(--green-l)}
+
+/* ─── SCALE BUTTONS ─── */
+.scale{display:flex;gap:5px}
+.scale-btn{flex:1;padding:9px 3px;border:2px solid var(--border);border-radius:10px;
+  background:#fff;font-size:.88rem;font-weight:700;color:var(--sub);
+  cursor:pointer;text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent;
+  display:flex;flex-direction:column;align-items:center;gap:2px}
+.scale-btn .s-num{font-size:.95rem;font-weight:800}
+.scale-btn .s-lbl{font-size:.58rem;line-height:1.2}
+.scale-btn:active{transform:scale(.95)}
+.scale-btn.sel{border-color:var(--green-l);background:var(--green-l);color:#fff}
+.scale-btn.sel-dkgreen{border-color:#1b5e20;background:#1b5e20;color:#fff}
+.scale-btn.sel-orange{border-color:#ef6c00;background:#ef6c00;color:#fff}
+.scale-btn.sel-yellow{border-color:#f9a825;background:#f9a825;color:#202124}
+.scale-btn.sel-red{border-color:var(--red);background:var(--red);color:#fff}
+.scale-btn.sel-blue{border-color:var(--blue);background:var(--blue);color:#fff}
+
+/* ─── WIND ZONES ─── */
+.wind-zone-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.wz-btn{padding:7px 2px;border:2px solid var(--border);border-radius:10px;
+  background:#fff;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:all .15s;font-size:.65rem}
+.wz-btn .wz-kn{font-size:.88rem;font-weight:800;color:var(--navy)}
+.wz-btn .wz-skill{font-size:.58rem;font-weight:700;margin-top:2px;line-height:1.2;padding:1px 4px;border-radius:4px;display:inline-block}
+.wz-btn .wz-lbl{font-size:.55rem;color:var(--sub);margin-top:1px;line-height:1.2}
+.wz-btn.selected{border-color:var(--navy);background:#e8f0fe}
+.wz-btn.selected .wz-kn{color:var(--navy)}
+.skill-a{background:#fff3e0;color:#e65100}
+.skill-ab{background:#fff8e1;color:#f57f17}
+.skill-b{background:#e8f5e9;color:#2e7d32}
+.skill-bc{background:#e3f2fd;color:#1565c0}
+.skill-c{background:#f3e5f5;color:#6a1b9a}
+.skill-sail{background:#e0f7fa;color:#006064}
+
+/* ─── DIRECTION INPUT (0-360°) ─── */
+.dir-input-wrap{background:#f8f9fa;border:2px solid var(--border);border-radius:12px;padding:10px}
+.dir-btns{display:flex;align-items:center;justify-content:center;gap:6px}
+.dir-step{width:40px;height:36px;border-radius:8px;border:2px solid var(--border);background:#fff;color:var(--text);font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s}
+.dir-step:active{background:var(--border)}
+.dir-val-box{display:flex;align-items:center;gap:2px}
+.dir-deg{width:60px;text-align:center;background:#fff;border:2px solid var(--border);border-radius:10px;padding:8px 2px;font-size:1.1rem;font-weight:800;color:var(--navy);font-family:inherit;-webkit-appearance:none}
+.dir-deg:focus{border-color:var(--green-l);outline:none}
+.dir-deg-unit{font-size:.8rem;color:var(--sub);font-weight:700}
+.dir-compass{text-align:center;margin-top:6px;font-size:1rem;font-weight:700;color:var(--blue);min-height:24px}
+.dir-compass .dir-arrow{font-size:1.1rem;margin-right:4px}
+.dir-compass .dir-name{color:var(--text);font-size:.85rem}
+/* Current strength buttons: blue gradient */
+.scale-btn.cur-1{border-color:#b3e5fc!important;background:#b3e5fc!important;color:#01579b!important}
+.scale-btn.cur-2{border-color:#4fc3f7!important;background:#4fc3f7!important;color:#01579b!important}
+.scale-btn.cur-3{border-color:#0288d1!important;background:#0288d1!important;color:#fff!important}
+.scale-btn.cur-4{border-color:#01579b!important;background:#01579b!important;color:#fff!important}
+.scale-btn.cur-5{border-color:#1a237e!important;background:#1a237e!important;color:#fff!important}
+
+/* ─── NUMBER INPUT ─── */
+.num-row{display:flex;align-items:center;gap:8px}
+.num-row .num-lbl{font-size:.82rem;font-weight:600;min-width:90px}
+.num-input{display:flex;align-items:center;gap:6px}
+.num-input input{width:65px;padding:9px;border:2px solid var(--border);border-radius:10px;
+  font-size:1rem;font-weight:700;text-align:center;outline:none}
+.num-input input:focus{border-color:var(--green-l)}
+.num-input .unit{font-size:.78rem;color:var(--sub)}
+.num-btn{width:34px;height:34px;border-radius:50%;border:2px solid var(--border);
+  background:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:var(--text);
+  -webkit-tap-highlight-color:transparent;flex-shrink:0}
+.num-btn:active{background:var(--border)}
+
+/* ─── CHECKIN BANNER ─── */
+.checkin-banner{background:linear-gradient(135deg,#e8f5e9,#f1f8e9);
+  border:2px solid #a5d6a7;border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.cb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cb-title{font-size:.78rem;font-weight:700;color:#2e7d32}
+.cb-link{font-size:.72rem;color:var(--blue);text-decoration:none;font-weight:600}
+.cb-pills{display:flex;gap:6px;flex-wrap:wrap}
+.cb-pill{padding:3px 9px;border-radius:20px;font-size:.72rem;font-weight:700}
+.cb-pill.good{background:#c8e6c9;color:#1b5e20}
+.cb-pill.ok{background:#fff9c4;color:#f57f17}
+.cb-pill.bad{background:#ffcdd2;color:#b71c1c}
+.cb-missing{font-size:.75rem;color:var(--sub);font-style:italic}
+
+/* ─── GEAR TABLE ─── */
+.gear-row{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 0;border-bottom:1px solid var(--border)}
+.gear-row:last-child{border-bottom:none}
+.gear-name{font-size:.82rem;font-weight:600;flex:1}
+.gear-hint{font-size:.68rem;color:var(--sub);margin-top:1px}
+
+/* ─── RACE RESULTS ─── */
+.race-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.race-item{background:#f8f9fa;border-radius:10px;padding:10px;border:1px solid var(--border)}
+.race-lbl{font-size:.72rem;font-weight:700;color:var(--sub);margin-bottom:6px}
+.race-pos{display:flex;align-items:center;gap:6px}
+.race-pos input{width:55px;padding:8px;border:2px solid var(--border);border-radius:8px;
+  font-size:1.1rem;font-weight:800;text-align:center;outline:none;background:#fff}
+.race-pos input:focus{border-color:var(--green-l)}
+.race-pos .dnf-btn,.race-pos .dsq-btn,.race-pos .ret-btn,.race-pos .bfd-btn{
+  font-size:.7rem;padding:4px 7px;border:1px solid var(--border);
+  border-radius:6px;background:#fff;cursor:pointer;color:var(--red);font-weight:700;
+  transition:background .15s,color .15s,border-color .15s}
+.race-pos .dnf-btn.active,.race-pos .dsq-btn.active,.race-pos .ret-btn.active,.race-pos .bfd-btn.active{
+  background:var(--red);color:#fff;border-color:var(--red)}
+
+/* ─── LIMITING FACTORS ─── */
+.lf-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.lf-item{display:flex;align-items:center;gap:8px;padding:9px 10px;
+  border:2px solid var(--border);border-radius:10px;background:#fff;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s}
+.lf-item.selected{border-color:var(--red);background:#fff5f5}
+.lf-item input{display:none}
+.lf-icon{font-size:1rem;flex-shrink:0}
+.lf-text{font-size:.78rem;font-weight:600;line-height:1.2}
+
+/* ─── RPE SCALE ─── */
+.rpe-row{display:flex;gap:4px;margin-top:6px}
+.rpe-btn{flex:1;padding:9px 2px;border:2px solid var(--border);border-radius:8px;
+  background:#fff;font-size:.8rem;font-weight:700;text-align:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s;
+  color:var(--sub)}
+.rpe-btn:active{transform:scale(.95)}
+.rpe-btn.r1,.rpe-btn.r2{--rc:#4caf50}
+.rpe-btn.r3,.rpe-btn.r4{--rc:#8bc34a}
+.rpe-btn.r5,.rpe-btn.r6{--rc:#ffc107}
+.rpe-btn.r7,.rpe-btn.r8{--rc:#ff9800}
+.rpe-btn.r9,.rpe-btn.r10{--rc:#f44336}
+.rpe-btn.sel{background:var(--rc);border-color:var(--rc);color:#fff}
+
+/* ─── TRAINING LOAD DISPLAY ─── */
+.load-display{background:linear-gradient(135deg,#e3f2fd,#e8eaf6);
+  border-radius:12px;padding:14px;margin-top:10px;text-align:center;border:2px solid #90caf9}
+.load-val{font-size:2rem;font-weight:800;color:#1565c0}
+.load-lbl{font-size:.75rem;color:#546e7a;margin-top:2px}
+.load-zone{font-size:.78rem;font-weight:700;margin-top:4px;padding:3px 10px;
+  border-radius:20px;display:inline-block}
+.zone-easy{background:#c8e6c9;color:#1b5e20}
+.zone-moderate{background:#fff9c4;color:#f57f17}
+.zone-hard{background:#ffccbc;color:#bf360c}
+.zone-very-hard{background:#ffcdd2;color:#b71c1c}
+
+/* ─── TEXTAREA ─── */
+textarea{width:100%;padding:11px 12px;border:2px solid var(--border);border-radius:10px;
+  font-size:.88rem;font-family:inherit;resize:vertical;min-height:80px;outline:none;
+  color:var(--text)}
+textarea:focus{border-color:var(--green-l)}
+
+/* ─── SESSION TYPE TABS ─── */
+.session-tabs{display:flex;gap:6px}
+.session-tab{flex:1;padding:10px;border:2px solid var(--border);border-radius:10px;
+  background:#fff;font-size:.82rem;font-weight:700;text-align:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s;color:var(--sub)}
+.session-tab.sel{border-color:var(--green-l);background:var(--green-l);color:#fff}
+
+/* ─── CLASS TAG ─── */
+.class-tag{display:inline-block;padding:3px 8px;border-radius:6px;
+  font-size:.7rem;font-weight:700;background:#e8f5e9;color:#2e7d32;
+  margin-left:6px}
+
+/* ─── SUBMIT ─── */
+.submit-section{max-width:520px;margin:0 auto;padding:14px}
+.submit-btn{width:100%;padding:16px;border:none;border-radius:14px;
+  background:linear-gradient(135deg,#0a3a1e,#1a6e3a);color:#fff;
+  font-size:1rem;font-weight:800;cursor:pointer;
+  box-shadow:0 4px 16px rgba(10,58,30,.35);letter-spacing:.3px;
+  -webkit-tap-highlight-color:transparent;transition:transform .15s,box-shadow .15s}
+.submit-btn:active{transform:scale(.97);box-shadow:0 2px 8px rgba(10,58,30,.2)}
+.submit-btn:disabled{opacity:.6;cursor:default}
+
+/* ─── SUCCESS ─── */
+.success-screen{display:none;position:fixed;inset:0;background:#fff;z-index:200;
+  padding:40px 24px;text-align:center;overflow-y:auto}
+.success-icon{font-size:4rem;margin-bottom:16px}
+.success-title{font-size:1.4rem;font-weight:800;color:#0a3a1e;margin-bottom:8px}
+.success-sub{font-size:.88rem;color:var(--sub);margin-bottom:24px;line-height:1.5}
+.success-card{background:#f8f9fa;border-radius:14px;padding:16px;margin-bottom:16px;text-align:left}
+.sc-row{display:flex;justify-content:space-between;padding:5px 0;
+  border-bottom:1px solid var(--border);font-size:.82rem}
+.sc-row:last-child{border-bottom:none}
+.sc-row .lbl{color:var(--sub)}
+.sc-row .val{font-weight:700}
+.insight-card{background:linear-gradient(135deg,#e3f2fd,#e8f5e9);
+  border-radius:14px;padding:16px;margin-bottom:16px;border:2px solid #90caf9;text-align:left}
+.insight-title{font-size:.8rem;font-weight:700;color:#1565c0;margin-bottom:8px;text-transform:uppercase}
+.insight-text{font-size:.82rem;color:var(--text);line-height:1.6}
+.new-log-btn{width:100%;padding:14px;border:2px solid var(--green-l);border-radius:12px;
+  background:#fff;color:var(--green-l);font-size:.95rem;font-weight:700;cursor:pointer}
+
+/* ─── SECTION HIDDEN ─── */
+.hidden{display:none}
+
+/* ─── INJURY FLAG ─── */
+.injury-btns{display:flex;gap:6px}
+.inj-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:10px;
+  background:#fff;font-size:.82rem;font-weight:700;text-align:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s;color:var(--sub)}
+.inj-btn.sel-none{border-color:var(--green-l);background:#e8f5e9;color:#2e7d32}
+.inj-btn.sel-mild{border-color:var(--orange);background:#fff8e1;color:#e65100}
+.inj-btn.sel-injury{border-color:var(--red);background:#ffebee;color:#b71c1c}
+
+/* ─── DATE INPUT ─── */
+input[type="date"],input[type="time"]{width:100%;padding:11px 12px;border:2px solid var(--border);
+  border-radius:10px;font-size:1rem;font-weight:700;background:#fff;
+  color:var(--text);outline:none;-webkit-appearance:none;text-align:center}
+input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
+
+/* ─── EQUIPMENT CONDITION RATING ─── */
+.equip-item{margin-bottom:10px;padding:8px 10px;border:2px solid var(--border);border-radius:10px;background:#fff}
+.equip-item-header{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.equip-item-name{font-size:.8rem;font-weight:700;flex:1}
+.equip-item-icon{font-size:.95rem}
+.equip-rating{display:flex;gap:4px}
+.eq-btn{flex:1;padding:5px 2px;border:2px solid var(--border);border-radius:7px;
+  background:#fff;font-size:.68rem;font-weight:700;text-align:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .12s;color:var(--sub);line-height:1.3}
+.eq-btn.eq-5{border-color:#2e7d32;background:#e8f5e9;color:#2e7d32}
+.eq-btn.eq-4{border-color:#689f38;background:#f1f8e9;color:#558b2f}
+.eq-btn.eq-3{border-color:#fbc02d;background:#fffde7;color:#f57f17}
+.eq-btn.eq-2{border-color:#f57c00;background:#fff3e0;color:#e65100}
+.eq-btn.eq-1{border-color:#d32f2f;background:#ffebee;color:#b71c1c}
+.urgent-box{background:#fff8f8;border:2px solid var(--red);border-radius:10px;
+  padding:12px;margin-top:10px}
+.urgent-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;cursor:pointer}
+.urgent-title{font-size:.82rem;font-weight:700;color:#b71c1c;flex:1}
+.urgent-check{width:18px;height:18px;border:2px solid var(--red);border-radius:4px;
+  background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.urgent-check.checked{background:var(--red)}
+.urgent-detail{display:none}
+.urgent-detail.show{display:block}
+
+/* ─── BODY MAP (Professional) ─── */
+/* Pain / Injury (text-based) */
+.pi-wrap{margin-top:8px}
+.pi-count{font-size:.7rem;color:var(--sub);font-weight:600;margin-bottom:6px}
+.pi-step{margin-bottom:8px}
+.pi-grid{display:flex;flex-wrap:wrap;gap:4px}
+.pi-btn{padding:5px 8px;border:1.5px solid var(--border);border-radius:6px;background:#fff;
+  font-size:.68rem;font-weight:600;color:var(--txt);cursor:pointer;transition:all .15s}
+.pi-btn:hover{background:#f5f5f5}
+.pi-btn.sel{border-color:var(--blue);background:#e8f0fe;color:var(--blue)}
+.pi-opt-row{display:flex;gap:4px}
+.pi-opt{flex:1;padding:5px 4px;border:1.5px solid var(--border);border-radius:6px;background:#fff;
+  font-size:.68rem;font-weight:600;color:var(--txt);cursor:pointer;text-align:center;transition:all .15s}
+.pi-opt.sel{border-color:var(--blue);background:#e8f0fe;color:var(--blue)}
+.pi-lvl-row{display:flex;gap:4px}
+.pi-lvl{flex:1;padding:6px 2px;border:1.5px solid var(--border);border-radius:6px;background:#fff;
+  cursor:pointer;text-align:center;transition:all .15s}
+.pi-num{display:block;font-size:.78rem;font-weight:700}
+.pi-lbl{display:block;font-size:.52rem;color:var(--sub)}
+.pi-lvl.lv1{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+.pi-lvl.lv2{border-color:#f9a825;background:#fff8e1;color:#795548}
+.pi-lvl.lv3{border-color:#ef6c00;background:#fff3e0;color:#bf360c}
+.pi-lvl.lv4{border-color:#c62828;background:#ffebee;color:#c62828}
+.pi-lvl.lv5{border-color:#880e0e;background:#880e0e;color:#fff}
+.pi-add-btn{flex:1;padding:7px;border:none;border-radius:6px;background:#e8f5e9;color:#2e7d32;
+  font-size:.72rem;font-weight:700;cursor:pointer}
+.pi-add-btn:disabled{opacity:.4;cursor:default}
+.pi-cancel-btn{padding:7px 14px;border:none;border-radius:6px;background:#f5f5f5;color:var(--sub);
+  font-size:.72rem;font-weight:600;cursor:pointer}
+.pi-list{margin-top:6px}
+.pi-entry{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;
+  border-radius:6px;margin-bottom:4px;font-size:.72rem;font-weight:600}
+.pi-entry .pi-tag{border-radius:4px;padding:1px 6px;font-size:.62rem;font-weight:700;margin-left:6px}
+.pi-entry .pi-del{background:none;border:none;font-size:.82rem;cursor:pointer;color:#999;padding:0 4px}
+.pi-entry.lv1{background:#e8f5e9}.pi-entry.lv2{background:#fff8e1}
+.pi-entry.lv3{background:#fff3e0}.pi-entry.lv4{background:#ffebee}.pi-entry.lv5{background:#fce4ec}
+
+/* ─── KNOWLEDGE QUIZ ─── */
+.know-row{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--border)}
+.know-row:last-child{border-bottom:none}
+.know-q{font-size:.8rem;font-weight:600;flex:1;padding-right:8px;line-height:1.3}
+.know-btns{display:flex;gap:4px;flex-shrink:0}
+.know-btn{padding:5px 9px;border:2px solid var(--border);border-radius:7px;
+  font-size:.72rem;font-weight:700;background:#fff;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:all .12s;color:var(--sub)}
+.know-btn.k-yes{border-color:var(--green-l);background:#e8f5e9;color:#1b5e20}
+.know-btn.k-partial{border-color:var(--orange);background:#fff8e1;color:#e65100}
+.know-btn.k-no{border-color:var(--red);background:#ffebee;color:#b71c1c}
+
+/* ─── KNOWLEDGE SCORE BANNER ─── */
+.know-score{border-radius:10px;padding:10px 12px;margin-top:10px;
+  display:flex;align-items:center;justify-content:space-between}
+.know-score.high{background:#e8f5e9;border:2px solid #a5d6a7}
+.know-score.mid{background:#fff9c4;border:2px solid #ffe082}
+.know-score.low{background:#ffebee;border:2px solid #ef9a9a}
+.ks-label{font-size:.78rem;font-weight:700}
+.ks-val{font-size:1.3rem;font-weight:800}
+
+/* ─── TECH SCALE COLORS ─── */
+.scale-btn.tech-1{border-color:#d32f2f!important;background:#d32f2f!important;color:#fff!important}
+.scale-btn.tech-2{border-color:#f57c00!important;background:#f57c00!important;color:#fff!important}
+.scale-btn.tech-3{border-color:#fbc02d!important;background:#fbc02d!important;color:#202124!important}
+.scale-btn.tech-4{border-color:#689f38!important;background:#689f38!important;color:#fff!important}
+.scale-btn.tech-5{border-color:#2e7d32!important;background:#2e7d32!important;color:#fff!important}
+
+/* ─── COACH MODE ─── */
+.coach-mode-banner{background:linear-gradient(135deg,#1a237e,#283593);color:#fff;
+  border-radius:12px;padding:12px 14px;margin-bottom:12px;
+  display:flex;align-items:center;gap:10px}
+.cm-icon{font-size:1.4rem}
+.cm-text{flex:1}
+.cm-title{font-size:.85rem;font-weight:800;margin-bottom:2px}
+.cm-sub{font-size:.72rem;opacity:.8}
+.coach-mode-section{opacity:.5;pointer-events:none;position:relative}
+.coach-mode-section::after{content:"Hidden in Coach Mode";position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  background:rgba(26,35,126,.9);color:#fff;padding:8px 16px;border-radius:8px;
+  font-size:.78rem;font-weight:700;pointer-events:none;white-space:nowrap}
+
+/* ─── COACH PRE-CHECK ─── */
+.check-group-title{font-size:.72rem;font-weight:700;color:var(--navy);
+  text-transform:uppercase;letter-spacing:.5px;margin:10px 0 6px;
+  padding:4px 8px;background:#e8f0fe;border-radius:6px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.chk-item{display:flex;align-items:center;gap:7px;padding:8px 9px;
+  border:2px solid var(--border);border-radius:9px;background:#fff;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .12s}
+.chk-item.chk-ok{border-color:#34a853;background:#e8f5e9}
+.chk-item.chk-issue{border-color:#ea4335;background:#ffebee}
+.chk-icon{font-size:1rem;flex-shrink:0}
+.chk-name{font-size:.75rem;font-weight:600;flex:1;line-height:1.2}
+.chk-status{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
+  background:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;transition:all .12s}
+.chk-item.chk-ok .chk-status{background:#34a853;border-color:#34a853;color:#fff}
+.chk-item.chk-issue .chk-status{background:#ea4335;border-color:#ea4335;color:#fff}
+.chk-summary{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 10px;background:#f8f9fa;border-radius:9px;margin-top:8px}
+.chk-count{font-size:.8rem;font-weight:700}
+
+/* ─── SESSION CONTENT (COACH) ─── */
+.chip-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.chip{padding:5px 11px;border:2px solid var(--border);border-radius:20px;
+  font-size:.75rem;font-weight:600;background:#fff;color:var(--sub);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .12s}
+.chip.sel-chip{border-color:var(--navy);background:var(--navy);color:#fff}
+.chip.sel-chip-green{border-color:var(--green-l);background:var(--green-l);color:#fff}
+.chip.sel-chip-orange{border-color:var(--orange);background:var(--orange);color:#202124}
+.drill-chip{font-family:monospace;font-size:.72rem;padding:4px 10px}
+.intensity-row{display:flex;gap:6px;margin-top:5px}
+.int-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:10px;
+  background:#fff;font-size:.82rem;font-weight:700;text-align:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .12s;color:var(--sub)}
+.int-btn.int-easy{border-color:#34a853;background:#e8f5e9;color:#1b5e20}
+.int-btn.int-mod{border-color:#fbc02d;background:#fffde7;color:#f57f17}
+.int-btn.int-hard{border-color:#ea4335;background:#ffebee;color:#b71c1c}
+
+/* ─── ATHLETE COMMENT CARDS ─── */
+.ath-comment-card{background:#fff;border:2px solid var(--border);border-radius:12px;
+  padding:12px;margin-bottom:8px;transition:border-color .15s}
+.ath-comment-card:focus-within{border-color:var(--green-l)}
+.ath-comment-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ath-num{width:26px;height:26px;border-radius:50%;background:var(--navy);
+  color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ath-comment-name{font-size:.85rem;font-weight:700;flex:1}
+.ath-comment-cls{font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:600}
+.cls-u17{background:#e8f0fe;color:#1a237e}
+.cls-u15{background:#e8f5e9;color:#1b5e20}
+.ath-tag-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.ath-tag{font-size:.7rem;padding:3px 8px;border:1px solid var(--border);border-radius:12px;
+  background:#fff;color:var(--sub);cursor:pointer;transition:all .1s;font-weight:600}
+.ath-tag.sel{background:var(--blue);border-color:var(--blue);color:#fff}
+.ath-comment-txt{width:100%;padding:8px 10px;border:2px solid var(--border);border-radius:8px;
+  font-size:.82rem;font-family:inherit;resize:none;min-height:64px;outline:none;color:var(--text)}
+.ath-comment-txt:focus{border-color:var(--green-l)}
+.ath-comment-txt::placeholder{color:#9aa0a6}
+.ath-input-row{display:flex;gap:6px;align-items:flex-start}
+.ath-input-row textarea{flex:1}
+.voice-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);
+  background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.voice-btn:hover{border-color:var(--green-l);background:#f0f7f0}
+.voice-btn.recording{border-color:#e53935;background:#ffebee;animation:pulse-rec 1s infinite}
+.voice-status{font-size:.65rem;color:var(--sub);text-align:center;margin-top:2px;min-height:14px}
+@keyframes pulse-rec{0%,100%{box-shadow:0 0 0 0 rgba(229,57,53,.4)}50%{box-shadow:0 0 0 8px rgba(229,57,53,0)}}
+
+/* ─── RACE NUMBER SELECTOR ─── */
+.race-num-btn{padding:10px;border:2px solid var(--border);border-radius:8px;
+  background:#fff;font-size:.8rem;font-weight:700;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:all .15s;color:var(--sub)}
+.race-num-btn:hover{border-color:#b3d9f2}
+.race-num-btn.selected{border-color:#1976d2;background:#1976d2;color:#fff}
+
+/* ─── COACH-LOCKED (read-only for athletes in regatta) ─── */
+.coach-locked{position:relative;pointer-events:none;opacity:.7}
+.coach-locked::after{content:'🔒 Coach data';position:absolute;top:4px;right:8px;
+  font-size:.6rem;font-weight:700;color:#1976d2;background:#e3f2fd;
+  padding:2px 8px;border-radius:10px;pointer-events:none;z-index:5}
+.coach-locked .scale-btn,.coach-locked .num-btn,.coach-locked .dir-step,
+.coach-locked .dir-deg,.coach-locked input{pointer-events:none!important}
+.class-locked{position:relative;pointer-events:none;opacity:.7}
+.class-locked::after{content:'🔒 Class rule';position:absolute;top:4px;right:8px;
+  font-size:.6rem;font-weight:700;color:#2e7d32;background:#e8f5e9;
+  padding:2px 8px;border-radius:10px;pointer-events:none;z-index:5}
+.class-locked .scale-btn{pointer-events:none!important}
+.wz-ctx{font-weight:700;color:var(--blue);background:#e8f0fe;padding:1px 6px;border-radius:4px;
+  font-size:.78rem;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-logo">
+    <span class="hdr-flag">🇮🇳</span>
+    <span class="hdr-title">Training Log</span>
+    <span class="hdr-flag">⛵</span>
+  </div>
+  <div class="hdr-sub">India Techno 293 · World Championship 2026</div>
+  <div class="hdr-badge">
+    <span class="badge">Foca, Turkey · Apr 3–9</span>
+    <span class="badge live" id="hdr-date">—</span>
+  </div>
+</div>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
+
+<!-- Settings bar -->
+<div class="section" style="padding-top:6px;padding-bottom:0">
+  <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:12px" id="url-settings">
+    <summary style="cursor:pointer;color:var(--sub);font-weight:600">⚙️ Server URL <span id="url-status" style="font-size:10px"></span></summary>
+    <div style="margin-top:8px;display:flex;gap:6px">
+      <input type="url" id="script-url-input" placeholder="Apps Script deployment URL"
+        style="flex:1;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:12px">
+      <button onclick="localStorage.setItem('india_t293_script_url',document.getElementById('script-url-input').value.trim());location.reload();"
+        style="padding:8px 12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:12px;cursor:pointer;font-weight:700">Save</button>
+    </div>
+  </details>
+</div>
+
+<!-- Weather auto-fill banner (shows when coach weather is loaded) -->
+<div class="section" style="padding-top:6px;padding-bottom:0;display:none" id="wx-autofill-banner">
+  <div style="background:#e8f5e9;border:2px solid #81c784;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px">
+    <span style="font-size:1.2rem">🌊</span>
+    <div style="flex:1">
+      <div style="font-size:12px;font-weight:700;color:#2e7d32">Weather Auto-filled from Coach Obs</div>
+      <div style="font-size:11px;color:#5f6368" id="wx-autofill-info">—</div>
+    </div>
+    <span style="font-size:11px;color:#81c784;font-weight:700">🔒 Locked</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 1: ATHLETE + SESSION ══ -->
+<div class="section">
+  <div class="card">
+    <div class="card-title"><span class="icon">👤</span> Session Identity</div>
+
+    <div class="field-row" style="margin-bottom:14px">
+      <div class="field" style="margin-bottom:0">
+        <label>Role</label>
+        <select id="role-select" onchange="onRoleChange()">
+          <option value="">— Select —</option>
+          <option value="athlete">Athlete</option>
+          <option value="coach">Coach</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Name <span class="class-tag hidden" id="class-tag">—</span></label>
+        <select id="name-select" onchange="onNameChange()" disabled>
+          <option value="">— Select role first —</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field" style="margin-bottom:14px">
+      <label>Session Date</label>
+      <input type="date" id="session-date" oninput="updateProgress()">
+    </div>
+
+    <div class="field">
+      <label>Session Type</label>
+      <div class="session-tabs">
+        <div class="session-tab" onclick="selectSession('physical')" data-type="physical">🏋️ Physical<br>Training</div>
+        <div class="session-tab" onclick="selectSession('race_practice')" data-type="race_practice">🚩 Race<br>Practice</div>
+        <div class="session-tab" onclick="selectSession('regatta')" data-type="regatta">🏆 Regatta</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COACH MODE BANNER -->
+<div class="section hidden" id="coach-mode-banner">
+  <div class="coach-mode-banner">
+    <span class="cm-icon">📋</span>
+    <div class="cm-text">
+      <div class="cm-title">COACH OBSERVATION MODE</div>
+      <div class="cm-sub">Recording technical observations for athlete. Subjective wellness fields are hidden — athlete must self-report those separately.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REGATTA: RACE NUMBER SELECTOR (coach + regatta only) ══ -->
+<div class="section hidden" id="regatta-race-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🏁</span> Race Entry</div>
+    <div class="field">
+      <label>Race Number</label>
+      <div class="hint">Select which race you are recording results for</div>
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:5px;">
+        <button class="race-num-btn" onclick="selectRaceNum(1)">R1</button>
+        <button class="race-num-btn" onclick="selectRaceNum(2)">R2</button>
+        <button class="race-num-btn" onclick="selectRaceNum(3)">R3</button>
+        <button class="race-num-btn" onclick="selectRaceNum(4)">R4</button>
+        <button class="race-num-btn" onclick="selectRaceNum(5)">R5</button>
+        <button class="race-num-btn" onclick="selectRaceNum(6)">R6</button>
+        <button class="race-num-btn" onclick="selectRaceNum(7)">R7</button>
+        <button class="race-num-btn" onclick="selectRaceNum(8)">R8</button>
+        <button class="race-num-btn" onclick="selectRaceNum(9)">R9</button>
+        <button class="race-num-btn" onclick="selectRaceNum(10)">R10</button>
+        <button class="race-num-btn" onclick="selectRaceNum(11)">R11</button>
+        <button class="race-num-btn" onclick="selectRaceNum(12)">R12</button>
+        <button class="race-num-btn" onclick="selectRaceNum(13)">R13</button>
+        <button class="race-num-btn" onclick="selectRaceNum(14)">R14</button>
+        <button class="race-num-btn" onclick="selectRaceNum(15)">R15</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COACH: RACE RESULTS (coach + regatta only) ══ -->
+<div class="section hidden" id="coach-race-results-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🏆</span> Race Results</div>
+    <div class="hint" style="margin-bottom:12px" id="coach-race-hint">Select a race number above to enter results</div>
+    <div id="coach-race-grid">
+      <!-- Built by JS: each athlete row with position input + DNF/DSQ/RET/BFD buttons -->
+    </div>
+  </div>
+</div>
+
+<!-- ══ COACH: PRE-SESSION CHECK (shown for coach + on-water sessions) ══ -->
+<div class="section hidden" id="coach-precheck-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">✅</span> Coach Pre-Session Checklist</div>
+    <div class="hint" style="margin-bottom:8px">Tap = OK ✓ · Long-press or second tap = Issue ⚠️</div>
+
+    <div class="check-group-title">🚤 Boat / Rescue Craft</div>
+    <div class="check-grid" id="chk-boat"></div>
+
+    <div class="check-group-title">🦺 Safety Equipment</div>
+    <div class="check-grid" id="chk-safety"></div>
+
+    <div class="check-group-title">📡 Instruments & Communication</div>
+    <div class="check-grid" id="chk-instruments"></div>
+
+    <div class="check-group-title">🎯 Training Equipment</div>
+    <div class="check-grid" id="chk-training-eq"></div>
+
+    <div class="check-group-title">🎒 Other / Personal</div>
+    <div class="check-grid" id="chk-other"></div>
+
+    <div class="chk-summary">
+      <span class="chk-count" id="coach-chk-count" style="color:var(--sub)">0 / 0 checked</span>
+      <button style="font-size:.72rem;padding:4px 10px;border:1px solid var(--green-l);border-radius:6px;
+        background:#fff;color:var(--green-l);cursor:pointer;font-weight:700" onclick="coachCheckAll()">✓ All OK</button>
+    </div>
+
+    <div class="field" style="margin-top:10px">
+      <label>Pre-Session Notes</label>
+      <textarea id="coach-precheck-notes" placeholder="Equipment issues, conditions briefing, safety concerns..."
+        style="min-height:60px"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COACH: SESSION CONTENT (shown for coach + on-water sessions) ══ -->
+<div class="section hidden" id="coach-session-content-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span> Session Plan — Library</div>
+
+    <div class="field">
+      <label>Session Focus <span style="font-weight:400;font-size:.75rem;color:var(--sub)">(multi-select)</span></label>
+      <div class="chip-row" id="sc-focus-row">
+        <div class="chip" onclick="toggleChip(this,'scFocus','skill')">🎯 Skill</div>
+        <div class="chip" onclick="toggleChip(this,'scFocus','speed')">⚡ Speed</div>
+        <div class="chip" onclick="toggleChip(this,'scFocus','racing')">🏆 Racing</div>
+        <div class="chip" onclick="toggleChip(this,'scFocus','tuning')">⚙️ Tuning</div>
+        <div class="chip" onclick="toggleChip(this,'scFocus','recovery')">💤 Recovery</div>
+        <div class="chip" onclick="toggleChip(this,'scFocus','fitness')">💪 Fitness</div>
+        <div class="chip" onclick="toggleChip(this,'scFocus','tactics')">🗺️ Tactics</div>
+      </div>
+    </div>
+
+    <div class="field-row" style="margin-top:10px">
+      <div class="field" style="margin-bottom:0">
+        <label>Intensity</label>
+        <div class="intensity-row">
+          <div class="int-btn" onclick="selectIntensity('easy')">😌<br><span style="font-size:.7rem">Easy</span></div>
+          <div class="int-btn" onclick="selectIntensity('moderate')">💪<br><span style="font-size:.7rem">Moderate</span></div>
+          <div class="int-btn" onclick="selectIntensity('hard')">🔥<br><span style="font-size:.7rem">Hard</span></div>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Volume</label>
+        <div class="intensity-row">
+          <div class="int-btn" onclick="selectVolume('low')">📉<br><span style="font-size:.7rem">Low</span></div>
+          <div class="int-btn" onclick="selectVolume('medium')">📊<br><span style="font-size:.7rem">Medium</span></div>
+          <div class="int-btn" onclick="selectVolume('heavy')">📈<br><span style="font-size:.7rem">Heavy</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:10px">
+      <label>Drills <span style="font-weight:400;font-size:.75rem;color:var(--sub)">(multi-select)</span></label>
+      <div class="chip-row">
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','LD')" title="Long Distance">LD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','MD')" title="Medium Distance">MD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SD')" title="Short Distance">SD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','MTD')" title="Mid/Long Tack Drill">MTD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','UDG')" title="Upwind-Downwind Group">UDG</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','STD')" title="Start + Tack Drill">STD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SGD')" title="Start + Gybe Drill">SGD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','PDS')" title="Pace Distance Solo">PDS</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SDS')" title="Speed Distance Solo">SDS</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SVD')" title="Slalom / VMG Drill">SVD</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','BTB')" title="Back-to-Back Starts">BTB</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','8DR')" title="Figure-8 Drill">8DR</div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:10px">
+      <label>Tactical Focus / Notes</label>
+      <textarea id="sc-tactical-notes" placeholder="e.g. Port-bias start setup, layline control, current crossing strategy..."></textarea>
+    </div>
+
+    <div class="field" style="margin-top:10px">
+      <label>Coach Objectives for Today</label>
+      <textarea id="sc-coach-objectives" placeholder="What should athletes achieve by end of session? What will you observe and measure?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PHYSICAL TRAINING SECTION (shown only when session = physical) ══ -->
+<div class="section hidden" id="physical-training-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🏋️</span> Physical Training Details</div>
+    <div class="field">
+      <label>Training Type</label>
+      <div class="scale">
+        <button class="scale-btn" onclick="selectPTType('gym')" id="pt-gym"><span class="s-num" style="font-size:.72rem">🏋️<br>Gym</span></button>
+        <button class="scale-btn" onclick="selectPTType('running')" id="pt-run"><span class="s-num" style="font-size:.72rem">🏃<br>Running</span></button>
+        <button class="scale-btn" onclick="selectPTType('drills')" id="pt-drill"><span class="s-num" style="font-size:.72rem">⚡<br>Drills</span></button>
+        <button class="scale-btn" onclick="selectPTType('yoga')" id="pt-yoga"><span class="s-num" style="font-size:.72rem">🧘<br>Yoga</span></button>
+        <button class="scale-btn" onclick="selectPTType('other')" id="pt-other"><span class="s-num" style="font-size:.72rem">📋<br>Other</span></button>
+      </div>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>Training Goal</label>
+      <div class="scale">
+        <button class="scale-btn" onclick="selectPTGoal('strength')" id="ptg-str"><span class="s-num" style="font-size:.68rem">💪<br>Strength</span></button>
+        <button class="scale-btn" onclick="selectPTGoal('endurance')" id="ptg-end"><span class="s-num" style="font-size:.68rem">🫁<br>Endurance</span></button>
+        <button class="scale-btn" onclick="selectPTGoal('flexibility')" id="ptg-flex"><span class="s-num" style="font-size:.68rem">🤸<br>Flexibility</span></button>
+        <button class="scale-btn" onclick="selectPTGoal('coordination')" id="ptg-coord"><span class="s-num" style="font-size:.68rem">🎯<br>Coordination</span></button>
+        <button class="scale-btn" onclick="selectPTGoal('power')" id="ptg-pow"><span class="s-num" style="font-size:.68rem">⚡<br>Power</span></button>
+      </div>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label>Description / Exercises</label>
+      <textarea id="pt_description" placeholder="e.g. 3×10 pull-ups, 4×400m intervals, plank 3×60s..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 2: ENVIRONMENT ══ -->
+<div class="section" id="water-sections-start">
+  <div class="card">
+    <div class="card-title"><span class="icon">🌊</span> Environment</div>
+
+    <div class="field">
+      <label>Wind Speed Zone</label>
+      <div class="hint">Select the zone that best matches the wind — each zone requires different pumping skills</div>
+      <div class="wind-zone-grid">
+        <div class="wz-btn" onclick="selectWindZone(0,'A','≤3 kn')">
+          <div class="wz-kn">≤3 kn</div>
+          <div class="wz-skill skill-a">Skill A</div>
+          <div class="wz-lbl">Max Power<br>Big pump</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(1,'A-B','4–6 kn')">
+          <div class="wz-kn">4–6 kn</div>
+          <div class="wz-skill skill-ab">Skill A→B</div>
+          <div class="wz-lbl">Transitioning<br>to rhythm</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(2,'B','7–9 kn')">
+          <div class="wz-kn">7–9 kn</div>
+          <div class="wz-skill skill-b">Skill B</div>
+          <div class="wz-lbl">Rhythmic<br>Endurance</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(3,'B-C','10–12 kn')">
+          <div class="wz-kn">10–12 kn</div>
+          <div class="wz-skill skill-bc">Skill B→C</div>
+          <div class="wz-lbl">Power +<br>Endurance</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(4,'C','13–17 kn')">
+          <div class="wz-kn">13–17 kn</div>
+          <div class="wz-skill skill-c">Skill C</div>
+          <div class="wz-lbl">Power Endurance<br>Explosive</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(5,'Sail','18–23 kn')">
+          <div class="wz-kn">18–23 kn</div>
+          <div class="wz-skill skill-sail">Sailing</div>
+          <div class="wz-lbl">Sail skill<br>dominant</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(6,'Sail+','24–30 kn')">
+          <div class="wz-kn">24–30 kn</div>
+          <div class="wz-skill skill-sail">Sailing+</div>
+          <div class="wz-lbl">Full trim<br>control</div>
+        </div>
+        <div class="wz-btn" onclick="selectWindZone(7,'Storm','30+ kn')">
+          <div class="wz-kn">30+ kn</div>
+          <div class="wz-skill" style="background:#ffebee;color:#b71c1c">Storm</div>
+          <div class="wz-lbl">Control<br>only</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Wind Direction</label>
+      <div class="hint" style="margin-bottom:6px">Wind comes FROM this direction (meteorological convention)</div>
+      <div class="dir-input-wrap">
+        <div class="dir-btns">
+          <button class="dir-step" onclick="stepDirInput('windDeg',-10)">−10</button>
+          <button class="dir-step" onclick="stepDirInput('windDeg',-5)">−5</button>
+          <div class="dir-val-box">
+            <input class="dir-deg" type="number" id="windDeg" value="" min="0" max="360" placeholder="---" oninput="onDirInput('windDeg','wind')">
+            <span class="dir-deg-unit">°</span>
+          </div>
+          <button class="dir-step" onclick="stepDirInput('windDeg',5)">+5</button>
+          <button class="dir-step" onclick="stepDirInput('windDeg',10)">+10</button>
+        </div>
+        <div class="dir-compass" id="windDeg-compass">Enter 0–360°</div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field" style="margin-bottom:0">
+        <label>Wave / Chop</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('wave','1')"><span class="s-num">1</span><span class="s-lbl">Flat</span></button>
+          <button class="scale-btn" onclick="selectScale('wave','2')"><span class="s-num">2</span><span class="s-lbl">Ripple</span></button>
+          <button class="scale-btn" onclick="selectScale('wave','3')"><span class="s-num">3</span><span class="s-lbl">Chop</span></button>
+          <button class="scale-btn" onclick="selectScale('wave','4')"><span class="s-num">4</span><span class="s-lbl">Waves</span></button>
+          <button class="scale-btn" onclick="selectScale('wave','5')"><span class="s-num">5</span><span class="s-lbl">Big</span></button>
+        </div>
+      </div>
+      <div class="field" id="air-temp-field">
+        <label>Air Temp</label>
+        <div class="num-input">
+          <button class="num-btn" onclick="stepNum('temp',-1)">−</button>
+          <input type="number" id="temp" value="22" min="-5" max="45" oninput="updateProgress()">
+          <span class="unit">°C</span>
+          <button class="num-btn" onclick="stepNum('temp',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tidal Current -->
+    <div class="field" style="margin-top:14px" id="tidal-current-field">
+      <label>🌊 Tidal Current</label>
+      <div class="hint" style="margin-bottom:6px">Arrow = direction current flows <b>toward</b> (opposite of wind convention) · N↑ = current flowing northward</div>
+      <div class="field-row">
+        <div class="field" style="margin-bottom:0;flex:1">
+          <div style="font-size:.72rem;font-weight:700;color:var(--sub);margin-bottom:5px">STRENGTH</div>
+          <div class="scale">
+            <button class="scale-btn" id="cur-str-1" onclick="selectCurrentStrength(1)"><span class="s-num">1</span><span class="s-lbl">Slack<br>≤0.5kt</span></button>
+            <button class="scale-btn" id="cur-str-2" onclick="selectCurrentStrength(2)"><span class="s-num">2</span><span class="s-lbl">Weak<br>~1kt</span></button>
+            <button class="scale-btn" id="cur-str-3" onclick="selectCurrentStrength(3)"><span class="s-num">3</span><span class="s-lbl">Mod<br>~2kt</span></button>
+            <button class="scale-btn" id="cur-str-4" onclick="selectCurrentStrength(4)"><span class="s-num">4</span><span class="s-lbl">Strong<br>~3kt</span></button>
+            <button class="scale-btn" id="cur-str-5" onclick="selectCurrentStrength(5)"><span class="s-num">5</span><span class="s-lbl">V.Strong<br>&gt;3kt</span></button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Water Temp</label>
+          <div class="num-input">
+            <button class="num-btn" onclick="stepNum('waterTemp',-1)">−</button>
+            <input type="number" id="waterTemp" value="18" min="0" max="40" oninput="updateProgress()">
+            <span class="unit">°C</span>
+            <button class="num-btn" onclick="stepNum('waterTemp',1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px">
+        <div style="font-size:.72rem;font-weight:700;color:var(--sub);margin-bottom:5px">FLOW DIRECTION (where current flows toward)</div>
+        <div class="dir-input-wrap">
+          <div class="dir-btns">
+            <button class="dir-step" onclick="stepDirInput('curDeg',-10)">−10</button>
+            <button class="dir-step" onclick="stepDirInput('curDeg',-5)">−5</button>
+            <div class="dir-val-box">
+              <input class="dir-deg" type="number" id="curDeg" value="" min="0" max="360" placeholder="---" oninput="onDirInput('curDeg','current')">
+              <span class="dir-deg-unit">°</span>
+            </div>
+            <button class="dir-step" onclick="stepDirInput('curDeg',5)">+5</button>
+            <button class="dir-step" onclick="stepDirInput('curDeg',10)">+10</button>
+          </div>
+          <div class="dir-compass" id="curDeg-compass">Enter 0–360°</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 3: EQUIPMENT TRIM ══ -->
+<div class="section" id="equip-trim-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">⚙️</span> Equipment Trim — Techno 293</div>
+    <div class="hint" style="margin-bottom:12px;font-size:.74rem;color:var(--sub)">
+      Exact settings used today. This is the data that drives correlation analysis.
+    </div>
+
+    <!-- Sail Size -->
+    <div class="field" id="sail-field">
+      <label>Sail Size <span style="font-weight:400;font-size:.75rem;color:var(--sub)" id="sail-selected-lbl"></span></label>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:4px">
+        <button class="scale-btn" id="ss-58" style="padding:10px 4px" onclick="selectSailSize(5.8)"><span class="s-num">5.8</span><span class="s-lbl">T293</span></button>
+        <button class="scale-btn" id="ss-68" style="padding:10px 4px" onclick="selectSailSize(6.8)"><span class="s-num">6.8</span><span class="s-lbl">T293</span></button>
+        <button class="scale-btn" id="ss-78" style="padding:10px 4px" onclick="selectSailSize(7.8)"><span class="s-num">7.8</span><span class="s-lbl">T293</span></button>
+        <button class="scale-btn" id="ss-85" style="padding:10px 4px" onclick="selectSailSize(8.5)"><span class="s-num">8.5</span><span class="s-lbl">T293+</span></button>
+      </div>
+    </div>
+
+    <!-- Downhaul -->
+    <div class="gear-row" style="flex-direction:column;align-items:flex-start;gap:8px">
+      <div>
+        <div class="gear-name">Downhaul Tension</div>
+        <div class="gear-hint">Draft position. More = flatter sail, better in strong wind</div>
+      </div>
+      <div style="display:flex;gap:5px;margin-top:4px;width:100%">
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('downhaul','1')"><span class="s-num" style="font-size:.72rem">Very<br>Tight</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('downhaul','2')"><span class="s-num" style="font-size:.72rem">Tight</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('downhaul','3')"><span class="s-num" style="font-size:.72rem">Average</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('downhaul','4')"><span class="s-num" style="font-size:.72rem">Loose</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('downhaul','5')"><span class="s-num" style="font-size:.72rem">Very<br>Loose</span></button>
+      </div>
+    </div>
+
+    <!-- Outhaul -->
+    <div class="gear-row" style="flex-direction:column;align-items:flex-start;gap:8px">
+      <div>
+        <div class="gear-name">Outhaul Tension</div>
+        <div class="gear-hint">Sail depth. More = flatter, less power but better control</div>
+      </div>
+      <div style="display:flex;gap:5px;margin-top:4px;width:100%">
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('outhaul','1')"><span class="s-num" style="font-size:.72rem">Very<br>Tight</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('outhaul','2')"><span class="s-num" style="font-size:.72rem">Tight</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('outhaul','3')"><span class="s-num" style="font-size:.72rem">Average</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('outhaul','4')"><span class="s-num" style="font-size:.72rem">Loose</span></button>
+        <button class="scale-btn" style="flex:1;padding:7px 2px" onclick="selectScale('outhaul','5')"><span class="s-num" style="font-size:.72rem">Very<br>Loose</span></button>
+      </div>
+    </div>
+
+    <!-- Mast Track -->
+    <div class="gear-row" style="flex-direction:column;align-items:flex-start;gap:8px">
+      <div>
+        <div class="gear-name">Mast Track Position</div>
+        <div class="gear-hint">P1 = forward (power) · P2 = mid · P3 = back (control/pointing)</div>
+      </div>
+      <div style="display:flex;gap:10px;width:100%">
+        <div style="flex:1">
+          <div style="font-size:.72rem;font-weight:700;color:var(--sub);margin-bottom:5px">⬆ UPWIND</div>
+          <div style="display:flex;gap:5px">
+            <button class="scale-btn" style="flex:1;padding:8px 4px" id="mt-up-1" onclick="selectMastTrackDir('up','P1')"><span class="s-num">P1</span><span class="s-lbl">Fwd</span></button>
+            <button class="scale-btn" style="flex:1;padding:8px 4px" id="mt-up-2" onclick="selectMastTrackDir('up','P2')"><span class="s-num">P2</span><span class="s-lbl">Mid</span></button>
+            <button class="scale-btn" style="flex:1;padding:8px 4px" id="mt-up-3" onclick="selectMastTrackDir('up','P3')"><span class="s-num">P3</span><span class="s-lbl">Back</span></button>
+          </div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:.72rem;font-weight:700;color:var(--sub);margin-bottom:5px">⬇ DOWNWIND</div>
+          <div style="display:flex;gap:5px">
+            <button class="scale-btn" style="flex:1;padding:8px 4px" id="mt-dn-1" onclick="selectMastTrackDir('dn','P1')"><span class="s-num">P1</span><span class="s-lbl">Fwd</span></button>
+            <button class="scale-btn" style="flex:1;padding:8px 4px" id="mt-dn-2" onclick="selectMastTrackDir('dn','P2')"><span class="s-num">P2</span><span class="s-lbl">Mid</span></button>
+            <button class="scale-btn" style="flex:1;padding:8px 4px" id="mt-dn-3" onclick="selectMastTrackDir('dn','P3')"><span class="s-num">P3</span><span class="s-lbl">Back</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boom Height -->
+    <div class="gear-row" style="flex-direction:column;align-items:flex-start;gap:8px;border-bottom:none;padding-bottom:0">
+      <div>
+        <div class="gear-name">Boom Height</div>
+        <div class="gear-hint">Relative to your body — chin is the standard reference ★</div>
+      </div>
+      <div style="display:flex;gap:5px;width:100%">
+        <button class="scale-btn" style="flex:1;padding:8px 2px" onclick="selectScale('boomHeight','1')">
+          <span class="s-num" style="font-size:.75rem">👤</span>
+          <span class="s-lbl" style="font-size:.62rem;line-height:1.3">Shoulder<br><span style="color:#ea4335">Low</span></span>
+        </button>
+        <button class="scale-btn" style="flex:1;padding:8px 2px" onclick="selectScale('boomHeight','2')">
+          <span class="s-num" style="font-size:.75rem">↕</span>
+          <span class="s-lbl" style="font-size:.62rem;line-height:1.3">Shoulder–<br>Chin</span>
+        </button>
+        <button class="scale-btn" style="flex:1;padding:8px 2px" onclick="selectScale('boomHeight','3')">
+          <span class="s-num" style="font-size:.75rem">⭐</span>
+          <span class="s-lbl" style="font-size:.62rem;line-height:1.3">Chin<br><span style="color:#34a853">Std</span></span>
+        </button>
+        <button class="scale-btn" style="flex:1;padding:8px 2px" onclick="selectScale('boomHeight','4')">
+          <span class="s-num" style="font-size:.75rem">↕</span>
+          <span class="s-lbl" style="font-size:.62rem;line-height:1.3">Chin–<br>Eyes</span>
+        </button>
+        <button class="scale-btn" style="flex:1;padding:8px 2px" onclick="selectScale('boomHeight','5')">
+          <span class="s-num" style="font-size:.75rem">👁️</span>
+          <span class="s-lbl" style="font-size:.62rem;line-height:1.3">Eyes<br><span style="color:#1a73e8">High</span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Equipment Feel Score -->
+    <div class="field" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+      <label>Overall Equipment Feel <span style="font-weight:400;font-size:.75rem;color:var(--sub)">(how well-tuned did the board feel?)</span></label>
+      <div class="scale">
+        <button class="scale-btn" onclick="selectScale('equipFeel','1')"><span class="s-num">1</span><span class="s-lbl">Wrong</span></button>
+        <button class="scale-btn" onclick="selectScale('equipFeel','2')"><span class="s-num">2</span><span class="s-lbl">Off</span></button>
+        <button class="scale-btn" onclick="selectScale('equipFeel','3')"><span class="s-num">3</span><span class="s-lbl">OK</span></button>
+        <button class="scale-btn" onclick="selectScale('equipFeel','4')"><span class="s-num">4</span><span class="s-lbl">Good</span></button>
+        <button class="scale-btn" onclick="selectScale('equipFeel','5')"><span class="s-num">5</span><span class="s-lbl">Perfect</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 3b: SETUP KNOWLEDGE & TUNING DIAGNOSIS ══ -->
+<div class="section" id="equip-knowledge-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🧪</span> Setup Knowledge Diagnosis</div>
+    <div class="hint" style="margin-bottom:12px">
+      Understanding <em>why</em> you chose these settings is as important as the settings themselves.
+      This data identifies training gaps over time.
+    </div>
+
+    <div class="know-row">
+      <div class="know-q">Do you know the correct <b>downhaul tension</b> for <span class="wz-ctx">these conditions</span>?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'dh_know','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'dh_know','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'dh_know','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Do you know the correct <b>outhaul tension</b> for <span class="wz-ctx">these conditions</span>?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'oh_know','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'oh_know','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'oh_know','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Do you know the correct <b>mast track position</b> for <span class="wz-ctx">these conditions</span>?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'mt_know','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'mt_know','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'mt_know','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Could you <b>explain WHY</b> you chose this rig setup for <span class="wz-ctx">these conditions</span>?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'explain_know','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'explain_know','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'explain_know','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Did your rig <b>feel correctly tuned</b> for <span class="wz-ctx">these conditions</span>?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'rig_feel_know','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'rig_feel_know','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'rig_feel_know','no')">No ✗</button>
+      </div>
+    </div>
+
+    <div class="know-score" id="know-score-banner" style="display:none">
+      <span class="ks-label" id="know-score-label">Tuning Knowledge</span>
+      <span class="ks-val" id="know-score-val">—</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 3c: EQUIPMENT CONDITION CHECK ══ -->
+<div class="section" id="equip-check-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🔧</span> Pre-Session Equipment Check</div>
+    <div class="hint" style="margin-bottom:12px">Rate each item: 5=Excellent · 4=Good · 3=OK (minor wear) · 2=Poor (needs attention) · 1=Critical (repair now)</div>
+
+    <div id="equip-rating-grid">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- Urgent Action -->
+    <div class="urgent-box" id="urgent-box">
+      <div class="urgent-header" onclick="toggleUrgent()">
+        <div class="urgent-check" id="urgent-check"></div>
+        <div class="urgent-title">🚨 Urgent Action Required</div>
+        <span style="font-size:.75rem;color:var(--sub)">Tap to flag</span>
+      </div>
+      <div class="urgent-detail" id="urgent-detail">
+        <textarea id="urgent-notes" placeholder="Describe what needs immediate repair or replacement..." style="min-height:60px"></textarea>
+        <div style="font-size:.72rem;color:#b71c1c;margin-top:6px">⚡ Coach will be notified when you submit this log</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 10px;background:#f8f9fa;border-radius:9px">
+      <span style="font-size:.78rem;font-weight:700;color:var(--sub)" id="equip-score-text">Rate all items above</span>
+      <button style="font-size:.72rem;padding:4px 10px;border:1px solid var(--green-l);border-radius:6px;background:#fff;color:var(--green-l);cursor:pointer;font-weight:700" onclick="rateAllExcellent()">✓ All Excellent</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 4: PHYSICAL STATE (from check-in) ══ -->
+<div class="section" id="wellness-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🧠</span> Physical / Psychological State</div>
+    <div class="hint" style="margin-bottom:10px">Auto-linked from morning check-in. Add manual overrides if needed.</div>
+    <div id="checkin-banner">
+      <div class="cb-missing">⚠️ No check-in found for today. Complete check-in first, or enter manually below.</div>
+    </div>
+
+    <div class="field-row" style="margin-top:10px">
+      <div class="field" style="margin-bottom:0">
+        <label>Readiness</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('readiness','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('readiness','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('readiness','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('readiness','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('readiness','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Fatigue</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('fatigue','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('fatigue','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('fatigue','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('fatigue','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('fatigue','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row" style="margin-top:10px">
+      <div class="field" style="margin-bottom:0">
+        <label>Confidence</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('confidence','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('confidence','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('confidence','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('confidence','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('confidence','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Stress</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('stress','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('stress','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('stress','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('stress','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('stress','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 5: TECHNICAL EXECUTION ══ -->
+<div class="section" id="tech-execution-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">⛵</span> Technical Execution</div>
+    <div class="hint" style="margin-bottom:12px">1 = very poor · 3 = average · 5 = excellent</div>
+
+    <!-- UPWIND -->
+    <div style="font-size:.78rem;font-weight:700;color:var(--navy);text-transform:uppercase;
+      letter-spacing:.5px;margin-bottom:8px;padding-left:2px">⬆ Upwind</div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:0">
+        <label>Speed</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('upwindSpeed','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindSpeed','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindSpeed','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindSpeed','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindSpeed','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Control / Angle</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('upwindControl','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindControl','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindControl','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindControl','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('upwindControl','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOWNWIND -->
+    <div style="font-size:.78rem;font-weight:700;color:var(--navy);text-transform:uppercase;
+      letter-spacing:.5px;margin:12px 0 8px;padding-left:2px">⬇ Downwind</div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:0">
+        <label>Speed / Planing</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('downwindSpeed','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindSpeed','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindSpeed','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindSpeed','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindSpeed','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Control / Angle</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('downwindControl','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindControl','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindControl','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindControl','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('downwindControl','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANEUVERS -->
+    <div style="font-size:.78rem;font-weight:700;color:var(--navy);text-transform:uppercase;
+      letter-spacing:.5px;margin:12px 0 8px;padding-left:2px">↩ Maneuvers</div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:0">
+        <label>Tacking Quality</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('tackingQuality','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('tackingQuality','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('tackingQuality','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('tackingQuality','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('tackingQuality','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Gybing Quality</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('gybingQuality','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('gybingQuality','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('gybingQuality','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('gybingQuality','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('gybingQuality','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUMPING + START -->
+    <div style="font-size:.78rem;font-weight:700;color:var(--navy);text-transform:uppercase;
+      letter-spacing:.5px;margin:12px 0 8px;padding-left:2px">⚡ Power & Start</div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:0">
+        <label>Pumping / Technique</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('pumpingTech','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('pumpingTech','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('pumpingTech','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('pumpingTech','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('pumpingTech','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Race Start — Overall Quality</label>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('startQuality','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('startQuality','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('startQuality','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('startQuality','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('startQuality','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Detail Breakdown -->
+    <div style="font-size:.78rem;font-weight:700;color:var(--navy);text-transform:uppercase;
+      letter-spacing:.5px;margin:12px 0 8px;padding-left:2px">🚩 Start Analysis</div>
+    <div class="hint" style="margin-bottom:8px">Rate each element of your start independently — identifies repeating patterns</div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:10px">
+        <label style="font-size:.76rem">Position Selection</label>
+        <div class="hint" style="font-size:.66rem;margin-bottom:4px">Did you pick the right end / spot on the line?</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('startPosition','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('startPosition','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('startPosition','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('startPosition','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('startPosition','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:10px">
+        <label style="font-size:.76rem">Holding Position</label>
+        <div class="hint" style="font-size:.66rem;margin-bottom:4px">Could you defend your spot in the final minute?</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('startHold','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('startHold','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('startHold','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('startHold','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('startHold','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field" style="margin-bottom:10px">
+        <label style="font-size:.76rem">Acceleration Timing</label>
+        <div class="hint" style="font-size:.66rem;margin-bottom:4px">Did you hit top speed at the gun?</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('startAccel','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('startAccel','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('startAccel','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('startAccel','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('startAccel','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:10px">
+        <label style="font-size:.76rem">Pumping Power</label>
+        <div class="hint" style="font-size:.66rem;margin-bottom:4px">Explosive pumping to plane off the line?</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('startPump','1')"><span class="s-num">1</span></button>
+          <button class="scale-btn" onclick="selectScale('startPump','2')"><span class="s-num">2</span></button>
+          <button class="scale-btn" onclick="selectScale('startPump','3')"><span class="s-num">3</span></button>
+          <button class="scale-btn" onclick="selectScale('startPump','4')"><span class="s-num">4</span></button>
+          <button class="scale-btn" onclick="selectScale('startPump','5')"><span class="s-num">5</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label style="font-size:.76rem">Clean Air Maintenance</label>
+      <div class="hint" style="font-size:.66rem;margin-bottom:4px">Did you stay in clear wind off the line?</div>
+      <div class="scale">
+        <button class="scale-btn" onclick="selectScale('startCleanAir','1')"><span class="s-num">1</span><span class="s-lbl">Dirty<br>air</span></button>
+        <button class="scale-btn" onclick="selectScale('startCleanAir','2')"><span class="s-num">2</span></button>
+        <button class="scale-btn" onclick="selectScale('startCleanAir','3')"><span class="s-num">3</span></button>
+        <button class="scale-btn" onclick="selectScale('startCleanAir','4')"><span class="s-num">4</span></button>
+        <button class="scale-btn" onclick="selectScale('startCleanAir','5')"><span class="s-num">5</span><span class="s-lbl">Clean<br>air</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 6: RACE RESULTS (shown when session = regatta/race_practice) ══ -->
+<!-- ══ PERFORMANCE LIMITING FACTORS ══ -->
+<div class="section hidden" id="perf-factors-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">🔍</span> Performance Limiting Factors</div>
+    <div class="hint" style="margin-bottom:10px">Select all that apply — this data enables correlation analysis over time</div>
+    <div class="lf-grid" id="lf-grid">
+      <label class="lf-item" onclick="toggleLF(this,'equipment')"><span class="lf-icon">⚙️</span><span class="lf-text">Equipment /<br>Rigging</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'physical')"><span class="lf-icon">💪</span><span class="lf-text">Physical<br>Fitness</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'psychological')"><span class="lf-icon">🧠</span><span class="lf-text">Psychological /<br>Focus</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'technical')"><span class="lf-icon">⛵</span><span class="lf-text">Technical<br>Execution</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'tactical')"><span class="lf-icon">🗺️</span><span class="lf-text">Tactical<br>Decisions</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'wind_reading')"><span class="lf-icon">🌬️</span><span class="lf-text">Wind<br>Reading</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'rules')"><span class="lf-icon">📋</span><span class="lf-text">Racing<br>Rules</span></label>
+      <label class="lf-item" onclick="toggleLF(this,'experience')"><span class="lf-icon">⭐</span><span class="lf-text">Experience /<br>Pressure</span></label>
+    </div>
+
+    <div class="field" style="margin-top:14px">
+      <label>Tactical Self-Confidence</label>
+      <div class="scale">
+        <button class="scale-btn" onclick="selectScale('tacticalConf','1')"><span class="s-num">1</span><span class="s-lbl">Very low</span></button>
+        <button class="scale-btn" onclick="selectScale('tacticalConf','2')"><span class="s-num">2</span><span class="s-lbl">Low</span></button>
+        <button class="scale-btn" onclick="selectScale('tacticalConf','3')"><span class="s-num">3</span><span class="s-lbl">OK</span></button>
+        <button class="scale-btn" onclick="selectScale('tacticalConf','4')"><span class="s-num">4</span><span class="s-lbl">High</span></button>
+        <button class="scale-btn" onclick="selectScale('tacticalConf','5')"><span class="s-num">5</span><span class="s-lbl">Very high</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RACING RULES & TACTICAL KNOWLEDGE ══ -->
+<div class="section hidden" id="rules-knowledge-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">📚</span> Racing Rules &amp; Tactical Knowledge</div>
+    <div class="hint" style="margin-bottom:10px">Self-assessment of knowledge level — helps identify training gaps over time</div>
+
+    <div class="know-row">
+      <div class="know-q">Do you know the <b>right-of-way rules</b> (port/starboard, windward/leeward)?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'rules_row','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'rules_row','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'rules_row','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Do you know the <b>mark rounding rules</b> (room, overlaps, room at leeward mark)?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'rules_mark','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'rules_mark','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'rules_mark','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Do you understand <b>start procedure</b> (OCS, black flag, postponement signals)?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'rules_start','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'rules_start','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'rules_start','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Did you correctly identify the <b>start line bias</b> today?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'tactic_bias','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'tactic_bias','partial')">Unsure</button>
+        <button class="know-btn" onclick="answerKnow(this,'tactic_bias','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Did you complete a <b>transit set up</b> before the start? (line sight, pin transit)</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'tactic_transit','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'tactic_transit','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'tactic_transit','no')">No ✗</button>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-q">Did you read the <b>wind shifts correctly</b> on the upwind leg today?</div>
+      <div class="know-btns">
+        <button class="know-btn" onclick="answerKnow(this,'tactic_shift','yes')">Yes ✓</button>
+        <button class="know-btn" onclick="answerKnow(this,'tactic_shift','partial')">Partly</button>
+        <button class="know-btn" onclick="answerKnow(this,'tactic_shift','no')">No ✗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 7: TRAINING LOAD ══ -->
+<div class="section" id="training-load-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">📊</span> Training Load</div>
+
+    <div class="field-row" style="margin-bottom:10px">
+      <div class="field" style="margin-bottom:0">
+        <label>Start Time</label>
+        <input type="time" id="tl-start" onchange="calcLogDuration()" style="height:48px;font-size:1.1rem">
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>End Time</label>
+        <input type="time" id="tl-end" onchange="calcLogDuration()" style="height:48px;font-size:1.1rem">
+      </div>
+    </div>
+    <div style="background:#f0f7f0;border:2px solid #a5d6a7;border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px">
+      <span style="font-size:.82rem;color:#2e7d32;font-weight:600">Duration:</span>
+      <span id="tl-dur-val" style="font-weight:800;font-size:1.3rem;color:#0a3a1e">— min</span>
+    </div>
+
+    <div class="field">
+      <label>RPE — Rate of Perceived Exertion</label>
+      <div class="hint" id="rpe-coach-hint" style="display:none">Rate the overall physical exertion level you observed across the athletes</div>
+      <div class="rpe-row">
+        <div class="rpe-btn r1" onclick="selectRPE(1)">1<br><span style="font-size:.6rem">Very<br>easy</span></div>
+        <div class="rpe-btn r2" onclick="selectRPE(2)">2</div>
+        <div class="rpe-btn r3" onclick="selectRPE(3)">3<br><span style="font-size:.6rem">Easy</span></div>
+        <div class="rpe-btn r4" onclick="selectRPE(4)">4</div>
+        <div class="rpe-btn r5" onclick="selectRPE(5)">5<br><span style="font-size:.6rem">Mod.</span></div>
+        <div class="rpe-btn r6" onclick="selectRPE(6)">6</div>
+        <div class="rpe-btn r7" onclick="selectRPE(7)">7<br><span style="font-size:.6rem">Hard</span></div>
+        <div class="rpe-btn r8" onclick="selectRPE(8)">8</div>
+        <div class="rpe-btn r9" onclick="selectRPE(9)">9<br><span style="font-size:.6rem">V.Hard</span></div>
+        <div class="rpe-btn r10" onclick="selectRPE(10)">10<br><span style="font-size:.6rem">Max</span></div>
+      </div>
+    </div>
+
+    <div class="load-display" id="load-display">
+      <div class="load-val" id="load-val">—</div>
+      <div class="load-lbl">Training Load (duration × RPE)</div>
+      <div class="load-zone" id="load-zone">Select duration &amp; RPE</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COACH: PER-ATHLETE COMMENTS (coach + on-water only) ══ -->
+<div class="section hidden" id="coach-athlete-comments-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">💬</span> Individual Athlete Observations</div>
+    <div class="hint" style="margin-bottom:12px" id="ath-obs-hint">
+      Per-athlete technical notes from today's on-water session.
+    </div>
+    <div id="ath-comment-grid">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 8: NOTES & SATISFACTION ══ -->
+<div class="section" id="notes-satisfaction-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">📝</span> Notes &amp; Satisfaction</div>
+
+    <div class="field">
+      <label>Session Notes / Key Observations</label>
+      <div class="hint">What stood out? Breakthroughs, problems, what to focus on next.</div>
+      <textarea id="notes" placeholder="e.g. Downhaul was too loose in 15+ knots — board felt heavy upwind. Need to pull 2 more turns tomorrow..."></textarea>
+    </div>
+
+    <div class="field" id="coach-obs-field" style="display:none">
+      <label>Coach Observation</label>
+      <textarea id="coach_notes" placeholder="Coach's technical observation or tactical feedback..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Session Satisfaction</label>
+      <div class="hint">How happy are you with this session's performance?</div>
+      <div class="scale">
+        <button class="scale-btn" onclick="selectScale('satisfaction','1')"><span class="s-num">1</span><span class="s-lbl">Poor</span></button>
+        <button class="scale-btn" onclick="selectScale('satisfaction','2')"><span class="s-num">2</span><span class="s-lbl">Below avg</span></button>
+        <button class="scale-btn" onclick="selectScale('satisfaction','3')"><span class="s-num">3</span><span class="s-lbl">Average</span></button>
+        <button class="scale-btn" onclick="selectScale('satisfaction','4')"><span class="s-num">4</span><span class="s-lbl">Good</span></button>
+        <button class="scale-btn" onclick="selectScale('satisfaction','5')"><span class="s-num">5</span><span class="s-lbl">Excellent</span></button>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:14px;padding-top:14px;border-top:2px solid var(--border)">
+      <label>🩺 Physical Condition After Session</label>
+      <div class="hint" style="margin-bottom:10px">Rate how your body feels right now</div>
+
+      <div style="margin-bottom:10px">
+        <div style="font-size:.78rem;font-weight:600;color:var(--sub);margin-bottom:4px">Muscle Soreness</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('soreness','1')"><span class="s-num">1</span><span class="s-lbl">None</span></button>
+          <button class="scale-btn" onclick="selectScale('soreness','2')"><span class="s-num">2</span><span class="s-lbl">Mild</span></button>
+          <button class="scale-btn" onclick="selectScale('soreness','3')"><span class="s-num">3</span><span class="s-lbl">Moderate</span></button>
+          <button class="scale-btn" onclick="selectScale('soreness','4')"><span class="s-num">4</span><span class="s-lbl">Sore</span></button>
+          <button class="scale-btn" onclick="selectScale('soreness','5')"><span class="s-num">5</span><span class="s-lbl">Very sore</span></button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:10px">
+        <div style="font-size:.78rem;font-weight:600;color:var(--sub);margin-bottom:4px">Injury / Pain Level</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('painLevel','1')"><span class="s-num">1</span><span class="s-lbl">No pain</span></button>
+          <button class="scale-btn" onclick="selectScale('painLevel','2')"><span class="s-num">2</span><span class="s-lbl">Slight</span></button>
+          <button class="scale-btn" onclick="selectScale('painLevel','3')"><span class="s-num">3</span><span class="s-lbl">Moderate</span></button>
+          <button class="scale-btn" onclick="selectScale('painLevel','4')"><span class="s-num">4</span><span class="s-lbl">Significant</span></button>
+          <button class="scale-btn" onclick="selectScale('painLevel','5')"><span class="s-num">5</span><span class="s-lbl">Severe</span></button>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:.78rem;font-weight:600;color:var(--sub);margin-bottom:4px">Overall Fatigue</div>
+        <div class="scale">
+          <button class="scale-btn" onclick="selectScale('postFatigue','1')"><span class="s-num">1</span><span class="s-lbl">Fresh</span></button>
+          <button class="scale-btn" onclick="selectScale('postFatigue','2')"><span class="s-num">2</span><span class="s-lbl">Light</span></button>
+          <button class="scale-btn" onclick="selectScale('postFatigue','3')"><span class="s-num">3</span><span class="s-lbl">Normal</span></button>
+          <button class="scale-btn" onclick="selectScale('postFatigue','4')"><span class="s-num">4</span><span class="s-lbl">Tired</span></button>
+          <button class="scale-btn" onclick="selectScale('postFatigue','5')"><span class="s-num">5</span><span class="s-lbl">Exhausted</span></button>
+        </div>
+      </div>
+
+      <!-- Pain / Injury Input (text-based) -->
+      <div class="pi-wrap" style="margin-top:10px">
+        <label style="font-size:.78rem;font-weight:600;color:var(--sub)">Pain / Injury</label>
+        <div class="pi-count" id="pi-count">No areas marked</div>
+
+        <!-- Step 1: Body Part -->
+        <div class="pi-step" id="pi-step-part">
+          <div style="font-size:.68rem;font-weight:600;color:var(--sub);margin-bottom:4px">① Body Part</div>
+          <div class="pi-grid" id="pi-parts">
+            <button class="pi-btn" onclick="piSelectPart('Head')">Head</button>
+            <button class="pi-btn" onclick="piSelectPart('Neck')">Neck</button>
+            <button class="pi-btn" onclick="piSelectPart('Shoulder')">Shoulder</button>
+            <button class="pi-btn" onclick="piSelectPart('Chest')">Chest</button>
+            <button class="pi-btn" onclick="piSelectPart('Upper arm')">Upper arm</button>
+            <button class="pi-btn" onclick="piSelectPart('Elbow')">Elbow</button>
+            <button class="pi-btn" onclick="piSelectPart('Forearm')">Forearm</button>
+            <button class="pi-btn" onclick="piSelectPart('Wrist')">Wrist</button>
+            <button class="pi-btn" onclick="piSelectPart('Hand')">Hand</button>
+            <button class="pi-btn" onclick="piSelectPart('Upper back')">Upper back</button>
+            <button class="pi-btn" onclick="piSelectPart('Lower back')">Lower back</button>
+            <button class="pi-btn" onclick="piSelectPart('Abs')">Abs</button>
+            <button class="pi-btn" onclick="piSelectPart('Glute')">Glute</button>
+            <button class="pi-btn" onclick="piSelectPart('Groin')">Groin</button>
+            <button class="pi-btn" onclick="piSelectPart('Quad')">Quad</button>
+            <button class="pi-btn" onclick="piSelectPart('Hamstring')">Hamstring</button>
+            <button class="pi-btn" onclick="piSelectPart('Knee')">Knee</button>
+            <button class="pi-btn" onclick="piSelectPart('Shin')">Shin</button>
+            <button class="pi-btn" onclick="piSelectPart('Calf')">Calf</button>
+            <button class="pi-btn" onclick="piSelectPart('Ankle')">Ankle</button>
+            <button class="pi-btn" onclick="piSelectPart('Foot')">Foot</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Side + Position (shown after part selected) -->
+        <div class="pi-step hidden" id="pi-step-detail">
+          <div style="font-size:.68rem;font-weight:600;color:var(--sub);margin-bottom:4px">② <span id="pi-sel-part-lbl">—</span> — Side & Position</div>
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <div style="flex:1">
+              <div style="font-size:.6rem;color:var(--sub);margin-bottom:3px">Side</div>
+              <div class="pi-opt-row" id="pi-side-row">
+                <button class="pi-opt" onclick="piSelectSide('Left')">Left</button>
+                <button class="pi-opt" onclick="piSelectSide('Center')">Center</button>
+                <button class="pi-opt" onclick="piSelectSide('Right')">Right</button>
+              </div>
+            </div>
+            <div style="flex:1">
+              <div style="font-size:.6rem;color:var(--sub);margin-bottom:3px">Position</div>
+              <div class="pi-opt-row" id="pi-pos-row">
+                <button class="pi-opt" onclick="piSelectPos('Front')">Front</button>
+                <button class="pi-opt" onclick="piSelectPos('Back')">Back</button>
+              </div>
+            </div>
+          </div>
+          <!-- Step 3: Pain level -->
+          <div style="font-size:.6rem;color:var(--sub);margin-bottom:3px">Pain Level</div>
+          <div class="pi-lvl-row" id="pi-lvl-row">
+            <button class="pi-lvl" data-lv="1" onclick="piSelectLvl(1)"><span class="pi-num">1</span><span class="pi-lbl">Mild</span></button>
+            <button class="pi-lvl" data-lv="2" onclick="piSelectLvl(2)"><span class="pi-num">2</span><span class="pi-lbl">Moderate</span></button>
+            <button class="pi-lvl" data-lv="3" onclick="piSelectLvl(3)"><span class="pi-num">3</span><span class="pi-lbl">High</span></button>
+            <button class="pi-lvl" data-lv="4" onclick="piSelectLvl(4)"><span class="pi-num">4</span><span class="pi-lbl">Severe</span></button>
+            <button class="pi-lvl" data-lv="5" onclick="piSelectLvl(5)"><span class="pi-num">5</span><span class="pi-lbl">Critical</span></button>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <button class="pi-add-btn" id="pi-add-btn" onclick="piAddEntry()" disabled>+ Add</button>
+            <button class="pi-cancel-btn" onclick="piCancel()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Marked list -->
+        <div class="pi-list" id="pi-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="submit-section">
+  <button class="submit-btn" id="submit-btn" onclick="submitLog()">
+    💾 Save Training Log
+  </button>
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">📋</div>
+  <div class="success-title">Log Saved!</div>
+  <div class="success-sub" id="success-sub">Training data recorded successfully.</div>
+
+  <div class="success-card" id="summary-card">
+    <!-- populated by JS -->
+  </div>
+
+  <div class="insight-card" id="insight-card" style="display:none">
+    <div class="insight-title">🔍 Today's Key Insight</div>
+    <div class="insight-text" id="insight-text"></div>
+  </div>
+
+  <button class="new-log-btn" onclick="resetForm()">+ New Training Log Entry</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// ROSTER
+// ═══════════════════════════════════════════
+// Class → sail size mapping (T293 class rules)
+const CLASS_SAIL = {
+  'T293 Junior (U15)': 5.8,
+  'T293 Youth (U17)':  7.8,
+  'T293 Plus Youth (U19)': 8.5,
+  'T293 Plus Open': 8.5,
+};
+
+const ROSTER = {
+  athlete: [
+    { id:'IND16',  name:'Mohit Mhatre',           cls:'T293 Youth (U17)',  gender:'M' },
+    { id:'IND261', name:'Soham Yogesh Rajput',     cls:'T293 Youth (U17)',  gender:'M' },
+    { id:'IND18',  name:'Rashmita Thimiti',        cls:'T293 Youth (U17)',  gender:'F' },
+    { id:'IND39',  name:'Tejasvi Prajapati',       cls:'T293 Youth (U17)',  gender:'F' },
+    { id:'IND01',  name:'Udaiveer Singh Johal',    cls:'T293 Junior (U15)', gender:'M' },
+    { id:'IND7',   name:'Vihaan Prakash',          cls:'T293 Junior (U15)', gender:'M' },
+    { id:'IND02',  name:'Vaishnavi Vishal Kajale', cls:'T293 Junior (U15)', gender:'F' },
+    { id:'IND11',  name:'Priyanshi Patil',         cls:'T293 Junior (U15)', gender:'F' },
+  ],
+  coach: [
+    { id:'COACH_D', name:'Mr. Danny Ok',           cls:'Head Coach',    gender:'M' },
+    { id:'COACH_P', name:'Sh. Prakash',            cls:'Coach',         gender:'M' },
+    { id:'COACH_M', name:'Mrs. Meenu Johal',       cls:'Lady Manager',  gender:'F' },
+  ]
+};
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+const state = {
+  role: null, athleteId: null, athleteName: null, athleteClass: null, isCoachMode: false,
+  sessionType: null, date: null,
+  windBft: null, windZoneSkill: null, windZoneLabel: null, windDir: null, wave: null, temp: 22, waterTemp: 18,
+  currentStrength: null, currentDir: null,
+  sailSize: null, downhaul: 3, outhaul: 3, mastTrackUp: null, mastTrackDn: null, boomHeight: null,
+  equipFeel: null,
+  readiness: null, fatigue: null, confidence: null, stress: null,
+  upwindSpeed: null, upwindControl: null,
+  downwindSpeed: null, downwindControl: null,
+  tackingQuality: null, gybingQuality: null,
+  pumpingTech: null, startQuality: null,
+  startPosition: null, startHold: null, startAccel: null, startPump: null, startCleanAir: null,
+  racePositions: Array(15).fill(''),
+  limitingFactors: new Set(),
+  tacticalConf: null,
+  duration: 90, rpe: null, trainingLoad: null,
+  notes: '', coachNotes: '',
+  satisfaction: null,
+  soreness: null, painLevel: null, postFatigue: null,
+  currentRaceNum: null, coachRaceResults: {},
+};
+
+const REQUIRED_FIELDS = ['role','athleteId','sessionType','date','windBft','satisfaction'];
+
+// ── COACH CHECKLIST DATA ──────────────────────────────────────────────
+const COACH_CHECKLIST = {
+  boat: [
+    { key:'hull_board', icon:'🏄', name:'Hull / Board condition' },
+    { key:'hull_rib',   icon:'🚤', name:'Hull / RIB condition' },
+    { key:'air_rib',    icon:'💨', name:'Air pressure (RIB)' },
+    { key:'engine',     icon:'⛽', name:'Engine' },
+    { key:'fuel',       icon:'🪣', name:'Fuel level' },
+  ],
+  safety: [
+    { key:'towrope',  icon:'🪢', name:'Tow rope' },
+    { key:'anchor',   icon:'⚓', name:'Anchor + line' },
+    { key:'pfd',      icon:'🦺', name:'Life jackets (×8)' },
+    { key:'whistle_s',icon:'📯', name:'Whistle / Horn' },
+  ],
+  instruments: [
+    { key:'anemometer', icon:'🌬️', name:'Anemometer' },
+    { key:'wind_ind',   icon:'🎏', name:'Wind indicator' },
+    { key:'radio',      icon:'📻', name:'Radio / bbTalkin' },
+    { key:'current_m',  icon:'🌊', name:'Current measurer' },
+  ],
+  training_eq: [
+    { key:'marks',      icon:'🔴', name:'Race marks' },
+    { key:'whiteboard', icon:'📋', name:'Whiteboard' },
+    { key:'marker',     icon:'🖊️', name:'Markers' },
+    { key:'whistle_t',  icon:'🔔', name:'Whistle' },
+  ],
+  other: [
+    { key:'rulebook',  icon:'📖', name:'Rule book' },
+    { key:'snacks',    icon:'🍌', name:'Snacks' },
+    { key:'water',     icon:'💧', name:'Water (×8+)' },
+    { key:'hats',      icon:'🧢', name:'Hats / Sun caps' },
+    { key:'firstaid',  icon:'🩹', name:'First aid kit' },
+    { key:'sunscreen', icon:'☀️', name:'Sunscreen' },
+  ]
+};
+
+// ── COACH STATE ───────────────────────────────────────────────────────
+const coachCheckState = {};   // key → 'ok' | 'issue' | null
+const scFocus  = new Set();
+const scDrills = new Set();
+let scIntensity = null;
+let scVolume    = null;
+const athCommentTags = {};    // athleteId → Set of tags
+const ATH_TAGS = ['Technique','Tactics','Start','Fitness','Mental','Equipment'];
+
+// ── BUILD COACH CHECKLIST DOM ─────────────────────────────────────────
+const CHK_GRID_IDS = { boat:'chk-boat', safety:'chk-safety',
+  instruments:'chk-instruments', training_eq:'chk-training-eq', other:'chk-other' };
+
+function buildCoachChecklistGrids() {
+  for (const [group, items] of Object.entries(COACH_CHECKLIST)) {
+    const el = document.getElementById(CHK_GRID_IDS[group]);
+    if (!el) continue;
+    el.innerHTML = items.map(item => `
+      <div class="chk-item" id="chk-${item.key}" onclick="toggleCoachCheck('${item.key}')">
+        <span class="chk-icon">${item.icon}</span>
+        <span class="chk-name">${item.name}</span>
+        <span class="chk-status" id="chk-st-${item.key}">—</span>
+      </div>`).join('');
+  }
+  updateCoachCheckCount();
+}
+
+function toggleCoachCheck(key) {
+  const cur = coachCheckState[key];
+  const next = cur === 'ok' ? 'issue' : cur === 'issue' ? null : 'ok';
+  coachCheckState[key] = next;
+  const el = document.getElementById('chk-' + key);
+  const st = document.getElementById('chk-st-' + key);
+  if (!el || !st) return;
+  el.classList.remove('chk-ok','chk-issue');
+  if (next === 'ok')    { el.classList.add('chk-ok');    st.textContent = '✓'; }
+  else if (next === 'issue') { el.classList.add('chk-issue'); st.textContent = '⚠'; }
+  else                  { st.textContent = '—'; }
+  updateCoachCheckCount();
+}
+
+function coachCheckAll() {
+  const allItems = Object.values(COACH_CHECKLIST).flat();
+  allItems.forEach(item => {
+    coachCheckState[item.key] = 'ok';
+    const el = document.getElementById('chk-' + item.key);
+    const st = document.getElementById('chk-st-' + item.key);
+    if (el) { el.classList.remove('chk-issue'); el.classList.add('chk-ok'); }
+    if (st) st.textContent = '✓';
+  });
+  updateCoachCheckCount();
+}
+
+function updateCoachCheckCount() {
+  const allItems = Object.values(COACH_CHECKLIST).flat();
+  const total = allItems.length;
+  const ok    = allItems.filter(i => coachCheckState[i.key] === 'ok').length;
+  const issue = allItems.filter(i => coachCheckState[i.key] === 'issue').length;
+  const el = document.getElementById('coach-chk-count');
+  if (!el) return;
+  el.textContent = `${ok} / ${total} checked${issue > 0 ? ' · ⚠️ ' + issue + ' issue(s)' : ''}`;
+  el.style.color = ok === total ? '#1b5e20' : (issue > 0 ? '#ea4335' : 'var(--sub)');
+}
+
+// ── SESSION CONTENT CHIP TOGGLES ──────────────────────────────────────
+function toggleChip(el, setName, val) {
+  const s = setName === 'scFocus' ? scFocus : scDrills;
+  if (s.has(val)) {
+    s.delete(val);
+    el.classList.remove('sel-chip');
+  } else {
+    s.add(val);
+    el.classList.add('sel-chip');
+  }
+}
+
+function selectIntensity(val) {
+  scIntensity = val;
+  document.querySelectorAll('.int-btn').forEach(b => {
+    b.classList.remove('int-easy','int-mod','int-hard');
+    const bVal = b.getAttribute('onclick').match(/\('(\w+)'\)/)?.[1];
+    if (bVal === val) b.classList.add('int-' + (val==='easy'?'easy':val==='moderate'?'mod':'hard'));
+  });
+}
+
+function selectVolume(val) {
+  scVolume = val;
+  // Volume buttons: those calling selectVolume()
+  document.querySelectorAll('.int-btn[onclick*="selectVolume"]').forEach(b => {
+    b.classList.remove('int-easy','int-mod','int-hard');
+    const bVal = b.getAttribute('onclick').match(/\('(\w+)'\)/)?.[1];
+    if (bVal === val) {
+      b.classList.add(val==='low'?'int-easy':val==='medium'?'int-mod':'int-hard');
+    }
+  });
+}
+
+// ── BUILD ATHLETE COMMENT GRID ────────────────────────────────────────
+function buildAthCommentGrid() {
+  const grid = document.getElementById('ath-comment-grid');
+  if (!grid) return;
+  grid.innerHTML = ROSTER.athlete.map((a, idx) => {
+    athCommentTags[a.id] = new Set();
+    const clsCls = a.cls.includes('U17') ? 'cls-u17' : 'cls-u15';
+    const clsLabel = a.cls.includes('U17') ? 'U17' : 'U15';
+    return `
+      <div class="ath-comment-card" id="ath-cmt-card-${a.id}">
+        <div class="ath-comment-hdr">
+          <div class="ath-num">${idx + 1}</div>
+          <div class="ath-comment-name">${a.name}</div>
+          <span class="ath-comment-cls ${clsCls}">${clsLabel}</span>
+          <span style="font-size:.7rem;color:var(--sub);margin-left:4px">${a.id}</span>
+        </div>
+        <div class="ath-tag-row" id="ath-tags-${a.id}">
+          ${ATH_TAGS.map(t => `<span class="ath-tag" onclick="toggleAthTag(this,'${a.id}','${t}')">${t}</span>`).join('')}
+        </div>
+        <div class="ath-input-row">
+          <textarea class="ath-comment-txt" id="ath-cmt-${a.id}"
+            placeholder="Observations for ${a.name}..."></textarea>
+          <div style="display:flex;flex-direction:column;align-items:center;margin-top:2px">
+            <button class="voice-btn" id="voice-btn-${a.id}" onclick="toggleVoice('${a.id}')" title="Voice input">🎙️</button>
+            <div class="voice-status" id="voice-status-${a.id}"></div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleAthTag(el, athId, tag) {
+  if (!athCommentTags[athId]) athCommentTags[athId] = new Set();
+  if (athCommentTags[athId].has(tag)) {
+    athCommentTags[athId].delete(tag);
+    el.classList.remove('sel');
+  } else {
+    athCommentTags[athId].add(tag);
+    el.classList.add('sel');
+  }
+}
+
+// ═══════════════════════════════════════════
+// VOICE INPUT (Web Speech API)
+// ═══════════════════════════════════════════
+const activeRecognitions = {};
+
+function toggleVoice(athId) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert('This browser does not support voice input. Please use Chrome or Safari.');
+    return;
+  }
+
+  const btn = document.getElementById('voice-btn-' + athId);
+  const status = document.getElementById('voice-status-' + athId);
+  const textarea = document.getElementById('ath-cmt-' + athId);
+
+  // If already recording, stop
+  if (activeRecognitions[athId]) {
+    activeRecognitions[athId].stop();
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  activeRecognitions[athId] = recognition;
+
+  let finalTranscript = '';
+
+  recognition.onstart = () => {
+    btn.classList.add('recording');
+    btn.textContent = '⏹️';
+    status.textContent = 'Listening...';
+  };
+
+  recognition.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) {
+        finalTranscript += e.results[i][0].transcript + ' ';
+      } else {
+        interim += e.results[i][0].transcript;
+      }
+    }
+    // Append to existing text
+    const existing = textarea.value.trimEnd();
+    const separator = existing ? ' ' : '';
+    textarea.value = existing + separator + finalTranscript.trim() + (interim ? ' ' + interim : '');
+    status.textContent = interim ? '🔴 ...' : 'Listening...';
+  };
+
+  recognition.onerror = (e) => {
+    console.warn('Speech error:', e.error);
+    if (e.error === 'not-allowed') {
+      status.textContent = 'Mic blocked';
+    } else {
+      status.textContent = 'Error: ' + e.error;
+    }
+    stopVoice(athId);
+  };
+
+  recognition.onend = () => {
+    // Finalize text
+    if (finalTranscript.trim()) {
+      const existing = textarea.value.trimEnd();
+      // Clean up any interim text, set final
+      const base = existing.replace(/\s+/g,' ').trim();
+      if (!base.includes(finalTranscript.trim())) {
+        textarea.value = (existing ? existing + ' ' : '') + finalTranscript.trim();
+      }
+    }
+    stopVoice(athId);
+  };
+
+  recognition.start();
+}
+
+function stopVoice(athId) {
+  const btn = document.getElementById('voice-btn-' + athId);
+  const status = document.getElementById('voice-status-' + athId);
+  if (btn) {
+    btn.classList.remove('recording');
+    btn.textContent = '🎙️';
+  }
+  if (status) setTimeout(() => { status.textContent = ''; }, 2000);
+  delete activeRecognitions[athId];
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Set today's date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('session-date').value = today;
+  state.date = today;
+
+  // Update header date
+  const d = new Date();
+  document.getElementById('hdr-date').textContent =
+    d.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+
+  // Build grids
+  buildRaceGrid();
+  buildEquipGrid();
+  initBodyMap();
+  buildCoachChecklistGrids();
+  buildAthCommentGrid();
+
+  updateProgress();
+  loadCheckinData();
+
+  // ── URL settings init ──
+  const savedUrl = localStorage.getItem('india_t293_script_url') || '';
+  const urlInput = document.getElementById('script-url-input');
+  if (urlInput) urlInput.value = savedUrl;
+  const urlStatus = document.getElementById('url-status');
+  if (urlStatus) urlStatus.textContent = savedUrl ? '(Connected)' : '(Not set)';
+  if (urlStatus) urlStatus.style.color = savedUrl ? '#34a853' : '#ea4335';
+
+  // ── Weather auto-fill (for athletes only) ──
+  if (savedUrl) {
+    fetchCoachWeather(today);
+  }
+});
+
+// ═══════════════════════════════════════════
+// ATHLETE SELECTOR
+// ═══════════════════════════════════════════
+function onRoleChange() {
+  const role = document.getElementById('role-select').value;
+  state.role = role || null;
+  state.athleteId = null;
+  state.athleteName = null;
+  state.athleteClass = null;
+
+  const nameSelect = document.getElementById('name-select');
+  const classTag = document.getElementById('class-tag');
+
+  nameSelect.innerHTML = '<option value="">— Select name —</option>';
+  classTag.classList.add('hidden');
+  classTag.textContent = '';
+
+  if (!role) { nameSelect.disabled = true; return; }
+  nameSelect.disabled = false;
+
+  const list = ROSTER[role] || [];
+  list.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = p.name;
+    nameSelect.appendChild(opt);
+  });
+  updateProgress();
+}
+
+function onNameChange() {
+  const id = document.getElementById('name-select').value;
+  const role = state.role;
+  if (!id || !role) return;
+
+  const person = (ROSTER[role] || []).find(p => p.id === id);
+  if (!person) return;
+
+  state.athleteId = person.id;
+  state.athleteName = person.name;
+  state.athleteClass = person.cls;
+
+  const classTag = document.getElementById('class-tag');
+  classTag.textContent = person.cls;
+  classTag.classList.remove('hidden');
+
+  // Auto-set sail size from class profile (athletes only)
+  autoSetSailSize(person.cls, role === 'athlete');
+
+  // Coach mode: if role is 'coach', enable coach mode
+  setCoachMode(role === 'coach');
+
+  updateProgress();
+}
+
+function setCoachMode(isCoach) {
+  state.isCoachMode = isCoach;
+  const banner   = document.getElementById('coach-mode-banner');
+  const wellness = document.getElementById('wellness-section');
+  const rpeHint  = document.getElementById('rpe-coach-hint');
+
+  // Sections visible only for athletes
+  const athleteOnlySections = [
+    'equip-trim-section',
+    'equip-knowledge-section',
+  ];
+
+  const coachObsField = document.getElementById('coach-obs-field');
+
+  if (isCoach) {
+    banner.classList.remove('hidden');
+    if (coachObsField) coachObsField.style.display = '';
+    if (wellness) wellness.classList.add('coach-mode-section');
+    if (rpeHint) rpeHint.style.display = 'block';
+    athleteOnlySections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    });
+    // Show coach sections if an on-water session is selected
+    updateCoachSectionVisibility();
+  } else {
+    banner.classList.add('hidden');
+    if (coachObsField) coachObsField.style.display = 'none';
+    if (wellness) wellness.classList.remove('coach-mode-section');
+    if (rpeHint) rpeHint.style.display = 'none';
+    athleteOnlySections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && state.sessionType && state.sessionType !== 'physical') {
+        el.classList.remove('hidden');
+      }
+    });
+    // Hide all coach-only sections
+    ['coach-precheck-section','coach-session-content-section','coach-athlete-comments-section']
+      .forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
+  }
+}
+
+function updateCoachSectionVisibility() {
+  if (!state.isCoachMode) return;
+  const isOnWater = state.sessionType && state.sessionType !== 'physical';
+  const isRacePractice = state.sessionType === 'race_practice';
+  const isRegatta = state.sessionType === 'regatta';
+
+  // Show coach-athlete-comments in ALL coach modes (including physical)
+  const isPhysical = state.sessionType === 'physical';
+  const hasSession = !!state.sessionType;
+  const coachComments = document.getElementById('coach-athlete-comments-section');
+  if (coachComments) coachComments.classList.toggle('hidden', !hasSession);
+
+  // Update hint text based on session type
+  const hint = document.getElementById('ath-obs-hint');
+  if (hint) {
+    if (isPhysical) {
+      hint.textContent = 'Per-athlete observations from today\'s physical training / conditioning session.';
+    } else if (isRegatta && state.currentRaceNum) {
+      hint.textContent = 'Today\'s R' + state.currentRaceNum + ' race — per-athlete observations.';
+    } else if (isRegatta) {
+      hint.textContent = 'Per-athlete observations from today\'s race.';
+    } else {
+      hint.textContent = 'Per-athlete technical notes from today\'s on-water session.';
+    }
+  }
+
+  // For race_practice: show coach precheck, session content, and athlete comments
+  const coachPrecheck = document.getElementById('coach-precheck-section');
+  if (coachPrecheck) coachPrecheck.classList.toggle('hidden', !isRacePractice);
+
+  const coachSessionContent = document.getElementById('coach-session-content-section');
+  if (coachSessionContent) coachSessionContent.classList.toggle('hidden', !isRacePractice);
+}
+
+// ═══════════════════════════════════════════
+// SESSION TYPE
+// ═══════════════════════════════════════════
+function selectSession(type) {
+  state.sessionType = type;
+  document.querySelectorAll('.session-tab').forEach(t => {
+    t.classList.toggle('sel', t.dataset.type === type);
+  });
+
+  const isPhysical = type === 'physical';
+  const isRacePractice = type === 'race_practice';
+  const isRegatta = type === 'regatta';
+
+  // Update duration label based on session context
+  const durLabel = document.getElementById('duration-label');
+  if (durLabel) durLabel.textContent = isPhysical ? 'Training Duration' : 'Duration on Water';
+
+  const equipIds = ['equip-trim-section','equip-knowledge-section','equip-check-section'];
+
+  // Show/hide equipment sections: athlete on-water only
+  equipIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden', isPhysical || state.isCoachMode);
+  });
+
+  // Technical Execution: athlete on-water only
+  const techSection = document.getElementById('tech-execution-section');
+  if (techSection) techSection.classList.toggle('hidden', isPhysical || state.isCoachMode);
+
+  // Environment section: hide on physical (but show for coach)
+  const envSection = document.getElementById('water-sections-start');
+  if (envSection) envSection.classList.toggle('hidden', isPhysical);
+
+  // Physical training section
+  const ptSection = document.getElementById('physical-training-section');
+  if (ptSection) ptSection.classList.toggle('hidden', !isPhysical);
+
+  // Wellness (신체상황) section: hide for coach+physical and coach+regatta (athletes always see it except physical has own section)
+  const wellnessSection = document.getElementById('wellness-section');
+  if (wellnessSection) wellnessSection.classList.toggle('hidden', (state.isCoachMode && isPhysical) || (state.isCoachMode && isRegatta));
+
+  // Performance Limiting Factors: show for athlete on-water only
+  const perfFactors = document.getElementById('perf-factors-section');
+  if (perfFactors) perfFactors.classList.toggle('hidden', isPhysical || state.isCoachMode);
+
+  // Racing Rules & Tactical Knowledge: show for athlete on-water only
+  const rulesKnow = document.getElementById('rules-knowledge-section');
+  if (rulesKnow) rulesKnow.classList.toggle('hidden', isPhysical || state.isCoachMode);
+
+  // Training Load: hide for coach+regatta (coach focuses on race results, not training load)
+  const tlSection = document.getElementById('training-load-section');
+  if (tlSection) tlSection.classList.toggle('hidden', state.isCoachMode && isRegatta);
+
+  // Show regatta race section for ALL regatta (coach + athlete)
+  const regattaRaceSection = document.getElementById('regatta-race-section');
+  if (regattaRaceSection) regattaRaceSection.classList.toggle('hidden', !isRegatta);
+
+  // Show coach race results for coach+regatta
+  const coachRaceResults = document.getElementById('coach-race-results-section');
+  if (coachRaceResults) coachRaceResults.classList.toggle('hidden', !(state.isCoachMode && isRegatta));
+
+  // ── Dynamic Section Reordering ──
+  // Ensures correct order for ALL modes (coach + athlete)
+  const anchor = state.isCoachMode
+    ? document.getElementById('coach-mode-banner')
+    : document.querySelector('.session-tab')?.closest('.section') || document.querySelector('.section');
+  const submitSection = document.querySelector('.submit-section');
+  if (anchor && submitSection) {
+    const parent = submitSection.parentNode;
+    const refNode = submitSection;  // insert everything before Submit
+
+    const env = document.getElementById('water-sections-start');
+    const regRace = document.getElementById('regatta-race-section');
+    const coachRace = document.getElementById('coach-race-results-section');
+    const precheck = document.getElementById('coach-precheck-section');
+    const sessionPlan = document.getElementById('coach-session-content-section');
+    const athComments = document.getElementById('coach-athlete-comments-section');
+    const notesSat = document.getElementById('notes-satisfaction-section');
+    const ptSection = document.getElementById('physical-training-section');
+    const tlSection = document.getElementById('training-load-section');
+    const wellSection = document.getElementById('wellness-section');
+    const equipTrim = document.getElementById('equip-trim-section');
+    const equipKnow = document.getElementById('equip-knowledge-section');
+    const equipCheck = document.getElementById('equip-check-section');
+    const techExec = document.getElementById('tech-execution-section');
+    const perfFactors = document.getElementById('perf-factors-section');
+    const rulesKnow = document.getElementById('rules-knowledge-section');
+
+    if (state.isCoachMode && isPhysical) {
+      // Coach Physical: PT Details → Training Load → Athlete Obs → Notes & Satisfaction
+      if (ptSection) parent.insertBefore(ptSection, refNode);
+      if (tlSection) parent.insertBefore(tlSection, refNode);
+      if (athComments) parent.insertBefore(athComments, refNode);
+      if (notesSat) parent.insertBefore(notesSat, refNode);
+    } else if (state.isCoachMode && isRacePractice) {
+      // Coach Race Practice: Environment → Pre-check → Session Plan → Training Load → Athlete Obs → Notes & Satisfaction
+      if (env) parent.insertBefore(env, refNode);
+      if (precheck) parent.insertBefore(precheck, refNode);
+      if (sessionPlan) parent.insertBefore(sessionPlan, refNode);
+      if (tlSection) parent.insertBefore(tlSection, refNode);
+      if (athComments) parent.insertBefore(athComments, refNode);
+      if (notesSat) parent.insertBefore(notesSat, refNode);
+    } else if (state.isCoachMode && isRegatta) {
+      // Coach Regatta: Race Entry → Environment → Race Results → Athlete Obs → Notes & Satisfaction
+      if (regRace) parent.insertBefore(regRace, refNode);
+      if (env) parent.insertBefore(env, refNode);
+      if (coachRace) parent.insertBefore(coachRace, refNode);
+      if (athComments) parent.insertBefore(athComments, refNode);
+      if (notesSat) parent.insertBefore(notesSat, refNode);
+    } else if (!state.isCoachMode && isPhysical) {
+      // Athlete Physical: PT Details → Wellness → Training Load → Notes & Satisfaction
+      if (ptSection) parent.insertBefore(ptSection, refNode);
+      if (wellSection) parent.insertBefore(wellSection, refNode);
+      if (tlSection) parent.insertBefore(tlSection, refNode);
+      if (notesSat) parent.insertBefore(notesSat, refNode);
+    } else if (!state.isCoachMode && (isRacePractice || isRegatta)) {
+      // Athlete On-Water: [Race Entry if regatta] → TL → Env → Wellness → EquipCheck → EquipTrim → SetupKnow → TechExec → PerfFactors → RulesKnow → Notes&Sat
+      if (isRegatta && regRace) parent.insertBefore(regRace, refNode);
+      if (tlSection) parent.insertBefore(tlSection, refNode);
+      if (env) parent.insertBefore(env, refNode);
+      if (wellSection) parent.insertBefore(wellSection, refNode);
+      if (equipCheck) parent.insertBefore(equipCheck, refNode);
+      if (equipTrim) parent.insertBefore(equipTrim, refNode);
+      if (equipKnow) parent.insertBefore(equipKnow, refNode);
+      if (techExec) parent.insertBefore(techExec, refNode);
+      if (perfFactors) parent.insertBefore(perfFactors, refNode);
+      if (rulesKnow) parent.insertBefore(rulesKnow, refNode);
+      if (notesSat) parent.insertBefore(notesSat, refNode);
+    }
+  }
+
+  // Lock env fields for athlete + regatta (coach data only)
+  const athleteRegatta = !state.isCoachMode && isRegatta;
+  const airTempField = document.getElementById('air-temp-field');
+  const tidalField = document.getElementById('tidal-current-field');
+  if (airTempField) airTempField.classList.toggle('coach-locked', athleteRegatta);
+  if (tidalField) tidalField.classList.toggle('coach-locked', athleteRegatta);
+
+  // Update coach sections visibility when session type changes
+  updateCoachSectionVisibility();
+
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════
+// WIND ZONE
+// ═══════════════════════════════════════════
+function selectWindZone(idx, skill, label) {
+  state.windBft = idx;
+  state.windZoneSkill = skill;
+  state.windZoneLabel = label;
+  document.querySelectorAll('.wz-btn').forEach((b, i) => {
+    b.classList.toggle('selected', i === idx);
+  });
+  // Update Setup Knowledge questions with selected wind zone context
+  updateWindZoneContext();
+  updateProgress();
+}
+
+function updateWindZoneContext() {
+  const zone = state.windZoneLabel;
+  const skill = state.windZoneSkill;
+  const waveLbl = {1:'Flat',2:'Ripple',3:'Chop',4:'Waves',5:'Big waves'}[state.wave] || '';
+  let txt = 'these conditions';
+  if (zone && waveLbl) {
+    txt = `${zone} · ${waveLbl} conditions`;
+  } else if (zone) {
+    txt = `${zone} conditions`;
+  } else if (waveLbl) {
+    txt = waveLbl + ' conditions';
+  }
+  document.querySelectorAll('.wz-ctx').forEach(el => el.textContent = txt);
+}
+
+// ═══════════════════════════════════════════
+// DIRECTION (0-360°) UTILITIES
+// ═══════════════════════════════════════════
+const COMPASS_16 = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+const WIND_ARROWS = ['↓','↙','↙','←','←','←','↖','↑','↑','↗','↗','→','→','→','↘','↓'];
+const CUR_ARROWS =  ['↑','↗','↗','→','→','→','↘','↓','↓','↙','↙','←','←','←','↖','↑'];
+
+function degToCompass(deg) {
+  const d = ((deg % 360) + 360) % 360;
+  const idx = Math.round(d / 22.5) % 16;
+  return { name: COMPASS_16[idx], idx: idx };
+}
+
+function getDirArrow(deg, type) {
+  const d = ((deg % 360) + 360) % 360;
+  const idx = Math.round(d / 22.5) % 16;
+  return type === 'wind' ? WIND_ARROWS[idx] : CUR_ARROWS[idx];
+}
+
+function formatDirDisplay(deg, type) {
+  if (deg === null || deg === undefined || isNaN(deg)) return '';
+  const c = degToCompass(deg);
+  const arrow = getDirArrow(deg, type);
+  return arrow + ' ' + c.name + ' (' + Math.round(deg) + '°)';
+}
+
+function stepDirInput(inputId, delta) {
+  const inp = document.getElementById(inputId);
+  let val = parseInt(inp.value);
+  if (isNaN(val)) val = 0;
+  val = ((val + delta) % 360 + 360) % 360;
+  inp.value = val;
+  const type = inputId === 'windDeg' ? 'wind' : 'current';
+  if (inputId === 'windDeg') state.windDir = val;
+  else state.currentDir = val;
+  updateDirCompass(inputId, type);
+  updateProgress();
+}
+
+function onDirInput(inputId, type) {
+  const inp = document.getElementById(inputId);
+  let val = parseInt(inp.value);
+  if (isNaN(val) || inp.value === '') {
+    if (inputId === 'windDeg') state.windDir = null;
+    else state.currentDir = null;
+    document.getElementById(inputId + '-compass').innerHTML = 'Enter 0–360°';
+    updateProgress();
+    return;
+  }
+  val = ((val % 360) + 360) % 360;
+  if (inputId === 'windDeg') state.windDir = val;
+  else state.currentDir = val;
+  updateDirCompass(inputId, type);
+  updateProgress();
+}
+
+function updateDirCompass(inputId, type) {
+  const inp = document.getElementById(inputId);
+  const label = document.getElementById(inputId + '-compass');
+  const val = parseInt(inp.value);
+  if (isNaN(val)) { label.innerHTML = 'Enter 0–360°'; return; }
+  const c = degToCompass(val);
+  const arrow = getDirArrow(val, type);
+  const blowsLabel = type === 'wind' ? ' · blows ' + degToCompass((val + 180) % 360).name : '';
+  label.innerHTML = '<span class="dir-arrow">' + arrow + '</span> <span class="dir-name">' + c.name + '</span> <span style="color:var(--sub);font-size:.78rem">' + val + '°' + blowsLabel + '</span>';
+}
+
+// ═══════════════════════════════════════════
+// TIDAL CURRENT STRENGTH
+// ═══════════════════════════════════════════
+const CUR_STR_CLASSES = ['cur-1','cur-2','cur-3','cur-4','cur-5'];
+
+function selectCurrentStrength(val) {
+  if (state.currentStrength === val) {
+    state.currentStrength = null;
+    for (let i = 1; i <= 5; i++) {
+      const b = document.getElementById('cur-str-' + i);
+      if (b) b.classList.remove(...CUR_STR_CLASSES);
+    }
+    updateProgress();
+    return;
+  }
+  state.currentStrength = val;
+  for (let i = 1; i <= 5; i++) {
+    const b = document.getElementById('cur-str-' + i);
+    if (!b) continue;
+    b.classList.remove(...CUR_STR_CLASSES);
+    if (i === val) b.classList.add('cur-' + val);
+  }
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════
+// SCALE BUTTONS
+// ═══════════════════════════════════════════
+const ALL_SCALE_CLASSES = ['sel','sel-dkgreen','sel-orange','sel-yellow','sel-red','sel-blue','tech-1','tech-2','tech-3','tech-4','tech-5'];
+
+function selectScale(field, val) {
+  const newVal = parseInt(val);
+
+  // Toggle: clicking same value again clears selection
+  if (state[field] === newVal) {
+    state[field] = null;
+    document.querySelectorAll(`.scale-btn[onclick*="'${field}'"]`).forEach(btn => {
+      btn.classList.remove(...ALL_SCALE_CLASSES);
+    });
+    updateProgress();
+    return;
+  }
+
+  state[field] = newVal;
+
+  // Clear all buttons in this scale, then apply color to selected one
+  document.querySelectorAll(`.scale-btn[onclick*="'${field}'"]`).forEach(btn => {
+    const btnVal = btn.getAttribute('onclick').match(/'(\d+)'\)/)?.[1];
+    btn.classList.remove(...ALL_SCALE_CLASSES);
+    if (btnVal === val) {
+      btn.classList.add(getScaleClass(field, newVal));
+    }
+  });
+  // Update Setup Knowledge context when wave changes
+  if (field === 'wave') updateWindZoneContext();
+  updateProgress();
+}
+
+const TECH_FIELDS = [
+  'upwindSpeed','upwindControl','downwindSpeed','downwindControl',
+  'tackingQuality','gybingQuality','pumpingTech','startQuality',
+  'startPosition','startHold','startAccel','startPump','startCleanAir'
+];
+
+function getScaleClass(field, val) {
+  if (TECH_FIELDS.includes(field)) return `tech-${val}`;
+  // 5-color scale: 1=red, 2=orange, 3=yellow, 4=green, 5=dark green
+  const normal = ['','sel-red','sel-orange','sel-yellow','sel','sel-dkgreen'];
+  // Inverted fields (higher = worse): 1=dark green, 2=green, 3=yellow, 4=orange, 5=red
+  const inverted = ['','sel-dkgreen','sel','sel-yellow','sel-orange','sel-red'];
+  const redFields = ['fatigue','stress','wave','soreness','painLevel','postFatigue'];
+  return redFields.includes(field) ? inverted[val] : normal[val];
+}
+
+// ═══════════════════════════════════════════
+// SAIL SIZE
+// ═══════════════════════════════════════════
+function selectSail(size) {
+  state.sailSize = size;
+  document.querySelectorAll('#sail-btns .scale-btn').forEach(b => {
+    const s = b.getAttribute('onclick').match(/'(.+?)'/)?.[1];
+    b.classList.remove('sel','sel-orange','sel-red','sel-blue');
+    if (s === size) b.classList.add('sel-blue');
+  });
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════
+// SAIL SIZE
+// ═══════════════════════════════════════════
+function selectSailSize(size) {
+  // Toggle: clicking same size clears it
+  if (state.sailSize === size) {
+    state.sailSize = null;
+    document.querySelectorAll('[id^="ss-"]').forEach(b => b.classList.remove('sel-blue'));
+    const lbl = document.getElementById('sail-selected-lbl');
+    if (lbl) lbl.textContent = '';
+  } else {
+    state.sailSize = size;
+    const key = 'ss-' + Math.round(size * 10);
+    document.querySelectorAll('[id^="ss-"]').forEach(b => b.classList.remove('sel-blue'));
+    const btn = document.getElementById(key);
+    if (btn) btn.classList.add('sel-blue');
+    const lbl = document.getElementById('sail-selected-lbl');
+    if (lbl) lbl.textContent = '— ' + size + ' m² selected';
+  }
+  updateProgress();
+}
+
+function autoSetSailSize(cls, lock) {
+  const size = CLASS_SAIL[cls];
+  const sailField = document.getElementById('sail-field');
+  if (!sailField) return;
+  // Unlock first (in case switching athletes)
+  sailField.classList.remove('class-locked');
+  if (!size) return;
+  // Set sail size in state and highlight button
+  state.sailSize = size;
+  const key = 'ss-' + Math.round(size * 10);
+  document.querySelectorAll('[id^="ss-"]').forEach(b => b.classList.remove('sel-blue'));
+  const btn = document.getElementById(key);
+  if (btn) btn.classList.add('sel-blue');
+  const lbl = document.getElementById('sail-selected-lbl');
+  if (lbl) lbl.textContent = '— ' + size + ' m² (' + cls + ')';
+  // Lock for athletes (class-mandated sail size)
+  if (lock) sailField.classList.add('class-locked');
+}
+
+// ═══════════════════════════════════════════
+// MAST TRACK
+// ═══════════════════════════════════════════
+function selectMastTrackDir(dir, pos) {
+  if (dir === 'up') state.mastTrackUp = pos;
+  else state.mastTrackDn = pos;
+
+  // Update button styles for this direction
+  for (let i = 1; i <= 3; i++) {
+    const btn = document.getElementById(`mt-${dir}-${i}`);
+    if (!btn) continue;
+    btn.classList.remove('sel','sel-blue');
+    if (`P${i}` === pos) btn.classList.add('sel-blue');
+  }
+}
+
+// ═══════════════════════════════════════════
+// NUMBER INPUTS
+// ═══════════════════════════════════════════
+function stepNum(id, delta) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const min = parseFloat(el.min || -999), max = parseFloat(el.max || 999);
+  const step = parseFloat(el.step || 1);
+  const cur = parseFloat(el.value || 0);
+  const next = Math.min(max, Math.max(min, cur + delta));
+  el.value = next;
+  state[id] = next;
+  if (id === 'duration') calcTrainingLoad();
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════
+// RPE + TRAINING LOAD
+// ═══════════════════════════════════════════
+function selectRPE(val) {
+  state.rpe = val;
+  document.querySelectorAll('.rpe-btn').forEach((b, i) => {
+    b.classList.toggle('sel', i + 1 === val);
+  });
+  calcTrainingLoad();
+}
+
+function calcLogDuration() {
+  const startEl = document.getElementById('tl-start');
+  const endEl = document.getElementById('tl-end');
+  const durDisplay = document.getElementById('tl-dur-val');
+
+  if (!startEl.value || !endEl.value) {
+    durDisplay.textContent = '— min';
+    state.duration = 0;
+    return;
+  }
+
+  // Parse times
+  const [startHour, startMin] = startEl.value.split(':').map(Number);
+  const [endHour, endMin] = endEl.value.split(':').map(Number);
+
+  let startTotalMin = startHour * 60 + startMin;
+  let endTotalMin = endHour * 60 + endMin;
+
+  // Handle next-day case (end < start)
+  if (endTotalMin < startTotalMin) {
+    endTotalMin += 24 * 60;
+  }
+
+  const durationMin = endTotalMin - startTotalMin;
+  state.duration = durationMin;
+  durDisplay.textContent = durationMin + ' min';
+  calcTrainingLoad();
+}
+
+function calcTrainingLoad() {
+  const dur = state.duration;
+  const rpe = state.rpe;
+  if (!rpe || !dur) {
+    document.getElementById('load-val').textContent = '—';
+    document.getElementById('load-zone').textContent = 'Select start/end time & RPE';
+    document.getElementById('load-zone').className = 'load-zone';
+    return;
+  }
+  const load = dur * rpe;
+  state.trainingLoad = load;
+  document.getElementById('load-val').textContent = load.toLocaleString();
+
+  let zone, cls;
+  if (load < 300)      { zone = 'Recovery / Very Light'; cls = 'zone-easy'; }
+  else if (load < 600) { zone = 'Light Training';        cls = 'zone-easy'; }
+  else if (load < 900) { zone = 'Moderate Load';         cls = 'zone-moderate'; }
+  else if (load < 1200){ zone = 'Hard Training';         cls = 'zone-hard'; }
+  else                 { zone = '⚠️ Very High Load';     cls = 'zone-very-hard'; }
+
+  const zEl = document.getElementById('load-zone');
+  zEl.textContent = zone;
+  zEl.className = `load-zone ${cls}`;
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════
+// EQUIPMENT CONDITION RATING
+// ═══════════════════════════════════════════
+const EQUIP_ITEMS = [
+  { key:'board',      icon:'🏄', name:'Board / Hull' },
+  { key:'sail',       icon:'⛵', name:'Sail' },
+  { key:'mast',       icon:'🗼', name:'Mast' },
+  { key:'boom',       icon:'⚓', name:'Boom' },
+  { key:'fin',        icon:'🦈', name:'Fin / Dagger' },
+  { key:'downhaul_sys', icon:'🔩', name:'Downhaul system' },
+  { key:'outhaul_sys',  icon:'🔩', name:'Outhaul system' },
+  { key:'harness',    icon:'🦺', name:'Harness & lines' },
+  { key:'battens',    icon:'📏', name:'Battens & tension' },
+  { key:'footstraps', icon:'👟', name:'Footstraps' },
+  { key:'lifejacket', icon:'🧤', name:'Life jacket' },
+  { key:'watch',      icon:'⌚', name:'GPS / Watch' },
+];
+
+const EQUIP_LABELS = ['','Critical','Poor','OK','Good','Excellent'];
+state.equipRatings = {};
+state.urgentAction = false;
+state.urgentNotes = '';
+
+function buildEquipGrid() {
+  const grid = document.getElementById('equip-rating-grid');
+  if (!grid) return;
+  grid.innerHTML = EQUIP_ITEMS.map(item => `
+    <div class="equip-item" id="eq-item-${item.key}">
+      <div class="equip-item-header">
+        <span class="equip-item-icon">${item.icon}</span>
+        <span class="equip-item-name">${item.name}</span>
+      </div>
+      <div class="equip-rating">
+        ${[1,2,3,4,5].map(v => `
+          <div class="eq-btn" onclick="rateEquip('${item.key}',${v})" id="eq-${item.key}-${v}">
+            ${v}<br><span style="font-size:.55rem">${EQUIP_LABELS[v]}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function rateEquip(key, val) {
+  state.equipRatings[key] = val;
+  [1,2,3,4,5].forEach(v => {
+    const btn = document.getElementById(`eq-${key}-${v}`);
+    if (!btn) return;
+    btn.className = 'eq-btn';
+    if (v === val) btn.classList.add(`eq-${v}`);
+  });
+  // Note: Urgent flag is manual-only — user taps to toggle
+  updateEquipScore();
+}
+
+function rateAllExcellent() {
+  EQUIP_ITEMS.forEach(item => rateEquip(item.key, 5));
+}
+
+function updateEquipScore() {
+  const rated = Object.keys(state.equipRatings).length;
+  const avg = rated > 0 ? (Object.values(state.equipRatings).reduce((a,b)=>a+b,0)/rated).toFixed(1) : '—';
+  const txt = rated === EQUIP_ITEMS.length ? `All rated · Avg: ${avg}/5` : `${rated}/${EQUIP_ITEMS.length} rated`;
+  const el = document.getElementById('equip-score-text');
+  if (el) el.textContent = txt;
+}
+
+// ─── BODY MAP (Professional) ───
+state.bodyMap = {};
+let bmCurrentPart = null;
+// ═══════════════════════════════════════════
+// Pain / Injury (text-based)
+// ═══════════════════════════════════════════
+const PI_LABELS = ['','Mild','Moderate','High','Severe','Critical'];
+const PI_COLORS = ['','#e8f5e9','#fff8e1','#fff3e0','#ffebee','#fce4ec'];
+let piCur = { part: null, side: null, pos: null, lvl: null };
+
+// Center-only parts (no Left/Right option)
+const PI_CENTER_ONLY = ['Head','Neck','Upper back','Lower back','Abs','Groin'];
+
+function piSelectPart(part) {
+  piCur = { part, side: null, pos: null, lvl: null };
+  // Highlight selected
+  document.querySelectorAll('#pi-parts .pi-btn').forEach(b => b.classList.remove('sel'));
+  event.target.classList.add('sel');
+  // Update count — show "Adding: ..."
+  const existing = Object.keys(state.bodyMap).length;
+  const countEl = document.getElementById('pi-count');
+  countEl.textContent = (existing > 0 ? existing + ' area' + (existing > 1 ? 's' : '') + ' marked · ' : '') + 'Adding: ' + part;
+  // Show detail step
+  document.getElementById('pi-step-detail').classList.remove('hidden');
+  document.getElementById('pi-sel-part-lbl').textContent = part;
+  // Auto-select Center for center-only parts & disable L/R
+  const isCenterOnly = PI_CENTER_ONLY.includes(part);
+  document.querySelectorAll('#pi-side-row .pi-opt').forEach(b => {
+    const isCenterBtn = b.textContent === 'Center';
+    if (isCenterOnly) {
+      b.disabled = !isCenterBtn;
+      b.style.opacity = isCenterBtn ? '1' : '.3';
+      b.classList.toggle('sel', isCenterBtn);
+    } else {
+      b.disabled = false;
+      b.style.opacity = '1';
+      b.classList.remove('sel');
+    }
+  });
+  if (isCenterOnly) piCur.side = 'Center';
+  document.querySelectorAll('#pi-pos-row .pi-opt').forEach(b => b.classList.remove('sel'));
+  document.querySelectorAll('#pi-lvl-row .pi-lvl').forEach(b => b.classList.remove('lv1','lv2','lv3','lv4','lv5'));
+  piCur.pos = null; piCur.lvl = null;
+  piCheckAdd();
+}
+
+function piSelectSide(side) {
+  piCur.side = side;
+  document.querySelectorAll('#pi-side-row .pi-opt').forEach(b => {
+    b.classList.toggle('sel', b.textContent === side);
+  });
+  piCheckAdd();
+}
+
+function piSelectPos(pos) {
+  piCur.pos = pos;
+  document.querySelectorAll('#pi-pos-row .pi-opt').forEach(b => {
+    b.classList.toggle('sel', b.textContent === pos);
+  });
+  piCheckAdd();
+}
+
+function piSelectLvl(lv) {
+  piCur.lvl = lv;
+  document.querySelectorAll('#pi-lvl-row .pi-lvl').forEach(b => {
+    const bLv = parseInt(b.dataset.lv);
+    b.classList.remove('lv1','lv2','lv3','lv4','lv5');
+    if (bLv === lv) b.classList.add('lv' + lv);
+  });
+  piCheckAdd();
+}
+
+function piCheckAdd() {
+  const ok = piCur.part && piCur.side && piCur.pos && piCur.lvl;
+  document.getElementById('pi-add-btn').disabled = !ok;
+}
+
+function piAddEntry() {
+  if (!piCur.part || !piCur.side || !piCur.pos || !piCur.lvl) return;
+  // Build key
+  const key = [piCur.part, piCur.side, piCur.pos].join('_').toLowerCase().replace(/\s+/g,'');
+  state.bodyMap[key] = { part: piCur.part, side: piCur.side, pos: piCur.pos, lvl: piCur.lvl };
+  piRenderList();
+  piCancel();
+  updateProgress();
+}
+
+function piCancel() {
+  piCur = { part: null, side: null, pos: null, lvl: null };
+  document.querySelectorAll('#pi-parts .pi-btn').forEach(b => b.classList.remove('sel'));
+  document.getElementById('pi-step-detail').classList.add('hidden');
+}
+
+function piRemoveEntry(key) {
+  delete state.bodyMap[key];
+  piRenderList();
+  updateProgress();
+}
+
+function piRenderList() {
+  const list = document.getElementById('pi-list');
+  const entries = Object.entries(state.bodyMap);
+  const count = document.getElementById('pi-count');
+  if (count) count.textContent = entries.length === 0 ? 'No areas marked' : entries.length + ' area' + (entries.length > 1 ? 's' : '') + ' marked';
+  if (entries.length === 0) { list.innerHTML = ''; return; }
+  list.innerHTML = entries.map(([key, e]) => {
+    const loc = e.side === 'Center' ? e.pos : e.side + ' · ' + e.pos;
+    return `<div class="pi-entry lv${e.lvl}">
+      <span>${e.part} <span style="color:var(--sub);font-weight:400;font-size:.62rem">${loc}</span>
+        <span class="pi-tag" style="background:${PI_COLORS[e.lvl]}">${e.lvl} ${PI_LABELS[e.lvl]}</span>
+      </span>
+      <button class="pi-del" onclick="piRemoveEntry('${key}')">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function initBodyMap() {
+  // No SVG init needed — text-based now
+  piRenderList();
+}
+
+function bmReset() {
+  state.bodyMap = {};
+  piRenderList();
+  piCancel();
+}
+
+function toggleUrgent() {
+  state.urgentAction = !state.urgentAction;
+  const check = document.getElementById('urgent-check');
+  const detail = document.getElementById('urgent-detail');
+  check.classList.toggle('checked', state.urgentAction);
+  detail.classList.toggle('show', state.urgentAction);
+}
+
+// ═══════════════════════════════════════════
+// PHYSICAL TRAINING TYPE / GOAL
+// ═══════════════════════════════════════════
+state.ptType = null;           // single-select
+state.ptGoals = new Set();     // multi-select
+
+const PT_TYPE_MAP = {gym:'gym', running:'run', drills:'drill', yoga:'yoga', other:'other'};
+const PT_GOAL_MAP = {strength:'str',endurance:'end',flexibility:'flex',coordination:'coord',power:'pow'};
+
+function selectPTType(type) {
+  const btnId = 'pt-' + (PT_TYPE_MAP[type] || type);
+  // Single-select: deselect all others first
+  Object.values(PT_TYPE_MAP).forEach(g => {
+    const el = document.getElementById('pt-' + g);
+    if (el) el.classList.remove('sel-blue');
+  });
+  // Toggle same selection off
+  if (state.ptType === type) {
+    state.ptType = null;
+  } else {
+    state.ptType = type;
+    const btn = document.getElementById(btnId);
+    if (btn) btn.classList.add('sel-blue');
+  }
+  updatePTHint();
+  updateProgress();
+}
+
+function selectPTGoal(goal) {
+  const btnId = 'ptg-' + (PT_GOAL_MAP[goal] || goal);
+  const btn = document.getElementById(btnId);
+  // Multi-select: toggle
+  if (state.ptGoals.has(goal)) {
+    state.ptGoals.delete(goal);
+    if (btn) btn.classList.remove('sel-blue');
+  } else {
+    state.ptGoals.add(goal);
+    if (btn) btn.classList.add('sel-blue');
+  }
+  updatePTHint();
+}
+
+function updatePTHint() {
+  if (!state.isCoachMode) return;
+  const hint = document.getElementById('ath-obs-hint');
+  if (!hint || state.sessionType !== 'physical') return;
+  const typeName = state.ptType ? state.ptType.charAt(0).toUpperCase() + state.ptType.slice(1) : 'Physical training';
+  const goals = Array.from(state.ptGoals);
+  const goalStr = goals.length ? goals.map(g => g.charAt(0).toUpperCase() + g.slice(1)).join(', ') : 'conditioning';
+  hint.textContent = `Per-athlete observations from today's ${typeName} / ${goalStr} session.`;
+}
+
+// ═══════════════════════════════════════════
+// RACE RESULTS
+// ═══════════════════════════════════════════
+function buildRaceGrid() {
+  const grid = document.getElementById('race-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= 15; i++) {
+    grid.innerHTML += `
+      <div class="race-item">
+        <div class="race-lbl">Race ${i}</div>
+        <div class="race-pos">
+          <input type="text" id="race${i}" placeholder="—" maxlength="4"
+            oninput="state.racePositions[${i-1}]=this.value;clearRaceBtns(${i});updateProgress()">
+          <button class="dnf-btn" id="race${i}-DNF" onclick="setRaceResult(${i},'DNF')">DNF</button>
+          <button class="dsq-btn" id="race${i}-DSQ" onclick="setRaceResult(${i},'DSQ')">DSQ</button>
+          <button class="ret-btn" id="race${i}-RET" onclick="setRaceResult(${i},'RET')">RET</button>
+          <button class="bfd-btn" id="race${i}-BFD" onclick="setRaceResult(${i},'BFD')">BFD</button>
+        </div>
+      </div>`;
+  }
+}
+
+const RACE_CODES = ['DNF','DSQ','RET','BFD'];
+
+function clearRaceBtns(race) {
+  RACE_CODES.forEach(code => {
+    const btn = document.getElementById('race' + race + '-' + code);
+    if (btn) btn.classList.remove('active');
+  });
+}
+
+function setRaceResult(race, result) {
+  const input = document.getElementById('race' + race);
+  const currentVal = state.racePositions[race - 1];
+  // Toggle: if already set to same result, clear it
+  if (currentVal === result) {
+    input.value = '';
+    state.racePositions[race - 1] = '';
+    RACE_CODES.forEach(code => {
+      const btn = document.getElementById('race' + race + '-' + code);
+      if (btn) btn.classList.remove('active');
+    });
+  } else {
+    input.value = result;
+    state.racePositions[race - 1] = result;
+    RACE_CODES.forEach(code => {
+      const btn = document.getElementById('race' + race + '-' + code);
+      if (btn) btn.classList.toggle('active', code === result);
+    });
+  }
+  updateProgress();
+}
+
+// ═══════════════════════════════════════════
+// COACH RACE NUMBER SELECTION
+// ═══════════════════════════════════════════
+function selectRaceNum(num) {
+  state.currentRaceNum = state.currentRaceNum === num ? null : num;
+  document.querySelectorAll('.race-num-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i + 1 === state.currentRaceNum);
+  });
+  if (state.currentRaceNum) {
+    buildCoachRaceGrid();
+  }
+  // Update race results hint with selected race number
+  const raceHint = document.getElementById('coach-race-hint');
+  if (raceHint) {
+    raceHint.textContent = state.currentRaceNum
+      ? `Enter each athlete's finish position for Race ${state.currentRaceNum}`
+      : 'Select a race number above to enter results';
+  }
+  // Update athlete observations hint with selected race number
+  const hint = document.getElementById('ath-obs-hint');
+  if (hint) {
+    hint.textContent = state.currentRaceNum
+      ? `Today's R${state.currentRaceNum} race — per-athlete observations`
+      : 'Per-athlete technical notes from today\'s on-water session.';
+  }
+}
+
+function buildCoachRaceGrid() {
+  const grid = document.getElementById('coach-race-grid');
+  if (!grid) return;
+  grid.innerHTML = ROSTER.athlete.map((a, idx) => {
+    const result = state.coachRaceResults[state.currentRaceNum]?.[a.id] || '';
+    return `
+      <div style="padding:12px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px">
+        <div style="flex:1">
+          <div style="font-weight:600;font-size:.9rem">${a.name}</div>
+          <div style="font-size:.7rem;color:var(--sub)">${a.id}</div>
+        </div>
+        <input type="number" min="1" max="15" placeholder="—" value="${typeof result === 'number' ? result : ''}"
+          onchange="setCoachRaceResult('${a.id}', this.value ? parseInt(this.value) : null)"
+          style="width:60px;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:.9rem;text-align:center">
+        <button class="dnf-btn" onclick="setCoachRaceResult('${a.id}','DNF')" style="padding:6px 10px;font-size:.7rem">DNF</button>
+        <button class="dsq-btn" onclick="setCoachRaceResult('${a.id}','DSQ')" style="padding:6px 10px;font-size:.7rem">DSQ</button>
+        <button class="ret-btn" onclick="setCoachRaceResult('${a.id}','RET')" style="padding:6px 10px;font-size:.7rem">RET</button>
+        <button class="bfd-btn" onclick="setCoachRaceResult('${a.id}','BFD')" style="padding:6px 10px;font-size:.7rem">BFD</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function setCoachRaceResult(athleteId, value) {
+  if (!state.currentRaceNum) return;
+  if (!state.coachRaceResults[state.currentRaceNum]) {
+    state.coachRaceResults[state.currentRaceNum] = {};
+  }
+  state.coachRaceResults[state.currentRaceNum][athleteId] = value;
+}
+
+// ═══════════════════════════════════════════
+// LIMITING FACTORS
+// ═══════════════════════════════════════════
+function toggleLF(el, factor) {
+  if (state.limitingFactors.has(factor)) {
+    state.limitingFactors.delete(factor);
+    el.classList.remove('selected');
+  } else {
+    state.limitingFactors.add(factor);
+    el.classList.add('selected');
+  }
+}
+
+// ═══════════════════════════════════════════
+// CHECK-IN DATA (from localStorage simulation)
+// ═══════════════════════════════════════════
+function loadCheckinData() {
+  // In demo mode: show a sample check-in
+  // In real mode: pull from Google Sheets or localStorage
+  const banner = document.getElementById('checkin-banner');
+  const today = new Date().toISOString().split('T')[0];
+
+  // Demo: simulate today's check-in found
+  const demo = {
+    readiness: 4, fatigue: 2, confidence: 4, stress: 2,
+    sleepHours: 7.5, urine_color: 2
+  };
+
+  const pills = [
+    { label: `Readiness: ${demo.readiness}/5`, cls: demo.readiness >= 4 ? 'good' : demo.readiness === 3 ? 'ok' : 'bad' },
+    { label: `Fatigue: ${demo.fatigue}/5`, cls: demo.fatigue <= 2 ? 'good' : demo.fatigue === 3 ? 'ok' : 'bad' },
+    { label: `Conf: ${demo.confidence}/5`, cls: demo.confidence >= 4 ? 'good' : demo.confidence === 3 ? 'ok' : 'bad' },
+    { label: `Sleep: ${demo.sleepHours}h`, cls: demo.sleepHours >= 7 ? 'good' : demo.sleepHours >= 6 ? 'ok' : 'bad' },
+  ];
+
+  banner.innerHTML = `
+    <div class="cb-header">
+      <span class="cb-title">✅ Check-in data linked (${today})</span>
+      <span class="cb-link" style="opacity:.4;cursor:default">Linked ✓</span>
+    </div>
+    <div class="cb-pills">
+      ${pills.map(p => `<span class="cb-pill ${p.cls}">${p.label}</span>`).join('')}
+    </div>`;
+
+  // Pre-fill state from check-in
+  selectScale('readiness', demo.readiness.toString());
+  selectScale('fatigue', demo.fatigue.toString());
+  selectScale('confidence', demo.confidence.toString());
+  selectScale('stress', demo.stress.toString());
+}
+
+// ═══════════════════════════════════════════
+// PROGRESS BAR
+// ═══════════════════════════════════════════
+function updateProgress() {
+  // Dynamic required fields based on session type
+  let required = ['role','athleteId','sessionType','date','satisfaction'];
+  if (state.sessionType && state.sessionType !== 'physical') {
+    required.push('windBft');
+  }
+  const total = required.length;
+  let filled = 0;
+  if (state.role) filled++;
+  if (state.athleteId) filled++;
+  if (state.sessionType) filled++;
+  if (state.date) filled++;
+  if (state.satisfaction) filled++;
+  if (state.sessionType !== 'physical' && state.windBft !== null) filled++;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('pbar').style.width = pct + '%';
+}
+
+// ═══════════════════════════════════════════
+// SUBMIT
+// ═══════════════════════════════════════════
+// ── Apps Script Web App URL (set this after deployment) ──
+const WEBAPP_URL = localStorage.getItem('india_t293_script_url') || '';
+
+// ═══════════════════════════════════════════
+// WEATHER AUTO-FILL (from Coach Obs)
+// ═══════════════════════════════════════════
+let weatherLocked = false;
+
+function fetchCoachWeather(dateStr) {
+  if (!WEBAPP_URL) return;
+  const url = WEBAPP_URL + '?action=getWeather&date=' + encodeURIComponent(dateStr || '');
+
+  fetch(url)
+    .then(r => r.json())
+    .then(result => {
+      if (result.success && result.weather) {
+        applyCoachWeather(result.weather);
+      }
+    })
+    .catch(err => {
+      console.log('Weather auto-fill: not available (' + err.message + ')');
+    });
+}
+
+function applyCoachWeather(wx) {
+  weatherLocked = true;
+
+  // ── Wind Zone ──
+  if (wx.wind_zone_idx !== '' && wx.wind_zone_idx !== null) {
+    const idx = parseInt(wx.wind_zone_idx);
+    if (!isNaN(idx) && idx >= 0 && idx <= 7) {
+      const wzBtns = document.querySelectorAll('.wind-zone-grid .wz-btn');
+      if (wzBtns[idx]) wzBtns[idx].click(); // triggers selectWindZone
+    }
+  }
+
+  // ── Wind Direction ──
+  if (wx.wind_deg !== '' && wx.wind_deg !== null) {
+    const windDegInput = document.getElementById('windDeg');
+    if (windDegInput) {
+      windDegInput.value = wx.wind_deg;
+      onDirInput('windDeg', 'wind');
+    }
+  }
+
+  // ── Wave ──
+  if (wx.wave) {
+    const waveBtns = document.querySelectorAll('[onclick*="selectScale(\'wave\'"]');
+    waveBtns.forEach(btn => {
+      if (btn.querySelector('.s-num')?.textContent == wx.wave) btn.click();
+    });
+  }
+
+  // ── Air Temp ──
+  if (wx.air_temp) {
+    const tempInput = document.getElementById('temp');
+    if (tempInput) tempInput.value = wx.air_temp;
+  }
+
+  // ── Water Temp ──
+  if (wx.water_temp) {
+    const wtInput = document.getElementById('waterTemp');
+    if (wtInput) wtInput.value = wx.water_temp;
+  }
+
+  // ── Current Strength ──
+  if (wx.cur_str) {
+    const curBtns = document.querySelectorAll('[onclick*="selectScale(\'currentStrength\'"]');
+    curBtns.forEach(btn => {
+      if (btn.querySelector('.s-num')?.textContent == wx.cur_str) btn.click();
+    });
+  }
+
+  // ── Current Direction ──
+  if (wx.cur_deg !== '' && wx.cur_deg !== null) {
+    const curDegInput = document.getElementById('curDeg');
+    if (curDegInput) {
+      curDegInput.value = wx.cur_deg;
+      onDirInput('curDeg', 'current');
+    }
+  }
+
+  // ── Lock environment section for athletes ──
+  lockWeatherFields();
+
+  // ── Show banner ──
+  const banner = document.getElementById('wx-autofill-banner');
+  if (banner) {
+    banner.style.display = 'block';
+    const ts = wx.timestamp ? new Date(wx.timestamp).toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}) : '';
+    const info = document.getElementById('wx-autofill-info');
+    if (info) info.textContent = (wx.wind_zone || '') + ' · ' + (wx.wind_dir || '') + ' · Wave ' + (wx.wave || '-') + (ts ? ' · Recorded ' + ts : '');
+  }
+}
+
+function lockWeatherFields() {
+  // Lock all environment inputs when weather is auto-filled
+  const envCard = document.querySelector('#water-sections-start .card');
+  if (!envCard) return;
+
+  // Add locked visual style
+  envCard.style.position = 'relative';
+  envCard.style.opacity = '0.85';
+
+  // Disable wind zone buttons
+  envCard.querySelectorAll('.wz-btn').forEach(b => { b.style.pointerEvents = 'none'; });
+
+  // Disable direction inputs and step buttons
+  envCard.querySelectorAll('.dir-step, .dir-deg').forEach(el => {
+    el.disabled = true;
+    el.style.pointerEvents = 'none';
+    el.style.opacity = '0.7';
+  });
+
+  // Disable scale buttons (wave, current)
+  envCard.querySelectorAll('.scale-btn').forEach(b => { b.style.pointerEvents = 'none'; });
+
+  // Disable temp inputs
+  envCard.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.readOnly = true;
+    inp.style.opacity = '0.7';
+  });
+
+  // Add lock overlay text to card title
+  const title = envCard.querySelector('.card-title');
+  if (title && !title.querySelector('.lock-badge')) {
+    const badge = document.createElement('span');
+    badge.className = 'lock-badge';
+    badge.style.cssText = 'margin-left:auto;font-size:.65rem;background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:10px;font-weight:700';
+    badge.textContent = '🔒 Auto-filled by Coach';
+    title.appendChild(badge);
+  }
+}
+
+function submitLog() {
+  if (!state.role || !state.athleteId) {
+    alert('Please select your role and name.');
+    return;
+  }
+  if (!state.sessionType) {
+    alert('Please select a session type (Training / Race Practice / Regatta).');
+    return;
+  }
+  if (state.windBft === null && state.sessionType !== 'physical') {
+    alert('Please select wind speed zone.');
+    return;
+  }
+  if (!state.satisfaction) {
+    alert('Please rate your session satisfaction (1-5).');
+    return;
+  }
+
+  const payload = buildPayload();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+
+  if (WEBAPP_URL) {
+    // Submit to Google Sheets via Apps Script web app
+    fetch(WEBAPP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'trainingLog', payload: payload })
+    })
+    .then(r => r.json())
+    .then(result => {
+      if (result.success) {
+        showSuccess(payload);
+        if (payload.equip_urgent) {
+          showEquipAlert(payload);
+        }
+      } else {
+        alert('Submit error: ' + (result.error || 'Unknown'));
+        btn.disabled = false;
+        btn.textContent = '✅ Submit Training Log';
+      }
+    })
+    .catch(err => {
+      console.warn('Online submit failed, saving locally:', err);
+      saveLocally(payload);
+      showSuccess(payload);
+    });
+  } else {
+    // No URL configured — save locally and show success
+    saveLocally(payload);
+    showSuccess(payload);
+  }
+}
+
+function saveLocally(payload) {
+  try {
+    const key = 't293_pending_logs';
+    const pending = JSON.parse(localStorage.getItem(key) || '[]');
+    pending.push(payload);
+    localStorage.setItem(key, JSON.stringify(pending));
+  } catch(e) { console.warn('Local save error:', e); }
+}
+
+function showEquipAlert(payload) {
+  const alertDiv = document.createElement('div');
+  alertDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;padding:16px;background:#b71c1c;color:#fff;z-index:10000;text-align:center;font-weight:700;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.3)';
+  alertDiv.innerHTML = '🚨 Equipment urgent alert sent to coach! · ' +
+    (payload.equip_critical_items || []).join(', ');
+  document.body.appendChild(alertDiv);
+  setTimeout(() => alertDiv.remove(), 5000);
+}
+
+function buildPayload() {
+  return {
+    // Identity
+    date: state.date,
+    athlete_id: state.athleteId,
+    athlete_name: state.athleteName,
+    athlete_class: state.athleteClass,
+    role: state.role,
+    session_type: state.sessionType,
+
+    // Environment
+    wind_bft: state.windBft,
+    wind_dir_deg: state.windDir,
+    wind_dir: state.windDir != null ? degToCompass(state.windDir).name : null,
+    wave: state.wave,
+    temp: parseInt(document.getElementById('temp').value) || 22,
+    water_temp: parseInt(document.getElementById('waterTemp').value) || 18,
+    current_strength: state.currentStrength,
+    current_dir_deg: state.currentDir,
+    current_dir: state.currentDir != null ? degToCompass(state.currentDir).name : null,
+
+    // Equipment
+    sail_size: state.sailSize,
+    downhaul: state.downhaul,
+    outhaul: state.outhaul,
+    mast_track_upwind: state.mastTrackUp,
+    mast_track_downwind: state.mastTrackDn,
+    boom_height: state.boomHeight,
+    equip_feel: state.equipFeel,
+
+    // Physical/Psychological
+    readiness: state.readiness,
+    fatigue: state.fatigue,
+    confidence: state.confidence,
+    stress: state.stress,
+
+    // Technical
+    upwind_speed: state.upwindSpeed,
+    upwind_control: state.upwindControl,
+    downwind_speed: state.downwindSpeed,
+    downwind_control: state.downwindControl,
+    tacking_quality: state.tackingQuality,
+    gybing_quality: state.gybingQuality,
+    pumping_tech: state.pumpingTech,
+    start_quality: state.startQuality,
+    start_position: state.startPosition,
+    start_hold: state.startHold,
+    start_accel: state.startAccel,
+    start_pump: state.startPump,
+    start_clean_air: state.startCleanAir,
+
+    // Race
+    race_positions: state.racePositions.filter(p => p !== ''),
+    limiting_factors: Array.from(state.limitingFactors).join(','),
+    tactical_conf: state.tacticalConf,
+    current_race_num: state.currentRaceNum,
+    coach_race_results: state.isCoachMode ? Object.assign({}, state.coachRaceResults) : null,
+
+    // Load
+    start_time: document.getElementById('tl-start')?.value || null,
+    end_time: document.getElementById('tl-end')?.value || null,
+    duration_min: state.duration || 0,
+    rpe: state.rpe,
+    training_load: state.trainingLoad,
+
+    // Physical Training details (for physical session)
+    pt_type: state.ptType,
+    pt_goals: Array.from(state.ptGoals),
+    pt_description: document.getElementById('pt_description') ? document.getElementById('pt_description').value : '',
+
+    // Notes
+    notes: document.getElementById('notes').value,
+    coach_notes: document.getElementById('coach_notes').value,
+    satisfaction: state.satisfaction,
+    soreness: state.soreness,
+    pain_level: state.painLevel,
+    post_fatigue: state.postFatigue,
+    pain_location: Object.keys(state.bodyMap).length ? JSON.stringify(state.bodyMap) : '',
+    pain_areas: Object.entries(state.bodyMap).map(([k,e]) => {
+      const loc = e.side === 'Center' ? e.pos : e.side + ' ' + e.pos;
+      return e.part + '(' + loc + '):' + e.lvl + '/5';
+    }).join(', '),
+    coach_mode: state.isCoachMode,
+
+    // Diagnostics
+    setup_knowledge: Object.assign({}, knowState),
+    equip_ratings: Object.assign({}, state.equipRatings),
+    equip_avg: (function() {
+      const vals = Object.values(state.equipRatings || {}).filter(v => v > 0);
+      return vals.length ? Math.round(vals.reduce((a,b)=>a+b,0) / vals.length * 10) / 10 : null;
+    })(),
+    equip_critical_items: Object.entries(state.equipRatings || {})
+      .filter(([,v]) => v === 1).map(([k]) => k),
+    equip_urgent: !!(state.urgentAction),
+    equip_urgent_notes: document.getElementById('urgent-notes') ? document.getElementById('urgent-notes').value : '',
+
+    // Coach-specific fields
+    coach_precheck: state.isCoachMode ? Object.assign({}, coachCheckState) : null,
+    coach_precheck_issues: state.isCoachMode
+      ? Object.entries(coachCheckState).filter(([,v])=>v==='issue').map(([k])=>k)
+      : null,
+    coach_precheck_notes: state.isCoachMode
+      ? (document.getElementById('coach-precheck-notes')?.value || '')
+      : null,
+    coach_session_focus:   state.isCoachMode ? Array.from(scFocus)  : null,
+    coach_session_drills:  state.isCoachMode ? Array.from(scDrills) : null,
+    coach_session_intensity: state.isCoachMode ? scIntensity : null,
+    coach_session_volume:    state.isCoachMode ? scVolume    : null,
+    coach_tactical_notes:  state.isCoachMode
+      ? (document.getElementById('sc-tactical-notes')?.value || '')
+      : null,
+    coach_objectives:      state.isCoachMode
+      ? (document.getElementById('sc-coach-objectives')?.value || '')
+      : null,
+    coach_ath_comments: state.isCoachMode
+      ? ROSTER.athlete.reduce((acc, a) => {
+          const txt = document.getElementById('ath-cmt-' + a.id)?.value || '';
+          const tags = Array.from(athCommentTags[a.id] || []);
+          if (txt || tags.length) acc[a.id] = { name: a.name, tags, comment: txt };
+          return acc;
+        }, {})
+      : null,
+
+    // Meta
+    submitted_at: new Date().toISOString(),
+  };
+}
+
+// ═══════════════════════════════════════════
+// SUCCESS SCREEN
+// ═══════════════════════════════════════════
+function showSuccess(payload) {
+  const screen = document.getElementById('success-screen');
+  screen.style.display = 'block';
+  screen.scrollTop = 0;
+
+  // Reset submit button
+  const btn = document.getElementById('submit-btn');
+  if (btn) { btn.disabled = false; btn.textContent = '✅ Submit Training Log'; }
+
+  document.getElementById('success-sub').textContent =
+    `${payload.athlete_name} · ${payload.date} · ${payload.session_type.replace('_', ' ')}`;
+
+  const isPhysical = payload.session_type === 'physical';
+
+  // Summary card — build rows conditionally
+  let rows = '';
+
+  // Environment rows (sailing only)
+  if (!isPhysical) {
+    const bft = payload.wind_bft !== null ? `Bft ${payload.wind_bft}` : '—';
+    const windDirTxt = payload.wind_dir_deg != null ? formatDirDisplay(payload.wind_dir_deg, 'wind') : (payload.wind_dir || '');
+    rows += `<div class="sc-row"><span class="lbl">Wind</span><span class="val">${bft} ${windDirTxt}</span></div>`;
+    rows += `<div class="sc-row"><span class="lbl">Current</span><span class="val">${(function(){
+      const strLabels = ['','Slack','Weak','Moderate','Strong','V.Strong'];
+      const s = payload.current_strength;
+      const curDirTxt = payload.current_dir_deg != null ? formatDirDisplay(payload.current_dir_deg, 'current') : (payload.current_dir || '');
+      if (!s && !curDirTxt) return '—';
+      return (s ? strLabels[s] + ' (lvl ' + s + '/5)' : '') + (curDirTxt ? ' · ' + curDirTxt : '');
+    })()}</span></div>`;
+    rows += `<div class="sc-row"><span class="lbl">Sail</span><span class="val">${payload.sail_size ? payload.sail_size + ' m²' : '—'} · DH: ${payload.downhaul}/5 · OH: ${payload.outhaul}/5 · Track: ${payload.mast_track_upwind || '—'}/${payload.mast_track_downwind || '—'}</span></div>`;
+
+    // Knowledge summary
+    const knowAnswers = Object.values(payload.setup_knowledge || {});
+    const knowScore = knowAnswers.reduce((s,a) => s + (a==='yes'?2:a==='partial'?1:0), 0);
+    const knowMax = knowAnswers.length * 2;
+    const knowPct = knowMax > 0 ? Math.round(knowScore/knowMax*100) + '%' : '—';
+    const knowLabel = knowPct === '—' ? '—' : (parseInt(knowPct)>=75 ? '✅ Strong' : parseInt(knowPct)>=40 ? '⚠️ Partial' : '❌ Gap');
+    rows += `<div class="sc-row"><span class="lbl">Tuning Knowledge</span><span class="val">${knowLabel} (${knowPct})</span></div>`;
+
+    // Equipment check
+    rows += `<div class="sc-row"><span class="lbl">Equipment Check</span><span class="val">${(function(){
+      const avg = payload.equip_avg;
+      const crit = payload.equip_critical_items || [];
+      const urgent = payload.equip_urgent;
+      const rated = Object.values(payload.equip_ratings || {}).filter(v=>v>0).length;
+      if (!rated) return '—';
+      const ratingLabel = avg >= 4.5 ? '✅ Excellent' : avg >= 3.5 ? '🟢 Good' : avg >= 2.5 ? '🟡 Fair' : avg >= 1.5 ? '🟠 Poor' : '🔴 Critical';
+      let txt = ratingLabel + ' (avg ' + avg + '/5, ' + rated + ' items)';
+      if (crit.length) txt += ' · ⚠️ Critical: ' + crit.join(', ');
+      if (urgent) txt += ' · 🚨 Urgent action needed';
+      return txt;
+    })()}</span></div>`;
+
+    // Technical rows
+    rows += `<div class="sc-row"><span class="lbl">Upwind</span><span class="val">Speed ${payload.upwind_speed || '—'}/5 · Control ${payload.upwind_control || '—'}/5</span></div>`;
+    rows += `<div class="sc-row"><span class="lbl">Downwind</span><span class="val">Speed ${payload.downwind_speed || '—'}/5 · Control ${payload.downwind_control || '—'}/5</span></div>`;
+
+    // Race rows
+    const positions = payload.race_positions.length ? payload.race_positions.join(', ') : '—';
+    rows += `<div class="sc-row"><span class="lbl">Race Positions</span><span class="val">${positions}</span></div>`;
+  }
+
+  // Physical training rows (physical only)
+  if (isPhysical) {
+    const ptTypeLabels = {running:'🏃 Running',gym:'🏋️ Gym/Weights',yoga:'🧘 Yoga/Stretch',swimming:'🏊 Swimming',cycling:'🚴 Cycling',hiit:'⚡ HIIT',core:'💪 Core Training',other:'📋 Other'};
+    rows += `<div class="sc-row"><span class="lbl">Type</span><span class="val">${ptTypeLabels[payload.pt_type] || payload.pt_type || '—'}</span></div>`;
+    if (payload.pt_goals && payload.pt_goals.length) {
+      rows += `<div class="sc-row"><span class="lbl">Goals</span><span class="val">${payload.pt_goals.join(', ')}</span></div>`;
+    }
+    if (payload.pt_description) {
+      rows += `<div class="sc-row"><span class="lbl">Description</span><span class="val">${payload.pt_description}</span></div>`;
+    }
+  }
+
+  // Condition rows (always)
+  rows += `<div class="sc-row"><span class="lbl">Readiness</span><span class="val">${payload.readiness || '—'}/5</span></div>`;
+  rows += `<div class="sc-row"><span class="lbl">Fatigue</span><span class="val">${payload.fatigue || '—'}/5</span></div>`;
+  rows += `<div class="sc-row"><span class="lbl">Soreness</span><span class="val">${payload.soreness || '—'}/5</span></div>`;
+  rows += `<div class="sc-row"><span class="lbl">Post Fatigue</span><span class="val">${payload.post_fatigue || '—'}/5</span></div>`;
+
+  // Pain areas (always)
+  if (payload.pain_areas) {
+    rows += `<div class="sc-row"><span class="lbl">Pain Areas</span><span class="val">${payload.pain_areas}</span></div>`;
+  }
+
+  // Training load (always)
+  rows += `<div class="sc-row"><span class="lbl">Training Load</span><span class="val">${payload.training_load || '—'} (${payload.duration_min}min × RPE ${payload.rpe || '—'})</span></div>`;
+
+  // Limiting factors (sailing only)
+  if (!isPhysical) {
+    const lf = payload.limiting_factors || '—';
+    rows += `<div class="sc-row"><span class="lbl">Limiting Factors</span><span class="val">${lf}</span></div>`;
+  }
+
+  // Satisfaction (always)
+  rows += `<div class="sc-row"><span class="lbl">Satisfaction</span><span class="val">${payload.satisfaction ? '★'.repeat(payload.satisfaction) : '—'}</span></div>`;
+
+  document.getElementById('summary-card').innerHTML = rows;
+
+  // Generate insight
+  const insightEl = document.getElementById('insight-card');
+  const insightText = generateInsight(payload);
+  if (insightText) {
+    document.getElementById('insight-text').textContent = insightText;
+    insightEl.style.display = 'block';
+  }
+}
+
+function generateInsight(p) {
+  const insights = [];
+
+  // Equipment-performance insight
+  if (p.wind_bft >= 4 && p.downhaul <= 3 && (p.upwind_speed || 0) <= 2) {
+    insights.push(`📊 Pattern detected: Strong wind (Bft ${p.wind_bft}) with low downhaul (${p.downhaul}/10) → poor upwind speed. Consider increasing downhaul tension in these conditions.`);
+  }
+  if (p.wind_bft <= 2 && p.outhaul >= 7 && (p.downwind_speed || 0) <= 2) {
+    insights.push(`📊 Light wind + tight outhaul → low downwind speed. More outhaul reduces sail depth and power in light air.`);
+  }
+
+  // Physical-performance
+  if ((p.fatigue || 0) >= 4 && (p.satisfaction || 0) <= 2) {
+    insights.push(`🔋 High fatigue (${p.fatigue}/5) correlated with low satisfaction today. Recovery priority tonight.`);
+  }
+  if ((p.readiness || 0) >= 4 && (p.upwind_speed || 0) >= 4) {
+    insights.push(`✅ Good readiness (${p.readiness}/5) → strong upwind performance today. Data point for readiness-performance correlation.`);
+  }
+
+  // Limiting factors
+  if (p.limiting_factors.includes('equipment')) {
+    insights.push(`⚙️ Equipment logged as limiting factor. Review rig setup for next session in these conditions.`);
+  }
+  if (p.limiting_factors.includes('tactical')) {
+    insights.push(`🗺️ Tactical decisions noted as limiting factor. Recommend post-session debrief on course strategy.`);
+  }
+
+  // Training load
+  if ((p.training_load || 0) > 1200) {
+    insights.push(`⚠️ Very high training load today (${p.training_load}). Prioritize recovery — sleep, hydration, light stretching.`);
+  }
+
+  return insights[0] || null; // Return top insight
+}
+
+// ═══════════════════════════════════════════
+// KNOWLEDGE QUIZ
+// ═══════════════════════════════════════════
+const knowState = {};
+
+function answerKnow(btn, key, answer) {
+  knowState[key] = answer;
+
+  // Find sibling buttons in the same .know-btns group
+  const group = btn.closest('.know-btns');
+  group.querySelectorAll('.know-btn').forEach(b => {
+    b.classList.remove('k-yes','k-partial','k-no');
+  });
+  btn.classList.add(answer === 'yes' ? 'k-yes' : answer === 'partial' ? 'k-partial' : 'k-no');
+
+  updateKnowScore();
+}
+
+function updateKnowScore() {
+  const setupKeys = ['dh_know','oh_know','mt_know','explain_know','rig_feel_know'];
+  const answered = setupKeys.filter(k => knowState[k]);
+  if (answered.length === 0) return;
+
+  let score = 0;
+  answered.forEach(k => {
+    if (knowState[k] === 'yes') score += 2;
+    else if (knowState[k] === 'partial') score += 1;
+  });
+  const maxScore = answered.length * 2;
+  const pct = Math.round((score / maxScore) * 100);
+
+  const banner = document.getElementById('know-score-banner');
+  if (!banner) return;
+  banner.style.display = 'flex';
+
+  let cls, label;
+  if (pct >= 75) { cls = 'high'; label = `✅ Strong tuning knowledge (${pct}%)`; }
+  else if (pct >= 40) { cls = 'mid'; label = `⚠️ Partial knowledge — needs coaching (${pct}%)`; }
+  else { cls = 'low'; label = `❌ Knowledge gap identified — focus area (${pct}%)`; }
+
+  banner.className = `know-score ${cls}`;
+  document.getElementById('know-score-label').textContent = label;
+  document.getElementById('know-score-val').textContent = `${score}/${maxScore}`;
+}
+
+// ═══════════════════════════════════════════
+// EQUIPMENT CHECKLIST
+// ═══════════════════════════════════════════
+const equipChecked = new Set();
+
+function toggleCheck(el, key) {
+  if (equipChecked.has(key)) {
+    equipChecked.delete(key);
+    el.classList.remove('checked','issue');
+  } else {
+    equipChecked.add(key);
+    el.classList.add('checked');
+    el.classList.remove('issue');
+  }
+  updateCheckCounter();
+}
+
+function checkAll() {
+  document.querySelectorAll('#equip-check-grid .check-item').forEach(el => {
+    const key = el.dataset.key;
+    equipChecked.add(key);
+    el.classList.add('checked');
+    el.classList.remove('issue');
+  });
+  updateCheckCounter();
+}
+
+function updateCheckCounter() {
+  const total = document.querySelectorAll('#equip-check-grid .check-item').length;
+  const done = equipChecked.size;
+  const el = document.getElementById('check-counter-text');
+  if (el) {
+    el.textContent = `${done} / ${total} checked`;
+    el.style.color = done === total ? '#1b5e20' : (done >= 8 ? '#e65100' : '#ea4335');
+  }
+}
+
+// ═══════════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════════
+function resetForm() {
+  document.getElementById('success-screen').style.display = 'none';
+  setCoachMode(false);
+  // Reset key state
+  state.sessionType = null;
+  state.windBft = null;
+  state.windDir = null;
+  state.wave = null;
+  state.sailSize = null;
+  state.mastTrack = null;
+  state.rpe = null;
+  state.trainingLoad = null;
+  state.limitingFactors = new Set();
+  state.racePositions = Array(15).fill('');
+  state.satisfaction = null;
+  state.soreness = null;
+  state.painLevel = null;
+  state.postFatigue = null;
+  // Reset body map
+  bmReset();
+  // Reset PT fields
+  state.ptType = null;
+  state.ptGoals = new Set();
+  ['gym','run','drill','yoga','other'].forEach(t => {
+    const b = document.getElementById('pt-' + t);
+    if (b) b.classList.remove('sel-blue');
+  });
+  ['str','end','flex','coord'].forEach(g => {
+    const b = document.getElementById('ptg-' + g);
+    if (b) b.classList.remove('sel-blue');
+  });
+  const ptDesc = document.getElementById('pt_description');
+  if (ptDesc) ptDesc.value = '';
+  state.urgentAction = false;
+  state.equipRatings = {};
+  state.windZoneSkill = null;
+  state.windZoneLabel = null;
+  state.waterTemp = 18;
+  state.currentStrength = null;
+  state.currentDir = null;
+  for (let i = 1; i <= 5; i++) {
+    const b = document.getElementById('cur-str-' + i);
+    if (b) b.classList.remove(...CUR_STR_CLASSES);
+  }
+  // Reset direction inputs
+  const windDegEl = document.getElementById('windDeg');
+  const curDegEl = document.getElementById('curDeg');
+  if (windDegEl) { windDegEl.value = ''; }
+  if (curDegEl) { curDegEl.value = ''; }
+  const wdCompass = document.getElementById('windDeg-compass');
+  const cdCompass = document.getElementById('curDeg-compass');
+  if (wdCompass) wdCompass.innerHTML = 'Enter 0–360°';
+  if (cdCompass) cdCompass.innerHTML = 'Enter 0–360°';
+
+  // Visual reset
+  document.querySelectorAll('.scale-btn, .bft-btn, .session-tab, .rpe-btn, .lf-item')
+    .forEach(el => el.classList.remove(...ALL_SCALE_CLASSES, 'selected'));
+  document.querySelectorAll('.wz-btn').forEach(el => el.classList.remove('selected'));
+  // Reset urgent action UI
+  const uc = document.getElementById('urgent-check');
+  const ud = document.getElementById('urgent-detail');
+  const un = document.getElementById('urgent-notes');
+  if (uc) uc.classList.remove('checked');
+  if (ud) ud.classList.remove('show');
+  if (un) un.value = '';
+  // Reset equip grid ratings visually
+  document.querySelectorAll('.eq-btn').forEach(b => b.className = 'eq-btn');
+  updateEquipScore();
+  // Reset sail size buttons
+  document.querySelectorAll('[id^="ss-"]').forEach(b => b.classList.remove('sel-blue'));
+  const sailLbl = document.getElementById('sail-selected-lbl');
+  if (sailLbl) sailLbl.textContent = '';
+
+  // Reset coach sections
+  state.currentRaceNum = null;
+  state.coachRaceResults = {};
+  document.querySelectorAll('.race-num-btn').forEach(b => b.classList.remove('selected'));
+  const coachGrid = document.getElementById('coach-race-grid');
+  if (coachGrid) coachGrid.innerHTML = '';
+
+  Object.keys(coachCheckState).forEach(k => {
+    coachCheckState[k] = null;
+    const el = document.getElementById('chk-' + k);
+    const st = document.getElementById('chk-st-' + k);
+    if (el) el.classList.remove('chk-ok','chk-issue');
+    if (st) st.textContent = '—';
+  });
+  updateCoachCheckCount();
+  scFocus.clear();
+  scDrills.clear();
+  scIntensity = null;
+  scVolume    = null;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('sel-chip'));
+  document.querySelectorAll('.int-btn').forEach(b => b.classList.remove('int-easy','int-mod','int-hard'));
+  const cpn = document.getElementById('coach-precheck-notes');
+  const sctn = document.getElementById('sc-tactical-notes');
+  const scco = document.getElementById('sc-coach-objectives');
+  if (cpn) cpn.value = '';
+  if (sctn) sctn.value = '';
+  if (scco) scco.value = '';
+  ROSTER.athlete.forEach(a => {
+    const ta = document.getElementById('ath-cmt-' + a.id);
+    if (ta) ta.value = '';
+    if (athCommentTags[a.id]) athCommentTags[a.id].clear();
+    document.querySelectorAll(`#ath-tags-${a.id} .ath-tag`).forEach(t => t.classList.remove('sel'));
+  });
+
+  document.getElementById('notes').value = '';
+  document.getElementById('coach_notes').value = '';
+  document.getElementById('load-val').textContent = '—';
+  document.getElementById('load-zone').textContent = 'Select start/end time & RPE';
+  document.getElementById('load-zone').className = 'load-zone';
+  const tlStart = document.getElementById('tl-start');
+  const tlEnd = document.getElementById('tl-end');
+  const tlDurVal = document.getElementById('tl-dur-val');
+  if (tlStart) tlStart.value = '';
+  if (tlEnd) tlEnd.value = '';
+  if (tlDurVal) tlDurVal.textContent = '— min';
+  state.duration = 0;
+
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('session-date').value = today;
+  state.date = today;
+
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

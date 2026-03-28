@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlete Self-Assessment | Techno 293 World Championship 2026</title>
+    <style>
+        :root {
+            --green-d: #1b5e20;
+            --green-l: #43a047;
+            --blue: #1976d2;
+            --red: #c62828;
+            --orange: #ef6c00;
+            --txt: #202124;
+            --sub: #5f6368;
+            --border: #dadce0;
+            --bg: #f0f4f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            padding: 0;
+        }
+
+        header {
+            background: var(--green-d);
+            color: white;
+            padding: 24px 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px 24px 16px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            margin-bottom: 24px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--green-l);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--green-d);
+        }
+
+        .card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            color: var(--txt);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--txt);
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: inherit;
+            color: var(--txt);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--green-l);
+            box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.1);
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            background: white;
+            color: var(--txt);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            border-color: var(--green-l);
+            background: var(--green-l);
+            color: white;
+        }
+
+        .toggle-btn.active.post {
+            border-color: var(--orange);
+            background: var(--orange);
+        }
+
+        .scale-container {
+            display: flex;
+            gap: 4px;
+            justify-content: space-between;
+        }
+
+        .scale-btn {
+            flex: 1;
+            padding: 8px 4px;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            background: white;
+            color: var(--txt);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .scale-btn:hover {
+            border-color: var(--green-l);
+        }
+
+        .scale-btn.active {
+            color: white;
+            border-color: var(--green-l);
+        }
+
+        .scale-1 { --color: #c62828; }  /* Red */
+        .scale-2 { --color: #ef6c00; }  /* Orange */
+        .scale-3 { --color: #f9a825; }  /* Yellow */
+        .scale-4 { --color: #43a047; }  /* Light green */
+        .scale-5 { --color: #1b5e20; }  /* Dark green */
+
+        .scale-btn.active {
+            background: var(--color);
+            border-color: var(--color);
+            color: #fff;
+        }
+
+        /* Inverted fields (stress): high = bad */
+        .red-field.scale-1 { --color: #1b5e20; }
+        .red-field.scale-2 { --color: #43a047; }
+        .red-field.scale-3 { --color: #f9a825; }
+        .red-field.scale-4 { --color: #ef6c00; }
+        .red-field.scale-5 { --color: #c62828; }
+
+        /* Pain / Injury (text-based — matches training_log) */
+        .pi-wrap{margin-top:8px}
+        .pi-count{font-size:.7rem;color:var(--sub);font-weight:600;margin-bottom:6px}
+        .pi-step{margin-bottom:8px}
+        .pi-grid{display:flex;flex-wrap:wrap;gap:4px}
+        .pi-btn{padding:5px 8px;border:1.5px solid var(--border);border-radius:6px;background:#fff;
+          font-size:.68rem;font-weight:600;color:var(--txt);cursor:pointer;transition:all .15s}
+        .pi-btn:hover{background:#f5f5f5}
+        .pi-btn.sel{border-color:var(--blue);background:#e8f0fe;color:var(--blue)}
+        .pi-opt-row{display:flex;gap:4px}
+        .pi-opt{flex:1;padding:5px 4px;border:1.5px solid var(--border);border-radius:6px;background:#fff;
+          font-size:.68rem;font-weight:600;color:var(--txt);cursor:pointer;text-align:center;transition:all .15s}
+        .pi-opt.sel{border-color:var(--blue);background:#e8f0fe;color:var(--blue)}
+        .pi-lvl-row{display:flex;gap:4px}
+        .pi-lvl{flex:1;padding:6px 2px;border:1.5px solid var(--border);border-radius:6px;background:#fff;
+          cursor:pointer;text-align:center;transition:all .15s}
+        .pi-num{display:block;font-size:.78rem;font-weight:700}
+        .pi-lbl{display:block;font-size:.52rem;color:var(--sub)}
+        .pi-lvl.lv1{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+        .pi-lvl.lv2{border-color:#f9a825;background:#fff8e1;color:#795548}
+        .pi-lvl.lv3{border-color:#ef6c00;background:#fff3e0;color:#bf360c}
+        .pi-lvl.lv4{border-color:#c62828;background:#ffebee;color:#c62828}
+        .pi-lvl.lv5{border-color:#880e0e;background:#880e0e;color:#fff}
+        .pi-add-btn{flex:1;padding:7px;border:none;border-radius:6px;background:#e8f5e9;color:#2e7d32;
+          font-size:.72rem;font-weight:700;cursor:pointer}
+        .pi-add-btn:disabled{opacity:.4;cursor:default}
+        .pi-cancel-btn{padding:7px 14px;border:none;border-radius:6px;background:#f5f5f5;color:var(--sub);
+          font-size:.72rem;font-weight:600;cursor:pointer}
+        .pi-list{margin-top:6px}
+        .pi-entry{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;
+          border-radius:6px;margin-bottom:4px;font-size:.72rem;font-weight:600}
+        .pi-entry .pi-tag{border-radius:4px;padding:1px 6px;font-size:.62rem;font-weight:700;margin-left:6px}
+        .pi-entry .pi-del{background:none;border:none;font-size:.82rem;cursor:pointer;color:#999;padding:0 4px}
+        .pi-entry.lv1{background:#e8f5e9}.pi-entry.lv2{background:#fff8e1}
+        .pi-entry.lv3{background:#fff3e0}.pi-entry.lv4{background:#ffebee}.pi-entry.lv5{background:#fce4ec}
+
+        .priority-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .priority-item {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            padding: 10px 12px;
+            background: var(--bg);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background .2s, transform .15s;
+        }
+        .priority-item.rank-1 {
+            background: #ffebee;
+            border-left: 4px solid var(--red);
+        }
+        .priority-item.rank-2 {
+            background: #fff3e0;
+            border-left: 4px solid var(--orange);
+        }
+        .priority-item.rank-3 {
+            background: #fff8e1;
+            border-left: 4px solid #f9a825;
+        }
+        .priority-rank-num {
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--sub);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .priority-item.rank-1 .priority-rank-num { background: var(--red); }
+        .priority-item.rank-2 .priority-rank-num { background: var(--orange); }
+        .priority-item.rank-3 .priority-rank-num { background: #f9a825; }
+        .priority-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-left: auto;
+        }
+        .priority-arrows button {
+            width: 28px;
+            height: 22px;
+            border: 1.5px solid var(--border);
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .15s;
+        }
+        .priority-arrows button:hover {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+        }
+        .priority-arrows button:disabled {
+            opacity: .25;
+            cursor: default;
+            background: #fff;
+            color: var(--sub);
+            border-color: var(--border);
+        }
+
+        .summary-card {
+            background: white;
+            border: 2px solid var(--green-l);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        .summary-card h2 {
+            color: var(--green-d);
+            margin-bottom: 16px;
+        }
+
+        .priority-section {
+            margin-bottom: 12px;
+        }
+
+        .priority-section h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--sub);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            color: white;
+        }
+
+        .badge-critical { background: var(--red); }
+        .badge-improve { background: var(--orange); }
+        .badge-maintain { background: var(--green-l); }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--green-l);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-d);
+        }
+
+        .btn-secondary {
+            background: var(--border);
+            color: var(--txt);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sub);
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: var(--sub);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .pi-grid {
+                gap: 3px;
+            }
+            .pi-btn {
+                padding: 4px 6px;
+                font-size: .62rem;
+            }
+
+            .toggle-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏄 Athlete Self-Assessment</h1>
+        <p>India Techno 293 · World Championship 2026</p>
+    </header>
+
+    <div style="max-width:600px;margin:0 auto;padding:8px 16px">
+        <details style="background:#fff;border:1px solid #dadce0;border-radius:8px;padding:8px 12px;margin-bottom:8px">
+            <summary style="cursor:pointer;font-size:12px;color:#5f6368;font-weight:600">⚙️ Server URL</summary>
+            <div style="margin-top:8px;display:flex;gap:6px">
+                <input type="url" id="script-url-input" placeholder="Apps Script URL"
+                    style="flex:1;padding:8px;border:1px solid #dadce0;border-radius:6px;font-size:12px"
+                    value="">
+                <button onclick="localStorage.setItem('india_t293_script_url',document.getElementById('script-url-input').value.trim());location.reload();"
+                    style="padding:8px 12px;background:#1b5e20;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer">Save</button>
+            </div>
+        </details>
+    </div>
+
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <form id="assessmentForm">
+            <!-- Section 0: Header & Identity -->
+            <div class="card">
+                <h2>Assessment Details</h2>
+
+                <div class="form-group">
+                    <label>Assessment Type</label>
+                    <div class="toggle-group">
+                        <button type="button" class="toggle-btn active" data-type="pre">
+                            📋 PRE Event
+                        </button>
+                        <button type="button" class="toggle-btn" data-type="post">
+                            🏆 POST Event
+                        </button>
+                    </div>
+                    <input type="hidden" id="assessment_type" name="assessment_type" value="pre">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="athlete_name">Athlete Name</label>
+                    <select id="athlete_name" name="athlete_name" required>
+                        <option value="">Select your name...</option>
+                    </select>
+                    <input type="hidden" id="athlete_id" name="athlete_id">
+                    <input type="hidden" id="athlete_class" name="athlete_class">
+                </div>
+
+                <div class="form-group">
+                    <label>Class</label>
+                    <input type="text" id="class_display" readonly style="background: var(--bg); cursor: not-allowed;">
+                </div>
+            </div>
+
+            <!-- Section 1: Physical Readiness -->
+            <div class="card">
+                <h2>1. Physical Readiness</h2>
+
+                <div class="form-group">
+                    <label>Overall Fitness (1=Very unfit → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="fitness_level" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="fitness_level" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="fitness_level" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="fitness_level" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="fitness_level" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="fitness_level" name="fitness_level">
+                </div>
+
+                <div class="form-group">
+                    <label>Energy Level (1=Very low → 5=Very high)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="energy" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="energy" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="energy" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="energy" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="energy" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="energy" name="energy">
+                </div>
+
+                <div class="form-group">
+                    <label>Flexibility (1=Very stiff → 5=Very flexible)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="flexibility" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="flexibility" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="flexibility" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="flexibility" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="flexibility" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="flexibility" name="flexibility">
+                </div>
+
+                <div class="form-group">
+                    <label>Endurance (1=Very low → 5=Very high)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="endurance" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="endurance" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="endurance" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="endurance" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="endurance" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="endurance" name="endurance">
+                </div>
+
+                <h3>Strength</h3>
+                <div class="form-group">
+                    <label>Upper Body (1=Weak → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="strength_upper" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="strength_upper" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="strength_upper" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="strength_upper" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="strength_upper" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="strength_upper" name="strength_upper">
+                </div>
+
+                <div class="form-group">
+                    <label>Core (1=Weak → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="strength_core" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="strength_core" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="strength_core" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="strength_core" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="strength_core" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="strength_core" name="strength_core">
+                </div>
+
+                <div class="form-group">
+                    <label>Legs (1=Weak → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="strength_legs" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="strength_legs" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="strength_legs" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="strength_legs" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="strength_legs" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="strength_legs" name="strength_legs">
+                </div>
+
+                <h3>Pain / Injury</h3>
+                <div class="form-group">
+                  <div class="pi-wrap">
+                    <div class="pi-count" id="pi-count">No areas marked</div>
+                    <!-- Step 1: Body Part -->
+                    <div class="pi-step" id="pi-step-part">
+                      <div style="font-size:.68rem;font-weight:600;color:var(--sub);margin-bottom:4px">① Body Part</div>
+                      <div class="pi-grid" id="pi-parts">
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Head')">Head</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Neck')">Neck</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Shoulder')">Shoulder</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Chest')">Chest</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Upper arm')">Upper arm</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Elbow')">Elbow</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Forearm')">Forearm</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Wrist')">Wrist</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Hand')">Hand</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Upper back')">Upper back</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Lower back')">Lower back</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Abs')">Abs</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Glute')">Glute</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Groin')">Groin</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Quad')">Quad</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Hamstring')">Hamstring</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Knee')">Knee</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Shin')">Shin</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Calf')">Calf</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Ankle')">Ankle</button>
+                        <button type="button" class="pi-btn" onclick="piSelectPart('Foot')">Foot</button>
+                      </div>
+                    </div>
+                    <!-- Step 2: Side + Position + Level -->
+                    <div class="pi-step hidden" id="pi-step-detail">
+                      <div style="font-size:.68rem;font-weight:600;color:var(--sub);margin-bottom:4px">② <span id="pi-sel-part-lbl">—</span> — Side & Position</div>
+                      <div style="display:flex;gap:8px;margin-bottom:8px">
+                        <div style="flex:1">
+                          <div style="font-size:.6rem;color:var(--sub);margin-bottom:3px">Side</div>
+                          <div class="pi-opt-row" id="pi-side-row">
+                            <button type="button" class="pi-opt" onclick="piSelectSide('Left')">Left</button>
+                            <button type="button" class="pi-opt" onclick="piSelectSide('Center')">Center</button>
+                            <button type="button" class="pi-opt" onclick="piSelectSide('Right')">Right</button>
+                          </div>
+                        </div>
+                        <div style="flex:1">
+                          <div style="font-size:.6rem;color:var(--sub);margin-bottom:3px">Position</div>
+                          <div class="pi-opt-row" id="pi-pos-row">
+                            <button type="button" class="pi-opt" onclick="piSelectPos('Front')">Front</button>
+                            <button type="button" class="pi-opt" onclick="piSelectPos('Back')">Back</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="font-size:.6rem;color:var(--sub);margin-bottom:3px">Pain Level</div>
+                      <div class="pi-lvl-row" id="pi-lvl-row">
+                        <button type="button" class="pi-lvl" data-lv="1" onclick="piSelectLvl(1)"><span class="pi-num">1</span><span class="pi-lbl">Mild</span></button>
+                        <button type="button" class="pi-lvl" data-lv="2" onclick="piSelectLvl(2)"><span class="pi-num">2</span><span class="pi-lbl">Moderate</span></button>
+                        <button type="button" class="pi-lvl" data-lv="3" onclick="piSelectLvl(3)"><span class="pi-num">3</span><span class="pi-lbl">High</span></button>
+                        <button type="button" class="pi-lvl" data-lv="4" onclick="piSelectLvl(4)"><span class="pi-num">4</span><span class="pi-lbl">Severe</span></button>
+                        <button type="button" class="pi-lvl" data-lv="5" onclick="piSelectLvl(5)"><span class="pi-num">5</span><span class="pi-lbl">Critical</span></button>
+                      </div>
+                      <div style="display:flex;gap:6px;margin-top:8px">
+                        <button type="button" class="pi-add-btn" id="pi-add-btn" onclick="piAddEntry()" disabled>+ Add</button>
+                        <button type="button" class="pi-cancel-btn" onclick="piCancel()">Cancel</button>
+                      </div>
+                    </div>
+                    <!-- Marked list -->
+                    <div class="pi-list" id="pi-list"></div>
+                  </div>
+                  <input type="hidden" id="pain_areas" name="pain_areas" value="">
+                </div>
+            </div>
+
+            <!-- Section 2: Technical Skills -->
+            <div class="card">
+                <h2>2. Technical Skills</h2>
+
+                <h3>Upwind</h3>
+                <div class="form-group">
+                    <label>Speed (1=Slow → 5=Fast)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="upwind_speed" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="upwind_speed" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="upwind_speed" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="upwind_speed" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="upwind_speed" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="upwind_speed" name="upwind_speed">
+                </div>
+
+                <div class="form-group">
+                    <label>Board Control (1=Unstable → 5=Stable)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="upwind_control" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="upwind_control" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="upwind_control" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="upwind_control" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="upwind_control" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="upwind_control" name="upwind_control">
+                </div>
+
+                <h3>Downwind</h3>
+                <div class="form-group">
+                    <label>Speed (1=Slow → 5=Fast)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="downwind_speed" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="downwind_speed" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="downwind_speed" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="downwind_speed" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="downwind_speed" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="downwind_speed" name="downwind_speed">
+                </div>
+
+                <div class="form-group">
+                    <label>Board Control (1=Unstable → 5=Stable)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="downwind_control" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="downwind_control" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="downwind_control" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="downwind_control" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="downwind_control" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="downwind_control" name="downwind_control">
+                </div>
+
+                <h3>Maneuvers</h3>
+                <div class="form-group">
+                    <label>Tacking (1=Poor → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="tacking_quality" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="tacking_quality" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="tacking_quality" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="tacking_quality" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="tacking_quality" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="tacking_quality" name="tacking_quality">
+                </div>
+
+                <div class="form-group">
+                    <label>Gybing (1=Poor → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="gybing_quality" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="gybing_quality" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="gybing_quality" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="gybing_quality" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="gybing_quality" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="gybing_quality" name="gybing_quality">
+                </div>
+
+                <div class="form-group">
+                    <label>Pumping Technique (1=Poor → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="pumping_tech" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="pumping_tech" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="pumping_tech" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="pumping_tech" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="pumping_tech" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="pumping_tech" name="pumping_tech">
+                </div>
+
+                <h3>Racing</h3>
+                <div class="form-group">
+                    <label>Start Quality (1=Poor → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="start_quality" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="start_quality" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="start_quality" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="start_quality" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="start_quality" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="start_quality" name="start_quality">
+                </div>
+            </div>
+
+            <!-- Section 3: Equipment Knowledge -->
+            <div class="card">
+                <h2>3. Equipment Knowledge</h2>
+
+                <div class="form-group">
+                    <label>Sail Tuning (1=No understanding → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="equip_sail_tuning" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="equip_sail_tuning" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="equip_sail_tuning" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="equip_sail_tuning" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="equip_sail_tuning" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="equip_sail_tuning" name="equip_sail_tuning">
+                </div>
+
+                <div class="form-group">
+                    <label>Board Setup (1=No understanding → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="equip_board_setup" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="equip_board_setup" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="equip_board_setup" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="equip_board_setup" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="equip_board_setup" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="equip_board_setup" name="equip_board_setup">
+                </div>
+
+                <div class="form-group">
+                    <label>Equipment Care & Maintenance (1=Poor → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="equip_maintenance" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="equip_maintenance" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="equip_maintenance" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="equip_maintenance" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="equip_maintenance" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="equip_maintenance" name="equip_maintenance">
+                </div>
+
+                <div class="form-group">
+                    <label>Wind & Weather Reading (1=Poor → 5=Excellent)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="equip_wind_reading" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="equip_wind_reading" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="equip_wind_reading" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="equip_wind_reading" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="equip_wind_reading" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="equip_wind_reading" name="equip_wind_reading">
+                </div>
+            </div>
+
+            <!-- Section 4: Racing Knowledge -->
+            <div class="card">
+                <h2>4. Racing Knowledge & Rules</h2>
+
+                <h3>Rules Understanding</h3>
+                <div class="form-group">
+                    <label>Right-of-Way Rules (1=No knowledge → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="rules_right_of_way" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="rules_right_of_way" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="rules_right_of_way" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="rules_right_of_way" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="rules_right_of_way" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="rules_right_of_way" name="rules_right_of_way">
+                </div>
+
+                <div class="form-group">
+                    <label>Penalty Rules (360° turns) (1=No knowledge → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="rules_penalties" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="rules_penalties" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="rules_penalties" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="rules_penalties" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="rules_penalties" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="rules_penalties" name="rules_penalties">
+                </div>
+
+                <div class="form-group">
+                    <label>Mark Rounding Rules (1=No knowledge → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="rules_marks" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="rules_marks" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="rules_marks" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="rules_marks" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="rules_marks" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="rules_marks" name="rules_marks">
+                </div>
+
+                <div class="form-group">
+                    <label>Protest Procedure (1=No knowledge → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="rules_protest" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="rules_protest" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="rules_protest" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="rules_protest" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="rules_protest" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="rules_protest" name="rules_protest">
+                </div>
+
+                <h3>Tactics</h3>
+                <div class="form-group">
+                    <label>Upwind Tactics (1=Poor → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="tactical_upwind" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="tactical_upwind" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="tactical_upwind" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="tactical_upwind" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="tactical_upwind" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="tactical_upwind" name="tactical_upwind">
+                </div>
+
+                <div class="form-group">
+                    <label>Downwind Tactics (1=Poor → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="tactical_downwind" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="tactical_downwind" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="tactical_downwind" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="tactical_downwind" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="tactical_downwind" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="tactical_downwind" name="tactical_downwind">
+                </div>
+
+                <div class="form-group">
+                    <label>Starting Strategy (1=Poor → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="tactical_start" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="tactical_start" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="tactical_start" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="tactical_start" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="tactical_start" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="tactical_start" name="tactical_start">
+                </div>
+
+                <div class="form-group">
+                    <label>Reading Current & Tide (1=Poor → 5=Expert)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="tactical_current" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="tactical_current" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="tactical_current" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="tactical_current" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="tactical_current" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="tactical_current" name="tactical_current">
+                </div>
+            </div>
+
+            <!-- Section 5: Mental & Race Readiness -->
+            <div class="card">
+                <h2>5. Mental & Race Readiness</h2>
+
+                <div class="form-group">
+                    <label>Race Confidence (1=Very low → 5=Very high)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="confidence" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="confidence" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="confidence" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="confidence" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="confidence" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="confidence" name="confidence">
+                </div>
+
+                <div class="form-group">
+                    <label>Stress Level (1=Low stress (good) → 5=High stress (bad))</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn red-field scale-1" data-field="stress" data-value="1">1</button>
+                        <button type="button" class="scale-btn red-field scale-2" data-field="stress" data-value="2">2</button>
+                        <button type="button" class="scale-btn red-field scale-3" data-field="stress" data-value="3">3</button>
+                        <button type="button" class="scale-btn red-field scale-4" data-field="stress" data-value="4">4</button>
+                        <button type="button" class="scale-btn red-field scale-5" data-field="stress" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="stress" name="stress">
+                </div>
+
+                <div class="form-group">
+                    <label>Focus / Concentration (1=Easily distracted → 5=Laser focused)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="focus" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="focus" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="focus" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="focus" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="focus" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="focus" name="focus">
+                </div>
+
+                <div class="form-group">
+                    <label>Goal Clarity (1=No clear goals → 5=Very clear goals)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="goal_clarity" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="goal_clarity" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="goal_clarity" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="goal_clarity" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="goal_clarity" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="goal_clarity" name="goal_clarity">
+                </div>
+
+                <div class="form-group">
+                    <label>Motivation Level (1=Low → 5=Very high)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="motivation" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="motivation" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="motivation" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="motivation" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="motivation" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="motivation" name="motivation">
+                </div>
+            </div>
+
+            <!-- Section 6: Open Questions -->
+            <div class="card">
+                <h2>6. Reflections</h2>
+
+                <div class="form-group">
+                    <label for="strength_self">What do you think is your strongest skill on the water?</label>
+                    <textarea id="strength_self" name="strength_self" placeholder="Describe your strength..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="weakness_self">What do you most want to improve?</label>
+                    <textarea id="weakness_self" name="weakness_self" placeholder="Describe what you want to improve..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="coach_learning" id="coach_learning_label">What has your previous coaching focused on?</label>
+                    <textarea id="coach_learning" name="coach_learning" placeholder="Share your coaching experiences..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="race_goal" id="race_goal_label">What is your race goal for this championship?</label>
+                    <textarea id="race_goal" name="race_goal" placeholder="Describe your goals..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 7: Priority Matrix -->
+            <div class="card">
+                <h2>7. Priority Ranking</h2>
+                <p class="info-text">Use ▲▼ to reorder. Top = most needs improvement</p>
+
+                <ul class="priority-list" id="priority-list"></ul>
+
+                <input type="hidden" id="priority_ranking" name="priority_ranking" value="">
+            </div>
+
+            <!-- Summary Section (auto-generated) -->
+            <div class="summary-card hidden" id="summary_section">
+                <h2>Assessment Summary</h2>
+                <p class="info-text" style="margin-bottom: 16px;">Click "Complete Assessment" to see priority classification</p>
+
+                <div class="priority-section" id="priority_critical">
+                    <h3>Priority 1 - Critical (1-2 rating)</h3>
+                    <div id="critical_badges"></div>
+                </div>
+
+                <div class="priority-section" id="priority_improve">
+                    <h3>Priority 2 - Improve (3 rating)</h3>
+                    <div id="improve_badges"></div>
+                </div>
+
+                <div class="priority-section" id="priority_maintain">
+                    <h3>Priority 3 - Maintain (4-5 rating)</h3>
+                    <div id="maintain_badges"></div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card">
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="reset_btn">Clear Form</button>
+                    <button type="submit" class="btn btn-primary">Complete Assessment</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const SUBMIT_URL = localStorage.getItem('india_t293_script_url') || '';
+
+        const ROSTER = [
+            { id: 'IND16', name: 'Mohit Mhatre', cls: 'T293 Youth (U17)', gender: 'M' },
+            { id: 'IND261', name: 'Soham Yogesh Rajput', cls: 'T293 Youth (U17)', gender: 'M' },
+            { id: 'IND18', name: 'Rashmita Thimiti', cls: 'T293 Youth (U17)', gender: 'F' },
+            { id: 'IND39', name: 'Tejasvi Prajapati', cls: 'T293 Youth (U17)', gender: 'F' },
+            { id: 'IND01', name: 'Udaiveer Singh Johal', cls: 'T293 Junior (U15)', gender: 'M' },
+            { id: 'IND7', name: 'Vihaan Prakash', cls: 'T293 Junior (U15)', gender: 'M' },
+            { id: 'IND02', name: 'Vaishnavi Vishal Kajale', cls: 'T293 Junior (U15)', gender: 'F' },
+            { id: 'IND11', name: 'Priyanshi Patil', cls: 'T293 Junior (U15)', gender: 'F' },
+        ];
+
+        const SCALE_FIELDS = [
+            'fitness_level', 'energy', 'flexibility', 'endurance', 'strength_upper', 'strength_core', 'strength_legs',
+            'upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality',
+            'equip_sail_tuning', 'equip_board_setup', 'equip_maintenance', 'equip_wind_reading',
+            'rules_right_of_way', 'rules_penalties', 'rules_marks', 'rules_protest',
+            'tactical_upwind', 'tactical_downwind', 'tactical_start', 'tactical_current',
+            'confidence', 'stress', 'focus', 'goal_clarity', 'motivation'
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved URL into input
+            const savedUrl = localStorage.getItem('india_t293_script_url') || '';
+            const urlInput = document.getElementById('script-url-input');
+            if (urlInput) urlInput.value = savedUrl;
+
+            initRoster();
+            setDateToday();
+            setupToggleButtons();
+            setupScaleButtons();
+            piRenderList();
+            renderPriorityList();
+            setupResetButton();
+            setupFormSubmit();
+            setupProgressBar();
+        });
+
+        function initRoster() {
+            const select = document.getElementById('athlete_name');
+            ROSTER.forEach(athlete => {
+                const option = document.createElement('option');
+                option.value = athlete.id;
+                option.textContent = athlete.name;
+                select.appendChild(option);
+            });
+
+            select.addEventListener('change', (e) => {
+                const athlete = ROSTER.find(a => a.id === e.target.value);
+                if (athlete) {
+                    document.getElementById('athlete_id').value = athlete.id;
+                    document.getElementById('athlete_class').value = athlete.cls;
+                    document.getElementById('class_display').value = athlete.cls;
+                }
+            });
+        }
+
+        function setDateToday() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+        }
+
+        function setupToggleButtons() {
+            document.querySelectorAll('[data-type]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const type = e.target.getAttribute('data-type');
+
+                    document.querySelectorAll('[data-type]').forEach(b => {
+                        b.classList.remove('active', 'post');
+                    });
+                    e.target.classList.add('active');
+                    if (type === 'post') {
+                        e.target.classList.add('post');
+                    }
+
+                    document.getElementById('assessment_type').value = type;
+
+                    // Update labels for PRE/POST context
+                    const coachLabel = document.getElementById('coach_learning_label');
+                    const goalLabel = document.getElementById('race_goal_label');
+
+                    if (type === 'pre') {
+                        coachLabel.textContent = 'What has your previous coaching focused on?';
+                        goalLabel.textContent = 'What is your race goal for this championship?';
+                    } else {
+                        coachLabel.textContent = 'What was the most valuable thing you learned during this championship?';
+                        goalLabel.textContent = 'Did you achieve your goal? What would you do differently?';
+                    }
+                });
+            });
+        }
+
+        function setupScaleButtons() {
+            document.querySelectorAll('[data-field]').forEach(btn => {
+                if (!btn.hasAttribute('data-priority')) {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const field = btn.getAttribute('data-field');
+                        const value = btn.getAttribute('data-value');
+
+                        document.querySelectorAll(`[data-field="${field}"]`).forEach(b => {
+                            b.classList.remove('active');
+                        });
+
+                        btn.classList.add('active');
+                        document.getElementById(field).value = value;
+                        updateProgressBar();
+                    });
+                }
+            });
+        }
+
+        // ═══ Pain / Injury (text-based — same as training_log) ═══
+        const PI_LABELS = ['','Mild','Moderate','High','Severe','Critical'];
+        const PI_COLORS = ['','#e8f5e9','#fff8e1','#fff3e0','#ffebee','#fce4ec'];
+        const PI_CENTER_ONLY = ['Head','Neck','Upper back','Lower back','Abs','Groin'];
+        let piBodyMap = {};
+        let piCur = { part: null, side: null, pos: null, lvl: null };
+
+        function piSelectPart(part) {
+          piCur = { part, side: null, pos: null, lvl: null };
+          document.querySelectorAll('#pi-parts .pi-btn').forEach(b => b.classList.remove('sel'));
+          event.target.classList.add('sel');
+          // Update count — show "Adding: ..."
+          const existing = Object.keys(piBodyMap).length;
+          const countEl = document.getElementById('pi-count');
+          countEl.textContent = (existing > 0 ? existing + ' area' + (existing > 1 ? 's' : '') + ' marked · ' : '') + 'Adding: ' + part;
+          document.getElementById('pi-step-detail').classList.remove('hidden');
+          document.getElementById('pi-sel-part-lbl').textContent = part;
+          const isCenterOnly = PI_CENTER_ONLY.includes(part);
+          document.querySelectorAll('#pi-side-row .pi-opt').forEach(b => {
+            const isCenterBtn = b.textContent === 'Center';
+            if (isCenterOnly) {
+              b.disabled = !isCenterBtn;
+              b.style.opacity = isCenterBtn ? '1' : '.3';
+              b.classList.toggle('sel', isCenterBtn);
+            } else {
+              b.disabled = false;
+              b.style.opacity = '1';
+              b.classList.remove('sel');
+            }
+          });
+          if (isCenterOnly) piCur.side = 'Center';
+          document.querySelectorAll('#pi-pos-row .pi-opt').forEach(b => b.classList.remove('sel'));
+          document.querySelectorAll('#pi-lvl-row .pi-lvl').forEach(b => b.classList.remove('lv1','lv2','lv3','lv4','lv5'));
+          piCur.pos = null; piCur.lvl = null;
+          piCheckAdd();
+        }
+
+        function piSelectSide(side) {
+          piCur.side = side;
+          document.querySelectorAll('#pi-side-row .pi-opt').forEach(b => {
+            b.classList.toggle('sel', b.textContent === side);
+          });
+          piCheckAdd();
+        }
+
+        function piSelectPos(pos) {
+          piCur.pos = pos;
+          document.querySelectorAll('#pi-pos-row .pi-opt').forEach(b => {
+            b.classList.toggle('sel', b.textContent === pos);
+          });
+          piCheckAdd();
+        }
+
+        function piSelectLvl(lv) {
+          piCur.lvl = lv;
+          document.querySelectorAll('#pi-lvl-row .pi-lvl').forEach(b => {
+            const bLv = parseInt(b.dataset.lv);
+            b.classList.remove('lv1','lv2','lv3','lv4','lv5');
+            if (bLv === lv) b.classList.add('lv' + lv);
+          });
+          piCheckAdd();
+        }
+
+        function piCheckAdd() {
+          const ok = piCur.part && piCur.side && piCur.pos && piCur.lvl;
+          document.getElementById('pi-add-btn').disabled = !ok;
+        }
+
+        function piAddEntry() {
+          if (!piCur.part || !piCur.side || !piCur.pos || !piCur.lvl) return;
+          const key = [piCur.part, piCur.side, piCur.pos].join('_').toLowerCase().replace(/\s+/g,'');
+          piBodyMap[key] = { part: piCur.part, side: piCur.side, pos: piCur.pos, lvl: piCur.lvl };
+          piRenderList();
+          piCancel();
+          updateProgressBar();
+        }
+
+        function piCancel() {
+          piCur = { part: null, side: null, pos: null, lvl: null };
+          document.querySelectorAll('#pi-parts .pi-btn').forEach(b => b.classList.remove('sel'));
+          document.getElementById('pi-step-detail').classList.add('hidden');
+        }
+
+        function piRemoveEntry(key) {
+          delete piBodyMap[key];
+          piRenderList();
+          updateProgressBar();
+        }
+
+        function piRenderList() {
+          const list = document.getElementById('pi-list');
+          const entries = Object.entries(piBodyMap);
+          const count = document.getElementById('pi-count');
+          if (count) count.textContent = entries.length === 0 ? 'No areas marked' : entries.length + ' area' + (entries.length > 1 ? 's' : '') + ' marked';
+          if (entries.length === 0) { list.innerHTML = ''; document.getElementById('pain_areas').value = ''; return; }
+          list.innerHTML = entries.map(([key, e]) => {
+            const loc = e.side === 'Center' ? e.pos : e.side + ' · ' + e.pos;
+            return `<div class="pi-entry lv${e.lvl}">
+              <span>${e.part} <span style="color:var(--sub);font-weight:400;font-size:.62rem">${loc}</span>
+                <span class="pi-tag" style="background:${PI_COLORS[e.lvl]}">${e.lvl} ${PI_LABELS[e.lvl]}</span>
+              </span>
+              <button type="button" class="pi-del" onclick="piRemoveEntry('${key}')">✕</button>
+            </div>`;
+          }).join('');
+          // Update hidden field
+          document.getElementById('pain_areas').value = entries.map(([k,e]) => {
+            const loc = e.side === 'Center' ? e.pos : e.side + ' ' + e.pos;
+            return e.part + '(' + loc + '):' + e.lvl + '/5';
+          }).join(', ');
+        }
+
+        // ═══ Priority Ranking (▲▼ reorder) ═══
+        const PRIORITY_AREAS = [
+          'Upwind technique','Downwind technique','Starting','Tacking/Gybing',
+          'Race tactics','Physical fitness','Equipment tuning','Mental strength'
+        ];
+        let priorityOrder = [...PRIORITY_AREAS]; // mutable copy
+
+        function renderPriorityList() {
+          const ul = document.getElementById('priority-list');
+          ul.innerHTML = priorityOrder.map((area, i) => {
+            const rank = i + 1;
+            const rankClass = rank <= 3 ? ' rank-' + rank : '';
+            return `<li class="priority-item${rankClass}" data-idx="${i}">
+              <span class="priority-rank-num">${rank}</span>
+              <span style="flex:1">${area}</span>
+              <span class="priority-arrows">
+                <button type="button" onclick="prioMove(${i},-1)" ${i===0?'disabled':''}>▲</button>
+                <button type="button" onclick="prioMove(${i},1)" ${i===priorityOrder.length-1?'disabled':''}>▼</button>
+              </span>
+            </li>`;
+          }).join('');
+          // Update hidden field
+          const data = {};
+          priorityOrder.forEach((area, i) => { data[area] = i + 1; });
+          document.getElementById('priority_ranking').value = JSON.stringify(data);
+        }
+
+        function prioMove(idx, dir) {
+          const newIdx = idx + dir;
+          if (newIdx < 0 || newIdx >= priorityOrder.length) return;
+          [priorityOrder[idx], priorityOrder[newIdx]] = [priorityOrder[newIdx], priorityOrder[idx]];
+          renderPriorityList();
+          updateProgressBar();
+        }
+
+        function setupResetButton() {
+            document.getElementById('reset_btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Clear all form data?')) {
+                    document.getElementById('assessmentForm').reset();
+                    document.querySelectorAll('.scale-btn.active').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    document.querySelectorAll('.toggle-btn').forEach(btn => {
+                        btn.classList.remove('active', 'post');
+                    });
+                    document.querySelectorAll('[data-type="pre"]')[0].classList.add('active');
+                    document.getElementById('assessment_type').value = 'pre';
+                    piBodyMap = {};
+                    piRenderList();
+                    piCancel();
+                    priorityOrder = [...PRIORITY_AREAS];
+                    renderPriorityList();
+                    setDateToday();
+                    updateProgressBar();
+                }
+            });
+        }
+
+        function setupFormSubmit() {
+            document.getElementById('assessmentForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(document.getElementById('assessmentForm'));
+                const payload = {
+                    assessment_type: formData.get('assessment_type'),
+                    date: formData.get('date'),
+                    athlete_id: formData.get('athlete_id'),
+                    athlete_name: formData.get('athlete_name'),
+                    athlete_class: formData.get('athlete_class'),
+                };
+
+                // Add all scale fields
+                SCALE_FIELDS.forEach(field => {
+                    const val = formData.get(field);
+                    payload[field] = val ? parseInt(val) : null;
+                });
+
+                // Add text fields
+                payload.strength_self = formData.get('strength_self');
+                payload.weakness_self = formData.get('weakness_self');
+                payload.coach_learning = formData.get('coach_learning');
+                payload.race_goal = formData.get('race_goal');
+                payload.pain_areas = formData.get('pain_areas');
+
+                // Priority ranking (from reorder list)
+                payload.priority_ranking = document.getElementById('priority_ranking').value;
+                payload.submitted_at = new Date().toISOString();
+
+                console.log('Payload:', payload);
+
+                if (!SUBMIT_URL) {
+                    showSummary();
+                    alert('Assessment complete! (Google Apps Script URL not configured yet)\n\nPayload logged to console.');
+                } else {
+                    submitToGoogleSheets(payload);
+                }
+            });
+        }
+
+        function submitToGoogleSheets(payload) {
+            const btn = document.querySelector('button[type="submit"]');
+            if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+
+            fetch(SUBMIT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'preEventAssessment', payload: payload })
+            })
+            .then(() => {
+                showSummary();
+                // Show success feedback
+                const flash = document.createElement('div');
+                flash.style.cssText = 'position:fixed;top:0;left:0;right:0;padding:14px;background:#2e7d32;color:#fff;z-index:10000;text-align:center;font-weight:700;font-size:14px';
+                flash.textContent = '✅ Assessment submitted to Google Sheets!';
+                document.body.appendChild(flash);
+                setTimeout(() => flash.remove(), 3000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showSummary();
+                alert('Saved locally. Will sync when online.');
+            })
+            .finally(() => {
+                if (btn) { btn.disabled = false; btn.textContent = 'Submit Assessment'; }
+            });
+        }
+
+        function showSummary() {
+            const summary = document.getElementById('summary_section');
+            summary.classList.remove('hidden');
+
+            const criticalBadges = document.getElementById('critical_badges');
+            const improveBadges = document.getElementById('improve_badges');
+            const maintainBadges = document.getElementById('maintain_badges');
+
+            criticalBadges.innerHTML = '';
+            improveBadges.innerHTML = '';
+            maintainBadges.innerHTML = '';
+
+            const categories = {
+                'Physical': ['fitness_level', 'energy', 'flexibility', 'endurance', 'strength_upper', 'strength_core', 'strength_legs'],
+                'Technical': ['upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality'],
+                'Equipment': ['equip_sail_tuning', 'equip_board_setup', 'equip_maintenance', 'equip_wind_reading'],
+                'Racing': ['rules_right_of_way', 'rules_penalties', 'rules_marks', 'rules_protest', 'tactical_upwind', 'tactical_downwind', 'tactical_start', 'tactical_current'],
+                'Mental': ['confidence', 'stress', 'focus', 'goal_clarity', 'motivation']
+            };
+
+            Object.entries(categories).forEach(([category, fields]) => {
+                const critical = [];
+                const improve = [];
+                const maintain = [];
+
+                fields.forEach(field => {
+                    const val = document.getElementById(field).value;
+                    if (!val) return;
+
+                    const numVal = parseInt(val);
+                    const isStress = field === 'stress';
+
+                    // For stress, invert: 1-2 is GOOD (maintain), 4-5 is BAD (critical)
+                    let priority;
+                    if (isStress) {
+                        if (numVal <= 2) priority = 'maintain';
+                        else if (numVal === 3) priority = 'improve';
+                        else priority = 'critical';
+                    } else {
+                        if (numVal <= 2) priority = 'critical';
+                        else if (numVal === 3) priority = 'improve';
+                        else priority = 'maintain';
+                    }
+
+                    const badge = document.createElement('span');
+                    badge.className = `badge badge-${priority}`;
+                    const fieldLabel = field.replace(/_/g, ' ').toUpperCase();
+                    badge.textContent = `${fieldLabel} (${numVal})`;
+
+                    if (priority === 'critical') critical.push(badge);
+                    else if (priority === 'improve') improve.push(badge);
+                    else maintain.push(badge);
+                });
+
+                if (critical.length) {
+                    const section = document.createElement('div');
+                    section.className = 'priority-section';
+                    section.innerHTML = `<h3>${category}</h3>`;
+                    critical.forEach(b => section.appendChild(b));
+                    criticalBadges.parentElement.appendChild(section);
+                }
+
+                if (improve.length) {
+                    const section = document.createElement('div');
+                    section.className = 'priority-section';
+                    section.innerHTML = `<h3>${category}</h3>`;
+                    improve.forEach(b => section.appendChild(b));
+                    improveBadges.parentElement.appendChild(section);
+                }
+
+                if (maintain.length) {
+                    const section = document.createElement('div');
+                    section.className = 'priority-section';
+                    section.innerHTML = `<h3>${category}</h3>`;
+                    maintain.forEach(b => section.appendChild(b));
+                    maintainBadges.parentElement.appendChild(section);
+                }
+            });
+
+            summary.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateProgressBar() {
+            const filledCount = SCALE_FIELDS.filter(f => document.getElementById(f).value).length;
+            const textFieldsFilled = [
+                document.getElementById('strength_self').value,
+                document.getElementById('weakness_self').value,
+                document.getElementById('coach_learning').value,
+                document.getElementById('race_goal').value
+            ].filter(v => v).length;
+
+            const totalFields = SCALE_FIELDS.length + 4; // scale fields + text fields (priority always complete)
+            const filled = filledCount + textFieldsFilled;
+
+            const percentage = Math.round((filled / totalFields) * 100);
+            document.querySelector('.progress-fill').style.width = percentage + '%';
+        }
+
+        function setupProgressBar() {
+            document.getElementById('assessmentForm').addEventListener('input', updateProgressBar);
+            document.getElementById('assessmentForm').addEventListener('change', updateProgressBar);
+        }
+    </script>
+</body>
+</html>
