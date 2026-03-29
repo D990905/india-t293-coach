@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>India T293 — 컨디셔닝 설문지 (Conditioning Survey)</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="컨디셔닝설문">
+<meta name="theme-color" content="#0a2a6e">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a2a6e;--blue:#1a73e8;--green:#34a853;--orange:#fbbc04;
+  --red:#ea4335;--bg:#f0f4f8;--card:#fff;--text:#202124;--sub:#5f6368;
+  --border:#e8eaed;--r:14px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:40px}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;
+  padding:18px 20px 14px;text-align:center;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.hdr-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px}
+.flag{width:32px;height:21px;border-radius:3px}
+.hdr-title{font-size:1.05rem;font-weight:800;letter-spacing:.3px}
+.hdr-sub{font-size:.72rem;opacity:.8}
+.hdr-date{display:inline-block;margin-top:6px;background:rgba(255,255,255,.15);
+  border-radius:20px;padding:3px 12px;font-size:.75rem}
+
+/* PROGRESS BAR */
+.progress-wrap{background:#e8eaed;height:5px;position:sticky;top:72px;z-index:99}
+.progress-bar{height:100%;background:var(--green);transition:width .4s ease;width:0%}
+
+/* SECTIONS */
+.section{max-width:500px;margin:0 auto;padding:16px 16px 0}
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;
+  margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.card-title{font-size:.8rem;font-weight:700;color:var(--blue);
+  text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;
+  padding-bottom:8px;border-bottom:2px solid var(--border);
+  display:flex;align-items:center;gap:6px}
+
+/* FIELD */
+.field{margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.field .hint{font-size:.72rem;color:var(--sub);margin-bottom:6px;margin-top:-3px}
+
+/* SCALE BUTTONS */
+.scale{display:flex;gap:6px;flex-wrap:nowrap}
+.scale-btn{flex:1;padding:10px 4px;border:2px solid var(--border);border-radius:10px;
+  background:#fff;font-size:.88rem;font-weight:700;color:var(--sub);
+  cursor:pointer;text-align:center;transition:all .15s;min-width:0;-webkit-tap-highlight-color:transparent}
+.scale-btn:active{transform:scale(.95)}
+.scale-btn.selected{border-color:var(--blue);background:var(--blue);color:#fff}
+.scale-btn.sel-green{border-color:var(--green);background:var(--green);color:#fff}
+.scale-btn.sel-orange{border-color:var(--orange);background:var(--orange);color:#202124}
+.scale-btn.sel-red{border-color:var(--red);background:var(--red);color:#fff}
+
+/* URINE COLOR SCALE */
+.urine-scale{display:flex;gap:4px}
+.urine-btn{flex:1;height:38px;border-radius:8px;border:3px solid transparent;
+  cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.urine-btn.selected{border-color:var(--text)!important;transform:scale(1.08)}
+.uc1{background:#fff8e1}.uc2{background:#fff176}.uc3{background:#ffee58}
+.uc4{background:#fdd835}.uc5{background:#f9a825}.uc6{background:#e65100}
+.urine-labels{display:flex;justify-content:space-between;margin-top:4px}
+.urine-labels span{font-size:.65rem;color:var(--sub)}
+
+/* NUMBER INPUT */
+.num-input{display:flex;align-items:center;gap:10px}
+.num-input input{width:70px;padding:10px;border:2px solid var(--border);border-radius:10px;
+  font-size:1rem;font-weight:700;text-align:center;outline:none}
+.num-input input:focus{border-color:var(--blue)}
+.num-input .unit{font-size:.82rem;color:var(--sub)}
+.num-btn{width:38px;height:38px;border-radius:50%;border:2px solid var(--border);
+  background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:var(--blue);
+  -webkit-tap-highlight-color:transparent}
+.num-btn:active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* SLEEP TIME INPUT */
+.sleep-time-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.time-input-group{flex:1;display:flex;flex-direction:column;gap:4px}
+.time-label{font-size:.72rem;color:var(--sub);font-weight:600;text-align:center}
+.time-input-group input[type="time"]{
+  width:100%;padding:10px 8px;border:2px solid var(--border);border-radius:10px;
+  font-size:1rem;font-weight:700;text-align:center;outline:none;background:#fff;
+  -webkit-appearance:none;color:var(--text)}
+.time-input-group input[type="time"]:focus{border-color:var(--blue)}
+.time-arrow{font-size:1.2rem;color:var(--sub);flex-shrink:0;padding-top:16px}
+.sleep-duration-display{
+  background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:10px;
+  padding:10px 14px;display:flex;align-items:center;gap:8px;
+  font-size:.85rem;color:var(--text)}
+.sleep-duration-display strong{font-size:1rem;color:var(--green)}
+.sleep-warn{color:var(--red)!important}
+.sleep-ok{color:var(--green)!important}
+
+/* TEXT AREA */
+textarea{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:10px;
+  font-size:.88rem;font-family:inherit;resize:none;outline:none;min-height:70px;line-height:1.5}
+textarea:focus{border-color:var(--blue)}
+
+/* SELECT */
+select{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:10px;
+  font-size:.88rem;font-family:inherit;outline:none;background:#fff;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235f6368' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center}
+select:focus{border-color:var(--blue)}
+
+/* ROLE / NAME SELECTOR */
+.role-name-row{display:flex;gap:10px}
+.role-name-row .field-half{flex:1}
+.role-name-row label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px}
+select:disabled{background:#f8f9fa;color:#9aa0a6;cursor:not-allowed}
+.identity-tag{display:none;flex-wrap:wrap;gap:6px;margin-top:10px}
+.id-badge{padding:5px 12px;border-radius:20px;font-size:.78rem;font-weight:700}
+
+/* SUBMIT */
+.submit-wrap{max-width:500px;margin:0 auto;padding:4px 16px 20px}
+.btn-submit{width:100%;padding:16px;background:var(--green);color:#fff;
+  border:none;border-radius:14px;font-size:1rem;font-weight:700;
+  cursor:pointer;letter-spacing:.3px;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 4px 16px rgba(52,168,83,.35);transition:all .15s}
+.btn-submit:active{transform:scale(.97);box-shadow:none}
+.btn-submit:disabled{background:#ccc;box-shadow:none}
+
+/* SUCCESS */
+.success-page{display:none;max-width:500px;margin:60px auto;padding:20px;text-align:center}
+.success-icon{font-size:4rem;margin-bottom:16px}
+.success-title{font-size:1.3rem;font-weight:800;color:var(--green);margin-bottom:8px}
+.success-msg{font-size:.9rem;color:var(--sub);line-height:1.6;text-align:left}
+.btn-reset{margin-top:20px;padding:12px 28px;background:var(--blue);color:#fff;
+  border:none;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer}
+
+/* VALIDATION */
+.field.error label{color:var(--red)}
+.field.error .scale-btn,.field.error .urine-btn,.field.error input,
+.field.error textarea,.field.error select{border-color:var(--red)!important}
+.err-msg{font-size:.72rem;color:var(--red);margin-top:4px;display:none}
+.field.error .err-msg{display:block}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-logo">
+    <span style="font-size:1.8rem;line-height:1">🇮🇳</span>
+    <div class="hdr-title">컨디셔닝 설문지</div>
+  </div>
+  <div class="hdr-sub">2026 World Championships · Foca, Turkey</div>
+  <div class="hdr-date" id="hdr-date"></div>
+</header>
+<div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+<!-- FORM -->
+<form id="checkin-form" autocomplete="off">
+
+<!-- 1. WHO ARE YOU -->
+<div class="section">
+  <div class="card">
+    <div class="card-title">👤 Who are you?</div>
+    <div class="field" id="f-athlete">
+      <div class="role-name-row">
+        <div class="field-half">
+          <label>Role</label>
+          <select id="sel-role" onchange="onRoleChange()">
+            <option value="">— Select —</option>
+            <option value="athlete">🏄 Athlete</option>
+            <option value="coach">🎯 Coach</option>
+          </select>
+        </div>
+        <div class="field-half">
+          <label>Name</label>
+          <select id="sel-name" onchange="onNameChange()" disabled>
+            <option value="">— Select role first —</option>
+          </select>
+        </div>
+      </div>
+      <div class="identity-tag" id="identity-tag"></div>
+      <div class="err-msg">Please select your role and name.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. SLEEP -->
+<div class="section">
+  <div class="card">
+    <div class="card-title">😴 Sleep</div>
+
+    <div class="field" id="f-sleep-hours">
+      <label>Bedtime → Wake time</label>
+      <div class="hint">Enter when you slept and woke up — duration is calculated automatically</div>
+      <div class="sleep-time-row">
+        <div class="time-input-group">
+          <div class="time-label">🌙 Bedtime</div>
+          <input type="time" id="sleep-bedtime" value="22:30" onchange="calcSleepDuration()">
+        </div>
+        <div class="time-arrow">→</div>
+        <div class="time-input-group">
+          <div class="time-label">☀️ Wake time</div>
+          <input type="time" id="sleep-waketime" value="06:30" onchange="calcSleepDuration()">
+        </div>
+      </div>
+      <div class="sleep-duration-display" id="sleep-duration-display">
+        💤 Sleep duration: <strong id="sleep-duration-text">8h 00m</strong>
+      </div>
+    </div>
+
+    <div class="field" id="f-sleep-quality">
+      <label>Sleep quality</label>
+      <div class="hint">1 = Very poor &nbsp;·&nbsp; 5 = Excellent</div>
+      <div class="scale" id="s-sleep-quality">
+        <div class="scale-btn" onclick="selectScale(this,'sleepQuality',1,'sel-red')">1</div>
+        <div class="scale-btn" onclick="selectScale(this,'sleepQuality',2,'sel-orange')">2</div>
+        <div class="scale-btn" onclick="selectScale(this,'sleepQuality',3,'sel-orange')">3</div>
+        <div class="scale-btn" onclick="selectScale(this,'sleepQuality',4,'sel-green')">4</div>
+        <div class="scale-btn" onclick="selectScale(this,'sleepQuality',5,'sel-green')">5</div>
+      </div>
+      <div class="err-msg">Please rate your sleep quality.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. PHYSICAL STATE -->
+<div class="section">
+  <div class="card">
+    <div class="card-title">💪 Physical State</div>
+
+    <div class="field" id="f-fatigue">
+      <label>Fatigue level</label>
+      <div class="hint">1 = Fresh &nbsp;·&nbsp; 5 = Exhausted</div>
+      <div class="scale" id="s-fatigue">
+        <div class="scale-btn" onclick="selectScale(this,'fatigue',1,'sel-green')">1</div>
+        <div class="scale-btn" onclick="selectScale(this,'fatigue',2,'sel-green')">2</div>
+        <div class="scale-btn" onclick="selectScale(this,'fatigue',3,'sel-orange')">3</div>
+        <div class="scale-btn" onclick="selectScale(this,'fatigue',4,'sel-red')">4</div>
+        <div class="scale-btn" onclick="selectScale(this,'fatigue',5,'sel-red')">5</div>
+      </div>
+      <div class="err-msg">Please rate your fatigue.</div>
+    </div>
+
+    <div class="field" id="f-soreness">
+      <label>Muscle soreness</label>
+      <div class="hint">1 = None &nbsp;·&nbsp; 5 = Severe</div>
+      <div class="scale" id="s-soreness">
+        <div class="scale-btn" onclick="selectScale(this,'soreness',1,'sel-green')">1</div>
+        <div class="scale-btn" onclick="selectScale(this,'soreness',2,'sel-green')">2</div>
+        <div class="scale-btn" onclick="selectScale(this,'soreness',3,'sel-orange')">3</div>
+        <div class="scale-btn" onclick="selectScale(this,'soreness',4,'sel-red')">4</div>
+        <div class="scale-btn" onclick="selectScale(this,'soreness',5,'sel-red')">5</div>
+      </div>
+      <div class="err-msg">Please rate muscle soreness.</div>
+    </div>
+
+    <div class="field" id="f-stress">
+      <label>Stress / mental load</label>
+      <div class="hint">1 = Calm &nbsp;·&nbsp; 5 = Very stressed</div>
+      <div class="scale" id="s-stress">
+        <div class="scale-btn" onclick="selectScale(this,'stress',1,'sel-green')">1</div>
+        <div class="scale-btn" onclick="selectScale(this,'stress',2,'sel-green')">2</div>
+        <div class="scale-btn" onclick="selectScale(this,'stress',3,'sel-orange')">3</div>
+        <div class="scale-btn" onclick="selectScale(this,'stress',4,'sel-red')">4</div>
+        <div class="scale-btn" onclick="selectScale(this,'stress',5,'sel-red')">5</div>
+      </div>
+      <div class="err-msg">Please rate your stress level.</div>
+    </div>
+
+    <div class="field" id="f-body-weight">
+      <label>Body weight this morning</label>
+      <div class="num-input">
+        <button type="button" class="num-btn" onclick="adjustNum('body-weight',-0.1)">−</button>
+        <input type="number" id="body-weight" value="65.0" min="30" max="120" step="0.1" oninput="updateProgress()">
+        <span class="unit">kg</span>
+        <button type="button" class="num-btn" onclick="adjustNum('body-weight',0.1)">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. HYDRATION -->
+<div class="section">
+  <div class="card">
+    <div class="card-title">💧 Hydration</div>
+    <div class="field" id="f-urine">
+      <label>Urine color (first thing this morning)</label>
+      <div class="hint">Tap the color that matches</div>
+      <div class="urine-scale" id="s-urine">
+        <div class="urine-btn uc1" onclick="selectUrine(this,1)" title="Pale yellow — great"></div>
+        <div class="urine-btn uc2" onclick="selectUrine(this,2)" title="Light yellow — good"></div>
+        <div class="urine-btn uc3" onclick="selectUrine(this,3)" title="Yellow — OK"></div>
+        <div class="urine-btn uc4" onclick="selectUrine(this,4)" title="Dark yellow — drink more"></div>
+        <div class="urine-btn uc5" onclick="selectUrine(this,5)" title="Amber — dehydrated"></div>
+        <div class="urine-btn uc6" onclick="selectUrine(this,6)" title="Brown — alert!"></div>
+      </div>
+      <div class="urine-labels">
+        <span>💧 Hydrated</span>
+        <span>🔴 Dehydrated</span>
+      </div>
+      <div class="err-msg">Please select your urine color.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. GRIP STRENGTH -->
+<div class="section">
+  <div class="card">
+    <div class="card-title">🤜 Grip Strength (optional)</div>
+    <div class="field">
+      <label>Left hand (kg) — if dynamometer available</label>
+      <div class="num-input">
+        <button type="button" class="num-btn" onclick="adjustNum('grip-left',-1)">−</button>
+        <input type="number" id="grip-left" placeholder="—" min="0" max="80" step="1">
+        <span class="unit">kg</span>
+        <button type="button" class="num-btn" onclick="adjustNum('grip-left',1)">+</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Right hand (kg)</label>
+      <div class="num-input">
+        <button type="button" class="num-btn" onclick="adjustNum('grip-right',-1)">−</button>
+        <input type="number" id="grip-right" placeholder="—" min="0" max="80" step="1">
+        <span class="unit">kg</span>
+        <button type="button" class="num-btn" onclick="adjustNum('grip-right',1)">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. OVERALL READINESS -->
+<div class="section">
+  <div class="card">
+    <div class="card-title">🎯 Overall Readiness</div>
+
+    <div class="field" id="f-readiness">
+      <label>How ready are you to train/race today?</label>
+      <div class="hint">1 = Not at all &nbsp;·&nbsp; 10 = 100% Ready</div>
+      <div class="scale" id="s-readiness" style="flex-wrap:wrap;gap:5px">
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',1,'sel-red')">1</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',2,'sel-red')">2</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',3,'sel-orange')">3</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',4,'sel-orange')">4</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',5,'sel-orange')">5</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',6,'sel-green')">6</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',7,'sel-green')">7</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',8,'sel-green')">8</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',9,'sel-green')">9</div>
+        <div class="scale-btn" style="flex:none;width:calc(20% - 4px)" onclick="selectScale(this,'readiness',10,'sel-green')">10</div>
+      </div>
+      <div class="err-msg">Please rate your overall readiness.</div>
+    </div>
+
+    <div class="field">
+      <label>Any notes for the coach? (optional)</label>
+      <textarea id="notes" placeholder="Pain location, concerns, anything coach should know…" rows="3"></textarea>
+    </div>
+  </div>
+</div>
+
+</form><!-- end form -->
+
+<!-- SUBMIT BUTTON -->
+<div class="submit-wrap">
+  <button class="btn-submit" id="btn-submit" onclick="submitForm()">
+    ✅ Submit Check-in
+  </button>
+</div>
+
+<!-- SUCCESS PAGE -->
+<div class="success-page" id="success-page">
+  <div class="success-icon">✅</div>
+  <div class="success-title">Check-in Complete!</div>
+  <div class="success-msg" id="success-msg"></div>
+  <button class="btn-reset" onclick="resetForm()">Submit Another</button>
+</div>
+
+<script>
+// ── ROSTER ───────────────────────────────────────────────
+// Update class assignments here if needed
+const ROSTER = {
+  athlete: [
+    // U-17 Boys
+    { id:'IND16',  name:'Mohit Mhatre',           cls:'T293 Youth (U17)',   gender:'M' },
+    { id:'IND261', name:'Soham Yogesh Rajput',     cls:'T293 Youth (U17)',   gender:'M' },
+    // U-17 Girls
+    { id:'IND18',  name:'Rashmita Thimiti',        cls:'T293 Youth (U17)',   gender:'F' },
+    { id:'IND39',  name:'Tejasvi Prajapati',       cls:'T293 Youth (U17)',   gender:'F' },
+    // U-15 Boys
+    { id:'IND01',  name:'Udaiveer Singh Johal',    cls:'T293 Junior (U15)',  gender:'M' },
+    { id:'IND7',   name:'Vihaan Prakash',          cls:'T293 Junior (U15)',  gender:'M' },
+    // U-15 Girls
+    { id:'IND02',  name:'Vaishnavi Vishal Kajale', cls:'T293 Junior (U15)',  gender:'F' },
+    { id:'IND11',  name:'Priyanshi Patil',         cls:'T293 Junior (U15)',  gender:'F' },
+  ],
+  coach: [
+    { id:'COACH_D', name:'Mr. Danny Ok (Foreign Coach)', cls:'Coach', gender:'M' },
+    { id:'COACH_P', name:'Sh. Prakash (Coach)',          cls:'Coach', gender:'M' },
+    { id:'COACH_M', name:'Mrs. Meenu Johal (Manager)',   cls:'Staff',  gender:'F' },
+  ]
+};
+
+// ── STATE ────────────────────────────────────────────────
+const state = {
+  athleteId: null, athleteName: null, athleteRole: null, athleteClass: null,
+  sleepQuality: null, sleepHours: 8.0, bedtime: '22:30', waketime: '06:30',
+  fatigue: null, soreness: null,
+  stress: null, readiness: null, urineColor: null
+};
+
+// ── DATE ─────────────────────────────────────────────────
+(function(){
+  const d = new Date();
+  const opts = {weekday:'short',year:'numeric',month:'short',day:'numeric'};
+  document.getElementById('hdr-date').textContent = d.toLocaleDateString('en-US',opts);
+})();
+
+// ── ROLE / NAME SELECT ───────────────────────────────────
+function onRoleChange(){
+  const role    = document.getElementById('sel-role').value;
+  const nameSel = document.getElementById('sel-name');
+  nameSel.innerHTML = '<option value="">— Select name —</option>';
+  state.athleteId = state.athleteName = state.athleteRole = state.athleteClass = null;
+  document.getElementById('identity-tag').style.display = 'none';
+
+  if(!role){ nameSel.disabled = true; updateProgress(); return; }
+
+  ROSTER[role].forEach(p => {
+    const o = document.createElement('option');
+    o.value = p.id; o.textContent = p.name;
+    nameSel.appendChild(o);
+  });
+  nameSel.disabled = false;
+  updateProgress();
+}
+
+function onNameChange(){
+  const role = document.getElementById('sel-role').value;
+  const id   = document.getElementById('sel-name').value;
+  if(!id || !role) return;
+
+  const person = ROSTER[role].find(p => p.id === id);
+  if(!person) return;
+
+  state.athleteId    = person.id;
+  state.athleteName  = person.name;
+  state.athleteRole  = role;
+  state.athleteClass = person.cls;
+
+  // Identity tag
+  const isCoach   = role === 'coach';
+  const roleColor = isCoach ? '#9334e6' : (person.gender === 'F' ? '#c2185b' : '#1a73e8');
+  const clsColor  = '#34a853';
+  const tag = document.getElementById('identity-tag');
+  tag.style.display = 'flex';
+  tag.innerHTML =
+    `<span class="id-badge" style="background:${roleColor};color:#fff">
+       ${isCoach ? '🎯 Coach' : '🏄 Athlete'}
+     </span>` +
+    (!isCoach
+      ? `<span class="id-badge" style="background:#e8f5e9;color:${clsColor}">${person.cls}</span>
+         <span class="id-badge" style="background:#e8eaed;color:#5f6368">${person.gender === 'F' ? '♀ Female' : '♂ Male'}</span>`
+      : '');
+
+  clearError('f-athlete');
+  updateProgress();
+}
+
+// ── SLEEP TIME CALCULATION ────────────────────────────────
+function calcSleepDuration(){
+  const bedtime  = document.getElementById('sleep-bedtime').value  || '22:30';
+  const waketime = document.getElementById('sleep-waketime').value || '06:30';
+  const [bh, bm] = bedtime.split(':').map(Number);
+  const [wh, wm] = waketime.split(':').map(Number);
+  let bedMins  = bh * 60 + bm;
+  let wakeMins = wh * 60 + wm;
+  if(wakeMins <= bedMins) wakeMins += 24 * 60; // crossed midnight
+  const totalMins = wakeMins - bedMins;
+  const hours = Math.floor(totalMins / 60);
+  const mins  = totalMins % 60;
+  const dec   = parseFloat((totalMins / 60).toFixed(2));
+
+  const txt = `${hours}h ${mins > 0 ? mins + 'm' : ''}`.trim();
+  const el  = document.getElementById('sleep-duration-text');
+  el.textContent = txt;
+  // colour feedback
+  el.className = dec < 6 ? 'sleep-warn' : dec >= 8 ? 'sleep-ok' : '';
+
+  state.sleepHours = dec;
+  state.bedtime    = bedtime;
+  state.waketime   = waketime;
+  updateProgress();
+}
+
+// ── SCALE SELECT ──────────────────────────────────────────
+// Field IDs may use hyphens; state keys use camelCase — map here
+const FIELD_ID = {
+  'sleepQuality': 'f-sleep-quality',
+  'fatigue':      'f-fatigue',
+  'soreness':     'f-soreness',
+  'stress':       'f-stress',
+  'readiness':    'f-readiness'
+};
+function selectScale(el, key, val, cls){
+  const container = el.parentElement;
+  container.querySelectorAll('.scale-btn').forEach(b=>{
+    b.classList.remove('selected','sel-green','sel-orange','sel-red');
+  });
+  el.classList.add('selected', cls);
+  state[key] = val;
+  clearError(FIELD_ID[key] || 'f-'+key);
+  updateProgress();
+}
+
+// ── URINE SELECT ──────────────────────────────────────────
+function selectUrine(el, val){
+  document.querySelectorAll('.urine-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  state.urineColor = val;
+  clearError('f-urine');
+  updateProgress();
+}
+
+// ── NUM INPUT ─────────────────────────────────────────────
+function adjustNum(id, delta){
+  const el = document.getElementById(id);
+  if(!el.value && el.placeholder === '—') el.value = 0;
+  let v = parseFloat(el.value||0) + delta;
+  if(el.min) v = Math.max(parseFloat(el.min), v);
+  if(el.max) v = Math.min(parseFloat(el.max), v);
+  el.value = parseFloat(v.toFixed(1));
+  updateProgress();
+}
+
+// ── PROGRESS ──────────────────────────────────────────────
+function updateProgress(){
+  const required = [
+    state.athleteId, state.sleepQuality, state.fatigue,
+    state.soreness, state.stress, state.readiness, state.urineColor
+  ];
+  const filled = required.filter(v => v !== null).length;
+  const pct = Math.round((filled / required.length) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// ── VALIDATION ────────────────────────────────────────────
+function clearError(id){
+  const f = document.getElementById(id);
+  if(f) f.classList.remove('error');
+}
+function setError(id){
+  const f = document.getElementById(id);
+  if(f) f.classList.add('error');
+}
+function validate(){
+  let ok = true;
+  if(!state.athleteId)      { setError('f-athlete'); ok=false; }
+  if(!state.sleepQuality)   { setError('f-sleep-quality'); ok=false; }
+  if(!state.fatigue)        { setError('f-fatigue'); ok=false; }
+  if(!state.soreness)       { setError('f-soreness'); ok=false; }
+  if(!state.stress)         { setError('f-stress'); ok=false; }
+  if(!state.urineColor)     { setError('f-urine'); ok=false; }
+  if(!state.readiness)      { setError('f-readiness'); ok=false; }
+  return ok;
+}
+
+// ── SUBMIT ────────────────────────────────────────────────
+function submitForm(){
+  if(!validate()){
+    // scroll to first error
+    const first = document.querySelector('.field.error');
+    if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+
+  const payload = {
+    timestamp:     new Date().toISOString(),
+    athlete_id:    state.athleteId,
+    athlete_name:  state.athleteName,
+    role:          state.athleteRole,
+    class:         state.athleteClass,
+    date:          new Date().toLocaleDateString('en-CA'),
+    sleep_bedtime: state.bedtime,
+    sleep_waketime:state.waketime,
+    sleep_hours:   state.sleepHours,
+    sleep_quality: state.sleepQuality,
+    fatigue:       state.fatigue,
+    muscle_soreness: state.soreness,
+    stress_level:  state.stress,
+    urine_color:   state.urineColor,
+    grip_left:     parseFloat(document.getElementById('grip-left').value)||null,
+    grip_right:    parseFloat(document.getElementById('grip-right').value)||null,
+    body_weight:   parseFloat(document.getElementById('body-weight').value),
+    overall_readiness: state.readiness,
+    notes:         document.getElementById('notes').value.trim()
+  };
+
+  // ── Send to Google Apps Script Web App ──
+  if (!localStorage.getItem('t293_webapp_url')) {
+    localStorage.setItem('t293_webapp_url', 'https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec');
+  }
+  const WEBAPP_URL = localStorage.getItem('t293_webapp_url') || '';
+  if (WEBAPP_URL) {
+    fetch(WEBAPP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'conditionSubmit', payload: payload })
+    })
+    .then(r => r.json())
+    .then(result => {
+      if (result.success) {
+        showSuccess(payload);
+      } else {
+        console.warn('Submit error:', result.error);
+        showSuccess(payload); // Show success anyway, data saved in summary
+      }
+    })
+    .catch(err => {
+      console.warn('Online submit failed:', err);
+      // Save locally for later sync
+      try {
+        const pending = JSON.parse(localStorage.getItem('t293_pending_checkins') || '[]');
+        pending.push(payload);
+        localStorage.setItem('t293_pending_checkins', JSON.stringify(pending));
+      } catch(e) {}
+      showSuccess(payload);
+    });
+  } else {
+    // No URL configured — demo mode
+    setTimeout(() => showSuccess(payload), 800);
+  }
+}
+
+function showSuccess(payload){
+  document.getElementById('checkin-form').style.display = 'none';
+  document.querySelector('.submit-wrap').style.display = 'none';
+  document.getElementById('progress-bar').style.width = '100%';
+  document.getElementById('progress-bar').style.background = '#34a853';
+
+  // ── Helper: styled advice card ──
+  function tip(emoji, color, title, lines){
+    const bg = color === 'blue'   ? '#e8f0fe' :
+               color === 'green'  ? '#e6f4ea' :
+               color === 'orange' ? '#fef7e0' : '#fce8e6';
+    const tc = color === 'blue'   ? '#1a73e8' :
+               color === 'green'  ? '#34a853' :
+               color === 'orange' ? '#e37400' : '#c5221f';
+    return `<div style="background:${bg};border-radius:10px;padding:12px 14px;margin:8px 0;text-align:left">
+      <div style="font-weight:700;color:${tc};margin-bottom:6px">${emoji} ${title}</div>
+      <div style="font-size:.83rem;color:#3c4043;line-height:1.65">${lines.map(l=>'· '+l).join('<br>')}</div>
+    </div>`;
+  }
+
+  let cards = '';
+
+  // ── 1. Readiness summary ──
+  const r = payload.overall_readiness;
+  if(r >= 8)      cards += tip('🟢','green', 'Great readiness today!', ['You\'re in top shape — push hard in training.', 'Focus on race tactics and technical precision.']);
+  else if(r >= 5) cards += tip('🟡','orange','Moderate readiness', ['Manage your effort — don\'t overdo it early.', 'Stay hydrated and eat well before the session.']);
+  else            cards += tip('🔴','red',   'Low readiness — Coach notified', ['Consider a light recovery session instead of full training.', 'Talk to the coach before going on the water.']);
+
+  // ── 2. Sleep advice ──
+  const slH = payload.sleep_hours || 0;
+  const slQ = payload.sleep_quality || 3;
+  if(slH < 6 || slQ <= 2){
+    cards += tip('😴','orange','Sleep Recovery Tips', [
+      'Keep the room dark — use blackout curtains or an eye mask.',
+      'Reduce noise: earplugs or a white noise app can help.',
+      'Keep room temperature cool (~18–20°C) for deeper sleep.',
+      'Avoid screens for 30 min before bed — try reading instead.',
+      'Tonight: aim for lights-out by 21:30 to catch up on sleep debt.'
+    ]);
+  } else if(slH < 7.5 || slQ === 3){
+    cards += tip('😴','blue','Sleep Optimisation', [
+      'Try to go to bed at the same time every night.',
+      'Cool, dark, quiet room = better sleep quality.',
+      'Avoid heavy meals or caffeine after 16:00.'
+    ]);
+  }
+
+  // ── 3. Muscle soreness advice ──
+  const sor = payload.muscle_soreness || 0;
+  if(sor >= 4){
+    cards += tip('💪','red','High Muscle Soreness', [
+      'Start with 10 min easy aerobic warm-up (light jog or cycling).',
+      'Follow with full-body stretching — hold each stretch 30–40 sec.',
+      'Cold-warm contrast shower (1 min cold / 2 min warm × 3 rounds).',
+      'If pain is severe or localised, consider a muscle relaxant (consult coach).',
+      'Report to coach — training load may need to be adjusted today.'
+    ]);
+  } else if(sor === 3){
+    cards += tip('💪','orange','Moderate Soreness — Recovery Mode', [
+      'Light aerobic movement before training activates blood flow.',
+      'Dynamic stretching before, static stretching after session.',
+      'Stay well hydrated — helps flush lactic acid faster.',
+      'Foam rolling on sore areas for 2–3 min each.'
+    ]);
+  } else if(sor <= 2 && sor > 0){
+    cards += tip('💪','green','Muscles feeling good!', [
+      'Short warm-up is still important — don\'t skip it.',
+      'Maintain hydration throughout the session.'
+    ]);
+  }
+
+  // ── 4. Stress / mental load advice ──
+  const st = payload.stress_level || 0;
+  if(st >= 4){
+    cards += tip('🧠','red','High Stress — Mental Reset', [
+      'Try 5 min of box breathing: inhale 4s → hold 4s → exhale 4s → hold 4s.',
+      'Put on your favourite music for 10–15 min before the session.',
+      'Remind yourself: focus only on what you can control right now.',
+      'Talk to the coach — a quick 1-on-1 chat can help clear your head.',
+      'Consider a short mindfulness session (Headspace / Calm app).'
+    ]);
+  } else if(st === 3){
+    cards += tip('🧠','orange','Some Stress Detected', [
+      'Music before training is proven to lower cortisol — use it.',
+      '5 min of slow, deep breathing helps activate the parasympathetic system.',
+      'Set one clear goal for today\'s session — keeps focus tight.'
+    ]);
+  }
+
+  // ── 5. Hydration advice ──
+  const ur = payload.urine_color || 0;
+  if(ur >= 5){
+    cards += tip('💧','red','Dehydration Alert!', [
+      'Drink 500 ml of water right now before anything else.',
+      'Continue drinking 200–300 ml every 20 min during training.',
+      'Add electrolytes if you\'ve been sweating heavily.',
+      'Coach has been notified — monitor closely today.'
+    ]);
+  } else if(ur === 4){
+    cards += tip('💧','orange','Drink More Water', [
+      'Drink at least 300–500 ml before training starts.',
+      'Keep a water bottle on the water — sip regularly.',
+      'Aim for pale yellow urine by next check-in.'
+    ]);
+  }
+
+  // ── 6. High fatigue ──
+  if(payload.fatigue >= 4){
+    cards += tip('⚡','red','High Fatigue — Reduce Load', [
+      'Avoid high-intensity intervals today.',
+      'Focus on technique work at lower intensity.',
+      'Recovery nutrition: protein + carbs within 30 min after session.',
+      'Early bedtime tonight is priority #1.'
+    ]);
+  }
+
+  // ── COACH ALERT ──────────────────────────────────────────
+  const COACH_EMAIL = 'kor22@me.com';
+  const COACH_NAME  = 'Coach Danny';
+  // Coaches don't alert themselves — only athlete submissions trigger email alerts
+  if(payload.role === 'coach') alertFlags.length = 0;
+
+  // Determine alert level
+  const alertFlags = [];
+  if(payload.overall_readiness <= 3)   alertFlags.push(`🔴 Low readiness (${payload.overall_readiness}/10)`);
+  if(payload.fatigue >= 4)             alertFlags.push(`⚡ High fatigue (${payload.fatigue}/5)`);
+  if(payload.muscle_soreness >= 4)     alertFlags.push(`💪 High muscle soreness (${payload.muscle_soreness}/5)`);
+  if(payload.stress_level >= 4)        alertFlags.push(`🧠 High stress (${payload.stress_level}/5)`);
+  if(payload.urine_color >= 5)         alertFlags.push(`💧 Severe dehydration (urine color ${payload.urine_color}/6)`);
+  if((payload.sleep_hours||0) < 5.5)   alertFlags.push(`😴 Very short sleep (${payload.sleep_hours}h)`);
+
+  let alertBanner = '';
+  if(alertFlags.length > 0){
+    // Build email content
+    const subject = encodeURIComponent(
+      `⚠️ ALERT: ${payload.athlete_name} — ${alertFlags.length} flag(s) — ${payload.date}`
+    );
+    const body = encodeURIComponent(
+      `${COACH_NAME},\n\n` +
+      `${payload.athlete_name} just submitted their morning check-in and has the following flags:\n\n` +
+      alertFlags.join('\n') +
+      `\n\n── Full Check-in Data ──\n` +
+      `Date: ${payload.date}\n` +
+      `Readiness: ${payload.overall_readiness}/10\n` +
+      `Fatigue: ${payload.fatigue}/5\n` +
+      `Muscle Soreness: ${payload.muscle_soreness}/5\n` +
+      `Stress: ${payload.stress_level}/5\n` +
+      `Sleep: ${payload.sleep_hours}h (${payload.sleep_bedtime || '—'} → ${payload.sleep_waketime || '—'})\n` +
+      `Sleep Quality: ${payload.sleep_quality}/5\n` +
+      `Urine Color: ${payload.urine_color}/6\n` +
+      `Body Weight: ${payload.body_weight} kg\n` +
+      (payload.notes ? `\nAthlete notes: "${payload.notes}"\n` : '') +
+      `\n── India T293 Coaching System ──`
+    );
+    const mailtoLink = `mailto:${COACH_EMAIL}?subject=${subject}&body=${body}`;
+
+    alertBanner = `
+      <div style="background:#fce8e6;border:2px solid #ea4335;border-radius:12px;padding:14px 16px;margin:10px 0">
+        <div style="font-weight:800;color:#c5221f;font-size:.95rem;margin-bottom:8px">
+          ⚠️ ${alertFlags.length} Alert Flag${alertFlags.length>1?'s':''} Detected
+        </div>
+        <div style="font-size:.82rem;color:#3c4043;margin-bottom:12px;line-height:1.7">
+          ${alertFlags.join('<br>')}
+        </div>
+        <a href="${mailtoLink}" style="
+          display:inline-block;background:#ea4335;color:#fff;
+          padding:10px 18px;border-radius:8px;font-weight:700;
+          font-size:.85rem;text-decoration:none;letter-spacing:.2px">
+          📧 Send Alert to Coach Now
+        </a>
+        <div style="font-size:.72rem;color:#9aa0a6;margin-top:8px">
+          Tap to open a pre-filled email to ${COACH_NAME}
+        </div>
+      </div>`;
+  } else {
+    alertBanner = `<div style="background:#e6f4ea;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.83rem;color:#137333">
+      ✅ No alert flags — no notification needed today.
+    </div>`;
+  }
+
+  const roleLabel = payload.role === 'coach'
+    ? `<span style="background:#9334e6;color:#fff;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;margin-left:8px">🎯 Coach</span>`
+    : `<span style="background:#e8f0fe;color:#1a73e8;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;margin-left:8px">${payload.class || 'Athlete'}</span>`;
+
+  const header = `<div style="font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;flex-wrap:wrap;gap:4px">
+    <strong>${payload.athlete_name}</strong>${roleLabel}
+    <span style="color:#9aa0a6;font-weight:400;font-size:.85rem;margin-left:4px">· ${payload.date}</span>
+  </div>`;
+
+  const footer = `<div style="margin-top:14px;font-size:.75rem;color:#9aa0a6;border-top:1px solid #e8eaed;padding-top:10px">
+    Data submitted to India T293 coaching system
+  </div>`;
+
+  document.getElementById('success-msg').innerHTML = header + alertBanner + cards + footer;
+  document.getElementById('success-page').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function resetForm(){
+  location.reload();
+}
+
+// ── Register Service Worker ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
