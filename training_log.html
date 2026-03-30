@@ -1980,12 +1980,14 @@ document.addEventListener('DOMContentLoaded', () => {
   loadCheckinData();
 
   // ── URL settings init ──
-  const savedUrl = localStorage.getItem('india_t293_script_url') || '';
+  const DEFAULT_GAS = 'https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec';
+  if (!localStorage.getItem('india_t293_script_url')) localStorage.setItem('india_t293_script_url', DEFAULT_GAS);
+  const savedUrl = localStorage.getItem('india_t293_script_url') || DEFAULT_GAS;
   const urlInput = document.getElementById('script-url-input');
   if (urlInput) urlInput.value = savedUrl;
   const urlStatus = document.getElementById('url-status');
-  if (urlStatus) urlStatus.textContent = savedUrl ? '(Connected)' : '(Not set)';
-  if (urlStatus) urlStatus.style.color = savedUrl ? '#34a853' : '#ea4335';
+  if (urlStatus) urlStatus.textContent = '(Connected)';
+  if (urlStatus) urlStatus.style.color = '#34a853';
 
   // ── Weather auto-fill (for athletes only) ──
   if (savedUrl) {
@@ -3061,7 +3063,7 @@ function updateProgress() {
 // SUBMIT
 // ═══════════════════════════════════════════
 // ── Apps Script Web App URL (set this after deployment) ──
-const WEBAPP_URL = localStorage.getItem('india_t293_script_url') || '';
+const WEBAPP_URL = localStorage.getItem('india_t293_script_url') || 'https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec';
 
 // ═══════════════════════════════════════════
 // WEATHER AUTO-FILL (from Coach Obs)
