@@ -460,6 +460,12 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
 .class-locked .scale-btn{pointer-events:none!important}
 .wz-ctx{font-weight:700;color:var(--blue);background:#e8f0fe;padding:1px 6px;border-radius:4px;
   font-size:.78rem;white-space:nowrap}
+.attend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.attend-btn{padding:10px 4px;border-radius:8px;border:2px solid var(--border);background:var(--card);text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.attend-btn.sel-full{border-color:var(--green);background:rgba(52,168,83,.15);color:var(--green)}
+.attend-btn.sel-modified{border-color:var(--blue);background:rgba(26,115,232,.15);color:var(--blue)}
+.attend-btn.sel-limited{border-color:var(--orange);background:rgba(251,188,4,.15);color:var(--orange)}
+.attend-btn.sel-absent{border-color:var(--red);background:rgba(234,67,53,.15);color:var(--red)}
 </style>
 </head>
 <body>
@@ -543,6 +549,21 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
 </div>
 
 <!-- COACH MODE BANNER -->
+<div class="section hidden" id="attendance-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span> Training Attendance</div>
+    <div class="attend-grid" id="attend-grid">
+      <div class="attend-btn" onclick="selectAttendance('full')" data-attend="full">✅ Full</div>
+      <div class="attend-btn" onclick="selectAttendance('modified')" data-attend="modified">🔄 Modified</div>
+      <div class="attend-btn" onclick="selectAttendance('limited')" data-attend="limited">⚠️ Limited</div>
+      <div class="attend-btn" onclick="selectAttendance('absent')" data-attend="absent">❌ Absent</div>
+    </div>
+    <div class="field hidden" id="attend-reason-field">
+      <label>Reason (optional)</label>
+      <textarea id="attend-reason" placeholder="Why modified/limited/absent?"></textarea>
+    </div>
+  </div>
+</div>
 <div class="section hidden" id="coach-mode-banner">
   <div class="coach-mode-banner">
     <span class="cm-icon">📋</span>
@@ -1975,6 +1996,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // ═══════════════════════════════════════════
 // ATHLETE SELECTOR
 // ═══════════════════════════════════════════
+// ── ATTENDANCE ──
+let attendanceStatus = null;
+function selectAttendance(status) {
+  attendanceStatus = status;
+  document.querySelectorAll('.attend-btn').forEach(b => {
+    b.className = 'attend-btn';
+  });
+  const btn = document.querySelector(`.attend-btn[data-attend="${status}"]`);
+  if (btn) btn.classList.add('sel-' + status);
+  const reasonField = document.getElementById('attend-reason-field');
+  if (reasonField) {
+    reasonField.classList.toggle('hidden', status === 'full');
+  }
+  updateProgress();
+}
+
 function onRoleChange() {
   const role = document.getElementById('role-select').value;
   state.role = role || null;
@@ -2017,6 +2054,7 @@ function onNameChange() {
   const classTag = document.getElementById('class-tag');
   classTag.textContent = person.cls;
   classTag.classList.remove('hidden');
+  document.getElementById('attendance-section')?.classList.remove('hidden');
 
   // Auto-set sail size from class profile (athletes only)
   autoSetSailSize(person.cls, role === 'athlete');
@@ -2593,7 +2631,17 @@ const EQUIP_ITEMS = [
 
 const EQUIP_LABELS = ['','Critical','Poor','OK','Good','Excellent'];
 state.equipRatings = {};
-state.urgentAction = false;
+// Reset attendance
+  attendanceStatus = null;
+  document.querySelectorAll('.attend-btn').forEach(b => b.className = 'attend-btn');
+  const attendReason = document.getElementById('attend-reason');
+  if (attendReason) attendReason.value = '';
+  const attendReasonField = document.getElementById('attend-reason-field');
+  if (attendReasonField) attendReasonField.classList.add('hidden');
+  const attendSection = document.getElementById('attendance-section');
+  if (attendSection) attendSection.classList.add('hidden');
+
+  state.urgentAction = false;
 state.urgentNotes = '';
 
 function buildEquipGrid() {
@@ -3228,6 +3276,9 @@ function buildPayload() {
     athlete_class: state.athleteClass,
     role: state.role,
     session_type: state.sessionType,
+    // Attendance
+    attendance_status: attendanceStatus,
+    attendance_reason: attendanceStatus && attendanceStatus !== 'full' ? (document.getElementById('attend-reason')?.value || '') : null,
 
     // Environment
     wind_bft: state.windBft,
