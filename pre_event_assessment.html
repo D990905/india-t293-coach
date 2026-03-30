@@ -759,6 +759,81 @@
                 </div>
             </div>
 
+            <!-- Section 2b: Wind Condition Skills -->
+            <div class="card">
+                <h2>2b. Wind Condition Skills</h2>
+
+                <h3>Light Wind (&lt;10 kts)</h3>
+                <div class="form-group">
+                    <label>Upwind Ability (1=Struggle → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="light_wind_upwind" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="light_wind_upwind" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="light_wind_upwind" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="light_wind_upwind" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="light_wind_upwind" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="light_wind_upwind" name="light_wind_upwind">
+                </div>
+                <div class="form-group">
+                    <label>Downwind Ability (1=Struggle → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="light_wind_downwind" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="light_wind_downwind" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="light_wind_downwind" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="light_wind_downwind" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="light_wind_downwind" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="light_wind_downwind" name="light_wind_downwind">
+                </div>
+                <div class="form-group">
+                    <label>Overall Light Wind Confidence (1=Low → 5=High)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="light_wind_confidence" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="light_wind_confidence" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="light_wind_confidence" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="light_wind_confidence" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="light_wind_confidence" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="light_wind_confidence" name="light_wind_confidence">
+                </div>
+
+                <h3>Heavy Wind (&gt;15 kts)</h3>
+                <div class="form-group">
+                    <label>Upwind Ability (1=Struggle → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="heavy_wind_upwind" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="heavy_wind_upwind" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="heavy_wind_upwind" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="heavy_wind_upwind" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="heavy_wind_upwind" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="heavy_wind_upwind" name="heavy_wind_upwind">
+                </div>
+                <div class="form-group">
+                    <label>Downwind Ability (1=Struggle → 5=Strong)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="heavy_wind_downwind" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="heavy_wind_downwind" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="heavy_wind_downwind" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="heavy_wind_downwind" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="heavy_wind_downwind" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="heavy_wind_downwind" name="heavy_wind_downwind">
+                </div>
+                <div class="form-group">
+                    <label>Overall Heavy Wind Confidence (1=Low → 5=High)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="heavy_wind_confidence" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="heavy_wind_confidence" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="heavy_wind_confidence" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="heavy_wind_confidence" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="heavy_wind_confidence" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="heavy_wind_confidence" name="heavy_wind_confidence">
+                </div>
+            </div>
+
             <!-- Section 3: Equipment Knowledge -->
             <div class="card">
                 <h2>3. Equipment Knowledge</h2>
@@ -919,8 +994,9 @@
             <div class="card">
                 <h2>5. Mental & Race Readiness</h2>
 
+                <h3>Confidence by Area</h3>
                 <div class="form-group">
-                    <label>Race Confidence (1=Very low → 5=Very high)</label>
+                    <label>Overall Race Confidence (1=Very low → 5=Very high)</label>
                     <div class="scale-container">
                         <button type="button" class="scale-btn scale-1" data-field="confidence" data-value="1">1</button>
                         <button type="button" class="scale-btn scale-2" data-field="confidence" data-value="2">2</button>
@@ -930,16 +1006,41 @@
                     </div>
                     <input type="hidden" id="confidence" name="confidence">
                 </div>
-
                 <div class="form-group">
-                    <label>Stress Level (1=Low stress (good) → 5=High stress (bad))</label>
+                    <label>Technical Confidence (1=Very low → 5=Very high)</label>
                     <div class="scale-container">
-                        <button type="button" class="scale-btn red-field scale-1" data-field="stress" data-value="1">1</button>
-                        <button type="button" class="scale-btn red-field scale-2" data-field="stress" data-value="2">2</button>
-                        <button type="button" class="scale-btn red-field scale-3" data-field="stress" data-value="3">3</button>
-                        <button type="button" class="scale-btn red-field scale-4" data-field="stress" data-value="4">4</button>
-                        <button type="button" class="scale-btn red-field scale-5" data-field="stress" data-value="5">5</button>
+                        <button type="button" class="scale-btn scale-1" data-field="confidence_technical" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="confidence_technical" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="confidence_technical" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="confidence_technical" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="confidence_technical" data-value="5">5</button>
                     </div>
+                    <input type="hidden" id="confidence_technical" name="confidence_technical">
+                </div>
+                <div class="form-group">
+                    <label>Tactical Confidence (1=Very low → 5=Very high)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="confidence_tactical" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="confidence_tactical" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="confidence_tactical" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="confidence_tactical" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="confidence_tactical" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="confidence_tactical" name="confidence_tactical">
+                </div>
+                <div class="form-group">
+                    <label>Physical Confidence (1=Very low → 5=Very high)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="confidence_physical" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="confidence_physical" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="confidence_physical" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="confidence_physical" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="confidence_physical" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="confidence_physical" name="confidence_physical">
+                </div>
+
+                <h3>Mental State</h3>
                     <input type="hidden" id="stress" name="stress">
                 </div>
 
@@ -1063,10 +1164,12 @@
         const SCALE_FIELDS = [
             'fitness_level', 'energy', 'flexibility', 'endurance', 'strength_upper', 'strength_core', 'strength_legs',
             'upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality',
+            'light_wind_upwind', 'light_wind_downwind', 'light_wind_confidence', 'heavy_wind_upwind', 'heavy_wind_downwind', 'heavy_wind_confidence',
             'equip_sail_tuning', 'equip_board_setup', 'equip_maintenance', 'equip_wind_reading',
             'rules_right_of_way', 'rules_penalties', 'rules_marks', 'rules_protest',
             'tactical_upwind', 'tactical_downwind', 'tactical_start', 'tactical_current',
-            'confidence', 'stress', 'focus', 'goal_clarity', 'motivation'
+            'confidence', 'confidence_technical', 'confidence_tactical', 'confidence_physical',
+            'stress', 'focus', 'goal_clarity', 'motivation'
         ];
 
         // Initialize
@@ -1416,10 +1519,11 @@
 
             const categories = {
                 'Physical': ['fitness_level', 'energy', 'flexibility', 'endurance', 'strength_upper', 'strength_core', 'strength_legs'],
-                'Technical': ['upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality'],
+                'Technical': ['upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality',
+                    'light_wind_upwind', 'light_wind_downwind', 'light_wind_confidence', 'heavy_wind_upwind', 'heavy_wind_downwind', 'heavy_wind_confidence'],
                 'Equipment': ['equip_sail_tuning', 'equip_board_setup', 'equip_maintenance', 'equip_wind_reading'],
                 'Racing': ['rules_right_of_way', 'rules_penalties', 'rules_marks', 'rules_protest', 'tactical_upwind', 'tactical_downwind', 'tactical_start', 'tactical_current'],
-                'Mental': ['confidence', 'stress', 'focus', 'goal_clarity', 'motivation']
+                'Mental': ['confidence', 'confidence_technical', 'confidence_tactical', 'confidence_physical', 'stress', 'focus', 'goal_clarity', 'motivation']
             };
 
             Object.entries(categories).forEach(([category, fields]) => {
