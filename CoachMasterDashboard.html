@@ -3341,8 +3341,13 @@
         // ============================================================================
         // FOOTER & INITIALIZATION
         // ============================================================================
-        document.getElementById('todayDate').textContent = '2026-03-29';
-        document.getElementById('daysToEvent').textContent = '5';
+        document.getElementById('todayDate').textContent = formatDate(TODAY);
+        const EVENT_START = new Date('2026-04-03');
+        const daysLeft = Math.ceil((EVENT_START - TODAY) / (1000 * 60 * 60 * 24));
+        document.getElementById('daysToEvent').textContent = daysLeft > 0 ? daysLeft : 'D-Day!';
+        // Set date pickers to today
+        document.getElementById('tab1DatePicker').value = formatDate(TODAY);
+        document.getElementById('tab4FormDate').value = formatDate(TODAY);
 
         // Responsive window resize handler
         window.addEventListener('resize', () => {
