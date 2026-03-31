@@ -2821,10 +2821,22 @@
 
         function renderTab2Individual() {
             const athlete = tab2SelectedAthlete;
+            const profileEl = document.getElementById('individualProfile');
+            // Show/hide loading overlay without destroying DOM
+            let overlay = document.getElementById('profileLoadingOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'profileLoadingOverlay';
+                overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(11,17,32,0.95);display:flex;align-items:center;justify-content:center;z-index:10;border-radius:12px;';
+                overlay.innerHTML = '<div style="text-align:center;font-size:16px;color:#F59E0B;">⚠️ No athlete data loaded yet. Waiting for live data...</div>';
+                profileEl.style.position = 'relative';
+                profileEl.appendChild(overlay);
+            }
             if (!athlete) {
-                document.getElementById('individualProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">⚠️ No athlete data loaded yet. Waiting for live data...</div>';
+                overlay.style.display = 'flex';
                 return;
             }
+            overlay.style.display = 'none';
 
             // === PROFILE CARD ===
             const photoEl = document.getElementById('profilePhoto');
