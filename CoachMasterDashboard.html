@@ -748,7 +748,7 @@
 
         .calendar-day.rest { background: #0B1120; }
         .calendar-day.light { background: rgba(255, 107, 0, 0.1); }
-        .calendar-day.heavy { background: rgba(240, 136, 62, 0.1); }
+        .calendar-day.practice { background: rgba(59, 130, 246, 0.1); }
         .calendar-day.race { background: rgba(248, 81, 73, 0.1); }
         .calendar-day.today { border: 2px solid #FF6B00; }
 
@@ -1657,7 +1657,7 @@
                         <span>Light Training</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="width: 16px; height: 16px; background: rgba(240, 136, 62, 0.3); border: 1px solid #f0883e; border-radius: 3px;"></div>
+                        <div style="width: 16px; height: 16px; background: rgba(59, 130, 246, 0.3); border: 1px solid #3B82F6; border-radius: 3px;"></div>
                         <span>Heavy Training</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
@@ -1687,16 +1687,26 @@
                     <input type="time" id="tab4FormTime" value="09:00">
                 </div>
                 <div class="form-group">
-                    <label>Session Type:</label>
-                    <select id="tab4FormType">
-                        <option value="light">Light Training</option>
-                        <option value="heavy">Heavy Training</option>
-                        <option value="race">Race Simulation</option>
-                        <option value="technique">Technique Drills</option>
-                        <option value="fitness">Fitness Training</option>
-                        <option value="rest">Rest & Recovery</option>
-                        <option value="others">Others</option>
-                    </select>
+                    <label style="font-size:15px;font-weight:600;margin-bottom:8px;display:block;">Session Type:</label>
+                    <input type="hidden" id="tab4FormType" value="physical">
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+                        <div class="session-type-card active" data-type="physical" style="background:#1F2937;border:2px solid #FF6B00;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
+                            <div style="font-size:24px;margin-bottom:6px;">🏋️</div>
+                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Physical Training</div>
+                        </div>
+                        <div class="session-type-card" data-type="race" style="background:#111827;border:2px solid #374151;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
+                            <div style="font-size:24px;margin-bottom:6px;">🚩</div>
+                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Race Practice</div>
+                        </div>
+                        <div class="session-type-card" data-type="regatta" style="background:#111827;border:2px solid #374151;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
+                            <div style="font-size:24px;margin-bottom:6px;">🏆</div>
+                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Regatta</div>
+                        </div>
+                        <div class="session-type-card" data-type="others" style="background:#111827;border:2px solid #374151;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
+                            <div style="font-size:24px;margin-bottom:6px;">📋</div>
+                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Others</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Notes:</label>
@@ -2739,6 +2749,10 @@
 
         function renderTab2Individual() {
             const athlete = tab2SelectedAthlete;
+            if (!athlete) {
+                document.getElementById('individualProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">\u26A0\uFE0F No athlete data loaded yet. Waiting for live data...</div>';
+                return;
+            }
 
             // === PROFILE CARD ===
             const photoEl = document.getElementById('profilePhoto');
@@ -3056,6 +3070,10 @@
         });
 
         function renderTab2Group() {
+            if (!tab2SelectedAthlete) {
+                document.getElementById('groupProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">\u26A0\uFE0F No athlete data loaded yet.</div>';
+                return;
+            }
             // Group comparison: skills by class
             const selectedClass = tab2SelectedAthlete.class;
             const classAthletes = DATA.athletes.filter(a => a.class === selectedClass);
@@ -3113,6 +3131,7 @@
 
         function updateTab3() {
             const athlete = tab3SelectedAthlete;
+            if (!athlete) return;
             const surveys = DATA.surveys?.filter(s => s.athleteId === athlete.id) || [];
             const survey = surveys.length > 0 ? surveys[surveys.length - 1] : {};
 
@@ -3483,11 +3502,12 @@
                 let icon = '';
                 if (sessionCount > 0) {
                     const type = sessions[0].type;
-                    if (type === 'heavy') dayClass = 'calendar-day heavy';
-                    else if (type === 'race') dayClass = 'calendar-day race';
+                    if (type === 'regatta') dayClass = 'calendar-day race';
+                    else if (type === 'race') dayClass = 'calendar-day practice';
+                    else if (type === 'physical') dayClass = 'calendar-day light';
                     else dayClass = 'calendar-day light';
 
-                    icon = type === 'race' ? '🏁' : type === 'heavy' ? '⚡' : '💧';
+                    icon = type === 'regatta' ? '🏆' : type === 'race' ? '🚩' : type === 'physical' ? '🏋️' : '📋';
                 }
 
                 if (isToday) dayClass += ' today';
@@ -3523,8 +3543,8 @@
             const sessionsHtml = sessions.length > 0
                 ? sessions.map(s => `
                     <div class="detail-session">
-                        <div style="font-weight: 600; color: #F1F5F9;">${s.time} - ${s.type.toUpperCase()}</div>
-                        <div class="detail-session-time">${s.notes}</div>
+                        <div style="font-weight: 600; color: #F1F5F9; font-size: 15px;">${s.time} \u2014 ${typeLabels[s.type] || s.type}</div>
+                        <div class="detail-session-time" style="color: #94A3B8; margin-top: 4px;">${s.notes}</div>
                     </div>
                 `).join('')
                 : '<div class="no-data">No sessions scheduled</div>';
@@ -3566,18 +3586,36 @@
         });
 
         // Initialize Tab 4
-        // Add some sample sessions
+        // Add sample sessions with new session types
         tab4Sessions[formatDate(TODAY)] = [
-            { time: '09:00', type: 'heavy', notes: 'Morning training - start line practice' },
-            { time: '14:30', type: 'technique', notes: 'Afternoon technique drills' }
+            { time: '09:00', type: 'physical', notes: 'Morning physical training \u2014 warm up + drills' },
+            { time: '14:30', type: 'race', notes: 'Afternoon race practice \u2014 start line & upwind' }
         ];
         const _tomorrow = new Date(TODAY); _tomorrow.setDate(_tomorrow.getDate() + 1);
         tab4Sessions[formatDate(_tomorrow)] = [
-            { time: '10:00', type: 'light', notes: 'Recovery session' }
+            { time: '10:00', type: 'race', notes: 'Pre-competition race practice' }
         ];
-        tab4Sessions['2026-04-02'] = [
-            { time: '09:00', type: 'race', notes: 'Championship heats begin' }
+        tab4Sessions['2026-04-03'] = [
+            { time: '09:00', type: 'regatta', notes: 'Championship Day 1 \u2014 Registration & Measurement' }
         ];
+        tab4Sessions['2026-04-04'] = [
+            { time: '09:00', type: 'regatta', notes: 'Championship Day 2 \u2014 Racing begins' }
+        ];
+
+        // Session type card selection handler
+        document.querySelectorAll('.session-type-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.session-type-card').forEach(c => {
+                    c.style.border = '2px solid #374151';
+                    c.style.background = '#111827';
+                    c.classList.remove('active');
+                });
+                card.style.border = '2px solid #FF6B00';
+                card.style.background = '#1F2937';
+                card.classList.add('active');
+                document.getElementById('tab4FormType').value = card.dataset.type;
+            });
+        });
 
         renderCalendar();
 
