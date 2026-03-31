@@ -187,7 +187,7 @@
             margin-top: 2px;
         }
 
-        /* âââ COMPACT INLINE FILTER BAR âââ */
+        /* &mdash;&mdash;&mdash; COMPACT INLINE FILTER BAR &mdash;&mdash;&mdash; */
         .filter-bar {
             display: flex;
             align-items: center;
@@ -278,7 +278,7 @@
             box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
         }
 
-        /* âââ ATHLETE STATUS TABLE âââ */
+        /* &mdash;&mdash;&mdash; ATHLETE STATUS TABLE &mdash;&mdash;&mdash; */
         .athlete-table-wrap {
             overflow-x: auto;
             margin-top: 16px;
@@ -1056,8 +1056,8 @@
         <header>
             <div class="header-content">
                 <div class="header-title">
-                    <h1>ð®ð³ FSS Athlete Management System</h1>
-                    <div class="subtitle" style="line-height:1.6">Faster, Stronger &amp; Smarter Â· Developed by DannyOk<br><span style="font-size:14px;color:#FF6B00">2026 T293 World Championship â FoÃ§a, Turkey Â· April 3-9</span></div>
+                    <h1>&#x1F1EE;&#x1F1F3; FSS Athlete Management System</h1>
+                    <div class="subtitle" style="line-height:1.6">Faster, Stronger &amp; Smarter &middot; Developed by DannyOk<br><span style="font-size:14px;color:#FF6B00">2026 T293 World Championship &mdash; Fo&ccedil;a, Turkey &middot; April 3-9</span></div>
                 </div>
                 <div class="header-info">
                     <div class="info-block">
@@ -1087,7 +1087,7 @@
             <button class="tab" data-tab="tab3" style="position:relative">Survey</button>
             <button class="tab" data-tab="tab4" style="position:relative">Calendar</button>
             <button class="tab" data-tab="tab5" style="position:relative">Wind</button>
-            <button class="tab" data-tab="tab6" style="position:relative">ð Log <span id="logBadge" class="tab-badge" style="display:none"></span></button>
+            <button class="tab" data-tab="tab6" style="position:relative">&#x1F4DD; Log <span id="logBadge" class="tab-badge" style="display:none"></span></button>
         </div>
 
         <!-- TAB 1: TODAY'S CONDITION + TRAINING LOAD -->
@@ -1095,18 +1095,18 @@
             <!-- TODAY'S CHECK-IN STATUS -->
             <div class="checkin-panel">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-                    <div class="checkin-title">ð TODAY'S CHECK-IN STATUS</div>
+                    <div class="checkin-title">&#x1F4CB; TODAY'S CHECK-IN STATUS</div>
                     <div style="font-size:28px;font-weight:800;color:#FF6B00" id="checkinCount">0 / 0</div>
                 </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                     <div>
-                        <div style="font-size:14px;font-weight:700;color:#10B981;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">â SUBMITTED</div>
+                        <div style="font-size:14px;font-weight:700;color:#10B981;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">&#x2705; SUBMITTED</div>
                         <div id="checkinSubmitted" style="display:flex;flex-wrap:wrap;gap:6px">
                             <span style="color:#94A3B8;font-size:15px">Loading...</span>
                         </div>
                     </div>
                     <div>
-                        <div style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">â ï¸ MISSING</div>
+                        <div style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">&#x26A0;&#xFE0F; MISSING</div>
                         <div id="checkinMissing" style="display:flex;flex-wrap:wrap;gap:6px">
                             <span style="color:#94A3B8;font-size:15px">Loading...</span>
                         </div>
@@ -1161,7 +1161,7 @@
                     <div class="overview-subtext">Team Average</div>
                 </div>
                 <div class="overview-card">
-                    <div class="overview-label">â ï¸ Alerts</div>
+                    <div class="overview-label">&#x26A0;&#xFE0F; Alerts</div>
                     <div class="overview-value" id="tab1AlertCount" style="color: #f85149;">2</div>
                     <div class="overview-subtext">Needs Attention</div>
                 </div>
@@ -1169,26 +1169,26 @@
 
             <!-- ATHLETE STATUS TABLE -->
             <div class="card">
-                <div class="card-title">âï¸ Athlete Status Overview</div>
+                <div class="card-title">&#x2699; Athlete Status Overview</div>
                 <div class="athlete-table-wrap">
                     <table class="athlete-status-table" id="tab1AthleteTable">
                         <thead>
                             <tr>
                                 <th data-sort="status" style="cursor:default"></th>
-                                <th data-sort="name">Athlete <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="class">Class <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="wellness">Wellness <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="readiness">Readiness <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="sleepHrs">Sleep <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="sleepQuality">Sleep Q <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="fatigue">Fatigue <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="soreness">Soreness <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="mood">Mood <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="stress">Stress <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="hydration">Hydration <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="weight">Weight <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="acwr">ACWR <span class="sort-icon">â²â¼</span></th>
-                                <th data-sort="alertCount">Status <span class="sort-icon">â²â¼</span></th>
+                                <th data-sort="name">Athlete <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="class">Class <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="wellness">Wellness <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="readiness">Readiness <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="sleepHrs">Sleep <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="sleepQuality">Sleep Q <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="fatigue">Fatigue <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="soreness">Soreness <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="mood">Mood <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="stress">Stress <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="hydration">Hydration <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="weight">Weight <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="acwr">ACWR <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                                <th data-sort="alertCount">Status <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
                             </tr>
                         </thead>
                         <tbody id="tab1AthleteTableBody">
@@ -1200,7 +1200,7 @@
 
             <!-- CHARTS -->
             <div class="card">
-                <div class="card-title">ð Team Wellness Trend (Last 30 Days)</div>
+                <div class="card-title">&#x1F4C8; Team Wellness Trend (Last 30 Days)</div>
                 <div class="chart-container">
                     <canvas id="tab1WellnessChart"></canvas>
                 </div>
@@ -1208,13 +1208,13 @@
 
             <div class="two-column">
                 <div class="card">
-                    <div class="card-title">â¡ Daily RPE (Rate of Perceived Exertion)</div>
+                    <div class="card-title">&#x26A1; Daily RPE (Rate of Perceived Exertion)</div>
                     <div class="chart-container">
                         <canvas id="tab1LoadChart"></canvas>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-title">ð¯ ACWR Zone Distribution</div>
+                    <div class="card-title">&#x1F3AF; ACWR Zone Distribution</div>
                     <div class="chart-container">
                         <canvas id="tab1ACWRChart"></canvas>
                     </div>
@@ -1223,7 +1223,7 @@
 
             <!-- ROLLING CHANGES (AIS-style) -->
             <div class="card">
-                <div class="card-title">ð Rolling Changes â <span id="rollingDateRange" style="color:#FF6B00;font-weight:600"></span></div>
+                <div class="card-title">&#x1F4CA; Rolling Changes &mdash; <span id="rollingDateRange" style="color:#FF6B00;font-weight:600"></span></div>
                 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px" id="rollingChangesGrid">
                     <div class="overview-card" style="border-left:4px solid #FF6B00">
                         <div class="overview-label">Training Load</div>
@@ -1270,7 +1270,7 @@
 
             <!-- MONITORING FLAGS (AIS-style) -->
             <div class="card">
-                <div class="card-title">ð© Monitoring Flags & Alerts</div>
+                <div class="card-title">&#x1F6A9; Monitoring Flags & Alerts</div>
                 <div class="two-column">
                     <div>
                         <h4 style="color:#F1F5F9;margin-bottom:12px;font-size:14px">Active Flags</h4>
@@ -1289,7 +1289,7 @@
 
             <!-- TRAINING LOAD TIMELINE (AIS-style) -->
             <div class="card">
-                <div class="card-title">ð Training Load Timeline â Daily Load + ATL/CTL</div>
+                <div class="card-title">&#x1F4C8; Training Load Timeline &mdash; Daily Load + ATL/CTL</div>
                 <div style="height:400px;position:relative">
                     <canvas id="tab1LoadTimeline"></canvas>
                 </div>
@@ -1300,7 +1300,7 @@
         <!-- TAB 2: ATHLETE PROFILE + PERFORMANCE CORRELATION -->
         <div id="tab2" class="tab-content">
             <div class="card">
-                <div class="card-title">ð Athlete Selection</div>
+                <div class="card-title">&#x1F50D; Athlete Selection</div>
                 <div class="selector-group">
                     <label>View Type:</label>
                     <select id="tab2ViewType">
@@ -1322,7 +1322,7 @@
                     <!-- Top band with gradient -->
                     <div style="background:linear-gradient(135deg,#FF6B00,#FF9500,#FBBF24);padding:16px 24px;display:flex;align-items:center;gap:20px">
                         <div id="profilePhoto" style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.4);background:#0B1120;flex-shrink:0;display:flex;align-items:center;justify-content:center">
-                            <span style="font-size:32px">ð</span>
+                            <span style="font-size:32px">&#x1F3C4;</span>
                         </div>
                         <div style="flex:1;min-width:0">
                             <div id="profileName" style="font-size:22px;font-weight:800;color:#0B1120;letter-spacing:-0.3px"></div>
@@ -1337,7 +1337,7 @@
 
                 <!-- DYNAMIC CORRELATION EXPLORER -->
                 <div class="card">
-                    <div class="card-title" id="correlationTitle">ð¬ Correlation: Wind Speed (kts) vs Satisfaction</div>
+                    <div class="card-title" id="correlationTitle">&#x1F52C; Correlation: Wind Speed (kts) vs Satisfaction</div>
                     <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
                         <div style="display:flex;align-items:center;gap:8px">
                             <label style="color:#94A3B8;font-size:13px;font-weight:600">X-Axis:</label>
@@ -1410,7 +1410,7 @@
 
                 <!-- DYNAMIC HEATMAP EXPLORER -->
                 <div class="card">
-                    <div class="card-title" id="heatmapTitle">ð¥ Heatmap: Wind Range Ã Downhaul â Performance</div>
+                    <div class="card-title" id="heatmapTitle">&#x1F525; Heatmap: Wind Range &times; Downhaul &rarr; Performance</div>
                     <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
                         <div style="display:flex;align-items:center;gap:6px">
                             <label style="color:#94A3B8;font-size:12px;font-weight:600">Rows:</label>
@@ -1451,7 +1451,7 @@
 
                 <!-- SETUP INSIGHTS -->
                 <div class="card">
-                    <div class="card-title">ð¡ Optimal Setup Summary</div>
+                    <div class="card-title">&#x1F4A1; Optimal Setup Summary</div>
                     <div id="tab2SetupInsight" style="background: #0B1120; border: 1px solid #1F2937; padding: 20px; border-radius: 8px; font-size: 14px; line-height: 1.8; color: #F1F5F9;">
                         <!-- Will be populated by JS -->
                     </div>
@@ -1459,7 +1459,7 @@
 
                 <!-- SKILL RADAR + PERFORMANCE -->
                 <div class="card">
-                    <div class="card-title">ð Technical Skills Profile</div>
+                    <div class="card-title">&#x1F4CA; Technical Skills Profile</div>
                     <div class="two-column">
                         <div>
                             <h4 style="color: #F1F5F9; margin-bottom: 12px; font-size: 14px;">Skill Radar</h4>
@@ -1478,7 +1478,7 @@
 
                 <!-- DIFFICULTY FREQUENCY -->
                 <div class="card">
-                    <div class="card-title">â ï¸ Most Common Difficulties</div>
+                    <div class="card-title">&#x26A0;&#xFE0F; Most Common Difficulties</div>
                     <div class="chart-container">
                         <canvas id="tab2DifficultyChart"></canvas>
                     </div>
@@ -1488,7 +1488,7 @@
             <!-- GROUP COMPARISON SECTION -->
             <div id="groupProfile" style="display: none;">
                 <div class="card">
-                    <div class="card-title">ð¥ Class Average Comparison</div>
+                    <div class="card-title">&#x1F465; Class Average Comparison</div>
                     <div class="chart-container wide">
                         <canvas id="tab2GroupComparisonChart"></canvas>
                     </div>
@@ -1497,7 +1497,7 @@
 
             <!-- PARALLEL COORDINATES (moved from Correlate tab) -->
             <div class="card">
-                <div class="card-title">ð¬ Multi-Variable Correlation â Parallel Coordinates</div>
+                <div class="card-title">&#x1F52C; Multi-Variable Correlation &mdash; Parallel Coordinates</div>
                 <div style="margin-bottom:16px">
                     <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
                         <label style="color:#94A3B8;font-size:13px;font-weight:600">Select Axes (2-6):</label>
@@ -1534,7 +1534,7 @@
         <!-- TAB 3: SURVEY ANALYSIS -->
         <div id="tab3" class="tab-content">
             <div class="card">
-                <div class="card-title">ð¯ Select Athlete for Detailed Analysis</div>
+                <div class="card-title">&#x1F3AF; Select Athlete for Detailed Analysis</div>
                 <div class="selector-group">
                     <label>Athlete:</label>
                     <select id="tab3AthleteSelect">
@@ -1543,7 +1543,7 @@
                     <!-- Mini profile badge -->
                     <div id="tab3MiniProfile" style="display:flex;align-items:center;gap:10px;margin-left:16px;background:#0B1120;border:1px solid #1F2937;border-radius:8px;padding:6px 14px">
                         <div id="tab3MiniPhoto" style="width:32px;height:32px;border-radius:50%;overflow:hidden;background:#111827;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                            <span style="font-size:14px">ð</span>
+                            <span style="font-size:14px">&#x1F3C4;</span>
                         </div>
                         <div>
                             <div id="tab3MiniName" style="font-size:14px;font-weight:700;color:#F1F5F9"></div>
@@ -1555,7 +1555,7 @@
 
             <!-- SKILL RADAR with COMPARISON -->
             <div class="card">
-                <div class="card-title">ð All Skills Profile (Pre-Post Survey)</div>
+                <div class="card-title">&#x1F4C8; All Skills Profile (Pre-Post Survey)</div>
                 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
                     <div style="display:flex;align-items:center;gap:8px">
                         <label style="color:#94A3B8;font-size:13px;font-weight:600">Compare With:</label>
@@ -1586,7 +1586,7 @@
 
             <!-- PRIORITY NEEDS -->
             <div class="card">
-                <div class="card-title">ð´ Priority Training Needs (Ranked)</div>
+                <div class="card-title">&#x1F534; Priority Training Needs (Ranked)</div>
                 <div class="chart-container">
                     <canvas id="tab3PriorityChart"></canvas>
                 </div>
@@ -1597,7 +1597,7 @@
 
             <!-- SKILL COMPARISON -->
             <div class="card">
-                <div class="card-title">ð Individual vs Team Average vs Class Average</div>
+                <div class="card-title">&#x1F4CA; Individual vs Team Average vs Class Average</div>
                 <div class="chart-container wide">
                     <canvas id="tab3ComparisonChart"></canvas>
                 </div>
@@ -1605,7 +1605,7 @@
 
             <!-- PHYSICAL ASSESSMENT -->
             <div class="card">
-                <div class="card-title">ðª Physical Assessment</div>
+                <div class="card-title">&#x1F4AA; Physical Assessment</div>
                 <div class="two-column">
                     <div>
                         <h4 style="color: #F1F5F9; margin-bottom: 12px; font-size: 14px;">Grip Strength - All Athletes</h4>
@@ -1624,7 +1624,7 @@
 
             <!-- CONCERNS & FEEDBACK -->
             <div class="card">
-                <div class="card-title">ð£ï¸ Concerns & Support Needed</div>
+                <div class="card-title">&#x1F5E3; Concerns & Support Needed</div>
                 <div id="tab3ConcernsBox">
                     <!-- Will be populated by JS -->
                 </div>
@@ -1634,11 +1634,11 @@
         <!-- TAB 4: TRAINING CALENDAR -->
         <div id="tab4" class="tab-content">
             <div class="card">
-                <div class="card-title">ð Training Calendar - March 2026</div>
+                <div class="card-title">&#x1F4C5; Training Calendar - March 2026</div>
                 <div class="selector-group">
-                    <button class="btn-secondary" id="tab4PrevMonth" style="border: none; padding: 8px 16px; background: #1F2937;">â Previous</button>
+                    <button class="btn-secondary" id="tab4PrevMonth" style="border: none; padding: 8px 16px; background: #1F2937;">&larr; Previous</button>
                     <div id="tab4CurrentMonth" style="font-size: 18px; font-weight: 600; flex: 1; text-align: center;">March 2026</div>
-                    <button class="btn-secondary" id="tab4NextMonth" style="border: none; padding: 8px 16px; background: #1F2937;">Next â</button>
+                    <button class="btn-secondary" id="tab4NextMonth" style="border: none; padding: 8px 16px; background: #1F2937;">Next &rarr;</button>
                 </div>
 
                 <!-- CALENDAR GRID -->
@@ -1654,15 +1654,15 @@
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: rgba(255, 107, 0, 0.3); border: 1px solid #FF6B00; border-radius: 3px;"></div>
-                        <span>ðï¸ Physical Training</span>
+                        <span>&#x1F3CB;&#xFE0F; Physical Training</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: rgba(59, 130, 246, 0.3); border: 1px solid #3B82F6; border-radius: 3px;"></div>
-                        <span>ð© Race Practice</span>
+                        <span>&#x1F6A9; Race Practice</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: rgba(248, 81, 73, 0.3); border: 1px solid #f85149; border-radius: 3px;"></div>
-                        <span>ð Regatta</span>
+                        <span>&#x1F3C6; Regatta</span>
                     </div>
                 </div>
             </div>
@@ -1677,7 +1677,7 @@
 
             <!-- ADD SESSION FORM -->
             <div class="card">
-                <div class="card-title">â Add Training Session</div>
+                <div class="card-title">&#x2795; Add Training Session</div>
                 <div class="form-group">
                     <label>Date:</label>
                     <input type="date" id="tab4FormDate" value="" lang="en">
@@ -1691,16 +1691,16 @@
                     <input type="hidden" id="tab4FormType" value="physical">
                     <div style="display:flex;gap:8px;flex-wrap:wrap;">
                         <div class="session-type-card active" data-type="physical" style="background:#1F2937;border:1px solid #FF6B00;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#F1F5F9;">
-                            ðï¸ Physical Training
+                            &#x1F3CB;&#xFE0F; Physical Training
                         </div>
                         <div class="session-type-card" data-type="race" style="background:#111827;border:1px solid #374151;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#94A3B8;">
-                            ð© Race Practice
+                            &#x1F6A9; Race Practice
                         </div>
                         <div class="session-type-card" data-type="regatta" style="background:#111827;border:1px solid #374151;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#94A3B8;">
-                            ð Regatta
+                            &#x1F3C6; Regatta
                         </div>
                         <div class="session-type-card" data-type="others" style="background:#111827;border:1px solid #374151;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#94A3B8;">
-                            ð Others
+                            &#x1F4CB; Others
                         </div>
                     </div>
                 </div>
@@ -1719,7 +1719,8 @@
             <div style="background:#111827;border:1px solid #1F2937;border-radius:12px;padding:16px;margin-bottom:12px">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
                     <h2 style="color:#FF6B00;font-size:18px;margin:0">Foca Live Forecast</h2>
-                    <div style="display:flex;gap:8px">
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <span style="color:#94A3B8;font-size:11px">Lat 38.6782 &middot; Lon 26.7389</span>
                         <a href="https://windy.app/forecast/spot/8505907/Foca+Turkey" target="_blank" style="background:#FF6B00;color:#fff;text-decoration:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px">Open Windy.app</a>
                         <a href="quick_obs.html" target="_blank" style="background:#238636;color:#fff;text-decoration:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px">Coach Obs</a>
                     </div>
@@ -1736,7 +1737,7 @@
             </div>
             <!-- Wind Tracker Dashboard -->
             <div style="background:#111827;border:1px solid #1F2937;border-radius:12px;padding:16px">
-                <h2 style="color:#FF6B00;font-size:18px;margin:0 0 10px 0">Wind Tracker â Analysis &amp; Race Simulation</h2>
+                <h2 style="color:#FF6B00;font-size:18px;margin:0 0 10px 0">Wind Tracker &mdash; Analysis &amp; Race Simulation</h2>
                 <iframe src="wind_dashboard_v5.html"
                     style="width:100%;height:calc(100vh - 300px);min-height:600px;border:none;border-radius:8px;background:#0D1117"
                     loading="lazy" allowfullscreen></iframe>
@@ -1748,7 +1749,7 @@
             <div id="tab6Warning"></div>
 
             <div class="card">
-                <div class="card-title" style="font-size:18px;color:#FF6B00">ð Recent Training Logs</div>
+                <div class="card-title" style="font-size:18px;color:#FF6B00">&#x1F4DD; Recent Training Logs</div>
                 <div style="font-size:14px;color:#94A3B8;margin-bottom:16px">
                     Training log form: <a href="https://d990905.github.io/india-t293-coach/training_log.html" target="_blank" style="color:#FF6B00;text-decoration:underline">training_log.html</a>
                 </div>
@@ -1758,7 +1759,7 @@
             </div>
 
             <div class="card" style="margin-top:20px">
-                <div class="card-title" style="font-size:18px;color:#FF6B00">ðï¸ Coach Daily Notes</div>
+                <div class="card-title" style="font-size:18px;color:#FF6B00">&#x1F5D2; Coach Daily Notes</div>
                 <div id="tab6CoachNotes" style="margin-bottom:16px">
                     <div style="text-align:center;padding:20px;color:#94A3B8;font-size:15px">No coach notes available</div>
                 </div>
@@ -1790,72 +1791,92 @@
         };
 
         // Data transformation function
+        // Helper: get value from object supporting both snake_case and camelCase keys
+        function gv(obj, camelKey, snakeKey) {
+            return obj[camelKey] !== undefined ? obj[camelKey] : (snakeKey ? obj[snakeKey] : undefined);
+        }
+        // Helper: average of numeric values (ignores 0/null/undefined)
+        function avg(...vals) {
+            const valid = vals.filter(v => v && v > 0);
+            return valid.length > 0 ? Math.round(valid.reduce((a,b) => a+b, 0) / valid.length) : 0;
+        }
+
         function transformData() {
-            // Transform preSurvey data into surveys format
+            // Transform preSurvey/assessments data into surveys format
+            // API returns snake_case: athlete_id, start_quality, upwind_speed, etc.
             DATA.surveys = DATA.preSurvey.map(s => ({
-                athleteId: s.athleteId,
-                date: s.date,
-                startSkill: s.startSkill,
-                upwindSkill: s.upwindSkill,
-                downwindSkill: s.downwindSkill,
-                pumpingSkill: s.pumpingSkill,
-                tackingSkill: s.tackingSkill,
-                gybingSkill: s.gybingSkill,
-                lightWindSkill: s.lightWindSkill,
-                heavyWindSkill: s.heavyWindSkill,
-                raceManagement: s.raceManagement,
-                rulesKnowledge: s.rulesKnowledge,
-                physicalConfidence: s.physicalConfidence,
-                technicalConfidence: s.technicalConfidence,
-                tacticalConfidence: s.tacticalConfidence,
-                mentalConfidence: s.mentalConfidence,
-                equipmentReadiness: s.equipmentReadiness,
-                goalRank: s.goalRank
+                athleteId: s.athleteId || s.athlete_id || '',
+                date: s.date || '',
+                startSkill: Number(s.startSkill || s.start_quality || 0),
+                upwindSkill: Number(s.upwindSkill || avg(Number(s.upwind_speed||0), Number(s.upwind_control||0)) || 0),
+                downwindSkill: Number(s.downwindSkill || avg(Number(s.downwind_speed||0), Number(s.downwind_control||0)) || 0),
+                pumpingSkill: Number(s.pumpingSkill || s.pumping_tech || 0),
+                tackingSkill: Number(s.tackingSkill || s.tacking_quality || 0),
+                gybingSkill: Number(s.gybingSkill || s.gybing_quality || 0),
+                lightWindSkill: Number(s.lightWindSkill || s.equip_wind_reading || 0),
+                heavyWindSkill: Number(s.heavyWindSkill || s.endurance || 0),
+                raceManagement: Number(s.raceManagement || avg(Number(s.tactical_upwind||0), Number(s.tactical_downwind||0), Number(s.tactical_start||0), Number(s.tactical_current||0)) || 0),
+                rulesKnowledge: Number(s.rulesKnowledge || avg(Number(s.rules_right_of_way||0), Number(s.rules_penalties||0), Number(s.rules_marks||0), Number(s.rules_protest||0)) || 0),
+                physicalConfidence: Number(s.physicalConfidence || s.fitness_level || 0),
+                technicalConfidence: Number(s.technicalConfidence || avg(Number(s.equip_sail_tuning||0), Number(s.equip_board_setup||0)) || 0),
+                tacticalConfidence: Number(s.tacticalConfidence || s.focus || 0),
+                mentalConfidence: Number(s.mentalConfidence || s.confidence || 0),
+                equipmentReadiness: Number(s.equipmentReadiness || avg(Number(s.equip_sail_tuning||0), Number(s.equip_board_setup||0), Number(s.equip_maintenance||0)) || 0),
+                goalRank: s.goalRank || s.priority_ranking || '',
+                // Extra fields from API
+                motivation: Number(s.motivation || 0),
+                stress: Number(s.stress || 0),
+                energy: Number(s.energy || 0),
+                strengthSelf: s.strength_self || s.strengthSelf || '',
+                weaknessSelf: s.weakness_self || s.weaknessSelf || '',
+                coachLearning: s.coach_learning || s.coachLearning || '',
+                raceGoal: s.race_goal || s.raceGoal || '',
+                painAreas: s.pain_areas || s.painAreas || ''
             }));
 
-            // Extract performance from training data
+            // Extract performance from training data (supports both snake_case and camelCase)
             DATA.performance = DATA.training.map(t => ({
-                athleteId: t.athleteId,
-                date: t.date,
-                sessionType: t.sessionType,
-                performance: t.performance,
-                windSpeed: t.windSpeed,
-                windBand: t.windBand,
-                duration: t.duration,
-                rpe: t.rpe,
-                srpeLoad: t.srpeLoad,
-                waterTemp: t.waterTemp,
-                airTemp: t.airTemp,
-                equipmentSail: t.equipmentSail,
-                equipmentBoard: t.equipmentBoard,
-                techniqueFocus: t.techniqueFocus,
-                satisfaction: t.rpe
+                athleteId: t.athleteId || t.athlete_id || '',
+                date: t.date || '',
+                sessionType: t.sessionType || t.session_type || '',
+                performance: t.performance || 0,
+                windSpeed: t.windSpeed || t.wind_speed_avg || t.wind_speed_average || 0,
+                windBand: t.windBand || t.wind_band || '',
+                duration: t.duration || t.duration_min || 0,
+                rpe: Number(t.rpe || 0),
+                srpeLoad: Number(t.srpeLoad || t.srpe_load || 0),
+                waterTemp: t.waterTemp || t.water_temp || 0,
+                airTemp: t.airTemp || t.air_temp || 0,
+                equipmentSail: t.equipmentSail || t.equipment_sail || '',
+                equipmentBoard: t.equipmentBoard || t.equipment_board || '',
+                techniqueFocus: t.techniqueFocus || t.technique_focus || '',
+                satisfaction: Number(t.satisfaction || t.rpe || 0)
             }));
 
             // Extract physical data from preSurvey
             DATA.physical = DATA.preSurvey.map(s => ({
-                athleteId: s.athleteId,
-                gripStrength: s.gripStrength,
-                balanceTest: s.balanceTest
+                athleteId: s.athleteId || s.athlete_id || '',
+                gripStrength: Number(s.gripStrength || s.strength_upper || 0),
+                balanceTest: Number(s.balanceTest || s.flexibility || 0)
             }));
 
             // Extract concerns and needs from preSurvey
-            DATA.concerns = DATA.preSurvey.filter(s => s.concerns).map(s => ({
-                athleteId: s.athleteId,
-                text: s.concerns,
+            DATA.concerns = DATA.preSurvey.filter(s => s.concerns || s.pain_areas).map(s => ({
+                athleteId: s.athleteId || s.athlete_id || '',
+                text: s.concerns || s.pain_areas || '',
                 type: 'concern'
-            })).concat(DATA.preSurvey.filter(s => s.needsHelp).map(s => ({
-                athleteId: s.athleteId,
-                text: s.needsHelp,
+            })).concat(DATA.preSurvey.filter(s => s.needsHelp || s.coach_learning).map(s => ({
+                athleteId: s.athleteId || s.athlete_id || '',
+                text: s.needsHelp || s.coach_learning || '',
                 type: 'needsHelp'
             })));
 
             // Extract technique focus from training data (used as difficulties/challenges)
-            DATA.difficulties = DATA.training.filter(t => t.techniqueFocus).map(t => ({
-                athleteId: t.athleteId,
-                date: t.date,
-                text: t.techniqueFocus,
-                sessionType: t.sessionType
+            DATA.difficulties = DATA.training.filter(t => t.techniqueFocus || t.technique_focus).map(t => ({
+                athleteId: t.athleteId || t.athlete_id || '',
+                date: t.date || '',
+                text: t.techniqueFocus || t.technique_focus || '',
+                sessionType: t.sessionType || t.session_type || ''
             }));
 
             // Add photos to athletes
@@ -1886,21 +1907,33 @@
                     // Update athlete profiles from live data
                     if (liveData.athletes && liveData.athletes.length) {
                         DATA.athletes = liveData.athletes.map(a => ({
-                            id: a.id || a.sailNumber || '',
-                            name: a.name || '',
+                            id: a.athlete_id || a.id || a.sail_number || '',
+                            name: a.full_name || a.name || '',
+                            firstName: a.first_name || '',
+                            lastName: a.last_name || '',
                             gender: a.gender || '',
                             class: a.class || '',
                             age: a.age || 0,
-                            club: a.homeClub || a.club || '',
-                            sail: a.sailNumber || '',
-                            weight: a.weight || 0,
-                            photo: (typeof PHOTO_MAP !== 'undefined' && PHOTO_MAP[a.id]) || ''
+                            club: a.home_club || a.club || '',
+                            sail: a.sail_number || a.sailNumber || '',
+                            weight: a.weight_kg || a.weight || 0,
+                            height: a.height_cm || a.height || 0,
+                            experience: a.experience_years || a.experience || '',
+                            bestResult: a.best_ranking || a.bestResult || '',
+                            goals: a.goals || '',
+                            notes: a.notes || '',
+                            coach: a.coach || '',
+                            country: a.country || 'IND',
+                            photo: (typeof PHOTO_MAP !== 'undefined' && (PHOTO_MAP[a.athlete_id] || PHOTO_MAP[a.id])) || ''
                         }));
                     }
-                    // If live conditioning data exists, update it
-                    if (liveData.conditioning) DATA.conditioning = liveData.conditioning;
-                    if (liveData.training) DATA.training = liveData.training;
-                    if (liveData.preSurvey) DATA.preSurvey = liveData.preSurvey;
+                    // If live conditioning data exists, update it (API returns latestConditions, assessments)
+                    if (liveData.latestConditions && liveData.latestConditions.length) DATA.conditioning = liveData.latestConditions;
+                    if (liveData.conditioning && liveData.conditioning.length) DATA.conditioning = liveData.conditioning;
+                    if (liveData.recentTraining && liveData.recentTraining.length) DATA.training = liveData.recentTraining;
+                    if (liveData.training && liveData.training.length) DATA.training = liveData.training;
+                    if (liveData.assessments && liveData.assessments.length) DATA.preSurvey = liveData.assessments;
+                    if (liveData.preSurvey && liveData.preSurvey.length) DATA.preSurvey = liveData.preSurvey;
 
                     // Re-run transformations with updated data
                     transformData();
@@ -1918,7 +1951,7 @@
                     renderCalendar();
                     updateTab6();
                     if (statusEl) {
-                        statusEl.textContent = 'Live data loaded â (' + DATA.athletes.length + ' athletes)';
+                        statusEl.textContent = 'Live data loaded &#x2713; (' + DATA.athletes.length + ' athletes)';
                         statusEl.style.color = '#10b981';
                     }
                     console.log('Live data loaded from GAS:', Object.keys(liveData));
@@ -1927,7 +1960,7 @@
                 console.log('Live data fetch failed:', e.message);
                 const statusEl = document.getElementById('data-status');
                 if (statusEl) {
-                    statusEl.textContent = 'â ï¸ OFFLINE â Live data unavailable. Check network connection.';
+                    statusEl.textContent = '&#x26A0;&#xFE0F; OFFLINE &mdash; Live data unavailable. Check network connection.';
                     statusEl.style.color = '#EF4444';
                     statusEl.style.fontSize = '14px';
                     statusEl.style.fontWeight = '700';
@@ -1937,7 +1970,7 @@
                 const checkinMissing = document.getElementById('checkinMissing');
                 const checkinCount = document.getElementById('checkinCount');
                 if (checkinCount) checkinCount.textContent = '-- / --';
-                if (checkinSubmitted) checkinSubmitted.innerHTML = '<span style="color:#F59E0B;font-size:15px;font-weight:600">â ï¸ Cannot load data â check internet connection</span>';
+                if (checkinSubmitted) checkinSubmitted.innerHTML = '<span style="color:#F59E0B;font-size:15px;font-weight:600">&#x26A0;&#xFE0F; Cannot load data &mdash; check internet connection</span>';
                 if (checkinMissing) checkinMissing.innerHTML = '';
             }
         }
@@ -1991,8 +2024,26 @@
         }
 
         function getAthleteLatestWellness(athleteId) {
-            const records = DATA.conditioning.filter(c => c.athleteId === athleteId).sort((a, b) => b.date.localeCompare(a.date));
-            return records.length > 0 ? records[0] : null;
+            const records = DATA.conditioning.filter(c => (c.athleteId || c.athlete_id) === athleteId).sort((a, b) => (b.date||'').localeCompare(a.date||''));
+            if (records.length === 0) return null;
+            const r = records[0];
+            // Normalize snake_case to camelCase for conditioning fields
+            return {
+                ...r,
+                athleteId: r.athleteId || r.athlete_id,
+                date: r.date || '',
+                wellness: Number(r.wellness || r.overall_wellness || 0),
+                sleepHrs: parseFloat(r.sleepHrs || r.sleep_hours || r.sleep_hrs || 0),
+                sleepQuality: Number(r.sleepQuality || r.sleep_quality || 0),
+                fatigue: Number(r.fatigue || r.fatigue_level || 0),
+                musclePain: Number(r.musclePain || r.muscle_pain || r.soreness || 0),
+                mood: Number(r.mood || r.mood_level || 0),
+                stress: Number(r.stress || r.stress_level || 0),
+                hydration: Number(r.hydration || r.urine_color || r.urineColor || 0),
+                weight: Number(r.weight || r.body_weight || r.weight_kg || 0),
+                readiness: Number(r.readiness || r.overall_readiness || 0),
+                acwr: parseFloat(r.acwr || 0)
+            };
         }
 
         function getWellnessStatus(wellness) {
@@ -2064,7 +2115,7 @@
         let tab1Period = 30;
         let tab1DateSelected = formatDate(TODAY);
 
-        // ââ Sortable table state ââ
+        // &mdash;&mdash; Sortable table state &mdash;&mdash;
         let tab1SortKey = null;   // current sort column key
         let tab1SortDir = 'desc'; // 'asc' or 'desc'
         let tab1RowData = [];     // cached computed row data
@@ -2086,7 +2137,7 @@
                     document.querySelectorAll('#tab1AthleteTable thead th').forEach(h => h.classList.remove('sort-active'));
                     th.classList.add('sort-active');
                     const icon = th.querySelector('.sort-icon');
-                    if (icon) icon.textContent = tab1SortDir === 'asc' ? 'â²' : 'â¼';
+                    if (icon) icon.textContent = tab1SortDir === 'asc' ? '&#x25B2;' : '&#x25BC;';
                     // Re-render sorted rows (no recalc)
                     renderTab1TableRows();
                 });
@@ -2100,7 +2151,7 @@
                 const status = getWellnessStatus(wellness);
                 const acwrVal = latest ? parseFloat((latest.acwr || 1.0).toFixed(2)) : 0;
 
-                // All wellness fields from conditioning data â no fake values
+                // All wellness fields from conditioning data &mdash; no fake values
                 const sleepHrs = parseFloat(latest?.sleepHrs || 0);
                 const sleepQuality = latest?.sleepQuality || 0;
                 const fatigue = latest?.fatigue || 0;
@@ -2108,7 +2159,7 @@
                 const mood = latest?.mood || 0;
                 const stress = latest?.stress || 0;
                 const hydration = latest?.hydration || latest?.urineColor || 0;
-                const weight = latest?.weight || (athlete.weight || 50);
+                const weight = latest?.weight || athlete.weight || 0;
                 const readiness = parseFloat(Math.max(1, Math.min(10, (wellness / 10).toFixed(1))));
 
                 const alerts = [];
@@ -2165,7 +2216,7 @@
 
             // Helper: show dash for missing/zero values
             const dv = (v, unit, scale) => {
-                if (!v || v === 0) return `<span style="color:#4B5563">â</span>`;
+                if (!v || v === 0) return `<span style="color:#4B5563">&mdash;</span>`;
                 if (scale) return `${v}/${scale}`;
                 return `${typeof v === 'number' && v % 1 !== 0 ? v.toFixed(1) : v}${unit || ''}`;
             };
@@ -2180,20 +2231,20 @@
                 const wellnessBadge = wellness >= 70 ? 'green' : wellness >= 50 ? 'orange' : 'red';
                 const readinessBadge = readiness >= 7 ? 'green' : readiness >= 5 ? 'orange' : 'red';
                 const statusBadge = !isAlert ? 'green' : alertCount >= 2 ? 'red' : 'orange';
-                const statusText = !isAlert ? 'â Good' : alertCount >= 2 ? 'â ï¸ Alert' : 'â¡ Watch';
+                const statusText = !isAlert ? '&#x2705; Good' : alertCount >= 2 ? '&#x26A0;&#xFE0F; Alert' : '&#x26A1; Watch';
                 const urineColors = ['#b8f5b0','#e8f59c','#f5e67c','#f5b84a','#ef4444'];
                 const urineColor = hydration > 0 ? urineColors[Math.min(hydration - 1, 4)] : '#374151';
                 const urineDark = hydration >= 4;
                 const clsLower = (athlete.class || '').replace(/[^a-zA-Z0-9]/g,'').toLowerCase();
                 const clsBadgeClass = clsLower.includes('u13') ? 'u13' : clsLower.includes('u15') ? 'u15' : clsLower.includes('u17') ? 'u17' : 'u19';
-                const genderIcon = athlete.gender === 'F' ? 'â' : 'â';
+                const genderIcon = athlete.gender === 'F' ? '&#x2640;' : '&#x2642;';
                 return `
                     <tr class="${isAlert ? 'row-alert' : ''}" style="cursor:pointer" onclick="showAthleteConditionPopup('${athlete.id}')">
                         <td><span class="status-dot ${status.dot}" style="width:10px;height:10px;margin:0" title="${status.label}"></span></td>
                         <td>
                             <div class="tbl-athlete">
                                 <div class="tbl-athlete-photo">
-                                    ${athlete.photo ? `<img src="${athlete.photo}">` : `<span style="font-size:14px">ð</span>`}
+                                    ${athlete.photo ? `<img src="${athlete.photo}">` : `<span style="font-size:14px">&#x1F3C4;</span>`}
                                 </div>
                                 <span class="tbl-athlete-name">${athlete.name}</span>
                             </div>
@@ -2202,22 +2253,22 @@
                         <td>
                             <div class="tbl-bar-wrap" style="justify-content:center">
                                 <div class="tbl-bar" style="width:50px"><div class="tbl-bar-fill" style="width:${wellness}%;background:${wellnessColor}"></div></div>
-                                <span class="tbl-bar-value" style="color:${wellnessColor}">${wellness > 0 ? Math.round(wellness) + '%' : '<span style="color:#4B5563">â</span>'}</span>
+                                <span class="tbl-bar-value" style="color:${wellnessColor}">${wellness > 0 ? Math.round(wellness) + '%' : '<span style="color:#4B5563">&mdash;</span>'}</span>
                             </div>
                         </td>
-                        <td><span class="tbl-sbadge ${readinessBadge}">${readiness > 1 ? readiness + '/10' : 'â'}</span></td>
-                        <td>${sleepHrs > 0 ? sleepHrs.toFixed(1) + 'h' : '<span style="color:#4B5563">â</span>'}</td>
-                        <td><span class="tbl-sbadge ${hi(sleepQuality)}">${sleepQuality > 0 ? sleepQuality + '/5' : 'â'}</span></td>
-                        <td><span class="tbl-sbadge ${lo(fatigue)}">${fatigue > 0 ? fatigue + '/5' : 'â'}</span></td>
-                        <td><span class="tbl-sbadge ${lo(soreness)}">${soreness > 0 ? soreness + '/5' : 'â'}</span></td>
-                        <td><span class="tbl-sbadge ${hi(mood)}">${mood > 0 ? mood + '/5' : 'â'}</span></td>
-                        <td><span class="tbl-sbadge ${lo(stress)}">${stress > 0 ? stress + '/5' : 'â'}</span></td>
-                        <td>${hydration > 0 ? `<span class="tbl-urine" style="background:${urineColor};${urineDark?'color:#fff':''}">${hydration}</span>` : '<span style="color:#4B5563">â</span>'}</td>
-                        <td style="color:#CBD5E1;font-size:12px">${weight > 0 ? (weight.toFixed ? weight.toFixed(1) : weight) + 'kg' : '<span style="color:#4B5563">â</span>'}</td>
+                        <td><span class="tbl-sbadge ${readinessBadge}">${readiness > 1 ? readiness + '/10' : '&mdash;'}</span></td>
+                        <td>${sleepHrs > 0 ? sleepHrs.toFixed(1) + 'h' : '<span style="color:#4B5563">&mdash;</span>'}</td>
+                        <td><span class="tbl-sbadge ${hi(sleepQuality)}">${sleepQuality > 0 ? sleepQuality + '/5' : '&mdash;'}</span></td>
+                        <td><span class="tbl-sbadge ${lo(fatigue)}">${fatigue > 0 ? fatigue + '/5' : '&mdash;'}</span></td>
+                        <td><span class="tbl-sbadge ${lo(soreness)}">${soreness > 0 ? soreness + '/5' : '&mdash;'}</span></td>
+                        <td><span class="tbl-sbadge ${hi(mood)}">${mood > 0 ? mood + '/5' : '&mdash;'}</span></td>
+                        <td><span class="tbl-sbadge ${lo(stress)}">${stress > 0 ? stress + '/5' : '&mdash;'}</span></td>
+                        <td>${hydration > 0 ? `<span class="tbl-urine" style="background:${urineColor};${urineDark?'color:#fff':''}">${hydration}</span>` : '<span style="color:#4B5563">&mdash;</span>'}</td>
+                        <td style="color:#CBD5E1;font-size:12px">${weight > 0 ? (weight.toFixed ? weight.toFixed(1) : weight) + 'kg' : '<span style="color:#4B5563">&mdash;</span>'}</td>
                         <td>
                             <div class="tbl-bar-wrap" style="justify-content:center">
                                 <div class="tbl-bar"><div class="tbl-bar-fill" style="width:${Math.min(acwrVal/2*100,100)}%;background:${acwrColor}"></div></div>
-                                <span class="tbl-bar-value" style="color:${acwrColor}">${acwrVal > 0 ? acwrVal.toFixed(2) : 'â'}</span>
+                                <span class="tbl-bar-value" style="color:${acwrColor}">${acwrVal > 0 ? acwrVal.toFixed(2) : '&mdash;'}</span>
                             </div>
                         </td>
                         <td><span class="tbl-sbadge ${statusBadge}">${statusText}</span></td>
@@ -2266,7 +2317,7 @@
             if (!athlete) return;
 
             const records = DATA.conditioning
-                .filter(c => c.athleteId === athleteId)
+                .filter(c => (c.athleteId || c.athlete_id) === athleteId)
                 .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
             const latest = records[0];
 
@@ -2279,7 +2330,7 @@
                 document.body.appendChild(popup);
             }
 
-            const v = (val, unit) => (val && val !== 0) ? `<span style="color:#F1F5F9;font-weight:700;font-size:16px">${val}</span><span style="color:#64748B;font-size:12px;margin-left:2px">${unit || ''}</span>` : '<span style="color:#4B5563">â</span>';
+            const v = (val, unit) => (val && val !== 0) ? `<span style="color:#F1F5F9;font-weight:700;font-size:16px">${val}</span><span style="color:#64748B;font-size:12px;margin-left:2px">${unit || ''}</span>` : '<span style="color:#4B5563">&mdash;</span>';
             const bar = (val, max, color) => {
                 if (!val || val === 0) return '<div style="width:60px;height:6px;background:#1F2937;border-radius:3px"></div>';
                 const pct = Math.min((val / max) * 100, 100);
@@ -2292,13 +2343,13 @@
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
                             <div style="display:flex;align-items:center;gap:12px">
                                 <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;background:#0B1120;display:flex;align-items:center;justify-content:center">
-                                    ${athlete.photo ? `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover">` : 'ð'}
+                                    ${athlete.photo ? `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover">` : '&#x1F3C4;'}
                                 </div>
                                 <h3 style="color:#F1F5F9;margin:0;font-size:18px">${athlete.name}</h3>
                             </div>
                             <span style="cursor:pointer;color:#94A3B8;font-size:22px" onclick="document.getElementById('conditionPopup').style.display='none'">&times;</span>
                         </div>
-                        <div style="text-align:center;padding:30px;color:#F59E0B;font-size:15px">â ï¸ No conditioning data submitted yet.</div>
+                        <div style="text-align:center;padding:30px;color:#F59E0B;font-size:15px">&#x26A0;&#xFE0F; No conditioning data submitted yet.</div>
                     </div>`;
             } else {
                 const dateStr = latest.date || 'Unknown';
@@ -2311,11 +2362,11 @@
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
                             <div style="display:flex;align-items:center;gap:12px">
                                 <div style="width:44px;height:44px;border-radius:50%;overflow:hidden;background:#0B1120;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                                    ${athlete.photo ? `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover">` : '<span style="font-size:20px">ð</span>'}
+                                    ${athlete.photo ? `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover">` : '<span style="font-size:20px">&#x1F3C4;</span>'}
                                 </div>
                                 <div>
                                     <h3 style="color:#F1F5F9;margin:0;font-size:17px">${athlete.name}</h3>
-                                    <div style="color:#94A3B8;font-size:12px">${[athlete.class, athlete.gender === 'M' ? 'Male' : 'Female'].filter(Boolean).join(' Â· ')}</div>
+                                    <div style="color:#94A3B8;font-size:12px">${[athlete.class, athlete.gender === 'M' ? 'Male' : 'Female'].filter(Boolean).join(' &middot; ')}</div>
                                 </div>
                             </div>
                             <span style="cursor:pointer;color:#94A3B8;font-size:22px;padding:4px" onclick="document.getElementById('conditionPopup').style.display='none'">&times;</span>
@@ -2336,46 +2387,46 @@
 
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð´ Sleep</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F634; Sleep</div>
                                 <div>${v(latest.sleepHrs, 'h')} <span style="color:#64748B;font-size:11px;margin-left:4px">Quality ${v(latest.sleepQuality, '/5')}</span></div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ðª Fatigue</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F4AA; Fatigue</div>
                                 <div>${v(latest.fatigue, '/5')} ${bar(latest.fatigue, 5, latest.fatigue >= 4 ? '#EF4444' : '#FF6B00')}</div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð©¹ Soreness</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1FA79; Soreness</div>
                                 <div>${v(latest.musclePain, '/5')} ${bar(latest.musclePain, 5, latest.musclePain >= 4 ? '#EF4444' : '#FF6B00')}</div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð Mood</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F60A; Mood</div>
                                 <div>${v(latest.mood, '/5')} ${bar(latest.mood, 5, '#10B981')}</div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð§  Stress</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F9E0; Stress</div>
                                 <div>${v(latest.stress, '/5')} ${bar(latest.stress, 5, latest.stress >= 4 ? '#EF4444' : '#FF6B00')}</div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð§ Hydration</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F4A7; Hydration</div>
                                 <div>${v(latest.hydration || latest.urineColor, '/5')}</div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">âï¸ Weight</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x2696;&#xFE0F; Weight</div>
                                 <div>${v(latest.weight, 'kg')}</div>
                             </div>
                             <div style="background:#0B1120;border-radius:8px;padding:10px">
-                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð Records</div>
+                                <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F4CA; Records</div>
                                 <div style="color:#F1F5F9;font-weight:700;font-size:16px">${records.length}</div>
                             </div>
                         </div>
 
                         ${latest.notes ? `<div style="margin-top:14px;background:#0B1120;border-radius:8px;padding:10px">
-                            <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">ð Notes</div>
+                            <div style="color:#94A3B8;font-size:11px;margin-bottom:4px">&#x1F4DD; Notes</div>
                             <div style="color:#F1F5F9;font-size:13px;line-height:1.5">${latest.notes}</div>
                         </div>` : ''}
 
                         ${latest.injury ? `<div style="margin-top:10px;background:#7f1d1d;border-radius:8px;padding:10px">
-                            <div style="color:#FCA5A5;font-size:11px;margin-bottom:4px">ð¨ Injury Report</div>
+                            <div style="color:#FCA5A5;font-size:11px;margin-bottom:4px">&#x1F6A8; Injury Report</div>
                             <div style="color:#FCA5A5;font-size:13px;line-height:1.5">${latest.injury}</div>
                         </div>` : ''}
                     </div>`;
@@ -2460,14 +2511,14 @@
                 }
             });
 
-            // Daily RPE chart (1-10 scale) â uses real data only
+            // Daily RPE chart (1-10 scale) &mdash; uses real data only
             const loadByAthlete = athletes.map(a => {
                 const latestTraining = DATA.training?.filter(t => t.athleteId === a.id).sort((x,y) => (y.date||'').localeCompare(x.date||''))[0];
                 const rpe = latestTraining?.rpe || 0;
                 return { name: a.name.split(' ').pop(), rpe };
             });
 
-            // RPE color coding: green(easy) â orange(moderate) â red(hard)
+            // RPE color coding: green(easy) &rarr; orange(moderate) &rarr; red(hard)
             function rpeColor(val) {
                 if (val <= 3) return '#10b981';      // green - easy
                 if (val <= 5) return '#FF6B00';      // orange - moderate
@@ -2520,7 +2571,7 @@
                 }
             });
 
-            // ACWR zone chart â uses real training data when available
+            // ACWR zone chart &mdash; uses real training data when available
             const acwrZones = {
                 'Insufficient\n(<0.8)': 0,
                 'Risky\n(0.8-1.0)': 0,
@@ -2565,7 +2616,7 @@
             const today = formatDate(TODAY);
             const allAthletes = DATA.athletes || [];
             const todayConditions = (DATA.conditioning || []).filter(c => c.date === today);
-            const submittedIds = todayConditions.map(c => c.athleteId);
+            const submittedIds = todayConditions.map(c => c.athleteId || c.athlete_id);
 
             const submitted = allAthletes.filter(a => submittedIds.includes(a.id));
             const missing = allAthletes.filter(a => !submittedIds.includes(a.id));
@@ -2578,14 +2629,14 @@
 
             if (submittedEl) {
                 submittedEl.innerHTML = submitted.length > 0
-                    ? submitted.map(a => `<span style="display:inline-block;background:#064e3b;color:#10B981;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px">${a.name}${a.class ? ' Â· ' + a.class : ''}</span>`).join('')
+                    ? submitted.map(a => `<span style="display:inline-block;background:#064e3b;color:#10B981;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px">${a.name}${a.class ? ' &middot; ' + a.class : ''}</span>`).join('')
                     : '<span style="color:#94A3B8;font-size:15px">No submissions yet</span>';
             }
 
             if (missingEl) {
                 missingEl.innerHTML = missing.length > 0
-                    ? missing.map(a => `<span style="display:inline-block;background:#7f1d1d;color:#FCA5A5;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px;animation:pulse 2s infinite">${a.name}${a.class ? ' Â· ' + a.class : ''}</span>`).join('')
-                    : '<span style="color:#10B981;font-size:16px;font-weight:700">â ALL ATHLETES CHECKED IN!</span>';
+                    ? missing.map(a => `<span style="display:inline-block;background:#7f1d1d;color:#FCA5A5;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px;animation:pulse 2s infinite">${a.name}${a.class ? ' &middot; ' + a.class : ''}</span>`).join('')
+                    : '<span style="color:#10B981;font-size:16px;font-weight:700">&#x2705; ALL ATHLETES CHECKED IN!</span>';
             }
         }
 
@@ -2642,16 +2693,16 @@
                     const lastDate = sorted[0]?.date || 'unknown';
                     warningEl.innerHTML = `
                         <div style="background:#7f1d1d;border:2px solid #EF4444;border-radius:12px;padding:20px;margin-bottom:20px;text-align:center">
-                            <div style="font-size:24px;font-weight:800;color:#FCA5A5;margin-bottom:8px">â ï¸ NO TRAINING LOGS SINCE ${lastDate}</div>
+                            <div style="font-size:24px;font-weight:800;color:#FCA5A5;margin-bottom:8px">&#x26A0;&#xFE0F; NO TRAINING LOGS SINCE ${lastDate}</div>
                             <div style="font-size:16px;color:#F1F5F9;margin-bottom:12px">Athletes have not submitted training logs for ${Math.ceil((TODAY - new Date(lastDate)) / (1000*60*60*24))} days!</div>
-                            <a href="https://d990905.github.io/india-t293-coach/training_log.html" target="_blank" style="display:inline-block;background:#FF6B00;color:#0B1120;padding:12px 24px;border-radius:8px;font-size:16px;font-weight:700;text-decoration:none">ð Open Training Log Form</a>
+                            <a href="https://d990905.github.io/india-t293-coach/training_log.html" target="_blank" style="display:inline-block;background:#FF6B00;color:#0B1120;padding:12px 24px;border-radius:8px;font-size:16px;font-weight:700;text-decoration:none">&#x1F4DD; Open Training Log Form</a>
                         </div>`;
                 } else if (training.length === 0) {
                     warningEl.innerHTML = `
                         <div style="background:#7f1d1d;border:2px solid #EF4444;border-radius:12px;padding:20px;margin-bottom:20px;text-align:center">
-                            <div style="font-size:24px;font-weight:800;color:#FCA5A5;margin-bottom:8px">â ï¸ NO TRAINING LOG DATA</div>
+                            <div style="font-size:24px;font-weight:800;color:#FCA5A5;margin-bottom:8px">&#x26A0;&#xFE0F; NO TRAINING LOG DATA</div>
                             <div style="font-size:16px;color:#F1F5F9;margin-bottom:12px">No training log entries found. Athletes should start using the form.</div>
-                            <a href="https://d990905.github.io/india-t293-coach/training_log.html" target="_blank" style="display:inline-block;background:#FF6B00;color:#0B1120;padding:12px 24px;border-radius:8px;font-size:16px;font-weight:700;text-decoration:none">ð Open Training Log Form</a>
+                            <a href="https://d990905.github.io/india-t293-coach/training_log.html" target="_blank" style="display:inline-block;background:#FF6B00;color:#0B1120;padding:12px 24px;border-radius:8px;font-size:16px;font-weight:700;text-decoration:none">&#x1F4DD; Open Training Log Form</a>
                         </div>`;
                 } else {
                     warningEl.innerHTML = '';
@@ -2772,11 +2823,11 @@
 
             const listEl = document.getElementById('monitoringFlagsList');
             if (flags.length === 0) {
-                listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#10b981;font-size:16px;font-weight:700">â No active flags â All athletes OK</div>';
+                listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#10b981;font-size:16px;font-weight:700">&#x2705; No active flags &mdash; All athletes OK</div>';
             } else {
                 listEl.innerHTML = flags.map(f => `
                     <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid ${f.severity==='high'?'#f85149':'#f0883e'};border-left:4px solid ${f.severity==='high'?'#f85149':'#f0883e'};border-radius:8px;margin-bottom:8px;background:#111827">
-                        <span style="font-size:20px">${f.type==='Fatigue'?'ð':f.type==='Sleep'?'ð´':f.type==='Pain'?'ð¤':'ð'}</span>
+                        <span style="font-size:20px">${f.type==='Fatigue'?'&#x1F613;':f.type==='Sleep'?'&#x1F634;':f.type==='Pain'?'&#x1F915;':'&#x1F614;'}</span>
                         <div style="flex:1">
                             <div style="color:#F1F5F9;font-weight:700;font-size:14px">${f.athlete}</div>
                             <div style="color:${f.severity==='high'?'#f85149':'#f0883e'};font-size:13px">${f.type}: ${f.detail}</div>
@@ -2884,7 +2935,7 @@
                 const label = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
                 const opt = document.createElement('option');
                 opt.value = val;
-                opt.textContent = i === 0 ? 'Today â ' + label : label;
+                opt.textContent = i === 0 ? 'Today &mdash; ' + label : label;
                 sel.appendChild(opt);
             }
         })();
@@ -2928,7 +2979,7 @@
                 const select = document.getElementById(id);
                 if (!select) return;
                 select.innerHTML = DATA.athletes.map((a, i) =>
-                    `<option value="${a.id}"${i === 0 ? ' selected' : ''}>${a.name}${a.class ? ' Â· ' + a.class : ''}</option>`
+                    `<option value="${a.id}"${i === 0 ? ' selected' : ''}>${a.name}${a.class ? ' &middot; ' + a.class : ''}</option>`
                 ).join('');
             });
             // Auto-select first athlete
@@ -2969,7 +3020,7 @@
                 overlay = document.createElement('div');
                 overlay.id = 'profileLoadingOverlay';
                 overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(11,17,32,0.95);display:flex;align-items:center;justify-content:center;z-index:10;border-radius:12px;';
-                overlay.innerHTML = '<div style="text-align:center;font-size:16px;color:#F59E0B;">â ï¸ No athlete data loaded yet. Waiting for live data...</div>';
+                overlay.innerHTML = '<div style="text-align:center;font-size:16px;color:#F59E0B;">&#x26A0;&#xFE0F; No athlete data loaded yet. Waiting for live data...</div>';
                 profileEl.style.position = 'relative';
                 profileEl.appendChild(overlay);
             }
@@ -2984,21 +3035,21 @@
             if (athlete.photo) {
                 photoEl.innerHTML = `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" alt="${athlete.name}">`;
             } else {
-                photoEl.innerHTML = `<span style="font-size:32px">ð</span>`;
+                photoEl.innerHTML = `<span style="font-size:32px">&#x1F3C4;</span>`;
             }
             document.getElementById('profileSailNo').textContent = athlete.id;
             document.getElementById('profileName').textContent = athlete.name;
-            document.getElementById('profileClass').textContent = [athlete.class, athlete.gender === 'M' ? 'Male' : 'Female', athlete.club].filter(Boolean).join(' Â· ');
+            document.getElementById('profileClass').textContent = [athlete.class, athlete.gender === 'M' ? 'Male' : 'Female', athlete.club].filter(Boolean).join(' &middot; ');
 
             // Latest conditioning data
-            const latestCond = DATA.conditioning?.filter(c => c.athleteId === athlete.id).sort((a,b) => b.date.localeCompare(a.date))[0];
+            const latestCond = DATA.conditioning?.filter(c => (c.athleteId || c.athlete_id) === athlete.id).sort((a,b) => (b.date||'').localeCompare(a.date||''))[0];
             const currentWeight = latestCond?.weight || athlete.weight;
 
             const profileItems = [
                 {label: 'Age', value: `${athlete.age}`, unit: 'yrs'},
                 {label: 'Height', value: athlete.height || '-', unit: 'cm'},
                 {label: 'Weight', value: currentWeight, unit: 'kg'},
-                {label: 'Sail', value: athlete.sail, unit: 'mÂ²'},
+                {label: 'Sail', value: athlete.sail, unit: 'm&sup2;'},
                 {label: 'Exp', value: athlete.experience || '-', unit: ''},
                 {label: 'Best', value: athlete.bestResult || '-', unit: ''}
             ];
@@ -3021,10 +3072,10 @@
             // Setup insight
             document.getElementById('tab2SetupInsight').innerHTML = `
                 <strong style="color: #FF6B00; font-size: 15px;">Best Setup in 15-20kts Wind:</strong><br><br>
-                âï¸ <strong>Outhaul:</strong> Tight<br>
-                ð <strong>Downhaul:</strong> Heavy<br>
-                ð <strong>Fin:</strong> 46cm<br>
-                â­ <strong>Expected Performance:</strong> 7.2/10<br><br>
+                &#x2699; <strong>Outhaul:</strong> Tight<br>
+                &#x1F4CD; <strong>Downhaul:</strong> Heavy<br>
+                &#x1F3C4; <strong>Fin:</strong> 46cm<br>
+                &#x2B50; <strong>Expected Performance:</strong> 7.2/10<br><br>
                 <em style="color: #94A3B8;">This setup provides optimal response and control in 15-20kt winds, with high board feel and easy maneuverability.</em>
             `;
 
@@ -3160,13 +3211,13 @@
 
             // Auto-update title
             const titleEl = document.getElementById('correlationTitle');
-            if (titleEl) titleEl.textContent = `ð¬ Correlation: ${AXIS_LABELS[xKey]} vs ${AXIS_LABELS[yKey]}`;
+            if (titleEl) titleEl.textContent = `&#x1F52C; Correlation: ${AXIS_LABELS[xKey]} vs ${AXIS_LABELS[yKey]}`;
 
             const validData = perfData.filter(p => p[xKey] != null && p[yKey] != null);
             const parseVal = (v) => typeof v === 'string' ? (parseFloat(v) || 0) : (v || 0);
 
             const datasets = [{
-                label: `${AXIS_LABELS[xKey]} Ã ${AXIS_LABELS[yKey]}`,
+                label: `${AXIS_LABELS[xKey]} &times; ${AXIS_LABELS[yKey]}`,
                 data: validData.map(p => ({ x: parseVal(p[xKey]), y: parseVal(p[yKey]) })),
                 backgroundColor: 'rgba(255, 107, 0, 0.6)',
                 borderColor: '#FF6B00',
@@ -3198,7 +3249,7 @@
                 </div>
                 <div style="background:#0B1120;border:1px solid #1F2937;border-radius:8px;padding:8px 16px;display:flex;align-items:center;gap:8px">
                     <span style="color:#94A3B8;font-size:12px">Strength</span>
-                    <span style="color:${rColor};font-size:14px;font-weight:700">${Math.abs(r) > 0.7 ? 'Strong ðª' : Math.abs(r) > 0.4 ? 'Moderate ð' : 'Weak ð'}</span>
+                    <span style="color:${rColor};font-size:14px;font-weight:700">${Math.abs(r) > 0.7 ? 'Strong &#x1F4AA;' : Math.abs(r) > 0.4 ? 'Moderate &#x1F4CA;' : 'Weak &#x1F4C9;'}</span>
                 </div>
             `;
 
@@ -3258,12 +3309,12 @@
             const valLabel = HEATMAP_VAL_LABELS[valKey] || valKey;
 
             // Title
-            document.getElementById('heatmapTitle').textContent = `ð¥ Heatmap: ${rowCfg.label} Ã ${colCfg.label} â ${valLabel}`;
+            document.getElementById('heatmapTitle').textContent = `&#x1F525; Heatmap: ${rowCfg.label} &times; ${colCfg.label} &rarr; ${valLabel}`;
 
             // Header
             document.getElementById('heatmapHead').innerHTML = `<th>${rowCfg.label}</th>` + colCfg.values.map(v => `<th>${v}</th>`).join('');
 
-            // Body â compute averages per cell
+            // Body &mdash; compute averages per cell
             document.getElementById('heatmapBody').innerHTML = rowCfg.values.map(rowVal => {
                 const cells = colCfg.values.map(colVal => {
                     const matched = perfData.filter(p => {
@@ -3272,7 +3323,7 @@
                         return rMatch && cMatch && p[valKey] != null;
                     });
                     if (matched.length === 0) {
-                        return `<td class="heatmap-cell heatmap-cold" style="color:#4B5563">â</td>`;
+                        return `<td class="heatmap-cell heatmap-cold" style="color:#4B5563">&mdash;</td>`;
                     }
                     const avg = matched.reduce((s, p) => s + (parseFloat(p[valKey]) || 0), 0) / matched.length;
                     const v = Math.round(avg * 10) / 10;
@@ -3293,7 +3344,7 @@
 
         function renderTab2Group() {
             if (!tab2SelectedAthlete) {
-                document.getElementById('groupProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">â ï¸ No athlete data loaded yet.</div>';
+                document.getElementById('groupProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">&#x26A0;&#xFE0F; No athlete data loaded yet.</div>';
                 return;
             }
             // Group comparison: skills by class
@@ -3359,11 +3410,11 @@
 
             // Mini profile update
             const miniPhoto = document.getElementById('tab3MiniPhoto');
-            if (miniPhoto) miniPhoto.innerHTML = athlete.photo ? `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">` : '<span style="font-size:14px">ð</span>';
+            if (miniPhoto) miniPhoto.innerHTML = athlete.photo ? `<img src="${athlete.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">` : '<span style="font-size:14px">&#x1F3C4;</span>';
             const miniName = document.getElementById('tab3MiniName');
             if (miniName) miniName.textContent = athlete.name;
             const miniClass = document.getElementById('tab3MiniClass');
-            if (miniClass) miniClass.textContent = `${athlete.class} Â· ${athlete.gender === 'M' ? 'M' : 'F'} Â· ${athlete.id}`;
+            if (miniClass) miniClass.textContent = `${athlete.class} &middot; ${athlete.gender === 'M' ? 'M' : 'F'} &middot; ${athlete.id}`;
 
             const skillAreas = [
                 { key: 'startSkill', label: 'Start' },
@@ -3541,7 +3592,7 @@
             const top3 = sortedSkills.slice(-3).reverse();
             document.getElementById('tab3CriticalNeeds').innerHTML = top3.map(need => `
                 <div class="critical-need">
-                    <div class="critical-need-title">ð¯ ${need.label} (Current: ${need.score}/10)</div>
+                    <div class="critical-need-title">&#x1F3AF; ${need.label} (Current: ${need.score}/10)</div>
                     <div class="critical-need-content">
                         <strong>Training Focus:</strong> Heavy emphasis on gate approaches and mark roundings<br>
                         <strong>Recommended Drills:</strong> Starting line practice, 50 starts in different conditions<br>
@@ -3729,7 +3780,7 @@
                     else if (type === 'physical') dayClass = 'calendar-day light';
                     else dayClass = 'calendar-day light';
 
-                    icon = type === 'regatta' ? 'ð' : type === 'race' ? 'ð©' : type === 'physical' ? 'ðï¸' : 'ð';
+                    icon = type === 'regatta' ? '&#x1F3C6;' : type === 'race' ? '&#x1F6A9;' : type === 'physical' ? '&#x1F3CB;&#xFE0F;' : '&#x1F4CB;';
                 }
 
                 if (isToday) dayClass += ' today';
@@ -3765,11 +3816,11 @@
             const dateDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
             document.getElementById('tab4DetailDate').textContent = dateDisplay;
 
-            const typeLabels = { physical: 'ðï¸ Physical Training', race: 'ð© Race Practice', regatta: 'ð Regatta', others: 'ð Others' };
+            const typeLabels = { physical: '&#x1F3CB;&#xFE0F; Physical Training', race: '&#x1F6A9; Race Practice', regatta: '&#x1F3C6; Regatta', others: '&#x1F4CB; Others' };
             const sessionsHtml = sessions.length > 0
                 ? sessions.map((s, i) => `
                     <div class="detail-session" style="position:relative">
-                        <div style="font-weight: 600; color: #F1F5F9; font-size: 15px;">${s.time} â ${typeLabels[s.type] || s.type}</div>
+                        <div style="font-weight: 600; color: #F1F5F9; font-size: 15px;">${s.time} &mdash; ${typeLabels[s.type] || s.type}</div>
                         <div class="detail-session-time" style="color: #94A3B8; margin-top: 4px;">${s.notes}</div>
                         <div style="position:absolute;top:8px;right:8px;display:flex;gap:6px">
                             <button onclick="editSession('${dateStr}', ${i})" style="background:none;border:1px solid #374151;color:#94A3B8;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px" title="Edit">Edit</button>
@@ -3847,7 +3898,7 @@
             showDayDetail(dateStr);
         });
 
-        // Initialize Tab 4 (no sample data â all sessions added by coach)
+        // Initialize Tab 4 (no sample data &mdash; all sessions added by coach)
 
         // Session type card selection handler
         document.querySelectorAll('.session-type-card').forEach(card => {
@@ -3888,7 +3939,7 @@
             startDate.setDate(startDate.getDate() - 6);
             const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
             const el = document.getElementById('rollingDateRange');
-            if (el) el.textContent = fmt(startDate) + ' â ' + fmt(endDate);
+            if (el) el.textContent = fmt(startDate) + ' &mdash; ' + fmt(endDate);
         })();
 
         // Responsive window resize handler
@@ -3928,7 +3979,7 @@
             const sel = document.getElementById('tab6AthleteSelect');
             if (sel) {
                 sel.innerHTML = '<option value="all">All Athletes</option>' +
-                    DATA.athletes.map(a => `<option value="${a.id}">${a.name}${a.class ? ' Â· ' + a.class : ''}</option>`).join('');
+                    DATA.athletes.map(a => `<option value="${a.id}">${a.name}${a.class ? ' &middot; ' + a.class : ''}</option>`).join('');
             }
 
             renderParallelCoordinates();
@@ -4063,7 +4114,7 @@
                     return { label: ax.label, avg: (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1) };
                 });
                 insightEl.innerHTML = `
-                    <div style="font-weight:700;color:#FF6B00;margin-bottom:8px">ð¡ Top ${Math.round(topRows.length)} sessions (${highlightKey} â¥ ${threshold.toFixed(1)}) averages:</div>
+                    <div style="font-weight:700;color:#FF6B00;margin-bottom:8px">&#x1F4A1; Top ${Math.round(topRows.length)} sessions (${highlightKey} &ge; ${threshold.toFixed(1)}) averages:</div>
                     <div style="display:flex;gap:16px;flex-wrap:wrap">
                         ${avgValues.map(v => `<span><strong style="color:#F1F5F9">${v.label}:</strong> ${v.avg}</span>`).join('')}
                     </div>
