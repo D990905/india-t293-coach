@@ -2312,7 +2312,7 @@
                 <div style="background:#111827;border:1px solid #FF6B00;border-radius:12px;padding:24px;max-width:400px;width:90%;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
                         <h3 style="color:#F1F5F9;margin:0;font-size:18px">${name}</h3>
-                        <span style="cursor:pointer;color:#94A3B8;font-size:20px" onclick="document.getElementById('rpeDetailPopup').style.display='none'">&times;</span>
+                        <span style="cursor:pointer;color:#94A3B8;font-size:20px" onclick="document.getElementById('rpeDetailPopup').style.display='none'">×</span>
                     </div>
                     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
                         <div style="font-size:36px;font-weight:700;color:${rpe <= 3 ? '#10b981' : rpe <= 5 ? '#FF6B00' : rpe <= 7 ? '#f0883e' : '#f85149'}">${rpe}</div>
@@ -2362,7 +2362,7 @@
                                 </div>
                                 <h3 style="color:#F1F5F9;margin:0;font-size:18px">${athlete.name}</h3>
                             </div>
-                            <span style="cursor:pointer;color:#94A3B8;font-size:22px" onclick="document.getElementById('conditionPopup').style.display='none'">&times;</span>
+                            <span style="cursor:pointer;color:#94A3B8;font-size:22px" onclick="document.getElementById('conditionPopup').style.display='none'">×</span>
                         </div>
                         <div style="text-align:center;padding:30px;color:#F59E0B;font-size:15px">&#x26A0;&#xFE0F; No conditioning data submitted yet.</div>
                     </div>`;
@@ -2381,10 +2381,10 @@
                                 </div>
                                 <div>
                                     <h3 style="color:#F1F5F9;margin:0;font-size:17px">${athlete.name}</h3>
-                                    <div style="color:#94A3B8;font-size:12px">${[athlete.class, athlete.gender === 'M' ? 'Male' : 'Female'].filter(Boolean).join(' &middot; ')}</div>
+                                    <div style="color:#94A3B8;font-size:12px">${[athlete.class, athlete.gender === 'M' ? 'Male' : 'Female'].filter(Boolean).join(' · ')}</div>
                                 </div>
                             </div>
-                            <span style="cursor:pointer;color:#94A3B8;font-size:22px;padding:4px" onclick="document.getElementById('conditionPopup').style.display='none'">&times;</span>
+                            <span style="cursor:pointer;color:#94A3B8;font-size:22px;padding:4px" onclick="document.getElementById('conditionPopup').style.display='none'">×</span>
                         </div>
 
                         <div style="background:#0B1120;border-radius:8px;padding:12px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
@@ -2533,7 +2533,7 @@
                 return { name: a.name.split(' ').pop(), rpe };
             });
 
-            // RPE color coding: green(easy) &rarr; orange(moderate) &rarr; red(hard)
+            // RPE color coding: green(easy) → orange(moderate) → red(hard)
             function rpeColor(val) {
                 if (val <= 3) return '#10b981';      // green - easy
                 if (val <= 5) return '#FF6B00';      // orange - moderate
@@ -2644,13 +2644,13 @@
 
             if (submittedEl) {
                 submittedEl.innerHTML = submitted.length > 0
-                    ? submitted.map(a => `<span style="display:inline-block;background:#064e3b;color:#10B981;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px">${a.name}${a.class ? ' &middot; ' + a.class : ''}</span>`).join('')
+                    ? submitted.map(a => `<span style="display:inline-block;background:#064e3b;color:#10B981;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px">${a.name}${a.class ? ' · ' + a.class : ''}</span>`).join('')
                     : '<span style="color:#94A3B8;font-size:15px">No submissions yet</span>';
             }
 
             if (missingEl) {
                 missingEl.innerHTML = missing.length > 0
-                    ? missing.map(a => `<span style="display:inline-block;background:#7f1d1d;color:#FCA5A5;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px;animation:pulse 2s infinite">${a.name}${a.class ? ' &middot; ' + a.class : ''}</span>`).join('')
+                    ? missing.map(a => `<span style="display:inline-block;background:#7f1d1d;color:#FCA5A5;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px;animation:pulse 2s infinite">${a.name}${a.class ? ' · ' + a.class : ''}</span>`).join('')
                     : '<span style="color:#10B981;font-size:16px;font-weight:700">&#x2705; ALL ATHLETES CHECKED IN!</span>';
             }
         }
@@ -2743,16 +2743,16 @@
                             </thead>
                             <tbody>
                                 ${recent.map(t => {
-                                    const athlete = DATA.athletes.find(a => a.id === t.athleteId);
-                                    const perfColor = (t.performance||0) >= 7 ? '#10B981' : (t.performance||0) >= 5 ? '#F59E0B' : '#EF4444';
+                                    const athlete = DATA.athletes.find(a => a.id === (t.athleteId || t.athlete_id));
+                                    const perfColor = (t.performance||t.rpe||0) >= 7 ? '#10B981' : (t.performance||t.rpe||0) >= 5 ? '#F59E0B' : '#EF4444';
                                     return `<tr style="border-bottom:1px solid #1F2937">
                                         <td style="padding:10px 14px;color:#F1F5F9;font-size:14px">${t.date || '-'}</td>
-                                        <td style="padding:10px 14px;color:#F1F5F9;font-size:14px;font-weight:600">${athlete?.name || t.athleteId}</td>
-                                        <td style="padding:10px 14px;color:#94A3B8;font-size:14px">${t.sessionType || '-'}</td>
-                                        <td style="padding:10px 14px;font-size:16px;font-weight:700;color:${perfColor}">${t.performance || '-'}</td>
-                                        <td style="padding:10px 14px;color:#F1F5F9;font-size:14px">${t.windSpeed || '-'}</td>
+                                        <td style="padding:10px 14px;color:#F1F5F9;font-size:14px;font-weight:600">${athlete?.name || t.full_name || t.athlete_id}</td>
+                                        <td style="padding:10px 14px;color:#94A3B8;font-size:14px">${t.sessionType || t.session_type || '-'}</td>
+                                        <td style="padding:10px 14px;font-size:16px;font-weight:700;color:${perfColor}">${t.performance || t.coach_rating || '-'}</td>
+                                        <td style="padding:10px 14px;color:#F1F5F9;font-size:14px">${t.windSpeed || t.wind_speed_avg || '-'}</td>
                                         <td style="padding:10px 14px;color:#F1F5F9;font-size:14px">${t.rpe ? t.rpe + '/10' : '-'}</td>
-                                        <td style="padding:10px 14px;color:#94A3B8;font-size:13px;max-width:200px;overflow:hidden;text-overflow:ellipsis">${t.techniqueFocus || '-'}</td>
+                                        <td style="padding:10px 14px;color:#94A3B8;font-size:13px;max-width:200px;overflow:hidden;text-overflow:ellipsis">${t.techniqueFocus || t.technique_focus || '-'}</td>
                                     </tr>`;
                                 }).join('')}
                             </tbody>
@@ -2994,7 +2994,7 @@
                 const select = document.getElementById(id);
                 if (!select) return;
                 select.innerHTML = DATA.athletes.map((a, i) =>
-                    `<option value="${a.id}"${i === 0 ? ' selected' : ''}>${a.name}${a.class ? ' &middot; ' + a.class : ''}</option>`
+                    `<option value="${a.id}"${i === 0 ? ' selected' : ''}>${a.name}${a.class ? ' · ' + a.class : ''}</option>`
                 ).join('');
             });
             // Auto-select first athlete
@@ -3054,7 +3054,7 @@
             }
             document.getElementById('profileSailNo').textContent = athlete.id;
             document.getElementById('profileName').textContent = athlete.name;
-            document.getElementById('profileClass').textContent = [athlete.class, athlete.gender === 'M' ? 'Male' : 'Female', athlete.club].filter(Boolean).join(' &middot; ');
+            document.getElementById('profileClass').textContent = [athlete.class, athlete.gender === 'M' ? 'Male' : 'Female', athlete.club].filter(Boolean).join(' · ');
 
             // Latest conditioning data
             const latestCond = DATA.conditioning?.filter(c => (c.athleteId || c.athlete_id) === athlete.id).sort((a,b) => (b.date||'').localeCompare(a.date||''))[0];
@@ -3226,13 +3226,13 @@
 
             // Auto-update title
             const titleEl = document.getElementById('correlationTitle');
-            if (titleEl) titleEl.textContent = `&#x1F52C; Correlation: ${AXIS_LABELS[xKey]} vs ${AXIS_LABELS[yKey]}`;
+            if (titleEl) titleEl.textContent = `🔬 Correlation: ${AXIS_LABELS[xKey]} vs ${AXIS_LABELS[yKey]}`;
 
             const validData = perfData.filter(p => p[xKey] != null && p[yKey] != null);
             const parseVal = (v) => typeof v === 'string' ? (parseFloat(v) || 0) : (v || 0);
 
             const datasets = [{
-                label: `${AXIS_LABELS[xKey]} &times; ${AXIS_LABELS[yKey]}`,
+                label: `${AXIS_LABELS[xKey]} × ${AXIS_LABELS[yKey]}`,
                 data: validData.map(p => ({ x: parseVal(p[xKey]), y: parseVal(p[yKey]) })),
                 backgroundColor: 'rgba(255, 107, 0, 0.6)',
                 borderColor: '#FF6B00',
@@ -3324,7 +3324,7 @@
             const valLabel = HEATMAP_VAL_LABELS[valKey] || valKey;
 
             // Title
-            document.getElementById('heatmapTitle').textContent = `&#x1F525; Heatmap: ${rowCfg.label} &times; ${colCfg.label} &rarr; ${valLabel}`;
+            document.getElementById('heatmapTitle').textContent = `&#x1F525; Heatmap: ${rowCfg.label} × ${colCfg.label} → ${valLabel}`;
 
             // Header
             document.getElementById('heatmapHead').innerHTML = `<th>${rowCfg.label}</th>` + colCfg.values.map(v => `<th>${v}</th>`).join('');
@@ -3429,7 +3429,7 @@
             const miniName = document.getElementById('tab3MiniName');
             if (miniName) miniName.textContent = athlete.name;
             const miniClass = document.getElementById('tab3MiniClass');
-            if (miniClass) miniClass.textContent = `${athlete.class} &middot; ${athlete.gender === 'M' ? 'M' : 'F'} &middot; ${athlete.id}`;
+            if (miniClass) miniClass.textContent = `${athlete.class} · ${athlete.gender === 'M' ? 'M' : 'F'} · ${athlete.id}`;
 
             const skillAreas = [
                 { key: 'startSkill', label: 'Start' },
@@ -3994,7 +3994,7 @@
             const sel = document.getElementById('tab6AthleteSelect');
             if (sel) {
                 sel.innerHTML = '<option value="all">All Athletes</option>' +
-                    DATA.athletes.map(a => `<option value="${a.id}">${a.name}${a.class ? ' &middot; ' + a.class : ''}</option>`).join('');
+                    DATA.athletes.map(a => `<option value="${a.id}">${a.name}${a.class ? ' · ' + a.class : ''}</option>`).join('');
             }
 
             renderParallelCoordinates();
