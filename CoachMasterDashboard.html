@@ -1208,7 +1208,7 @@
 
             <div class="two-column">
                 <div class="card">
-                    <div class="card-title">⚡ Daily Training Load (sRPE)</div>
+                    <div class="card-title">⚡ Daily RPE (Rate of Perceived Exertion)</div>
                     <div class="chart-container">
                         <canvas id="tab1LoadChart"></canvas>
                     </div>
@@ -1647,22 +1647,22 @@
                 </div>
 
                 <!-- LEGEND -->
-                <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px;">
+                <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; font-weight: 500;">
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: #0B1120; border: 1px solid #1F2937; border-radius: 3px;"></div>
                         <span>Rest Day</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: rgba(255, 107, 0, 0.3); border: 1px solid #FF6B00; border-radius: 3px;"></div>
-                        <span>Light Training</span>
+                        <span>🏋️ Physical Training</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: rgba(59, 130, 246, 0.3); border: 1px solid #3B82F6; border-radius: 3px;"></div>
-                        <span>Heavy Training</span>
+                        <span>🚩 Race Practice</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <div style="width: 16px; height: 16px; background: rgba(248, 81, 73, 0.3); border: 1px solid #f85149; border-radius: 3px;"></div>
-                        <span>Race Day</span>
+                        <span>🏆 Regatta</span>
                     </div>
                 </div>
             </div>
@@ -1680,31 +1680,27 @@
                 <div class="card-title">➕ Add Training Session</div>
                 <div class="form-group">
                     <label>Date:</label>
-                    <input type="date" id="tab4FormDate" value="">
+                    <input type="date" id="tab4FormDate" value="" lang="en">
                 </div>
                 <div class="form-group">
                     <label>Time:</label>
-                    <input type="time" id="tab4FormTime" value="09:00">
+                    <input type="time" id="tab4FormTime" value="09:00" lang="en">
                 </div>
                 <div class="form-group">
                     <label style="font-size:15px;font-weight:600;margin-bottom:8px;display:block;">Session Type:</label>
                     <input type="hidden" id="tab4FormType" value="physical">
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-                        <div class="session-type-card active" data-type="physical" style="background:#1F2937;border:2px solid #FF6B00;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
-                            <div style="font-size:24px;margin-bottom:6px;">🏋️</div>
-                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Physical Training</div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <div class="session-type-card active" data-type="physical" style="background:#1F2937;border:1px solid #FF6B00;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#F1F5F9;">
+                            🏋️ Physical Training
                         </div>
-                        <div class="session-type-card" data-type="race" style="background:#111827;border:2px solid #374151;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
-                            <div style="font-size:24px;margin-bottom:6px;">🚩</div>
-                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Race Practice</div>
+                        <div class="session-type-card" data-type="race" style="background:#111827;border:1px solid #374151;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#94A3B8;">
+                            🚩 Race Practice
                         </div>
-                        <div class="session-type-card" data-type="regatta" style="background:#111827;border:2px solid #374151;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
-                            <div style="font-size:24px;margin-bottom:6px;">🏆</div>
-                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Regatta</div>
+                        <div class="session-type-card" data-type="regatta" style="background:#111827;border:1px solid #374151;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#94A3B8;">
+                            🏆 Regatta
                         </div>
-                        <div class="session-type-card" data-type="others" style="background:#111827;border:2px solid #374151;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.2s;">
-                            <div style="font-size:24px;margin-bottom:6px;">📋</div>
-                            <div style="font-size:13px;font-weight:600;color:#F1F5F9;">Others</div>
+                        <div class="session-type-card" data-type="others" style="background:#111827;border:1px solid #374151;border-radius:20px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500;color:#94A3B8;">
+                            📋 Others
                         </div>
                     </div>
                 </div>
@@ -1719,12 +1715,12 @@
 
         <!-- TAB 5: WIND TRACKER -->
         <div id="tab5" class="tab-content">
-            <!-- Windy.com Live Forecast - Foca, Turkey -->
+            <!-- Wind Forecast - Foca, Turkey (windy.app) -->
             <div style="background:#111827;border:1px solid #1F2937;border-radius:12px;padding:16px;margin-bottom:12px">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-                    <h2 style="color:#FF6B00;font-size:18px;margin:0">Windy.com — Foca Live Forecast</h2>
+                    <h2 style="color:#FF6B00;font-size:18px;margin:0">Foca Live Forecast</h2>
                     <div style="display:flex;gap:8px">
-                        <a href="https://www.windy.com/38.667/26.755?38.667,26.755,11" target="_blank" style="background:#FF6B00;color:#fff;text-decoration:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px">Open Full Windy</a>
+                        <a href="https://windy.app/forecast/spot/761043/Foca+Turkey" target="_blank" style="background:#FF6B00;color:#fff;text-decoration:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px">Open Windy.app</a>
                         <a href="quick_obs.html" target="_blank" style="background:#238636;color:#fff;text-decoration:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px">Coach Obs</a>
                     </div>
                 </div>
@@ -1901,10 +1897,18 @@
 
                     // Re-run transformations with updated data
                     transformData();
-                    // Re-render all tabs
+                    // Re-render ALL tabs with live data
                     updateTab1();
                     updateCheckInStatus();
                     updateTabBadges();
+                    populateAthleteSelects();
+                    if (DATA.athletes.length > 0) {
+                        tab2SelectedAthlete = DATA.athletes[0];
+                        tab3SelectedAthlete = DATA.athletes[0];
+                    }
+                    updateTab2();
+                    updateTab3();
+                    renderCalendar();
                     updateTab6();
                     if (statusEl) {
                         statusEl.textContent = 'Live data loaded ✓ (' + DATA.athletes.length + ' athletes)';
@@ -2009,7 +2013,8 @@
                 tab.classList.add('active');
                 document.getElementById(tabId).classList.add('active');
 
-                // Update tab6 when switching to it
+                // Update tabs when switching to them
+                if (tabId === 'tab4') renderCalendar();
                 if (tabId === 'tab6') updateTab6();
 
                 // Trigger chart redraws on tab switch
@@ -2282,30 +2287,28 @@
                 }
             });
 
-            // Training load chart
+            // Daily RPE chart (1-10 scale)
             const loadByAthlete = athletes.map(a => {
-                const sRPE = Math.floor(Math.random() * 10) * 10 + 40;
-                return { name: a.name.split(' ').pop(), sRPE };
+                const rpe = Math.floor(Math.random() * 5) + 4; // RPE 4-8 range (realistic training)
+                return { name: a.name.split(' ').pop(), rpe };
             });
 
-            // Value-based color gradient: green(low) → blue(mid) → orange(high) → red(very high)
-            function sRPEColor(val, max) {
-                const ratio = val / max;
-                if (ratio < 0.4) return '#10b981';      // green - low load
-                if (ratio < 0.6) return '#FF6B00';      // blue - moderate
-                if (ratio < 0.8) return '#f0883e';      // orange - high
-                return '#f85149';                         // red - very high
+            // RPE color coding: green(easy) → orange(moderate) → red(hard)
+            function rpeColor(val) {
+                if (val <= 3) return '#10b981';      // green - easy
+                if (val <= 5) return '#FF6B00';      // orange - moderate
+                if (val <= 7) return '#f0883e';      // orange-red - hard
+                return '#f85149';                     // red - very hard
             }
-            const maxLoad = Math.max(...loadByAthlete.map(x => x.sRPE), 1);
 
             createChart('tab1LoadChart', {
                 type: 'bar',
                 data: {
                     labels: loadByAthlete.map(x => x.name),
                     datasets: [{
-                        label: 'Session RPE',
-                        data: loadByAthlete.map(x => x.sRPE),
-                        backgroundColor: loadByAthlete.map(x => sRPEColor(x.sRPE, maxLoad)),
+                        label: 'RPE',
+                        data: loadByAthlete.map(x => x.rpe),
+                        backgroundColor: loadByAthlete.map(x => rpeColor(x.rpe)),
                         borderColor: '#0B1120',
                         borderWidth: 1,
                         borderRadius: 6
@@ -2319,8 +2322,8 @@
                     scales: {
                         x: {
                             beginAtZero: true,
-                            max: 100,
-                            ticks: { color: '#94A3B8' },
+                            max: 10,
+                            ticks: { color: '#94A3B8', stepSize: 1 },
                             grid: { color: '#1F2937' }
                         },
                         y: {
@@ -2750,7 +2753,7 @@
         function renderTab2Individual() {
             const athlete = tab2SelectedAthlete;
             if (!athlete) {
-                document.getElementById('individualProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">\u26A0\uFE0F No athlete data loaded yet. Waiting for live data...</div>';
+                document.getElementById('individualProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">⚠️ No athlete data loaded yet. Waiting for live data...</div>';
                 return;
             }
 
@@ -3071,7 +3074,7 @@
 
         function renderTab2Group() {
             if (!tab2SelectedAthlete) {
-                document.getElementById('groupProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">\u26A0\uFE0F No athlete data loaded yet.</div>';
+                document.getElementById('groupProfile').innerHTML = '<div class="no-data" style="padding:40px;text-align:center;font-size:16px;color:#F59E0B;">⚠️ No athlete data loaded yet.</div>';
                 return;
             }
             // Group comparison: skills by class
@@ -3540,10 +3543,11 @@
             const dateDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
             document.getElementById('tab4DetailDate').textContent = dateDisplay;
 
+            const typeLabels = { physical: '🏋️ Physical Training', race: '🚩 Race Practice', regatta: '🏆 Regatta', others: '📋 Others' };
             const sessionsHtml = sessions.length > 0
                 ? sessions.map(s => `
                     <div class="detail-session">
-                        <div style="font-weight: 600; color: #F1F5F9; font-size: 15px;">${s.time} \u2014 ${typeLabels[s.type] || s.type}</div>
+                        <div style="font-weight: 600; color: #F1F5F9; font-size: 15px;">${s.time} — ${typeLabels[s.type] || s.type}</div>
                         <div class="detail-session-time" style="color: #94A3B8; margin-top: 4px;">${s.notes}</div>
                     </div>
                 `).join('')
@@ -3588,36 +3592,41 @@
         // Initialize Tab 4
         // Add sample sessions with new session types
         tab4Sessions[formatDate(TODAY)] = [
-            { time: '09:00', type: 'physical', notes: 'Morning physical training \u2014 warm up + drills' },
-            { time: '14:30', type: 'race', notes: 'Afternoon race practice \u2014 start line & upwind' }
+            { time: '09:00', type: 'physical', notes: 'Morning physical training — warm up + drills' },
+            { time: '14:30', type: 'race', notes: 'Afternoon race practice — start line & upwind' },
+            { time: '17:00', type: 'others', notes: 'Team meeting — daily debrief & video review' }
         ];
         const _tomorrow = new Date(TODAY); _tomorrow.setDate(_tomorrow.getDate() + 1);
         tab4Sessions[formatDate(_tomorrow)] = [
             { time: '10:00', type: 'race', notes: 'Pre-competition race practice' }
         ];
         tab4Sessions['2026-04-03'] = [
-            { time: '09:00', type: 'regatta', notes: 'Championship Day 1 \u2014 Registration & Measurement' }
+            { time: '09:00', type: 'regatta', notes: 'Championship Day 1 — Registration & Measurement' }
         ];
         tab4Sessions['2026-04-04'] = [
-            { time: '09:00', type: 'regatta', notes: 'Championship Day 2 \u2014 Racing begins' }
+            { time: '09:00', type: 'regatta', notes: 'Championship Day 2 — Racing begins' }
         ];
 
         // Session type card selection handler
         document.querySelectorAll('.session-type-card').forEach(card => {
             card.addEventListener('click', () => {
                 document.querySelectorAll('.session-type-card').forEach(c => {
-                    c.style.border = '2px solid #374151';
+                    c.style.border = '1px solid #374151';
                     c.style.background = '#111827';
+                    c.style.color = '#94A3B8';
                     c.classList.remove('active');
                 });
-                card.style.border = '2px solid #FF6B00';
+                card.style.border = '1px solid #FF6B00';
                 card.style.background = '#1F2937';
+                card.style.color = '#F1F5F9';
                 card.classList.add('active');
                 document.getElementById('tab4FormType').value = card.dataset.type;
             });
         });
 
         renderCalendar();
+        // Auto-show today's sessions
+        showDayDetail(formatDate(TODAY));
 
         // ============================================================================
         // FOOTER & INITIALIZATION
