@@ -12,7 +12,7 @@
             box-sizing: border-box;
         }
 
-        body {
+        body 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans CJK KR', sans-serif;
             background: #0B1120;
             color: #F1F5F9;
@@ -1951,7 +1951,7 @@
                     renderCalendar();
                     updateTab6();
                     if (statusEl) {
-                        statusEl.textContent = 'Live data loaded &#x2713; (' + DATA.athletes.length + ' athletes)';
+                        statusEl.textContent = 'Live data loaded ✓ (' + DATA.athletes.length + ' athletes)';
                         statusEl.style.color = '#10b981';
                     }
                     console.log('Live data loaded from GAS:', Object.keys(liveData));
@@ -1960,7 +1960,7 @@
                 console.log('Live data fetch failed:', e.message);
                 const statusEl = document.getElementById('data-status');
                 if (statusEl) {
-                    statusEl.textContent = '&#x26A0;&#xFE0F; OFFLINE &mdash; Live data unavailable. Check network connection.';
+                    statusEl.textContent = '&#x26A0;&#xFE0F; OFFLINE — Live data unavailable. Check network connection.';
                     statusEl.style.color = '#EF4444';
                     statusEl.style.fontSize = '14px';
                     statusEl.style.fontWeight = '700';
@@ -2032,11 +2032,26 @@
                 ...r,
                 athleteId: r.athleteId || r.athlete_id,
                 date: r.date || '',
-                wellness: Number(r.wellness || r.overall_wellness || 0),
+                wellness: (function() {
+                        var w = Number(r.wellness || r.overall_wellness || 0);
+                        if (w > 0) return w;
+                        var sq = Number(r.sleepQuality || r.sleep_quality || 0);
+                        var fat = Number(r.fatigue || 0);
+                        var ms = Number(r.musclePain || r.muscle_pain || r.muscle_soreness || r.soreness || 0);
+                        var md = Number(r.mood || 0);
+                        var st = Number(r.stress || r.stress_level || 0);
+                        var count = 0, sum = 0;
+                        if (sq > 0) { sum += sq; count++; }
+                        if (fat > 0) { sum += (6 - fat); count++; }
+                        if (ms > 0) { sum += (6 - ms); count++; }
+                        if (md > 0) { sum += md; count++; }
+                        if (st > 0) { sum += (6 - st); count++; }
+                        return count > 0 ? Math.round((sum / count / 5) * 100) : 0;
+                    })(),
                 sleepHrs: parseFloat(r.sleepHrs || r.sleep_hours || r.sleep_hrs || 0),
                 sleepQuality: Number(r.sleepQuality || r.sleep_quality || 0),
                 fatigue: Number(r.fatigue || r.fatigue_level || 0),
-                musclePain: Number(r.musclePain || r.muscle_pain || r.soreness || 0),
+                musclePain: Number(r.musclePain || r.muscle_pain || r.muscle_soreness || r.soreness || 0),
                 mood: Number(r.mood || r.mood_level || 0),
                 stress: Number(r.stress || r.stress_level || 0),
                 hydration: Number(r.hydration || r.urine_color || r.urineColor || 0),
@@ -2192,7 +2207,7 @@
                     sleepHrs: r => r.sleepHrs,
                     sleepQuality: r => r.sleepQuality,
                     fatigue: r => r.fatigue,
-                    soreness: r => r.soreness,
+                    soreness: r => r.musclePain || r.muscle_soreness || r.soreness,
                     mood: r => r.mood,
                     stress: r => r.stress,
                     hydration: r => r.hydration,
@@ -2935,7 +2950,7 @@
                 const label = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
                 const opt = document.createElement('option');
                 opt.value = val;
-                opt.textContent = i === 0 ? 'Today &mdash; ' + label : label;
+                opt.textContent = i === 0 ? 'Today — ' + label : label;
                 sel.appendChild(opt);
             }
         })();
@@ -3939,7 +3954,7 @@
             startDate.setDate(startDate.getDate() - 6);
             const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
             const el = document.getElementById('rollingDateRange');
-            if (el) el.textContent = fmt(startDate) + ' &mdash; ' + fmt(endDate);
+            if (el) el.textContent = fmt(startDate) + ' — ' + fmt(endDate);
         })();
 
         // Responsive window resize handler
