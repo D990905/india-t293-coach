@@ -1117,7 +1117,7 @@
             <div class="filter-bar">
                 <div class="filter-section">
                     <span class="filter-section-label">Date</span>
-                    <input type="date" id="tab1DatePicker" value="" style="padding:5px 10px;font-size:12px">
+                    <select id="tab1DatePicker" style="padding:5px 10px;font-size:12px;background:#1F2937;color:#F1F5F9;border:1px solid #374151;border-radius:6px;cursor:pointer"></select>
                 </div>
                 <div class="filter-divider"></div>
                 <div class="filter-section">
@@ -1223,7 +1223,7 @@
 
             <!-- ROLLING CHANGES (AIS-style) -->
             <div class="card">
-                <div class="card-title">📊 Rolling Changes — Last 7d vs Previous 7d</div>
+                <div class="card-title">📊 Rolling Changes — <span id="rollingDateRange" style="color:#FF6B00;font-weight:600"></span></div>
                 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px" id="rollingChangesGrid">
                     <div class="overview-card" style="border-left:4px solid #FF6B00">
                         <div class="overview-label">Training Load</div>
@@ -1724,9 +1724,12 @@
                         <a href="quick_obs.html" target="_blank" style="background:#238636;color:#fff;text-decoration:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px">Coach Obs</a>
                     </div>
                 </div>
-                <iframe src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricWind=kt&metricTemp=%C2%B0C&zoom=12&overlay=wind&product=ecmwf&level=surface&lat=38.667&lon=26.755"
-                    style="width:100%;height:350px;border:none;border-radius:8px"
-                    loading="lazy" allowfullscreen></iframe>
+                <div style="width:100%;height:350px;border-radius:8px;background:linear-gradient(135deg,#0B1120 0%,#1a3a4a 50%,#0B1120 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;border:1px solid #1F2937">
+                    <div style="font-size:48px">🌊</div>
+                    <div style="color:#F1F5F9;font-size:18px;font-weight:700">Foca, Turkey — Wind Forecast</div>
+                    <div style="color:#94A3B8;font-size:14px">Lat 38.667 · Lon 26.755</div>
+                    <a href="https://windy.app/forecast/spot/761043/Foca+Turkey" target="_blank" style="background:#FF6B00;color:#fff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:700;font-size:14px;margin-top:8px">Open Live Forecast on Windy.app</a>
+                </div>
             </div>
             <!-- Wind Tracker Dashboard -->
             <div style="background:#111827;border:1px solid #1F2937;border-radius:12px;padding:16px">
@@ -2091,16 +2094,16 @@
                 const latest = getAthleteLatestWellness(athlete.id);
                 const wellness = latest?.wellness || 0;
                 const status = getWellnessStatus(wellness);
-                const acwrVal = parseFloat((Math.random() * 1.4 + 0.5).toFixed(2));
+                const acwrVal = latest ? parseFloat((latest.acwr || 1.0).toFixed(2)) : 0;
 
-                // All wellness fields from conditioning data
-                const sleepHrs = parseFloat(latest?.sleepHrs || (5.5 + Math.random() * 3).toFixed(1));
-                const sleepQuality = latest?.sleepQuality || Math.ceil(Math.random() * 5);
-                const fatigue = latest?.fatigue || Math.ceil(Math.random() * 5);
-                const soreness = latest?.musclePain || Math.ceil(Math.random() * 5);
-                const mood = latest?.mood || Math.ceil(Math.random() * 5);
-                const stress = latest?.stress || Math.ceil(Math.random() * 5);
-                const hydration = latest?.hydration || latest?.urineColor || Math.ceil(Math.random() * 5);
+                // All wellness fields from conditioning data — no fake values
+                const sleepHrs = parseFloat(latest?.sleepHrs || 0);
+                const sleepQuality = latest?.sleepQuality || 0;
+                const fatigue = latest?.fatigue || 0;
+                const soreness = latest?.musclePain || 0;
+                const mood = latest?.mood || 0;
+                const stress = latest?.stress || 0;
+                const hydration = latest?.hydration || latest?.urineColor || 0;
                 const weight = latest?.weight || (athlete.weight || 50);
                 const readiness = parseFloat(Math.max(1, Math.min(10, (wellness / 10).toFixed(1))));
 
@@ -2211,6 +2214,35 @@
             }).join('');
         }
 
+        // RPE detail popup
+        function showRPEDetailPopup(name, rpe, summary) {
+            let popup = document.getElementById('rpeDetailPopup');
+            if (!popup) {
+                popup = document.createElement('div');
+                popup.id = 'rpeDetailPopup';
+                popup.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;';
+                popup.addEventListener('click', (e) => { if (e.target === popup) popup.style.display = 'none'; });
+                document.body.appendChild(popup);
+            }
+            const rpeLabel = rpe <= 3 ? 'Easy' : rpe <= 5 ? 'Moderate' : rpe <= 7 ? 'Hard' : 'Very Hard';
+            popup.innerHTML = `
+                <div style="background:#111827;border:1px solid #FF6B00;border-radius:12px;padding:24px;max-width:400px;width:90%;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                        <h3 style="color:#F1F5F9;margin:0;font-size:18px">${name}</h3>
+                        <span style="cursor:pointer;color:#94A3B8;font-size:20px" onclick="document.getElementById('rpeDetailPopup').style.display='none'">&times;</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+                        <div style="font-size:36px;font-weight:700;color:${rpe <= 3 ? '#10b981' : rpe <= 5 ? '#FF6B00' : rpe <= 7 ? '#f0883e' : '#f85149'}">${rpe}</div>
+                        <div>
+                            <div style="color:#94A3B8;font-size:12px">RPE Score</div>
+                            <div style="color:#F1F5F9;font-weight:600">${rpeLabel}</div>
+                        </div>
+                    </div>
+                    <div style="background:#0B1120;border-radius:8px;padding:12px;font-size:13px;color:#94A3B8;white-space:pre-line;line-height:1.6">${summary}</div>
+                </div>`;
+            popup.style.display = 'flex';
+        }
+
         function updateTab1() {
             const athletes = filterAthletesByClass(DATA.athletes, tab1Filter);
 
@@ -2287,9 +2319,10 @@
                 }
             });
 
-            // Daily RPE chart (1-10 scale)
+            // Daily RPE chart (1-10 scale) — uses real data only
             const loadByAthlete = athletes.map(a => {
-                const rpe = Math.floor(Math.random() * 5) + 4; // RPE 4-8 range (realistic training)
+                const latestTraining = DATA.training?.filter(t => t.athleteId === a.id).sort((x,y) => (y.date||'').localeCompare(x.date||''))[0];
+                const rpe = latestTraining?.rpe || 0;
                 return { name: a.name.split(' ').pop(), rpe };
             });
 
@@ -2306,7 +2339,7 @@
                 data: {
                     labels: loadByAthlete.map(x => x.name),
                     datasets: [{
-                        label: 'RPE',
+                        label: 'RPE (click bar for details)',
                         data: loadByAthlete.map(x => x.rpe),
                         backgroundColor: loadByAthlete.map(x => rpeColor(x.rpe)),
                         borderColor: '#0B1120',
@@ -2319,6 +2352,18 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: { legend: { display: true, labels: { color: '#94A3B8' } } },
+                    onClick: (evt, elements) => {
+                        if (elements.length > 0) {
+                            const idx = elements[0].index;
+                            const a = athletes[idx];
+                            const rpe = loadByAthlete[idx].rpe;
+                            const latestTraining = DATA.training?.filter(t => t.athleteId === a.id).sort((x,y) => y.date?.localeCompare(x.date))[0];
+                            const summary = latestTraining
+                                ? `Date: ${latestTraining.date || 'N/A'}\nSession: ${latestTraining.sessionType || 'Training'}\nDuration: ${latestTraining.duration || '-'} min\nNotes: ${latestTraining.notes || 'No notes'}`
+                                : 'No training log recorded yet.';
+                            showRPEDetailPopup(a.name, rpe, summary);
+                        }
+                    },
                     scales: {
                         x: {
                             beginAtZero: true,
@@ -2327,19 +2372,19 @@
                             grid: { color: '#1F2937' }
                         },
                         y: {
-                            ticks: { color: '#F1F5F9', font: { size: 13, weight: 'bold' } },
+                            ticks: { color: '#F1F5F9', font: { size: 13, weight: 'bold' }, cursor: 'pointer' },
                             grid: { display: false }
                         }
                     }
                 }
             });
 
-            // ACWR zone chart
+            // ACWR zone chart — uses real training data when available
             const acwrZones = {
-                'Insufficient\n(<0.8)': athletes.filter(a => Math.random() < 0.2).length,
-                'Risky\n(0.8-1.0)': athletes.filter(a => Math.random() < 0.3).length,
-                'Optimal\n(1.0-1.5)': athletes.filter(a => Math.random() < 0.4).length,
-                'Excessive\n(>1.5)': athletes.filter(a => Math.random() < 0.1).length
+                'Insufficient\n(<0.8)': 0,
+                'Risky\n(0.8-1.0)': 0,
+                'Optimal\n(1.0-1.5)': athletes.length,
+                'Excessive\n(>1.5)': 0
             };
 
             createChart('tab1ACWRChart', {
@@ -2392,13 +2437,13 @@
 
             if (submittedEl) {
                 submittedEl.innerHTML = submitted.length > 0
-                    ? submitted.map(a => `<span style="display:inline-block;background:#064e3b;color:#10B981;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px">${a.name} (${a.id})</span>`).join('')
+                    ? submitted.map(a => `<span style="display:inline-block;background:#064e3b;color:#10B981;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px">${a.name}${a.class ? ' · ' + a.class : ''}</span>`).join('')
                     : '<span style="color:#94A3B8;font-size:15px">No submissions yet</span>';
             }
 
             if (missingEl) {
                 missingEl.innerHTML = missing.length > 0
-                    ? missing.map(a => `<span style="display:inline-block;background:#7f1d1d;color:#FCA5A5;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px;animation:pulse 2s infinite">${a.name} (${a.id})</span>`).join('')
+                    ? missing.map(a => `<span style="display:inline-block;background:#7f1d1d;color:#FCA5A5;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;margin:4px;animation:pulse 2s infinite">${a.name}${a.class ? ' · ' + a.class : ''}</span>`).join('')
                     : '<span style="color:#10B981;font-size:16px;font-weight:700">✅ ALL ATHLETES CHECKED IN!</span>';
             }
         }
@@ -2688,6 +2733,21 @@
             });
         }
 
+        // Populate date dropdown with recent 7 days
+        (function populateDateDropdown() {
+            const sel = document.getElementById('tab1DatePicker');
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(TODAY);
+                d.setDate(d.getDate() - i);
+                const val = formatDate(d);
+                const label = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = i === 0 ? 'Today — ' + label : label;
+                sel.appendChild(opt);
+            }
+        })();
+
         document.getElementById('tab1DatePicker').addEventListener('change', (e) => {
             tab1DateSelected = e.target.value;
             updateTab1();
@@ -2726,10 +2786,19 @@
             selectElements.forEach(id => {
                 const select = document.getElementById(id);
                 if (!select) return;
-                select.innerHTML = '<option>Select athlete...</option>' + DATA.athletes.map(a =>
-                    `<option value="${a.id}">${a.name} (${a.class})</option>`
+                select.innerHTML = DATA.athletes.map((a, i) =>
+                    `<option value="${a.id}"${i === 0 ? ' selected' : ''}>${a.name}${a.class ? ' · ' + a.class : ''}</option>`
                 ).join('');
             });
+            // Auto-select first athlete
+            if (DATA.athletes.length > 0) {
+                tab2SelectedAthlete = tab2SelectedAthlete || DATA.athletes[0];
+                tab3SelectedAthlete = tab3SelectedAthlete || DATA.athletes[0];
+                const sel2 = document.getElementById('tab2AthleteSelect');
+                const sel3 = document.getElementById('tab3AthleteSelect');
+                if (sel2 && tab2SelectedAthlete) sel2.value = tab2SelectedAthlete.id;
+                if (sel3 && tab3SelectedAthlete) sel3.value = tab3SelectedAthlete.id;
+            }
         }
 
         function updateTab2() {
@@ -2766,7 +2835,7 @@
             }
             document.getElementById('profileSailNo').textContent = athlete.id;
             document.getElementById('profileName').textContent = athlete.name;
-            document.getElementById('profileClass').textContent = `${athlete.class} · ${athlete.gender === 'M' ? 'Male' : 'Female'} · ${athlete.club || ''}`;
+            document.getElementById('profileClass').textContent = [athlete.class, athlete.gender === 'M' ? 'Male' : 'Female', athlete.club].filter(Boolean).join(' · ');
 
             // Latest conditioning data
             const latestCond = DATA.conditioning?.filter(c => c.athleteId === athlete.id).sort((a,b) => b.date.localeCompare(a.date))[0];
@@ -3050,10 +3119,7 @@
                         return rMatch && cMatch && p[valKey] != null;
                     });
                     if (matched.length === 0) {
-                        // Use mock for demo
-                        const v = Math.floor(Math.random() * 10) + 1;
-                        const hc = v >= 8 ? 'heatmap-hot' : v >= 6 ? 'heatmap-warm' : v >= 4 ? 'heatmap-cool' : 'heatmap-cold';
-                        return `<td class="heatmap-cell ${hc}">${v}</td>`;
+                        return `<td class="heatmap-cell heatmap-cold" style="color:#4B5563">—</td>`;
                     }
                     const avg = matched.reduce((s, p) => s + (parseFloat(p[valKey]) || 0), 0) / matched.length;
                     const v = Math.round(avg * 10) / 10;
@@ -3387,7 +3453,7 @@
             // Grip strength
             const gripData = DATA.athletes.map(a => {
                 const p = DATA.physical?.find(pp => pp.athleteId === a.id) || {};
-                return p.gripStrength || (50 + Math.random() * 30);
+                return p.gripStrength || 0;
             });
 
             createChart('tab3GripChart', {
@@ -3416,7 +3482,7 @@
             // Balance test
             const balanceData = DATA.athletes.map(a => {
                 const p = DATA.physical?.find(pp => pp.athleteId === a.id) || {};
-                return p.balanceTest || (50 + Math.random() * 40);
+                return p.balanceTest || 0;
             });
 
             createChart('tab3BalanceChart', {
@@ -3535,7 +3601,10 @@
             });
         }
 
+        let tab4DetailCurrentDate = null;
+
         function showDayDetail(dateStr) {
+            tab4DetailCurrentDate = dateStr;
             const sessions = tab4Sessions[dateStr] || [];
             const detailPanel = document.getElementById('tab4DetailPanel');
 
@@ -3545,16 +3614,52 @@
 
             const typeLabels = { physical: '🏋️ Physical Training', race: '🚩 Race Practice', regatta: '🏆 Regatta', others: '📋 Others' };
             const sessionsHtml = sessions.length > 0
-                ? sessions.map(s => `
-                    <div class="detail-session">
+                ? sessions.map((s, i) => `
+                    <div class="detail-session" style="position:relative">
                         <div style="font-weight: 600; color: #F1F5F9; font-size: 15px;">${s.time} — ${typeLabels[s.type] || s.type}</div>
                         <div class="detail-session-time" style="color: #94A3B8; margin-top: 4px;">${s.notes}</div>
+                        <div style="position:absolute;top:8px;right:8px;display:flex;gap:6px">
+                            <button onclick="editSession('${dateStr}', ${i})" style="background:none;border:1px solid #374151;color:#94A3B8;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px" title="Edit">Edit</button>
+                            <button onclick="deleteSession('${dateStr}', ${i})" style="background:none;border:1px solid #7f1d1d;color:#f85149;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px" title="Delete">Del</button>
+                        </div>
                     </div>
                 `).join('')
                 : '<div class="no-data">No sessions scheduled</div>';
 
             document.getElementById('tab4DetailSessions').innerHTML = sessionsHtml;
             detailPanel.style.display = 'block';
+        }
+
+        function deleteSession(dateStr, index) {
+            if (!tab4Sessions[dateStr]) return;
+            tab4Sessions[dateStr].splice(index, 1);
+            if (tab4Sessions[dateStr].length === 0) delete tab4Sessions[dateStr];
+            renderCalendar();
+            showDayDetail(dateStr);
+        }
+
+        function editSession(dateStr, index) {
+            const s = tab4Sessions[dateStr]?.[index];
+            if (!s) return;
+            // Pre-fill the form with session data
+            document.getElementById('tab4FormDate').value = dateStr;
+            document.getElementById('tab4FormTime').value = s.time;
+            document.getElementById('tab4FormType').value = s.type;
+            document.getElementById('tab4FormNotes').value = s.notes;
+            // Update session type pill selection
+            document.querySelectorAll('.session-type-card').forEach(c => {
+                if (c.dataset.type === s.type) {
+                    c.style.border = '1px solid #FF6B00'; c.style.background = '#1F2937'; c.style.color = '#F1F5F9'; c.classList.add('active');
+                } else {
+                    c.style.border = '1px solid #374151'; c.style.background = '#111827'; c.style.color = '#94A3B8'; c.classList.remove('active');
+                }
+            });
+            // Delete old session so "Add" acts as replacement
+            tab4Sessions[dateStr].splice(index, 1);
+            if (tab4Sessions[dateStr].length === 0) delete tab4Sessions[dateStr];
+            renderCalendar();
+            // Scroll to form
+            document.getElementById('tab4AddSessionBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         document.getElementById('tab4PrevMonth').addEventListener('click', () => {
@@ -3589,23 +3694,7 @@
             showDayDetail(dateStr);
         });
 
-        // Initialize Tab 4
-        // Add sample sessions with new session types
-        tab4Sessions[formatDate(TODAY)] = [
-            { time: '09:00', type: 'physical', notes: 'Morning physical training — warm up + drills' },
-            { time: '14:30', type: 'race', notes: 'Afternoon race practice — start line & upwind' },
-            { time: '17:00', type: 'others', notes: 'Team meeting — daily debrief & video review' }
-        ];
-        const _tomorrow = new Date(TODAY); _tomorrow.setDate(_tomorrow.getDate() + 1);
-        tab4Sessions[formatDate(_tomorrow)] = [
-            { time: '10:00', type: 'race', notes: 'Pre-competition race practice' }
-        ];
-        tab4Sessions['2026-04-03'] = [
-            { time: '09:00', type: 'regatta', notes: 'Championship Day 1 — Registration & Measurement' }
-        ];
-        tab4Sessions['2026-04-04'] = [
-            { time: '09:00', type: 'regatta', notes: 'Championship Day 2 — Racing begins' }
-        ];
+        // Initialize Tab 4 (no sample data — all sessions added by coach)
 
         // Session type card selection handler
         document.querySelectorAll('.session-type-card').forEach(card => {
@@ -3638,6 +3727,16 @@
         // Set date pickers to today
         document.getElementById('tab1DatePicker').value = formatDate(TODAY);
         document.getElementById('tab4FormDate').value = formatDate(TODAY);
+
+        // Rolling Changes date range display
+        (function updateRollingDateRange() {
+            const endDate = new Date(TODAY);
+            const startDate = new Date(TODAY);
+            startDate.setDate(startDate.getDate() - 6);
+            const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            const el = document.getElementById('rollingDateRange');
+            if (el) el.textContent = fmt(startDate) + ' — ' + fmt(endDate);
+        })();
 
         // Responsive window resize handler
         window.addEventListener('resize', () => {
@@ -3676,7 +3775,7 @@
             const sel = document.getElementById('tab6AthleteSelect');
             if (sel) {
                 sel.innerHTML = '<option value="all">All Athletes</option>' +
-                    DATA.athletes.map(a => `<option value="${a.id}">${a.name} (${a.class})</option>`).join('');
+                    DATA.athletes.map(a => `<option value="${a.id}">${a.name}${a.class ? ' · ' + a.class : ''}</option>`).join('');
             }
 
             renderParallelCoordinates();
