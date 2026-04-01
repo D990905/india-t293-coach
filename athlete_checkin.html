@@ -760,9 +760,7 @@ function showSuccess(payload){
   // ── COACH ALERT ──────────────────────────────────────────
   const COACH_EMAIL = 'kor22@me.com';
   const COACH_NAME  = 'Coach Danny';
-  // Coaches don't alert themselves — only athlete submissions trigger email alerts
-  if(payload.role === 'coach') alertFlags.length = 0;
-
+  
   // Determine alert level
   const alertFlags = [];
   if(payload.overall_readiness <= 3)   alertFlags.push(`🔴 Low readiness (${payload.overall_readiness}/10)`);
@@ -771,6 +769,8 @@ function showSuccess(payload){
   if(payload.stress_level >= 4)        alertFlags.push(`🧠 High stress (${payload.stress_level}/5)`);
   if(payload.urine_color >= 5)         alertFlags.push(`💧 Severe dehydration (urine color ${payload.urine_color}/6)`);
   if((payload.sleep_hours||0) < 5.5)   alertFlags.push(`😴 Very short sleep (${payload.sleep_hours}h)`);
+    // Coaches don't alert themselves — only athlete submissions trigger email alerts
+    if(payload.role === 'coach') alertFlags.length = 0;
 
   let alertBanner = '';
   if(alertFlags.length > 0){
