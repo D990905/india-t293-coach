@@ -201,12 +201,12 @@ select:disabled{background:#f8f9fa;color:#9aa0a6;cursor:not-allowed}
       <div class="sleep-time-row">
         <div class="time-input-group">
           <div class="time-label">🌙 Bedtime</div>
-          <input lang="en" type="time" id="sleep-bedtime" value="22:30" onchange="calcSleepDuration()">
+          <input type="text" id="sleep-bedtime" value="22:30" onchange="calcSleepDuration()" inputmode="numeric" pattern="[0-2][0-9]:[0-5][0-9]" placeholder="HH:MM" style="text-align:center;font-size:1.3rem;font-weight:600;letter-spacing:2px">
         </div>
         <div class="time-arrow">→</div>
         <div class="time-input-group">
           <div class="time-label">☀️ Wake time</div>
-          <input lang="en" type="time" id="sleep-waketime" value="06:30" onchange="calcSleepDuration()">
+          <input type="text" id="sleep-waketime" value="06:30" onchange="calcSleepDuration()" inputmode="numeric" pattern="[0-2][0-9]:[0-5][0-9]" placeholder="HH:MM" style="text-align:center;font-size:1.3rem;font-weight:600;letter-spacing:2px">
         </div>
       </div>
       <div class="sleep-duration-display" id="sleep-duration-display">
