@@ -688,18 +688,14 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
     <div class="field" style="margin-top:10px">
       <label>Drills <span style="font-weight:400;font-size:.75rem;color:var(--sub)">(multi-select)</span></label>
       <div class="chip-row">
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','LD')" title="Long Distance">LD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','MD')" title="Medium Distance">MD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SD')" title="Short Distance">SD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','MTD')" title="Mid/Long Tack Drill">MTD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','UDG')" title="Upwind-Downwind Group">UDG</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','STD')" title="Start + Tack Drill">STD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SGD')" title="Start + Gybe Drill">SGD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','PDS')" title="Pace Distance Solo">PDS</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SDS')" title="Speed Distance Solo">SDS</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SVD')" title="Slalom / VMG Drill">SVD</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','BTB')" title="Back-to-Back Starts">BTB</div>
-        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','8DR')" title="Figure-8 Drill">8DR</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','LD')" title="Long Distance">Long Distance</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','30T')" title="30S Tacking">30S Tacking</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','30P')" title="30S Pumping">30S Pumping</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','BTB')" title="Start BTB Drills">Start BTB Drills</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','8DR')" title="8 Drills">8 Drills</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','SDR')" title="S Drills">S Drills</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','VDR')" title="V Drills">V Drills</div>
+        <div class="chip drill-chip" onclick="toggleChip(this,'scDrills','TDR')" title="T Drills">T Drills</div>
       </div>
     </div>
 
@@ -1455,17 +1451,7 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
 </div>
 
 <!-- ══ COACH: PER-ATHLETE COMMENTS (coach + on-water only) ══ -->
-<div class="section hidden" id="coach-athlete-comments-section">
-  <div class="card">
-    <div class="card-title"><span class="icon">💬</span> Individual Athlete Observations</div>
-    <div class="hint" style="margin-bottom:12px" id="ath-obs-hint">
-      Per-athlete technical notes from today's on-water session.
-    </div>
-    <div id="ath-comment-grid">
-      <!-- rendered by JS -->
-    </div>
-  </div>
-</div>
+
 
 <!-- ══ SECTION 8: NOTES & SATISFACTION ══ -->
 <div class="section" id="notes-satisfaction-section">
@@ -1693,17 +1679,16 @@ const REQUIRED_FIELDS = ['role','athleteId','sessionType','date','windBft','sati
 // ── COACH CHECKLIST DATA ──────────────────────────────────────────────
 const COACH_CHECKLIST = {
   boat: [
-    { key:'hull_board', icon:'🏄', name:'Hull / Board condition' },
     { key:'hull_rib',   icon:'🚤', name:'Hull / RIB condition' },
     { key:'air_rib',    icon:'💨', name:'Air pressure (RIB)' },
     { key:'engine',     icon:'⛽', name:'Engine' },
     { key:'fuel',       icon:'🪣', name:'Fuel level' },
+    { key:'extra_fuel', icon:'⛽', name:'Extra fuel' },
   ],
   safety: [
     { key:'towrope',  icon:'🪢', name:'Tow rope' },
     { key:'anchor',   icon:'⚓', name:'Anchor + line' },
-    { key:'pfd',      icon:'🦺', name:'Life jackets (×8)' },
-    { key:'whistle_s',icon:'📯', name:'Whistle / Horn' },
+    { key:'pfd',      icon:'🦺', name:'Life jackets ' },
   ],
   instruments: [
     { key:'anemometer', icon:'🌬️', name:'Anemometer' },
