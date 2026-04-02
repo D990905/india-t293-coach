@@ -3317,7 +3317,7 @@ function buildPayload() {
     limiting_factors: Array.from(state.limitingFactors).join(','),
     tactical_conf: state.tacticalConf,
     current_race_num: state.currentRaceNum,
-    coach_race_results: state.isCoachMode ? Object.assign({}, state.coachRaceResults) : null,
+    // coach_race_results removed (V5)
 
     // Load
     start_time: document.getElementById('tl-start')?.value || null,
@@ -3345,10 +3345,7 @@ function buildPayload() {
     }).join(', '),
     coach_mode: state.isCoachMode,
 
-    // Diagnostics
-    setup_knowledge: Object.assign({}, knowState),
-    equip_ratings: Object.assign({}, state.equipRatings),
-    // equip_avg, equip_critical_items, equip_urgent, equip_urgent_notes removed (V5)
+    // Diagnostics — setup_knowledge, equip_ratings, equip_avg/critical/urgent removed (V5)
 
     // Coach-specific fields
     coach_precheck: state.isCoachMode ? Object.assign({}, coachCheckState) : null,
