@@ -3348,17 +3348,14 @@ function buildPayload() {
     // Diagnostics
     setup_knowledge: Object.assign({}, knowState),
     equip_ratings: Object.assign({}, state.equipRatings),
-    equip_avg: (function() {
-      const vals = Object.values(state.equipRatings || {}).filter(v => v > 0);
-      return vals.length ? Math.round(vals.reduce((a,b)=>a+b,0) / vals.length * 10) / 10 : null;
-    })(),
-    equip_critical_items: Object.entries(state.equipRatings || {})
-      .filter(([,v]) => v === 1).map(([k]) => k),
-    equip_urgent: !!(state.urgentAction),
-    equip_urgent_notes: document.getElementById('urgent-notes') ? document.getElementById('urgent-notes').value : '',
+    // equip_avg, equip_critical_items, equip_urgent, equip_urgent_notes removed (V5)
 
     // Coach-specific fields
     coach_precheck: state.isCoachMode ? Object.assign({}, coachCheckState) : null,
+    // Individual precheck columns (pc_ prefix) for spreadsheet
+    ...(state.isCoachMode ? Object.fromEntries(
+      Object.entries(coachCheckState).map(([k, v]) => ['pc_' + k, v])
+    ) : {}),
     coach_precheck_issues: state.isCoachMode
       ? Object.entries(coachCheckState).filter(([,v])=>v==='issue').map(([k])=>k)
       : null,
