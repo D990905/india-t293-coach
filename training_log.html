@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>India T293 — Training Log</title>
+<title>India T293 — Training Review</title>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="IND T293 Log">
+<meta name="apple-mobile-web-app-title" content="Training Review">
 <meta name="theme-color" content="#0a3a1e">
 <link rel="manifest" href="manifest_training.json">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -92,6 +92,26 @@ select:focus{border-color:var(--green-l)}
 .wz-btn .wz-lbl{font-size:.55rem;color:var(--sub);margin-top:1px;line-height:1.2}
 .wz-btn.selected{border-color:var(--navy);background:#e8f0fe}
 .wz-btn.selected .wz-kn{color:var(--navy)}
+
+/* ─── ATTENDANCE STATUS ─── */
+.attend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.attend-btn{display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:12px 6px;border:2px solid var(--border);border-radius:12px;
+  background:#fff;cursor:pointer;transition:all .15s;text-align:center;
+  -webkit-tap-highlight-color:transparent}
+.attend-btn:active{transform:scale(.95)}
+.attend-icon{font-size:1.4rem}
+.attend-label{font-size:.82rem;font-weight:700;color:var(--text)}
+.attend-sub{font-size:.6rem;color:var(--sub);line-height:1.2}
+.attend-btn.sel-full{border-color:#34a853;background:#e8f5e9}
+.attend-btn.sel-full .attend-label{color:#2e7d32}
+.attend-btn.sel-modified{border-color:#1a73e8;background:#e8f0fe}
+.attend-btn.sel-modified .attend-label{color:#1a73e8}
+.attend-btn.sel-limited{border-color:#ef6c00;background:#fff3e0}
+.attend-btn.sel-limited .attend-label{color:#ef6c00}
+.attend-btn.sel-absent{border-color:var(--red);background:#fce8e6}
+.attend-btn.sel-absent .attend-label{color:var(--red)}
+
 .skill-a{background:#fff3e0;color:#e65100}
 .skill-ab{background:#fff8e1;color:#f57f17}
 .skill-b{background:#e8f5e9;color:#2e7d32}
@@ -460,12 +480,6 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
 .class-locked .scale-btn{pointer-events:none!important}
 .wz-ctx{font-weight:700;color:var(--blue);background:#e8f0fe;padding:1px 6px;border-radius:4px;
   font-size:.78rem;white-space:nowrap}
-.attend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
-.attend-btn{padding:10px 4px;border-radius:8px;border:2px solid var(--border);background:var(--card);text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
-.attend-btn.sel-full{border-color:var(--green);background:rgba(52,168,83,.15);color:var(--green)}
-.attend-btn.sel-modified{border-color:var(--blue);background:rgba(26,115,232,.15);color:var(--blue)}
-.attend-btn.sel-limited{border-color:var(--orange);background:rgba(251,188,4,.15);color:var(--orange)}
-.attend-btn.sel-absent{border-color:var(--red);background:rgba(234,67,53,.15);color:var(--red)}
 </style>
 </head>
 <body>
@@ -474,7 +488,7 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
 <div class="hdr">
   <div class="hdr-logo">
     <span class="hdr-flag">🇮🇳</span>
-    <span class="hdr-title">Training Log</span>
+    <span class="hdr-title">Training Review</span>
     <span class="hdr-flag">⛵</span>
   </div>
   <div class="hdr-sub">India Techno 293 · World Championship 2026</div>
@@ -548,22 +562,44 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
   </div>
 </div>
 
-<!-- COACH MODE BANNER -->
+<!-- ══ ATTENDANCE STATUS ══ -->
 <div class="section hidden" id="attendance-section">
   <div class="card">
     <div class="card-title"><span class="icon">📋</span> Training Attendance</div>
-    <div class="attend-grid" id="attend-grid">
-      <div class="attend-btn" onclick="selectAttendance('full')" data-attend="full">✅ Full</div>
-      <div class="attend-btn" onclick="selectAttendance('modified')" data-attend="modified">🔄 Modified</div>
-      <div class="attend-btn" onclick="selectAttendance('limited')" data-attend="limited">⚠️ Limited</div>
-      <div class="attend-btn" onclick="selectAttendance('absent')" data-attend="absent">❌ Absent</div>
+    <div class="field">
+      <label>Participation Status</label>
+      <div class="hint">Select how this athlete participated in today's session</div>
+      <div class="attend-grid" id="attend-grid">
+        <div class="attend-btn" onclick="selectAttendance('full')" data-attend="full">
+          <span class="attend-icon">✅</span>
+          <span class="attend-label">Full</span>
+          <span class="attend-sub">Completed full session</span>
+        </div>
+        <div class="attend-btn" onclick="selectAttendance('modified')" data-attend="modified">
+          <span class="attend-icon">🔄</span>
+          <span class="attend-label">Modified</span>
+          <span class="attend-sub">Adjusted program</span>
+        </div>
+        <div class="attend-btn" onclick="selectAttendance('limited')" data-attend="limited">
+          <span class="attend-icon">⚠️</span>
+          <span class="attend-label">Limited</span>
+          <span class="attend-sub">Injury / Low condition</span>
+        </div>
+        <div class="attend-btn" onclick="selectAttendance('absent')" data-attend="absent">
+          <span class="attend-icon">❌</span>
+          <span class="attend-label">Absent</span>
+          <span class="attend-sub">Did not participate</span>
+        </div>
+      </div>
     </div>
-    <div class="field hidden" id="attend-reason-field">
-      <label>Reason (optional)</label>
-      <textarea id="attend-reason" placeholder="Why modified/limited/absent?"></textarea>
+    <div class="field hidden" id="attend-reason-field" style="margin-top:10px">
+      <label>Reason / Notes</label>
+      <textarea id="attend-reason" placeholder="e.g. Shoulder pain since yesterday, reduced load protocol, rest day..."></textarea>
     </div>
   </div>
 </div>
+
+<!-- COACH MODE BANNER -->
 <div class="section hidden" id="coach-mode-banner">
   <div class="coach-mode-banner">
     <span class="cm-icon">📋</span>
@@ -654,7 +690,7 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
     <div class="card-title"><span class="icon">📋</span> Session Plan — Library</div>
 
     <div class="field">
-      <label>Session Focus <span style="font-weight:400;font-size:.75rem;color:var(--sub)">(multi-select)</span></label>
+      <label>Session Focused <span style="font-weight:400;font-size:.75rem;color:var(--sub)">(multi-select)</span></label>
       <div class="chip-row" id="sc-focus-row">
         <div class="chip" onclick="toggleChip(this,'scFocus','skill')">🎯 Skill</div>
         <div class="chip" onclick="toggleChip(this,'scFocus','speed')">⚡ Speed</div>
@@ -712,6 +748,17 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
       <label>Coach Objectives for Today</label>
       <textarea id="sc-coach-objectives" placeholder="What should athletes achieve by end of session? What will you observe and measure?"></textarea>
     </div>
+  </div>
+</div>
+
+<!-- ══ COACH: PER-ATHLETE COMMENTS (shown for coach + on-water sessions) ══ -->
+<div class="section hidden" id="coach-athlete-comments-section">
+  <div class="card">
+    <div class="card-title"><span class="icon">👥</span> Per-Athlete Observations</div>
+    <div class="hint" style="margin-bottom:10px">
+      Quick Obs에서 기록한 관찰이 자동으로 불러와집니다. 추가/수정 후 제출하세요.
+    </div>
+    <div id="ath-comments-container"></div>
   </div>
 </div>
 
@@ -1454,8 +1501,6 @@ input[type="date"]:focus,input[type="time"]:focus{border-color:var(--green-l)}
   </div>
 </div>
 
-<!-- ══ COACH: PER-ATHLETE COMMENTS (coach + on-water only) ══ -->
-
 
 <!-- ══ SECTION 8: NOTES & SATISFACTION ══ -->
 <div class="section" id="notes-satisfaction-section">
@@ -1687,12 +1732,12 @@ const COACH_CHECKLIST = {
     { key:'air_rib',    icon:'💨', name:'Air pressure (RIB)' },
     { key:'engine',     icon:'⛽', name:'Engine' },
     { key:'fuel',       icon:'🪣', name:'Fuel level' },
-    { key:'extra_fuel', icon:'⛽', name:'Extra fuel' },
+    { key:'extra_fuel', icon:'🪣', name:'Extra fuel' },
   ],
   safety: [
     { key:'towrope',  icon:'🪢', name:'Tow rope' },
     { key:'anchor',   icon:'⚓', name:'Anchor + line' },
-    { key:'pfd',      icon:'🦺', name:'Life jackets ' },
+    { key:'pfd',      icon:'🦺', name:'Life jackets' },
   ],
   instruments: [
     { key:'anemometer', icon:'🌬️', name:'Anemometer' },
@@ -1724,6 +1769,101 @@ let scIntensity = null;
 let scVolume    = null;
 const athCommentTags = {};    // athleteId → Set of tags
 const ATH_TAGS = ['Technique','Tactics','Start','Fitness','Mental','Equipment'];
+
+// ── BUILD PER-ATHLETE COMMENTS UI ────────────────────────────────────
+function buildAthleteCommentsUI() {
+  const container = document.getElementById('ath-comments-container');
+  if (!container) return;
+
+  container.innerHTML = ROSTER.athlete.map(a => {
+    const clsTag = a.cls.includes('U17') ? 'cls-u17' : 'cls-u15';
+    return `
+    <div class="ath-comment-card" id="ath-card-${a.id}" style="margin-bottom:12px;padding:10px 12px;border:2px solid var(--border);border-radius:10px;background:#fafafa">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+        <span class="ath-comment-name">${a.name}</span>
+        <span class="ath-comment-cls ${clsTag}">${a.cls.replace('T293 ','')}</span>
+        <span style="font-size:.7rem;color:var(--sub)">${a.id}</span>
+      </div>
+      <div class="ath-tag-row" id="ath-tags-${a.id}">
+        ${ATH_TAGS.map(tag => `<span class="ath-tag" onclick="toggleAthTag('${a.id}','${tag}',this)">${tag}</span>`).join('')}
+      </div>
+      <div class="ath-input-row">
+        <textarea id="ath-cmt-${a.id}" class="ath-comment-txt" placeholder="Observations for ${a.name}..." rows="2"></textarea>
+        <button type="button" class="voice-btn" id="voice-btn-${a.id}" onclick="toggleVoice('${a.id}')">🎙️</button>
+      </div>
+      <span class="voice-status" id="voice-status-${a.id}" style="font-size:.7rem;color:var(--sub)"></span>
+      <div class="hidden" id="qobs-badge-${a.id}" style="margin-top:4px;font-size:.7rem;padding:3px 8px;background:#fff3e0;color:#e65100;border-radius:8px;display:inline-block"></div>
+    </div>`;
+  }).join('');
+
+  // Auto-load quick obs data
+  loadQuickObsIntoComments();
+}
+
+function toggleAthTag(athId, tag, el) {
+  if (!athCommentTags[athId]) athCommentTags[athId] = new Set();
+  if (athCommentTags[athId].has(tag)) {
+    athCommentTags[athId].delete(tag);
+    el.classList.remove('sel');
+  } else {
+    athCommentTags[athId].add(tag);
+    el.classList.add('sel');
+  }
+}
+
+function loadQuickObsIntoComments() {
+  // Read from quick_obs localStorage (key: coachobs_v2)
+  const stored = JSON.parse(localStorage.getItem('coachobs_v2') || '[]');
+  const today = state.date || new Date().toISOString().slice(0, 10);
+  const todayObs = stored.filter(o => o.type === 'athlete' && o.ts && o.ts.startsWith(today));
+
+  if (!todayObs.length) return;
+
+  let loadedCount = 0;
+  todayObs.forEach(o => {
+    const code = o.athleteCode || o.code;
+    const ath = ROSTER.athlete.find(a => a.id === code);
+    if (!ath) return;
+
+    const textarea = document.getElementById('ath-cmt-' + ath.id);
+    if (!textarea) return;
+
+    // Append observation text
+    const obsText = o.text || o.observation_text || '';
+    if (obsText) {
+      const existing = textarea.value.trim();
+      const prefix = '[QuickObs ' + (o.ts ? o.ts.slice(11, 16) : '') + '] ';
+      textarea.value = existing ? existing + '\n' + prefix + obsText : prefix + obsText;
+      loadedCount++;
+    }
+
+    // Apply tags from categories
+    if (o.categories) {
+      const cats = o.categories.split(',').map(c => c.trim());
+      cats.forEach(cat => {
+        document.querySelectorAll('#ath-tags-' + ath.id + ' .ath-tag').forEach(el => {
+          const tagText = el.textContent.trim().toLowerCase();
+          if (tagText === cat.toLowerCase()) {
+            if (!athCommentTags[ath.id]) athCommentTags[ath.id] = new Set();
+            athCommentTags[ath.id].add(el.textContent.trim());
+            el.classList.add('sel');
+          }
+        });
+      });
+    }
+
+    // Show loaded badge
+    const badge = document.getElementById('qobs-badge-' + ath.id);
+    if (badge) {
+      badge.textContent = '📋 Quick Obs loaded';
+      badge.classList.remove('hidden');
+    }
+  });
+
+  if (loadedCount > 0) {
+    console.log('[TrainingLog] Loaded ' + loadedCount + ' Quick Obs entries for today');
+  }
+}
 
 // ── BUILD COACH CHECKLIST DOM ─────────────────────────────────────────
 const CHK_GRID_IDS = { boat:'chk-boat', safety:'chk-safety',
@@ -1813,47 +1953,6 @@ function selectVolume(val) {
   });
 }
 
-// ── BUILD ATHLETE COMMENT GRID ────────────────────────────────────────
-function buildAthCommentGrid() {
-  const grid = document.getElementById('ath-comment-grid');
-  if (!grid) return;
-  grid.innerHTML = ROSTER.athlete.map((a, idx) => {
-    athCommentTags[a.id] = new Set();
-    const clsCls = a.cls.includes('U17') ? 'cls-u17' : 'cls-u15';
-    const clsLabel = a.cls.includes('U17') ? 'U17' : 'U15';
-    return `
-      <div class="ath-comment-card" id="ath-cmt-card-${a.id}">
-        <div class="ath-comment-hdr">
-          <div class="ath-num">${idx + 1}</div>
-          <div class="ath-comment-name">${a.name}</div>
-          <span class="ath-comment-cls ${clsCls}">${clsLabel}</span>
-          <span style="font-size:.7rem;color:var(--sub);margin-left:4px">${a.id}</span>
-        </div>
-        <div class="ath-tag-row" id="ath-tags-${a.id}">
-          ${ATH_TAGS.map(t => `<span class="ath-tag" onclick="toggleAthTag(this,'${a.id}','${t}')">${t}</span>`).join('')}
-        </div>
-        <div class="ath-input-row">
-          <textarea class="ath-comment-txt" id="ath-cmt-${a.id}"
-            placeholder="Observations for ${a.name}..."></textarea>
-          <div style="display:flex;flex-direction:column;align-items:center;margin-top:2px">
-            <button class="voice-btn" id="voice-btn-${a.id}" onclick="toggleVoice('${a.id}')" title="Voice input">🎙️</button>
-            <div class="voice-status" id="voice-status-${a.id}"></div>
-          </div>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function toggleAthTag(el, athId, tag) {
-  if (!athCommentTags[athId]) athCommentTags[athId] = new Set();
-  if (athCommentTags[athId].has(tag)) {
-    athCommentTags[athId].delete(tag);
-    el.classList.remove('sel');
-  } else {
-    athCommentTags[athId].add(tag);
-    el.classList.add('sel');
-  }
-}
 
 // ═══════════════════════════════════════════
 // VOICE INPUT (Web Speech API)
@@ -1963,7 +2062,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buildEquipGrid();
   initBodyMap();
   buildCoachChecklistGrids();
-  buildAthCommentGrid();
 
   updateProgress();
   loadCheckinData();
@@ -1996,6 +2094,7 @@ function selectAttendance(status) {
   });
   const btn = document.querySelector(`.attend-btn[data-attend="${status}"]`);
   if (btn) btn.classList.add('sel-' + status);
+  // Show reason field for modified/limited/absent
   const reasonField = document.getElementById('attend-reason-field');
   if (reasonField) {
     reasonField.classList.toggle('hidden', status === 'full');
@@ -2045,6 +2144,8 @@ function onNameChange() {
   const classTag = document.getElementById('class-tag');
   classTag.textContent = person.cls;
   classTag.classList.remove('hidden');
+
+  // Show attendance section
   document.getElementById('attendance-section')?.classList.remove('hidden');
 
   // Auto-set sail size from class profile (athletes only)
@@ -2107,25 +2208,6 @@ function updateCoachSectionVisibility() {
   const isRacePractice = state.sessionType === 'race_practice';
   const isRegatta = state.sessionType === 'regatta';
 
-  // Show coach-athlete-comments in ALL coach modes (including physical)
-  const isPhysical = state.sessionType === 'physical';
-  const hasSession = !!state.sessionType;
-  const coachComments = document.getElementById('coach-athlete-comments-section');
-  if (coachComments) coachComments.classList.toggle('hidden', !hasSession);
-
-  // Update hint text based on session type
-  const hint = document.getElementById('ath-obs-hint');
-  if (hint) {
-    if (isPhysical) {
-      hint.textContent = 'Per-athlete observations from today\'s physical training / conditioning session.';
-    } else if (isRegatta && state.currentRaceNum) {
-      hint.textContent = 'Today\'s R' + state.currentRaceNum + ' race — per-athlete observations.';
-    } else if (isRegatta) {
-      hint.textContent = 'Per-athlete observations from today\'s race.';
-    } else {
-      hint.textContent = 'Per-athlete technical notes from today\'s on-water session.';
-    }
-  }
 
   // For race_practice: show coach precheck, session content, and athlete comments
   const coachPrecheck = document.getElementById('coach-precheck-section');
@@ -2133,6 +2215,18 @@ function updateCoachSectionVisibility() {
 
   const coachSessionContent = document.getElementById('coach-session-content-section');
   if (coachSessionContent) coachSessionContent.classList.toggle('hidden', !isRacePractice);
+
+  // Show per-athlete comments for race_practice and regatta
+  const athCommentsSection = document.getElementById('coach-athlete-comments-section');
+  if (athCommentsSection) {
+    const showAthComments = isRacePractice || isRegatta;
+    athCommentsSection.classList.toggle('hidden', !showAthComments);
+    // Build UI if first time showing
+    if (showAthComments && !athCommentsSection.dataset.built) {
+      buildAthleteCommentsUI();
+      athCommentsSection.dataset.built = '1';
+    }
+  }
 }
 
 // ═══════════════════════════════════════════
@@ -2172,7 +2266,7 @@ function selectSession(type) {
   const ptSection = document.getElementById('physical-training-section');
   if (ptSection) ptSection.classList.toggle('hidden', !isPhysical);
 
-  // Wellness (신체상황) section: hide for coach+physical and coach+regatta (athletes always see it except physical has own section)
+  // Wellness section: hide for coach+physical and coach+regatta (athletes always see it except physical has own section)
   const wellnessSection = document.getElementById('wellness-section');
   if (wellnessSection) wellnessSection.classList.toggle('hidden', (state.isCoachMode && isPhysical) || (state.isCoachMode && isRegatta));
 
@@ -2211,7 +2305,6 @@ function selectSession(type) {
     const coachRace = document.getElementById('coach-race-results-section');
     const precheck = document.getElementById('coach-precheck-section');
     const sessionPlan = document.getElementById('coach-session-content-section');
-    const athComments = document.getElementById('coach-athlete-comments-section');
     const notesSat = document.getElementById('notes-satisfaction-section');
     const ptSection = document.getElementById('physical-training-section');
     const tlSection = document.getElementById('training-load-section');
@@ -2224,25 +2317,22 @@ function selectSession(type) {
     const rulesKnow = document.getElementById('rules-knowledge-section');
 
     if (state.isCoachMode && isPhysical) {
-      // Coach Physical: PT Details → Training Load → Athlete Obs → Notes & Satisfaction
+      // Coach Physical: PT Details → Training Load → Notes & Satisfaction
       if (ptSection) parent.insertBefore(ptSection, refNode);
       if (tlSection) parent.insertBefore(tlSection, refNode);
-      if (athComments) parent.insertBefore(athComments, refNode);
       if (notesSat) parent.insertBefore(notesSat, refNode);
     } else if (state.isCoachMode && isRacePractice) {
-      // Coach Race Practice: Environment → Pre-check → Session Plan → Training Load → Athlete Obs → Notes & Satisfaction
+      // Coach Race Practice: Environment → Pre-check → Session Plan → Training Load → Notes & Satisfaction
       if (env) parent.insertBefore(env, refNode);
       if (precheck) parent.insertBefore(precheck, refNode);
       if (sessionPlan) parent.insertBefore(sessionPlan, refNode);
       if (tlSection) parent.insertBefore(tlSection, refNode);
-      if (athComments) parent.insertBefore(athComments, refNode);
       if (notesSat) parent.insertBefore(notesSat, refNode);
     } else if (state.isCoachMode && isRegatta) {
-      // Coach Regatta: Race Entry → Environment → Race Results → Athlete Obs → Notes & Satisfaction
+      // Coach Regatta: Race Entry → Environment → Race Results → Notes & Satisfaction
       if (regRace) parent.insertBefore(regRace, refNode);
       if (env) parent.insertBefore(env, refNode);
       if (coachRace) parent.insertBefore(coachRace, refNode);
-      if (athComments) parent.insertBefore(athComments, refNode);
       if (notesSat) parent.insertBefore(notesSat, refNode);
     } else if (!state.isCoachMode && isPhysical) {
       // Athlete Physical: PT Details → Wellness → Training Load → Notes & Satisfaction
@@ -2622,17 +2712,7 @@ const EQUIP_ITEMS = [
 
 const EQUIP_LABELS = ['','Critical','Poor','OK','Good','Excellent'];
 state.equipRatings = {};
-// Reset attendance
-  attendanceStatus = null;
-  document.querySelectorAll('.attend-btn').forEach(b => b.className = 'attend-btn');
-  const attendReason = document.getElementById('attend-reason');
-  if (attendReason) attendReason.value = '';
-  const attendReasonField = document.getElementById('attend-reason-field');
-  if (attendReasonField) attendReasonField.classList.add('hidden');
-  const attendSection = document.getElementById('attendance-section');
-  if (attendSection) attendSection.classList.add('hidden');
-
-  state.urgentAction = false;
+state.urgentAction = false;
 state.urgentNotes = '';
 
 function buildEquipGrid() {
@@ -3052,6 +3132,9 @@ function updateProgress() {
 // SUBMIT
 // ═══════════════════════════════════════════
 // ── Apps Script Web App URL (set this after deployment) ──
+if (!localStorage.getItem('india_t293_script_url')) {
+  localStorage.setItem('india_t293_script_url', 'https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec');
+}
 const WEBAPP_URL = localStorage.getItem('india_t293_script_url') || 'https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec';
 
 // ═══════════════════════════════════════════
@@ -3267,6 +3350,7 @@ function buildPayload() {
     athlete_class: state.athleteClass,
     role: state.role,
     session_type: state.sessionType,
+
     // Attendance
     attendance_status: attendanceStatus,
     attendance_reason: attendanceStatus && attendanceStatus !== 'full' ? (document.getElementById('attend-reason')?.value || '') : null,
@@ -3373,7 +3457,7 @@ function buildPayload() {
       ? ROSTER.athlete.reduce((acc, a) => {
           const txt = document.getElementById('ath-cmt-' + a.id)?.value || '';
           const tags = Array.from(athCommentTags[a.id] || []);
-          if (txt || tags.length) acc[a.id] = { name: a.name, tags, comment: txt };
+          if (txt || tags.length) acc[a.id] = { name: a.name, cls: a.cls, tags, comment: txt };
           return acc;
         }, {})
       : null,
@@ -3647,6 +3731,16 @@ function resetForm() {
   });
   const ptDesc = document.getElementById('pt_description');
   if (ptDesc) ptDesc.value = '';
+  // Reset attendance
+  attendanceStatus = null;
+  document.querySelectorAll('.attend-btn').forEach(b => b.className = 'attend-btn');
+  const attendReason = document.getElementById('attend-reason');
+  if (attendReason) attendReason.value = '';
+  const attendReasonField = document.getElementById('attend-reason-field');
+  if (attendReasonField) attendReasonField.classList.add('hidden');
+  const attendSection = document.getElementById('attendance-section');
+  if (attendSection) attendSection.classList.add('hidden');
+
   state.urgentAction = false;
   state.equipRatings = {};
   state.windZoneSkill = null;
