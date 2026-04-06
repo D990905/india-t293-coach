@@ -2861,26 +2861,22 @@ new Chart(document.getElementById('bias_U17B_Avg'),{
         </div>
       </div>
       <div class="card full">
-        <h2>UPWIND TWA COMPARISON (°)</h2>
-        <div class="chart-box">
-          <canvas id="uwTwaChart"></canvas>
-        </div>
-      </div>
-      <div class="card full">
-        <h2>DOWNWIND TWA COMPARISON (°)</h2>
-        <div class="chart-box">
-          <canvas id="dwTwaChart"></canvas>
-        </div>
-      </div>
-      <div class="card full">
-        <h2>TWA vs VMG EFFICIENCY</h2>
-        <div class="chart-box">
-          <canvas id="twaVmgScatter"></canvas>
+        <h2>TWA POLAR DIAGRAM — Upwind & Downwind Performance</h2>
+        <p style="font-size:12px;color:#94A3B8;margin:4px 0 8px">Arrow angle = TWA (True Wind Angle from wind axis). Arrow length = VMG (knots). Longer arrow at tighter angle = better performance.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center">
+          <div style="flex:1;min-width:400px;max-width:600px">
+            <h3 style="text-align:center;color:#FF6B00;font-size:14px;margin-bottom:4px">UPWIND (beating)</h3>
+            <canvas id="polarUW" width="560" height="480"></canvas>
+          </div>
+          <div style="flex:1;min-width:400px;max-width:600px">
+            <h3 style="text-align:center;color:#FF6B00;font-size:14px;margin-bottom:4px">DOWNWIND (running)</h3>
+            <canvas id="polarDW" width="560" height="480"></canvas>
+          </div>
         </div>
       </div>
       <div class="card full">
         <div class="insight">
-          <strong>TWA Analysis:</strong> Optimal upwind TWA for Techno293 in 10-15kt breeze is typically 55-65°.
+          <strong>TWA Polar Analysis:</strong> Optimal upwind TWA for Techno293 in 10-15kt breeze is typically 55-65°.
           <strong style="color:#10B981">Top performers (Monastiriotis 61.6°, Kanellopoulos 63.5°)</strong> sail closest to optimal angles with strong VMG.
           <strong style="color:#EF4444">MOHIT (72.3°) sails too wide upwind</strong> — 8-11° wider than leaders, directly reducing VMG by ~30%.
           RAJPUT (67.7°) also wider than optimal. Downwind TWA is consistent across fleet (121-124°), suggesting similar board handling.
@@ -3145,9 +3141,9 @@ function showSubTab(element, tabId) {
     if (rankProgChart) rankProgChart.resize();
     if (speedByLegChart) speedByLegChart.resize();
     if (vmgByLegChart) vmgByLegChart.resize();
-    if (typeof uwTwaChart !== 'undefined' && uwTwaChart) uwTwaChart.resize();
-    if (typeof dwTwaChart !== 'undefined' && dwTwaChart) dwTwaChart.resize();
-    if (typeof twaVmgChart !== 'undefined' && twaVmgChart) twaVmgChart.resize();
+    // Polar diagrams use fixed canvas size, redraw on resize
+    drawPolarDiagram('polarUW', 'uw');
+    drawPolarDiagram('polarDW', 'dw');
     if (sideBiasChart) sideBiasChart.resize();
   }, 100);
 }
@@ -3342,237 +3338,262 @@ if (vmgByLegCtx) {
   });
 }
 
-// Upwind TWA Chart
-const uwTwaCtx = document.getElementById('uwTwaChart');
-if (uwTwaCtx) {
-  const uwTwaChart = new Chart(uwTwaCtx, {
-    type: 'bar',
-    data: {
-      labels: ['Monastiriotis', 'Caires', 'Kanellopoulos', 'Kiiver', 'Koulalis', 'MOHIT (India)', 'RAJPUT (India)'],
-      datasets: [{
-        label: 'UW Avg TWA (°)',
-        data: [61.6, 64.1, 63.5, 67.5, 63.7, 72.3, 67.7],
-        backgroundColor: ['#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#3B82F6', '#FF6B00'],
-        borderRadius: 6
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        annotation: {
-          annotations: {
-            optimalZone: {
-              type: 'box',
-              xMin: 55,
-              xMax: 65,
-              backgroundColor: 'rgba(16,185,129,0.1)',
-              borderColor: 'rgba(16,185,129,0.4)',
-              borderWidth: 1,
-              label: { display: true, content: 'Optimal Zone', color: '#10B981', font: { size: 10 }, position: 'start' }
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          min: 50,
-          max: 80,
-          ticks: { color: '#94A3B8', font: { size: 11 }, callback: function(v) { return v + '°'; } },
-          grid: { color: 'rgba(31,41,55,.3)' },
-          title: { display: true, text: 'True Wind Angle (°)', color: '#94A3B8' }
-        },
-        y: {
-          ticks: { color: '#94A3B8', font: { size: 12, weight: 'bold' } },
-          grid: { display: false }
-        }
-      }
-    },
-    plugins: [{
-      id: 'optimalLine',
-      afterDraw(chart) {
-        const { ctx, chartArea, scales } = chart;
-        const x55 = scales.x.getPixelForValue(55);
-        const x65 = scales.x.getPixelForValue(65);
-        ctx.save();
-        ctx.fillStyle = 'rgba(16,185,129,0.08)';
-        ctx.fillRect(x55, chartArea.top, x65 - x55, chartArea.bottom - chartArea.top);
-        ctx.strokeStyle = '#10B981';
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([5, 3]);
-        ctx.beginPath();
-        ctx.moveTo(x55, chartArea.top);
-        ctx.lineTo(x55, chartArea.bottom);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(x65, chartArea.top);
-        ctx.lineTo(x65, chartArea.bottom);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = '#10B981';
-        ctx.font = '10px sans-serif';
-        ctx.fillText('Optimal 55-65°', x55 + 4, chartArea.top + 14);
-        ctx.restore();
-      }
-    }]
-  });
-}
+// TWA Polar Diagram
+const polarAthletes = [
+  { name: 'Monastiriotis', uwTWA: 61.6, dwTWA: 122.3, uwVMG: 4.78, dwVMG: 9.62, uwSpd: 10.50, dwSpd: 18.81, color: '#94A3B8', india: false },
+  { name: 'Caires',        uwTWA: 64.1, dwTWA: 122.4, uwVMG: 4.38, dwVMG: 8.74, uwSpd: 10.51, dwSpd: 17.12, color: '#CBD5E1', india: false },
+  { name: 'Kanellopoulos', uwTWA: 63.5, dwTWA: 122.5, uwVMG: 4.36, dwVMG: 9.49, uwSpd: 10.27, dwSpd: 18.58, color: '#64748B', india: false },
+  { name: 'Kiiver',        uwTWA: 67.5, dwTWA: 121.0, uwVMG: 4.20, dwVMG: 8.80, uwSpd: 11.23, dwSpd: 17.70, color: '#475569', india: false },
+  { name: 'Koulalis',      uwTWA: 63.7, dwTWA: 123.5, uwVMG: 4.19, dwVMG: 9.10, uwSpd: 10.10, dwSpd: 17.02, color: '#334155', india: false },
+  { name: 'MOHIT',         uwTWA: 72.3, dwTWA: 121.6, uwVMG: 3.35, dwVMG: 7.60, uwSpd: 11.72, dwSpd: 15.59, color: '#3B82F6', india: true },
+  { name: 'RAJPUT',        uwTWA: 67.7, dwTWA: 121.6, uwVMG: 3.57, dwVMG: 7.80, uwSpd: 13.61, dwSpd: 15.52, color: '#FF6B00', india: true }
+];
 
-// Downwind TWA Chart
-const dwTwaCtx = document.getElementById('dwTwaChart');
-if (dwTwaCtx) {
-  const dwTwaChart = new Chart(dwTwaCtx, {
-    type: 'bar',
-    data: {
-      labels: ['Monastiriotis', 'Caires', 'Kanellopoulos', 'Kiiver', 'Koulalis', 'MOHIT (India)', 'RAJPUT (India)'],
-      datasets: [{
-        label: 'DW Avg TWA (°)',
-        data: [122.3, 122.4, 122.5, 121.0, 123.5, 121.6, 121.6],
-        backgroundColor: ['#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#3B82F6', '#FF6B00'],
-        borderRadius: 6
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        x: {
-          min: 115,
-          max: 130,
-          ticks: { color: '#94A3B8', font: { size: 11 }, callback: function(v) { return v + '°'; } },
-          grid: { color: 'rgba(31,41,55,.3)' },
-          title: { display: true, text: 'True Wind Angle (°)', color: '#94A3B8' }
-        },
-        y: {
-          ticks: { color: '#94A3B8', font: { size: 12, weight: 'bold' } },
-          grid: { display: false }
-        }
-      }
-    },
-    plugins: [{
-      id: 'dwOptimalLine',
-      afterDraw(chart) {
-        const { ctx, chartArea, scales } = chart;
-        const x120 = scales.x.getPixelForValue(120);
-        const x125 = scales.x.getPixelForValue(125);
-        ctx.save();
-        ctx.fillStyle = 'rgba(16,185,129,0.08)';
-        ctx.fillRect(x120, chartArea.top, x125 - x120, chartArea.bottom - chartArea.top);
-        ctx.strokeStyle = '#10B981';
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([5, 3]);
-        ctx.beginPath();
-        ctx.moveTo(x120, chartArea.top);
-        ctx.lineTo(x120, chartArea.bottom);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(x125, chartArea.top);
-        ctx.lineTo(x125, chartArea.bottom);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = '#10B981';
-        ctx.font = '10px sans-serif';
-        ctx.fillText('Optimal 120-125°', x120 + 4, chartArea.top + 14);
-        ctx.restore();
-      }
-    }]
-  });
-}
+function drawPolarDiagram(canvasId, mode) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = (mode === 'uw') ? H - 40 : 40;
+  const maxR = (mode === 'uw') ? H - 80 : H - 80;
 
-// TWA vs VMG Scatter Chart
-const twaVmgCtx = document.getElementById('twaVmgScatter');
-if (twaVmgCtx) {
-  const twaVmgChart = new Chart(twaVmgCtx, {
-    type: 'scatter',
-    data: {
-      datasets: [
-        {
-          label: 'Upwind',
-          data: [
-            { x: 61.6, y: 4.78, label: 'Monastiriotis' },
-            { x: 64.1, y: 4.38, label: 'Caires' },
-            { x: 63.5, y: 4.36, label: 'Kanellopoulos' },
-            { x: 67.5, y: 4.20, label: 'Kiiver' },
-            { x: 63.7, y: 4.19, label: 'Koulalis' },
-            { x: 72.3, y: 3.35, label: 'MOHIT' },
-            { x: 67.7, y: 3.57, label: 'RAJPUT' }
-          ],
-          backgroundColor: ['#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#3B82F6', '#FF6B00'],
-          pointRadius: [8, 8, 8, 8, 8, 10, 10],
-          pointHoverRadius: 12
-        },
-        {
-          label: 'Downwind',
-          data: [
-            { x: 122.3, y: 9.62, label: 'Monastiriotis' },
-            { x: 122.4, y: 8.74, label: 'Caires' },
-            { x: 122.5, y: 9.49, label: 'Kanellopoulos' },
-            { x: 121.0, y: 8.80, label: 'Kiiver' },
-            { x: 123.5, y: 9.10, label: 'Koulalis' },
-            { x: 121.6, y: 7.60, label: 'MOHIT' },
-            { x: 121.6, y: 7.80, label: 'RAJPUT' }
-          ],
-          backgroundColor: ['rgba(148,163,184,.5)', 'rgba(148,163,184,.5)', 'rgba(148,163,184,.5)', 'rgba(148,163,184,.5)', 'rgba(148,163,184,.5)', 'rgba(59,130,246,.5)', 'rgba(255,107,0,.5)'],
-          pointRadius: [8, 8, 8, 8, 8, 10, 10],
-          pointHoverRadius: 12,
-          pointStyle: 'triangle'
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: '#94A3B8', font: { size: 11 } } },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) {
-              const d = ctx.raw;
-              return d.label + ': TWA ' + d.x + '° → VMG ' + d.y + ' kts';
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#94A3B8', font: { size: 11 }, callback: function(v) { return v + '°'; } },
-          grid: { color: 'rgba(31,41,55,.3)' },
-          title: { display: true, text: 'TWA (°)', color: '#94A3B8' }
-        },
-        y: {
-          ticks: { color: '#94A3B8', font: { size: 11 } },
-          grid: { color: 'rgba(31,41,55,.3)' },
-          title: { display: true, text: 'VMG (knots)', color: '#94A3B8' }
-        }
+  // max VMG for scaling
+  const maxVMG = (mode === 'uw') ? 5.5 : 10.5;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw wind arrow at top center
+  ctx.save();
+  ctx.strokeStyle = '#FF6B00';
+  ctx.fillStyle = '#FF6B00';
+  ctx.lineWidth = 2;
+  if (mode === 'uw') {
+    // Wind coming from top
+    ctx.beginPath();
+    ctx.moveTo(cx, 10);
+    ctx.lineTo(cx, 55);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx - 8, 40);
+    ctx.lineTo(cx, 55);
+    ctx.lineTo(cx + 8, 40);
+    ctx.fill();
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('WIND', cx, 8);
+  } else {
+    // Wind coming from top (boat going downwind = away from wind)
+    ctx.beginPath();
+    ctx.moveTo(cx, 10);
+    ctx.lineTo(cx, 55);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx - 8, 40);
+    ctx.lineTo(cx, 55);
+    ctx.lineTo(cx + 8, 40);
+    ctx.fill();
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('WIND', cx, 8);
+  }
+  ctx.restore();
+
+  // Draw concentric arcs (VMG scale rings)
+  const steps = (mode === 'uw') ? [1, 2, 3, 4, 5] : [2, 4, 6, 8, 10];
+  ctx.save();
+  for (const v of steps) {
+    const r = (v / maxVMG) * maxR;
+    ctx.beginPath();
+    if (mode === 'uw') {
+      ctx.arc(cx, cy, r, -Math.PI, 0);
+    } else {
+      ctx.arc(cx, cy, r, 0, Math.PI);
+    }
+    ctx.strokeStyle = 'rgba(148,163,184,0.15)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    // Label
+    ctx.fillStyle = '#64748B';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'right';
+    if (mode === 'uw') {
+      ctx.fillText(v + ' kts', cx - r - 4, cy + 4);
+    } else {
+      ctx.fillText(v + ' kts', cx - r - 4, cy - 4);
+    }
+  }
+  ctx.restore();
+
+  // Draw angle guide lines
+  ctx.save();
+  const angleGuides = (mode === 'uw') ? [30, 45, 60, 75, 90] : [90, 105, 120, 135, 150, 165, 180];
+  for (const deg of angleGuides) {
+    const rad = deg * Math.PI / 180;
+    // Draw on both sides (port and starboard)
+    for (const side of [-1, 1]) {
+      const ex = cx + side * Math.sin(rad) * maxR;
+      const ey = (mode === 'uw') ? cy - Math.cos(rad) * maxR : cy + Math.cos(rad - Math.PI/2) * maxR;
+
+      let eyCalc, exCalc;
+      if (mode === 'uw') {
+        exCalc = cx + side * Math.sin(rad) * maxR;
+        eyCalc = cy - Math.cos(rad) * maxR;
+      } else {
+        const dwRad = (deg - 90) * Math.PI / 180;
+        exCalc = cx + side * Math.cos(dwRad) * maxR;
+        eyCalc = cy + Math.sin(dwRad) * maxR;
       }
-    },
-    plugins: [{
-      id: 'scatterLabels',
-      afterDatasetsDraw(chart) {
-        const { ctx } = chart;
-        ctx.save();
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(exCalc, eyCalc);
+      ctx.strokeStyle = 'rgba(148,163,184,0.08)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Angle label (only on right side)
+      if (side === 1) {
+        ctx.fillStyle = '#475569';
+        ctx.font = '10px sans-serif';
+        ctx.textAlign = 'left';
+        const lblX = exCalc + 4;
+        const lblY = eyCalc;
+        ctx.fillText(deg + '°', lblX, lblY + 3);
+      }
+    }
+  }
+  ctx.restore();
+
+  // Draw optimal zone
+  ctx.save();
+  const optMin = (mode === 'uw') ? 55 : 120;
+  const optMax = (mode === 'uw') ? 65 : 125;
+  ctx.fillStyle = 'rgba(16,185,129,0.08)';
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  if (mode === 'uw') {
+    const a1 = -(90 - optMin) * Math.PI / 180;
+    const a2 = -(90 - optMax) * Math.PI / 180;
+    // Right side
+    ctx.arc(cx, cy, maxR, a2, a1);
+    ctx.lineTo(cx, cy);
+    ctx.fill();
+    // Left side
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, maxR, Math.PI - a1, Math.PI - a2);
+    ctx.lineTo(cx, cy);
+    ctx.fill();
+  } else {
+    const a1 = (optMin - 90) * Math.PI / 180;
+    const a2 = (optMax - 90) * Math.PI / 180;
+    ctx.arc(cx, cy, maxR, a1, a2);
+    ctx.lineTo(cx, cy);
+    ctx.fill();
+    // Left side
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, maxR, Math.PI - a2, Math.PI - a1);
+    ctx.lineTo(cx, cy);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Draw athlete arrows
+  polarAthletes.forEach((a, i) => {
+    const twa = (mode === 'uw') ? a.uwTWA : a.dwTWA;
+    const vmg = (mode === 'uw') ? a.uwVMG : a.dwVMG;
+    const spd = (mode === 'uw') ? a.uwSpd : a.dwSpd;
+    const r = (vmg / maxVMG) * maxR;
+
+    // Calculate endpoint (draw on BOTH sides for symmetry, right is primary)
+    for (const side of [1, -1]) {
+      let ex, ey;
+      if (mode === 'uw') {
+        const rad = twa * Math.PI / 180;
+        ex = cx + side * Math.sin(rad) * r;
+        ey = cy - Math.cos(rad) * r;
+      } else {
+        const rad = (twa - 90) * Math.PI / 180;
+        ex = cx + side * Math.cos(rad) * r;
+        ey = cy + Math.sin(rad) * r;
+      }
+
+      const lineW = a.india ? 3.5 : 2;
+      const alpha = (side === -1) ? 0.35 : (a.india ? 1 : 0.7);
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      // Draw arrow line
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(ex, ey);
+      ctx.strokeStyle = a.color;
+      ctx.lineWidth = lineW;
+      ctx.stroke();
+
+      // Arrowhead
+      const angle = Math.atan2(ey - cy, ex - cx);
+      const headLen = a.india ? 12 : 8;
+      ctx.beginPath();
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ex - headLen * Math.cos(angle - 0.4), ey - headLen * Math.sin(angle - 0.4));
+      ctx.lineTo(ex - headLen * Math.cos(angle + 0.4), ey - headLen * Math.sin(angle + 0.4));
+      ctx.closePath();
+      ctx.fillStyle = a.color;
+      ctx.fill();
+
+      // Dot at endpoint
+      ctx.beginPath();
+      ctx.arc(ex, ey, a.india ? 5 : 3, 0, Math.PI * 2);
+      ctx.fillStyle = a.color;
+      ctx.fill();
+
+      // Label (right side only)
+      if (side === 1) {
+        ctx.font = a.india ? 'bold 11px sans-serif' : '10px sans-serif';
+        ctx.fillStyle = a.color;
+        ctx.textAlign = 'left';
+        const lx = ex + 8;
+        const ly = ey + (i * 2 - 6);
+        ctx.fillText(a.name, lx, ly - 2);
         ctx.font = '9px sans-serif';
-        ctx.textAlign = 'center';
-        chart.data.datasets.forEach((ds, di) => {
-          const meta = chart.getDatasetMeta(di);
-          meta.data.forEach((pt, i) => {
-            const d = ds.data[i];
-            const isIndia = d.label === 'MOHIT' || d.label === 'RAJPUT';
-            ctx.fillStyle = isIndia ? (d.label === 'MOHIT' ? '#3B82F6' : '#FF6B00') : '#94A3B8';
-            ctx.fillText(d.label, pt.x, pt.y - 12);
-          });
-        });
-        ctx.restore();
+        ctx.fillStyle = '#94A3B8';
+        ctx.fillText(twa + '° / ' + vmg + ' kts VMG', lx, ly + 10);
       }
-    }]
+
+      ctx.restore();
+    }
   });
+
+  // Center dot (boat position)
+  ctx.beginPath();
+  ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#FF6B00';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+  ctx.strokeStyle = '#FF6B00';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Title for optimal zone
+  ctx.save();
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.textAlign = 'center';
+  if (mode === 'uw') {
+    ctx.fillText('Optimal ' + optMin + '-' + optMax + '°', cx, 75);
+  } else {
+    ctx.fillText('Optimal ' + optMin + '-' + optMax + '°', cx, H - 20);
+  }
+  ctx.restore();
 }
+
+// Draw both polar diagrams
+drawPolarDiagram('polarUW', 'uw');
+drawPolarDiagram('polarDW', 'dw');
 
 // Side Bias Chart
 const sideBiasCtx = document.getElementById('sideBiasChart');
