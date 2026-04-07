@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 2 GPS Performance Dashboard V2 — India Team</title>
+<title>Day 2 GPS Performance Dashboard V3 — India Team</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -53,12 +53,43 @@ tr:hover td { background:rgba(255,107,0,.06); }
 .polar-legend-color { width:16px; height:3px; border-radius:2px; }
 .no-twa-data { text-align:center; padding:40px 20px; color:#94A3B8; font-size:13px; }
 
+
+.track-map-placeholder { background:rgba(255,107,0,.05); border:1px solid rgba(255,107,0,.2); border-radius:12px; padding:40px 20px; text-align:center; color:#94A3B8; font-size:13px; min-height:200px; display:flex; align-items:center; justify-content:center; }
+.wind-arrow { font-size:48px; margin-bottom:12px; }
+.metrics-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin-top:8px; }
+.metric-indicator { padding:8px 12px; border-radius:8px; font-size:11px; font-weight:600; text-align:center; }
+.metric-green { background:rgba(16,185,129,.15); color:#10B981; }
+.metric-yellow { background:rgba(251,191,36,.15); color:#FBBF24; }
+.metric-red { background:rgba(239,68,68,.15); color:#EF4444; }
+
+
+.side-by-side-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:1000px) { .side-by-side-grid { grid-template-columns:1fr; } }
+
+
+.twa-flex { display:flex; gap:16px; margin-bottom:16px; }
+.twa-chart { flex:1; min-width:300px; }
+.twa-table { flex:1; min-width:300px; overflow-x:auto; }
+@media(max-width:900px) { .twa-flex { flex-direction:column; } }
+
+
+.key-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:16px; }
+.metric-card { background:#1F2937; border:1px solid #FF6B00; border-radius:10px; padding:12px; text-align:center; }
+.metric-card .metric-val { font-size:18px; font-weight:800; color:#FF9500; }
+.metric-card .metric-label { font-size:10px; color:#94A3B8; margin-top:4px; }
+.metric-card .metric-comp { font-size:11px; font-weight:600; margin-top:4px; }
+
+
+.chart-legend-item { display:inline-flex; align-items:center; gap:6px; margin-right:16px; margin-bottom:8px; font-size:11px; }
+.chart-legend-box { width:12px; height:12px; border-radius:2px; }
+.chart-legend-dash { width:16px; height:1px; background:currentColor; margin:0 2px; }
+
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>DAY 2 — GPS PERFORMANCE DASHBOARD V3</h1>
-  <p>T293 World Championship 2026 · Foca, Turkey · April 5, 2026</p>
+  <h1>🇮🇳 DAY 2 — GPS PERFORMANCE DASHBOARD V3</h1>
+<p class="subtitle">T293 World Championship 2026 · Foca, Turkey · April 5, 2026</p>
   <p style="font-size:11px;color:#0B1120;opacity:.7;margin-top:4px">MetaSail GPS Data Analysis by Coach DannyOk</p>
 </div>
 <div class="nav-tabs">
@@ -90,12 +121,12 @@ tr:hover td { background:rgba(255,107,0,.06); }
 </div>
 <div class="grid">
 <div class="card"><h2>METRIC-BY-METRIC BREAKDOWN</h2><div class="chart-box-tall"><canvas id="team_metric_bar"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box-tall"><canvas id="team_eff_pos"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box-tall"><canvas id="team_eff_pos"></canvas></div></div>
 </div>
 <div class="card full"><h2>DETAILED PERFORMANCE TABLE</h2><div style="overflow-x:auto"><table>
 <tr><th>Athlete</th><th>Class</th>
 <th>Avg Speed</th>
-<th>Max Speed</th>
+<th>MAX SPEED</th>
 <th>Avg VMG</th>
 <th>Avg VMC</th>
 <th>UW Speed</th>
@@ -211,13 +242,101 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U15 Boys — Race 4 (Fleet: 36)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (18:57) · #2 Joshua (20:03) · #3 Biel (20:42) · #4 Juan-Bartolomé (21:38) · #5 Tuna (21:51) · #20 Udaiveer (25:42) · #35 Vihaan (34:04)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="overflow-x:auto;margin-bottom:16px">
+<table style="font-size:11px;width:100%">
+<tr style="background:#1a2332">
+<th style="padding:8px;text-align:left;color:#FF9500">Athlete</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Start Side</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Speed (kts)</th>
+<th style="padding:8px;text-align:center;color:#FF9500">VMG</th>
+<th style="padding:8px;text-align:center;color:#FF9500">vs Fleet Top 5</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Leg 1 Eff</th>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Castro-Jurek Joshua</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Mid-RC</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">11.1</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">7.75</td>
+<td style="padding:8px;text-align:center;color:#22C55E;font-weight:600">96.5%</td>
+<td style="padding:8px;text-align:center;color:#93C5FD">3.55</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Dasilva-González Marcos</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Center</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">11.3</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">7.55</td>
+<td style="padding:8px;text-align:center;color:#22C55E;font-weight:600">98.3%</td>
+<td style="padding:8px;text-align:center;color:#10B981">2.77</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Johal Udaiveer</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Center</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">9.0</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">5.88</td>
+<td style="padding:8px;text-align:center;color:#FF9500;font-weight:600">78.3%</td>
+<td style="padding:8px;text-align:center;color:#93C5FD">2.49</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Prakash Vihaan</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Center</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">7.8</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">4.96</td>
+<td style="padding:8px;text-align:center;color:#EF4444;font-weight:600">67.8%</td>
+<td style="padding:8px;text-align:center;color:#10B981">1.81</td>
+</tr>
+</table>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Best Start Speed</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">11.3 kts</div>
+<div style="color:#10B981;font-size:11px">Dasilva-González Marcos</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Fleet Speed Gap</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">-9.8%</div>
+<div style="color:#FF9500;font-size:11px">Avg India vs Fleet</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Position Choice</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">Center</div>
+<div style="color:#94A3B8;font-size:11px">3 of 4 athletes</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Recovery Factor</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">1.79x</div>
+<div style="color:#22C55E;font-size:11px">Leg 2 vs Leg 1</div>
+</div>
+</div>
+
+<div style="margin-top:16px;padding:12px;background:#1a2332;border-radius:8px;border-left:3px solid #FF6B00">
+<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:13px">COACHING ANALYSIS</div>
+<p style="color:#E2E8F0;font-size:12px;line-height:1.6;margin:0">
+Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 5 speed—excellent positioning for a light-wind race. Joshua matched at 96.5%, showing both athletes found clear air on the Mid-RC and Center respectively. The team's center-line preference was strategic but created congestion; Udaiveer and Vihaan dropped significantly (78% and 68% respectively). Strong 1.7x+ recovery on leg 2 shows athletes compensated downwind, but the start speed deficit proved costly. Fleet winner Simon used tactical positioning to establish early control.
+</p>
+</div>
+
+<div style="margin-top:12px;padding:12px;background:#0d1b2a;border-radius:8px;border-left:3px solid #22C55E">
+<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:13px">RECOMMENDATIONS FOR NEXT RACE</div>
+<div style="color:#E2E8F0;font-size:12px;line-height:1.8">
+1. Disperse line positions: Udaiveer and Vihaan should target Mid-RC or RC end to reduce congestion and secure clearer air in this low-wind pattern.<br>
+2. Emphasize start discipline: Joshua and Dasilva-González showed excellent speed execution—maintain their approach while coaching newer athletes on timing into the line.<br>
+3. Focus on early tack: Recovery factor shows athletes found wind shifts downwind; teach recognition of pressure zones earlier to gain advantage on first beat.
+</div>
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15B_R4"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U15B_R4"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U15B_R4"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U15B_R4"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15B_R4"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15B_R4"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15B_R4"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U15B_R4"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U15B_R4" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -311,13 +430,101 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U15 Boys — Race 5 (Fleet: 35)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Biel (23:02) · #2 Joshua (23:23) · #3 Versace (23:45) · #4 Marcos (23:48) · #5 Simon (24:13) · #15 Udaiveer (26:31) · #35 Vihaan (34:51)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="overflow-x:auto;margin-bottom:16px">
+<table style="font-size:11px;width:100%">
+<tr style="background:#1a2332">
+<th style="padding:8px;text-align:left;color:#FF9500">Athlete</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Start Side</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Speed (kts)</th>
+<th style="padding:8px;text-align:center;color:#FF9500">VMG</th>
+<th style="padding:8px;text-align:center;color:#FF9500">vs Fleet Top 5</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Leg 1 Eff</th>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Castro-Jurek Joshua</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Mid-Pin</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">8.1</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">5.25</td>
+<td style="padding:8px;text-align:center;color:#FF9500;font-weight:600">95.3%</td>
+<td style="padding:8px;text-align:center;color:#93C5FD">2.99</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Dasilva-González Marcos</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Pin (Port)</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">8.7</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">5.97</td>
+<td style="padding:8px;text-align:center;color:#22C55E;font-weight:600">102.4%</td>
+<td style="padding:8px;text-align:center;color:#10B981">3.19</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Johal Udaiveer</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Pin (Port)</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">7.2</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">4.68</td>
+<td style="padding:8px;text-align:center;color:#FF9500;font-weight:600">84.7%</td>
+<td style="padding:8px;text-align:center;color:#93C5FD">2.84</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Prakash Vihaan</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Pin (Port)</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">6.6</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">4.68</td>
+<td style="padding:8px;text-align:center;color:#EF4444;font-weight:600">77.6%</td>
+<td style="padding:8px;text-align:center;color:#10B981">1.73</td>
+</tr>
+</table>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Best Start Speed</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">8.7 kts</div>
+<div style="color:#10B981;font-size:11px">Dasilva-González Marcos</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Fleet Speed Gap</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">-6.5%</div>
+<div style="color:#FF9500;font-size:11px">Avg India vs Fleet</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Position Choice</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">Pin (Port)</div>
+<div style="color:#94A3B8;font-size:11px">3 of 4 athletes</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Recovery Factor</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">1.82x</div>
+<div style="color:#22C55E;font-size:11px">Leg 2 vs Leg 1</div>
+</div>
+</div>
+
+<div style="margin-top:16px;padding:12px;background:#1a2332;border-radius:8px;border-left:3px solid #FF6B00">
+<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:13px">COACHING ANALYSIS</div>
+<p style="color:#E2E8F0;font-size:12px;line-height:1.6;margin:0">
+Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet top 5—a breakthrough start for the team. Pin favored in this race's pressure distribution. Joshua's Mid-Pin position (95.3%) shows the approach works but requires precision. Three athletes converged on port pin, suggesting effective scouting, but created mutual interference: Udaiveer (84.7%) and Vihaan (77.6%) paid the cost. Recovery factor of 1.82x is consistent, showing downwind improvements, but the larger start deficits for slower athletes hindered finishes. Marcos' success demonstrates that port tack start precision can be a competitive advantage.
+</p>
+</div>
+
+<div style="margin-top:12px;padding:12px;background:#0d1b2a;border-radius:8px;border-left:3px solid #22C55E">
+<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:13px">RECOMMENDATIONS FOR NEXT RACE</div>
+<div style="color:#E2E8F0;font-size:12px;line-height:1.8">
+1. Pin end requires timing precision: Dasilva-González excelled on port; continue coaching his approach to maximize pin advantage but teach younger athletes timing discipline to avoid OCS penalty risk.<br>
+2. Stagger positions: Udaiveer and Vihaan should target Mid-Pin or center to spread fleet presence and reduce air-stealing competition at the congested pin end.<br>
+3. Emphasize pressure scanning: Use the entire line—top performers hit 102% efficiency by reading wind shifts before the start; integrate this into pre-race briefings.
+</div>
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15B_R5"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U15B_R5"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U15B_R5"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U15B_R5"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15B_R5"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15B_R5"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15B_R5"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U15B_R5"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U15B_R5" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -411,13 +618,101 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U15 Boys — Race 6 (Fleet: 35)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (22:17) · #2 Biel (22:24) · #3 Versace (22:51) · #4 Joshua (23:31) · #5 Aren-Selim (23:48) · #26 Udaiveer (27:45) · #33 Vihaan (34:13)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="overflow-x:auto;margin-bottom:16px">
+<table style="font-size:11px;width:100%">
+<tr style="background:#1a2332">
+<th style="padding:8px;text-align:left;color:#FF9500">Athlete</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Start Side</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Speed (kts)</th>
+<th style="padding:8px;text-align:center;color:#FF9500">VMG</th>
+<th style="padding:8px;text-align:center;color:#FF9500">vs Fleet Top 5</th>
+<th style="padding:8px;text-align:center;color:#FF9500">Leg 1 Eff</th>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Castro-Jurek Joshua</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Center</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">7.7</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">4.84</td>
+<td style="padding:8px;text-align:center;color:#22C55E;font-weight:600">101.3%</td>
+<td style="padding:8px;text-align:center;color:#93C5FD">2.19</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Dasilva-González Marcos</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Mid-Pin</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">7.2</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">4.72</td>
+<td style="padding:8px;text-align:center;color:#FF9500;font-weight:600">94.7%</td>
+<td style="padding:8px;text-align:center;color:#10B981">2.17</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Johal Udaiveer</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Center</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">5.8</td>
+<td style="padding:8px;text-align:center;color:#93C5FD;font-weight:600">4.09</td>
+<td style="padding:8px;text-align:center;color:#EF4444;font-weight:600">76.3%</td>
+<td style="padding:8px;text-align:center;color:#93C5FD">1.82</td>
+</tr>
+<tr>
+<td style="padding:8px;color:#E2E8F0;font-weight:600">Prakash Vihaan</td>
+<td style="padding:8px;text-align:center;color:#E2E8F0">Mid-RC</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">6.2</td>
+<td style="padding:8px;text-align:center;color:#10B981;font-weight:600">4.32</td>
+<td style="padding:8px;text-align:center;color:#EF4444;font-weight:600">81.6%</td>
+<td style="padding:8px;text-align:center;color:#10B981">1.56</td>
+</tr>
+</table>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Best Start Speed</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">7.7 kts</div>
+<div style="color:#93C5FD;font-size:11px">Castro-Jurek Joshua</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Fleet Speed Gap</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">-6.8%</div>
+<div style="color:#FF9500;font-size:11px">Avg India vs Fleet</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Position Choice</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">Balanced</div>
+<div style="color:#94A3B8;font-size:11px">4 athletes, 4 sides</div>
+</div>
+<div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
+<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Recovery Factor</div>
+<div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">1.64x</div>
+<div style="color:#22C55E;font-size:11px">Leg 2 vs Leg 1</div>
+</div>
+</div>
+
+<div style="margin-top:16px;padding:12px;background:#1a2332;border-radius:8px;border-left:3px solid #FF6B00">
+<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:13px">COACHING ANALYSIS</div>
+<p style="color:#E2E8F0;font-size:12px;line-height:1.6;margin:0">
+Joshua broke through at 101.3% of fleet standard—the team's best performance in calm conditions with center-line positioning. Balanced dispersion across start sides was executed well: Joshua (center) and Vihaan (mid-RC) performed 81%+ of fleet, while Dasilva-González (mid-pin at 94.7%) showed adaptability. Udaiveer's 76.3% result on center suggests position choice wasn't the limiting factor; tactical boat handling and pressure recognition were. Lower recovery factor (1.64x) indicates the downwind gained less ground, typical of balanced wind distribution. Fleet winner Simon's consistent performance underscores importance of start discipline over position alone.
+</p>
+</div>
+
+<div style="margin-top:12px;padding:12px;background:#0d1b2a;border-radius:8px;border-left:3px solid #22C55E">
+<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:13px">RECOMMENDATIONS FOR NEXT RACE</div>
+<div style="color:#E2E8F0;font-size:12px;line-height:1.8">
+1. Maintain balanced line distribution: This race's 4-athletes, 4-sides approach reduced mutual interference and produced Joshua's best result—replicate this strategy in heavier wind to manage fleet pressure.<br>
+2. Coach tactical positioning off the line: Joshua's 101%+ speed shows center-line success correlates with early clear air; teach boat handling to find wind pockets immediately post-start.<br>
+3. Focus on downwind pressure hunting: Reduced recovery factor suggests athletes aren't maximizing downwind speed advantage; emphasize wing mark approach angles and pressure transitions on legs 2-3.
+</div>
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15B_R6"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U15B_R6"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U15B_R6"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U15B_R6"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15B_R6"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15B_R6"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15B_R6"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U15B_R6"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U15B_R6" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -499,7 +794,7 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15B_Avg"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON</h2><div class="chart-box"><canvas id="bar_U15B_Avg"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15B_Avg"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15B_Avg"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15B_Avg"></canvas></div></div>
 </div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
@@ -605,13 +900,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U15 Girls — Race 4 (Fleet: 23)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:14) · #2 Alessandra (24:01) · #3 Chiara (24:19) · #4 Blanka (24:28) · #5 Cristina (25:00) · #11 Vaishnavi (27:28) · #23 Priyanshi (30:28)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15G_R4"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U15G_R4"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U15G_R4"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U15G_R4"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15G_R4"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15G_R4"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15G_R4"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U15G_R4"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U15G_R4" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -705,13 +1009,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U15 Girls — Race 5 (Fleet: 23)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:31) · #2 Alessandra (24:09) · #3 Wing-Suet-Vince (24:51) · #4 Blanka (25:08) · #5 Cristina (25:32) · #13 Vaishnavi (29:31) · #20 Priyanshi (31:21)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15G_R5"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U15G_R5"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U15G_R5"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U15G_R5"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15G_R5"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15G_R5"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15G_R5"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U15G_R5"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U15G_R5" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -805,13 +1118,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U15 Girls — Race 6 (Fleet: 23)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:52) · #2 Cristina (24:44) · #3 Alessandra (24:49) · #4 Chiara (25:47) · #5 Blanka (25:53) · #8 Vaishnavi (27:22) · #16 Priyanshi (29:16)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15G_R6"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U15G_R6"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U15G_R6"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U15G_R6"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15G_R6"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15G_R6"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15G_R6"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U15G_R6"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U15G_R6" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -893,7 +1215,7 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U15G_Avg"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON</h2><div class="chart-box"><canvas id="bar_U15G_Avg"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15G_Avg"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U15G_Avg"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15G_Avg"></canvas></div></div>
 </div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
@@ -999,13 +1321,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U17 Boys — Race 4 (Fleet: 51)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Orestis-Nikolaos (30:52) · #2 Foivos (32:38) · #3 Andrei (33:02) · #4 Spyridon (33:53) · #5 Kerem-Demir (34:31) · #43 Mohit (42:05) · #50 Rajput (44:44)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17B_R4"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U17B_R4"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U17B_R4"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U17B_R4"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17B_R4"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17B_R4"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17B_R4"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U17B_R4"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U17B_R4" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -1099,13 +1430,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U17 Boys — Race 5 (Fleet: 51)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Evangelos (31:08) · #2 Dmitrii (31:26) · #3 Orestis-Nikolaos (31:56) · #4 Pankin (32:07) · #5 Curro (32:15) · #41 Mohit (38:49) · #45 Rajput (41:00)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17B_R5"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U17B_R5"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U17B_R5"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U17B_R5"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17B_R5"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17B_R5"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17B_R5"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U17B_R5"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U17B_R5" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -1199,13 +1539,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U17 Boys — Race 6 (Fleet: 51)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Hoi-Tik (34:45) · #2 Orestis-Nikolaos (35:45) · #3 Yanki (36:48) · #4 Kerem-Demir (36:57) · #5 Davide (37:08) · #17 Mohit (38:56) · #41 Rajput (43:45)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17B_R6"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U17B_R6"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U17B_R6"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U17B_R6"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17B_R6"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17B_R6"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17B_R6"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U17B_R6"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="no-twa-data">No courseDir data available for TWA analysis</div>
@@ -1258,7 +1607,7 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17B_Avg"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON</h2><div class="chart-box"><canvas id="bar_U17B_Avg"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17B_Avg"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17B_Avg"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17B_Avg"></canvas></div></div>
 </div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
@@ -1364,13 +1713,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U17 Girls — Race 4 (Fleet: 38)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Mariia (32:05) · #2 Olivia (32:28) · #3 Laura (33:01) · #4 Lindia-Miel (33:21) · #5 Kyriaki (33:29) · #34 Tejasvi (46:08) · #37 Rashmita (51:36)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17G_R4"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U17G_R4"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U17G_R4"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U17G_R4"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17G_R4"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17G_R4"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17G_R4"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U17G_R4"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U17G_R4" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -1464,13 +1822,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U17 Girls — Race 5 (Fleet: 37)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Olivia (30:33) · #2 Dalma (30:56) · #3 Johanna (31:45) · #4 Kyriaki (31:52) · #5 Irene (32:43) · #31 Tejasvi (39:53) · #34 Rashmita (40:23)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17G_R5"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U17G_R5"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U17G_R5"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U17G_R5"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17G_R5"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17G_R5"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17G_R5"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U17G_R5"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="polar-container"><canvas id="polar_twa_U17G_R5" width="420" height="460" class="polar-canvas"></canvas></div>
@@ -1564,13 +1931,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <h2>U17 Girls — Race 6 (Fleet: 37)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Dalma (26:57) · #2 Lilia (27:23) · #3 Lili (27:34) · #4 Panna (27:45) · #5 Zeynep (27:49) · #28 Rashmita (31:58) · #34 Tejasvi (33:02)</p>
 </div>
+
+<div class="card full" style="margin-bottom:16px">
+<h2>START STRATEGY ANALYSIS</h2>
+<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="font-size:24px;margin-bottom:8px">📡</div>
+No GPS start data available for India athletes in this race.
+</div>
+</div>
+
 <div class="grid">
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17G_R6"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON (knots)</h2><div class="chart-box"><canvas id="bar_U17G_R6"></canvas></div></div>
 <div class="card"><h2>LEG-BY-LEG SPEED</h2><div class="chart-box"><canvas id="legspd_U17G_R6"></canvas></div></div>
 <div class="card"><h2>GPS POSITION BY LEG</h2><div class="chart-box"><canvas id="legpos_U17G_R6"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17G_R6"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17G_R6"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17G_R6"></canvas></div></div>
 <div class="card"><h2>COURSE SIDE BIAS</h2><div class="chart-box"><canvas id="bias_U17G_R6"></canvas></div></div>
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="no-twa-data">No courseDir data available for TWA analysis</div>
@@ -1623,7 +1999,7 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="card"><h2>PERFORMANCE RADAR</h2><div class="chart-box"><canvas id="radar_U17G_Avg"></canvas></div></div>
 <div class="card"><h2>SPEED COMPARISON</h2><div class="chart-box"><canvas id="bar_U17G_Avg"></canvas></div></div>
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17G_Avg"></canvas></div></div>
-<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box"><canvas id="eff_U17G_Avg"></canvas></div></div>
+<div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17G_Avg"></canvas></div></div>
 </div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
@@ -1720,63 +2096,55 @@ function showSubTab(cls, race) {
 <script>
 
 new Chart(document.getElementById('team_radar'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
       label:'Class Top 5 (100%)',
-      data:[100, 100, 100, 100, 100, 100, 100, 100],
+      data:[100, 100, 100, 100, 100, 100],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3]
     },{
       label:'Team India Avg',
-      data:[83.4, 79.3, 82.4, 80.0, 85.8, 78.7, 82.8, 82.9],
+      data:[85.8, 78.7, 82.8, 82.9, 92.4, 80.0],
       backgroundColor:'rgba(255,191,36,0.15)', borderColor:'#FBBF24', borderWidth:3,
       pointBackgroundColor:'#FBBF24', pointRadius:4
-    }
-,{
+    },{
       label:'Johal Udaiveer (U15 Boys)',
-      data:[85.5, 89.3, 85.0, 83.1, 85.6, 80.9, 85.4, 84.7],
+      data:[85.6, 80.9, 85.4, 84.7, 97.1, 83.1],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3
-    }
-,{
+    },{
       label:'Prakash Vihaan (U15 Boys)',
-      data:[71.8, 59.4, 69.4, 65.2, 74.6, 59.1, 70.0, 69.9],
+      data:[74.6, 59.1, 70.0, 69.9, 83.8, 65.2],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3
-    }
-,{
+    },{
       label:'Kajale Vaishnavi (U15 Girls)',
-      data:[91.3, 91.3, 88.9, 87.1, 97.5, 91.1, 90.4, 88.2],
+      data:[97.5, 91.1, 90.4, 88.2, 92.8, 87.1],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3
-    }
-,{
+    },{
       label:'Patil Priyanshi (U15 Girls)',
-      data:[91.0, 82.2, 86.4, 85.7, 96.9, 74.4, 90.0, 87.9],
+      data:[96.9, 74.4, 90.0, 87.9, 86.9, 85.7],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3
-    }
-,{
+    },{
       label:'Mhatre Mohit (U17 Boys)',
-      data:[86.1, 85.4, 86.2, 84.8, 86.5, 80.3, 86.1, 88.5],
+      data:[86.5, 80.3, 86.1, 88.5, 95.8, 84.8],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3
-    }
-,{
+    },{
       label:'Yogesh Rajput (U17 Boys)',
-      data:[83.7, 77.3, 85.1, 77.5, 85.8, 83.9, 83.1, 85.8],
+      data:[85.8, 83.9, 83.1, 85.8, 90.3, 77.5],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3
-    }
-,{
+    },{
       label:'Prajapati Tejasvi (U17 Girls)',
-      data:[78.8, 81.7, 79.2, 77.9, 79.0, 82.9, 79.0, 78.4],
+      data:[79.0, 82.9, 79.0, 78.4, 98.9, 77.9],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3
-    }
-,{
+    },{
       label:'Thimiti Rashmita (U17 Girls)',
-      data:[79.0, 67.6, 79.2, 78.9, 80.7, 76.9, 78.2, 80.1],
+      data:[80.7, 76.9, 78.2, 80.1, 93.5, 78.9],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3
     }
@@ -1784,26 +2152,26 @@ new Chart(document.getElementById('team_radar'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:120, ticks:{ stepSize:20, color:'#94A3B8', font:{size:9} },
       angleLines:{ display:false }, grid:{ color:'rgba(255,107,0,0.15)' }, pointLabels:{ color:'#FF9500', font:{size:10} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('team_athlete_bar'),{
   type:'bar',
-  data:{ labels:["Johal Udaiveer", "Prakash Vihaan", "Kajale Vaishnavi", "Patil Priyanshi", "Mhatre Mohit", "Yogesh Rajput", "Prajapati Tejasvi", "Thimiti Rashmita"],
-    datasets:[{ label:'Fleet Top 5 Reference (100%)', data:[100,100,100,100,100,100,100,100], backgroundColor:'rgba(255,107,0,0.15)', borderColor:'#FF6B00', borderWidth:1, borderRadius:0, barThickness:2 },{ label:'Overall % of Top 5', data:[84.9, 67.4, 90.7, 86.8, 85.5, 82.8, 79.6, 77.6],
+  data:{ labels:["Kajale Vaishnavi", "Patil Priyanshi", "Mhatre Mohit", "Johal Udaiveer", "Yogesh Rajput", "Prajapati Tejasvi", "Thimiti Rashmita", "Prakash Vihaan"],
+    datasets:[{ label:'Fleet Top 5 Reference (100%)', data:[100,100,100,100,100,100,100,100], backgroundColor:'rgba(255,107,0,0.15)', borderColor:'#FF6B00', borderWidth:1, borderRadius:0, barThickness:2 },{ label:'Overall % of Top 5', data:[90.7, 86.8, 85.5, 84.9, 82.8, 79.6, 77.6, 67.4],
       backgroundColor:["#3B82F6", "#10B981", "#3B82F6", "#10B981", "#3B82F6", "#10B981", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ min:0, max:120, grid:{ display:false }, ticks:{ color:'#94A3B8' } },
       y:{ ticks:{ color:'#FF9500', font:{size:11} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('team_metric_bar'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[
 { label:'Johal Udaiveer', data:[85.5, 89.3, 85.0, 83.1, 85.6, 80.9, 85.4, 84.7],
       backgroundColor:'#3B82F6', borderRadius:4 }
 ,{ label:'Prakash Vihaan', data:[71.8, 59.4, 69.4, 65.2, 74.6, 59.1, 70.0, 69.9],
@@ -1824,7 +2192,7 @@ new Chart(document.getElementById('team_metric_bar'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ min:0, max:130, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -1842,52 +2210,52 @@ new Chart(document.getElementById('team_eff_pos'),{
 });
 
 new Chart(document.getElementById('radar_U15B_R4'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 86.9, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[73.9, 75.4, 68.9, 87.0, 67.6, 74.3, 70.3, 73.8, 68.5],
+,{ label:'Johal Udaiveer', data:[74.3, 70.3, 73.8, 68.5, 80.5, 67.6],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Prakash Vihaan', data:[55.8, 44.4, 55.4, 56.3, 53.0, 65.0, 51.8, 52.5, 56.8],
+,{ label:'Prakash Vihaan', data:[65.0, 51.8, 52.5, 56.8, 74.9, 53.0],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15B_R4'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[7.74, 16.26, 4.47, 10.94, 5.89],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[7.74, 4.47, 5.89, 16.26],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Johal Udaiveer', data:[6.58, 14.1, 3.54, 10.95, 4.58],
+,{ label:'Johal Udaiveer', data:[6.58, 3.54, 4.58, 14.1],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Prakash Vihaan', data:[4.97, 8.3, 2.85, 7.09, 3.59],
+,{ label:'Prakash Vihaan', data:[4.97, 2.85, 3.59, 8.3],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15B_R4'),{
   type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[6.78, 12.8, 7.78, 5.76, 5.99, 7.33],
+      label:'Fleet Top Avg', data:[6.78, 12.8, 7.78, 5.76, 5.99, 7.33], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Johal Udaiveer', data:[5.88, 10.33, 6.57, 4.83, 5.41, 6.45],
+,{ label:'Johal Udaiveer', data:[5.88, 10.33, 6.57, 4.83, 5.41, 6.45], tension: 0.4,
       borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Prakash Vihaan', data:[4.96, 5.71, 4.67, 4.42, 4.93, 5.13],
+,{ label:'Prakash Vihaan', data:[4.96, 5.71, 4.67, 4.42, 4.93, 5.13], tension: 0.4,
       borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
@@ -1895,28 +2263,28 @@ new Chart(document.getElementById('legspd_U15B_R4'),{
     scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U15B_R4'),{
   type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[12.6, 4.2, 3.6, 3.0, 3.0, 3.0],
-      borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
-      pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[5, 25, 25, 23, 21, 20],
-      borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
-      pointBackgroundColor:'#3B82F6' }
-,{ label:'Prakash Vihaan', data:[9, 36, 36, 35, 35, 35],
-      borderColor:'#10B981', borderWidth:2, pointRadius:4,
-      pointBackgroundColor:'#10B981' }
+      label:'Fleet Top Avg', data:[6.78, 12.8, 7.78, 5.76, 5.99, 7.33], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Johal Udaiveer', data:[5.88, 10.33, 6.57, 4.83, 5.41, 6.45], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Prakash Vihaan', data:[4.96, 5.71, 4.67, 4.42, 4.93, 5.13], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -1936,7 +2304,7 @@ new Chart(document.getElementById('updown_U15B_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -1946,8 +2314,8 @@ new Chart(document.getElementById('eff_U15B_R4'),{
     datasets:[{ label:'Efficiency %', data:[147.2, 159, 171],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -1957,84 +2325,62 @@ new Chart(document.getElementById('eff_U15B_R4'),{
 new Chart(document.getElementById('bias_U15B_R4'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Johal Udaiveer", "Prakash Vihaan"], datasets:[
-    { label:'Port (Left)', data:[37.9, 17.0, 28.5], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[62.1, 83.0, 71.5], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[37.9, 17.0, 28.5], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[62.1, 83.0, 71.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U15B_R5'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 86.7, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[73.6, 87.0, 79.1, 77.5, 76.5, 73.6, 79.1],
+,{ label:'Johal Udaiveer', data:[73.0, 85.7, 73.6, 79.1, 91.7, 76.5],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Prakash Vihaan', data:[67.2, 60.9, 66.8, 70.8, 62.4, 67.2, 66.8],
+,{ label:'Prakash Vihaan', data:[74.8, 57.7, 67.2, 66.8, 73.9, 62.4],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15B_R5'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[6.24, 11.66, 3.33, 8.31, 4.75],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[6.24, 3.33, 4.75, 11.66],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Johal Udaiveer', data:[5.28, 11.7, 3.03, 7.41, 4.18],
+,{ label:'Johal Udaiveer', data:[5.28, 3.03, 4.18, 11.7],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Prakash Vihaan', data:[4.82, 8.2, 2.56, 6.77, 3.41],
+,{ label:'Prakash Vihaan', data:[4.82, 2.56, 3.41, 8.2],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15B_R5'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[5.45, 8.72, 5.84, 5.52, 5.98, 5.93],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Johal Udaiveer', data:[4.68, 7.04, 5.22, 4.52, 4.9, 5.33],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Prakash Vihaan', data:[4.68, 5.84, 4.67, 4.73, 4.28, 4.73],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U15B_R5'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[10.2, 5.4, 5.0, 4.0, 3.2, 3.2],
+      label:'Fleet Top Avg Rank', data:[12.6, 4.2, 3.6, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[13, 11, 12, 14, 12, 11],
+,{ label:'Johal Udaiveer', data:[5, 25, 25, 23, 21, 20], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Prakash Vihaan', data:[12, 35, 35, 35, 35, 35],
+,{ label:'Prakash Vihaan', data:[9, 36, 36, 35, 35, 35], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2042,7 +2388,27 @@ new Chart(document.getElementById('legpos_U15B_R5'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U15B_R5'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[5.45, 8.72, 5.84, 5.52, 5.98, 5.93], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Johal Udaiveer', data:[4.68, 7.04, 5.22, 4.52, 4.9, 5.33], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Prakash Vihaan', data:[4.68, 5.84, 4.67, 4.73, 4.28, 4.73], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2052,8 +2418,8 @@ new Chart(document.getElementById('eff_U15B_R5'),{
     datasets:[{ label:'Efficiency %', data:[140.2, 133, 165],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2061,73 +2427,51 @@ new Chart(document.getElementById('eff_U15B_R5'),{
 });
 
 new Chart(document.getElementById('radar_U15B_R6'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[75.7, 70.3, 76.0, 74.6, 74.2, 75.7, 76.0],
+,{ label:'Johal Udaiveer', data:[75.5, 70.6, 75.7, 76.0, 82.0, 74.2],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Prakash Vihaan', data:[66.4, 52.3, 60.2, 70.5, 55.4, 66.4, 60.2],
+,{ label:'Prakash Vihaan', data:[80.6, 60.1, 66.4, 60.2, 69.9, 55.4],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15B_R6'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[5.49, 10.64, 2.79, 7.3, 4.44],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[5.49, 2.79, 4.44, 10.64],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Johal Udaiveer', data:[4.78, 8.6, 2.44, 6.26, 3.79],
+,{ label:'Johal Udaiveer', data:[4.78, 2.44, 3.79, 8.6],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Prakash Vihaan', data:[4.19, 6.4, 1.93, 5.92, 2.83],
+,{ label:'Prakash Vihaan', data:[4.19, 1.93, 2.83, 6.4],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15B_R6'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[4.72, 7.55, 4.93, 4.51, 4.59, 6.68],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Johal Udaiveer', data:[4.09, 6.31, 4.55, 3.91, 4.4, 5.44],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Prakash Vihaan', data:[4.32, 4.48, 4.3, 4.22, 3.7, 4.12],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U15B_R6'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[15.8, 3.2, 3.0, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[10.2, 5.4, 5.0, 4.0, 3.2, 3.2], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[26, 28, 28, 29, 25, 26],
+,{ label:'Johal Udaiveer', data:[13, 11, 12, 14, 12, 11], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Prakash Vihaan', data:[23, 35, 35, 34, 33, 33],
+,{ label:'Prakash Vihaan', data:[12, 35, 35, 35, 35, 35], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2135,7 +2479,27 @@ new Chart(document.getElementById('legpos_U15B_R6'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U15B_R6'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[4.72, 7.55, 4.93, 4.51, 4.59, 6.68], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Johal Udaiveer', data:[4.09, 6.31, 4.55, 3.91, 4.4, 5.44], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Prakash Vihaan', data:[4.32, 4.48, 4.3, 4.22, 3.7, 4.12], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2145,8 +2509,8 @@ new Chart(document.getElementById('eff_U15B_R6'),{
     datasets:[{ label:'Efficiency %', data:[135.8, 144, 169],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2154,41 +2518,39 @@ new Chart(document.getElementById('eff_U15B_R6'),{
 });
 
 new Chart(document.getElementById('radar_U15B_Avg'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[74.4, 77.6, 73.9, 80.7, 72.3, 74.5, 70.4, 74.3, 73.6],
-      backgroundColor:'rgba(59,130,246,0.3)',
-      borderColor:'#3B82F6', borderWidth:2,
+,{ label:'Johal Udaiveer', data:[74.5, 70.4, 74.3, 73.6, 84.4, 72.3],
+      backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Prakash Vihaan', data:[62.4, 51.6, 60.4, 64.8, 56.7, 64.9, 51.4, 60.9, 60.8],
-      backgroundColor:'rgba(16,185,129,0.3)',
-      borderColor:'#10B981', borderWidth:2,
+,{ label:'Prakash Vihaan', data:[64.9, 51.4, 60.9, 60.8, 72.9, 56.7],
+      backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15B_Avg'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[6.49, 12.85, 3.53, 8.85, 5.03],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[6.49, 3.53, 5.03, 12.85],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Johal Udaiveer', data:[5.55, 11.47, 3.0, 8.21, 4.18],
+,{ label:'Johal Udaiveer', data:[5.55, 3.0, 4.18, 11.47],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Prakash Vihaan', data:[4.66, 7.63, 2.45, 6.59, 3.28],
+,{ label:'Prakash Vihaan', data:[4.66, 2.45, 3.28, 7.63],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2208,7 +2570,7 @@ new Chart(document.getElementById('updown_U15B_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2218,8 +2580,8 @@ new Chart(document.getElementById('eff_U15B_Avg'),{
     datasets:[{ label:'Efficiency %', data:[141.07, 145.33, 168.33],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2227,73 +2589,51 @@ new Chart(document.getElementById('eff_U15B_Avg'),{
 });
 
 new Chart(document.getElementById('radar_U15G_R4'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 86.4, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[78.8, 80.5, 77.2, 83.0, 74.6, 85.0, 79.5, 76.5, 76.1],
+,{ label:'Kajale Vaishnavi', data:[85.0, 79.5, 76.5, 76.1, 80.8, 74.6],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Patil Priyanshi', data:[79.6, 74.8, 75.1, 87.0, 74.4, 84.5, 65.0, 77.7, 78.2],
+,{ label:'Patil Priyanshi', data:[84.5, 65.0, 77.7, 78.2, 73.2, 74.4],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15G_R4'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[5.95, 10.7, 3.67, 7.56, 4.85],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[5.95, 3.67, 4.85, 10.7],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Kajale Vaishnavi', data:[5.39, 9.9, 3.26, 7.26, 4.16],
+,{ label:'Kajale Vaishnavi', data:[5.39, 3.26, 4.16, 9.9],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Patil Priyanshi', data:[5.45, 9.2, 3.17, 7.61, 4.15],
+,{ label:'Patil Priyanshi', data:[5.45, 3.17, 4.15, 9.2],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15G_R4'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[5.21, 8.1, 5.05, 4.57, 5.39, 7.39],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Kajale Vaishnavi', data:[5.01, 6.59, 4.95, 4.55, 5.06, 6.2],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Patil Priyanshi', data:[5.12, 6.81, 4.79, 4.39, 5.21, 6.35],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U15G_R4'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[12.6, 3.4, 3.4, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[15.8, 3.2, 3.0, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[21, 14, 13, 11, 11, 11],
+,{ label:'Johal Udaiveer', data:[26, 28, 28, 29, 25, 26], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Patil Priyanshi', data:[17, 23, 23, 23, 23, 23],
+,{ label:'Prakash Vihaan', data:[23, 35, 35, 34, 33, 33], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2301,7 +2641,27 @@ new Chart(document.getElementById('legpos_U15G_R4'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U15G_R4'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[5.21, 8.1, 5.05, 4.57, 5.39, 7.39], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Kajale Vaishnavi', data:[5.01, 6.59, 4.95, 4.55, 5.06, 6.2], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Patil Priyanshi', data:[5.12, 6.81, 4.79, 4.39, 5.21, 6.35], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2321,7 +2681,7 @@ new Chart(document.getElementById('updown_U15G_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2331,8 +2691,8 @@ new Chart(document.getElementById('eff_U15G_R4'),{
     datasets:[{ label:'Efficiency %', data:[134.6, 145, 160],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2342,84 +2702,62 @@ new Chart(document.getElementById('eff_U15G_R4'),{
 new Chart(document.getElementById('bias_U15G_R4'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Kajale Vaishnavi", "Patil Priyanshi"], datasets:[
-    { label:'Port (Left)', data:[23.3, 22.0, 17.0], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[76.7, 78.0, 83.0], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[23.3, 22.0, 17.0], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[76.7, 78.0, 83.0], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U15G_R5'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 83.4, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[77.6, 74.8, 73.7, 87.0, 72.5, 77.6, 73.7],
+,{ label:'Kajale Vaishnavi', data:[80.3, 74.3, 77.6, 73.7, 79.8, 72.5],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Patil Priyanshi', data:[76.8, 66.2, 73.7, 75.2, 72.0, 76.8, 73.7],
+,{ label:'Patil Priyanshi', data:[79.6, 69.6, 76.8, 73.7, 76.1, 72.0],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15G_R5'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[5.56, 10.12, 3.27, 8.2, 4.52],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[5.56, 3.27, 4.52, 10.12],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Kajale Vaishnavi', data:[4.96, 8.7, 2.77, 8.55, 3.77],
+,{ label:'Kajale Vaishnavi', data:[4.96, 2.77, 3.77, 8.7],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Patil Priyanshi', data:[4.91, 7.7, 2.77, 7.39, 3.74],
+,{ label:'Patil Priyanshi', data:[4.91, 2.77, 3.74, 7.7],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15G_R5'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[4.94, 7.85, 5.12, 4.63, 5.07, 5.74],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Kajale Vaishnavi', data:[4.6, 6.36, 4.7, 4.35, 4.6, 5.15],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Patil Priyanshi', data:[4.61, 5.96, 4.61, 4.24, 4.92, 5.14],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U15G_R5'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[9.0, 3.4, 3.2, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[12.6, 3.4, 3.4, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[6, 15, 13, 14, 12, 13],
+,{ label:'Kajale Vaishnavi', data:[21, 14, 13, 11, 11, 11], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Patil Priyanshi', data:[3, 23, 22, 21, 21, 20],
+,{ label:'Patil Priyanshi', data:[17, 23, 23, 23, 23, 23], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2427,7 +2765,27 @@ new Chart(document.getElementById('legpos_U15G_R5'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U15G_R5'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[4.94, 7.85, 5.12, 4.63, 5.07, 5.74], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Kajale Vaishnavi', data:[4.6, 6.36, 4.7, 4.35, 4.6, 5.15], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Patil Priyanshi', data:[4.61, 5.96, 4.61, 4.24, 4.92, 5.14], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2437,8 +2795,8 @@ new Chart(document.getElementById('eff_U15G_R5'),{
     datasets:[{ label:'Efficiency %', data:[129.4, 141, 148],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2446,73 +2804,51 @@ new Chart(document.getElementById('eff_U15G_R5'),{
 });
 
 new Chart(document.getElementById('radar_U15G_R6'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 86.3, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[82.6, 83.5, 81.3, 87.0, 80.7, 82.6, 81.3],
+,{ label:'Kajale Vaishnavi', data:[88.1, 75.4, 82.6, 81.3, 81.7, 80.7],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Patil Priyanshi', data:[81.1, 73.7, 76.9, 81.5, 77.6, 81.1, 76.9],
+,{ label:'Patil Priyanshi', data:[86.3, 70.6, 81.1, 76.9, 77.8, 77.6],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15G_R6'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[4.75, 8.02, 2.76, 6.44, 3.9],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[4.75, 2.76, 3.9, 8.02],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Kajale Vaishnavi', data:[4.51, 7.7, 2.58, 6.49, 3.62],
+,{ label:'Kajale Vaishnavi', data:[4.51, 2.58, 3.62, 7.7],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Patil Priyanshi', data:[4.43, 6.8, 2.44, 6.08, 3.48],
+,{ label:'Patil Priyanshi', data:[4.43, 2.44, 3.48, 6.8],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15G_R6'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[4.18, 6.03, 4.59, 3.78, 4.38, 5.55],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Kajale Vaishnavi', data:[4.23, 5.91, 4.38, 3.83, 4.14, 4.57],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Patil Priyanshi', data:[4.15, 5.23, 4.33, 3.74, 4.24, 4.89],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U15G_R6'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[5.4, 4.2, 4.0, 3.4, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[9.0, 3.4, 3.2, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[20, 4, 5, 7, 9, 8],
+,{ label:'Kajale Vaishnavi', data:[6, 15, 13, 14, 12, 13], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Patil Priyanshi', data:[10, 19, 18, 17, 17, 16],
+,{ label:'Patil Priyanshi', data:[3, 23, 22, 21, 21, 20], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2520,7 +2856,27 @@ new Chart(document.getElementById('legpos_U15G_R6'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U15G_R6'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[4.18, 6.03, 4.59, 3.78, 4.38, 5.55], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Kajale Vaishnavi', data:[4.23, 5.91, 4.38, 3.83, 4.14, 4.57], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Patil Priyanshi', data:[4.15, 5.23, 4.33, 3.74, 4.24, 4.89], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2530,8 +2886,8 @@ new Chart(document.getElementById('eff_U15G_R6'),{
     datasets:[{ label:'Efficiency %', data:[129.6, 138, 145],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2539,41 +2895,39 @@ new Chart(document.getElementById('eff_U15G_R6'),{
 });
 
 new Chart(document.getElementById('radar_U15G_Avg'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 86.6, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Kajale Vaishnavi', data:[79.4, 79.4, 77.3, 87.0, 75.7, 84.8, 79.2, 78.6, 76.7],
-      backgroundColor:'rgba(59,130,246,0.3)',
-      borderColor:'#3B82F6', borderWidth:2,
+,{ label:'Kajale Vaishnavi', data:[84.8, 79.2, 78.6, 76.7, 80.8, 75.7],
+      backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Patil Priyanshi', data:[79.1, 71.5, 75.1, 82.3, 74.6, 84.3, 64.7, 78.3, 76.5],
-      backgroundColor:'rgba(16,185,129,0.3)',
-      borderColor:'#10B981', borderWidth:2,
+,{ label:'Patil Priyanshi', data:[84.3, 64.7, 78.3, 76.5, 75.6, 74.6],
+      backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U15G_Avg'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[5.42, 9.61, 3.23, 7.4, 4.42],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[5.42, 3.23, 4.42, 9.61],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Kajale Vaishnavi', data:[4.95, 8.77, 2.87, 7.43, 3.85],
+,{ label:'Kajale Vaishnavi', data:[4.95, 2.87, 3.85, 8.77],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Patil Priyanshi', data:[4.93, 7.9, 2.79, 7.03, 3.79],
+,{ label:'Patil Priyanshi', data:[4.93, 2.79, 3.79, 7.9],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2593,7 +2947,7 @@ new Chart(document.getElementById('updown_U15G_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2603,8 +2957,8 @@ new Chart(document.getElementById('eff_U15G_Avg'),{
     datasets:[{ label:'Efficiency %', data:[131.2, 141.33, 151.0],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2612,73 +2966,51 @@ new Chart(document.getElementById('eff_U15G_Avg'),{
 });
 
 new Chart(document.getElementById('radar_U17B_R4'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 75.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[69.7, 87.0, 70.0, 87.0, 67.8, 69.1, 62.3, 70.0, 73.7],
+,{ label:'Mhatre Mohit', data:[69.1, 62.3, 70.0, 73.7, 83.6, 67.8],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Yogesh Rajput', data:[68.9, 68.6, 72.5, 61.9, 65.2, 71.2, 68.2, 67.9, 74.5],
+,{ label:'Yogesh Rajput', data:[71.2, 68.2, 67.9, 74.5, 76.8, 65.2],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17B_R4'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[6.84, 15.2, 3.54, 10.8, 5.23],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[6.84, 3.54, 5.23, 15.2],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Mhatre Mohit', data:[5.48, 15.2, 2.85, 12.52, 4.08],
+,{ label:'Mhatre Mohit', data:[5.48, 2.85, 4.08, 15.2],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Yogesh Rajput', data:[5.42, 12, 2.95, 8.91, 3.92],
+,{ label:'Yogesh Rajput', data:[5.42, 2.95, 3.92, 12],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17B_R4'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[8.1, 9.8, 5.92, 5.22, 5.8, 6.19],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Mhatre Mohit', data:[6.3, 6.87, 4.82, 4.29, 5.63, 5],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Yogesh Rajput', data:[6.31, 6.51, 4.92, 4.59, 5.59, 4.62],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U17B_R4'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[9.0, 3.0, 3.0, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[5.4, 4.2, 4.0, 3.4, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[9, 28, 32, 34, 44, 43],
+,{ label:'Kajale Vaishnavi', data:[20, 4, 5, 7, 9, 8], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Yogesh Rajput', data:[45, 51, 50, 50, 50, 50],
+,{ label:'Patil Priyanshi', data:[10, 19, 18, 17, 17, 16], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2686,7 +3018,27 @@ new Chart(document.getElementById('legpos_U17B_R4'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U17B_R4'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[8.1, 9.8, 5.92, 5.22, 5.8, 6.19], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Mhatre Mohit', data:[6.3, 6.87, 4.82, 4.29, 5.63, 5], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Yogesh Rajput', data:[6.31, 6.51, 4.92, 4.59, 5.59, 4.62], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2706,7 +3058,7 @@ new Chart(document.getElementById('updown_U17B_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2716,8 +3068,8 @@ new Chart(document.getElementById('eff_U17B_R4'),{
     datasets:[{ label:'Efficiency %', data:[142.2, 148, 161],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2727,84 +3079,62 @@ new Chart(document.getElementById('eff_U17B_R4'),{
 new Chart(document.getElementById('bias_U17B_R4'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Mhatre Mohit", "Yogesh Rajput"], datasets:[
-    { label:'Port (Left)', data:[26.3, 7.0, 14.0], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[73.7, 93.0, 86.0], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[26.3, 7.0, 14.0], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[73.7, 93.0, 86.0], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U17B_R5'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[75.5, 58.5, 76.9, 82.7, 75.1, 77.1, 75.0, 75.1, 77.2],
+,{ label:'Mhatre Mohit', data:[77.1, 75.0, 75.1, 77.2, 81.5, 75.1],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Yogesh Rajput', data:[72.8, 66.1, 75.2, 78.1, 64.0, 72.7, 79.5, 72.8, 74.7],
+,{ label:'Yogesh Rajput', data:[72.7, 79.5, 72.8, 74.7, 79.8, 64.0],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17B_R5'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[5.1, 10.4, 2.59, 6.49, 4.12],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[5.1, 2.59, 4.12, 10.4],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Mhatre Mohit', data:[4.43, 7, 2.29, 6.17, 3.56],
+,{ label:'Mhatre Mohit', data:[4.43, 2.29, 3.56, 7],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Yogesh Rajput', data:[4.27, 7.9, 2.24, 5.83, 3.03],
+,{ label:'Yogesh Rajput', data:[4.27, 2.24, 3.03, 7.9],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17B_R5'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[5.17, 6.77, 4.56, 3.96, 4.43, 5.73],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Mhatre Mohit', data:[4.18, 5.06, 4.22, 3.83, 4.23, 5.08],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Yogesh Rajput', data:[4.1, 5.14, 3.76, 3.59, 4.27, 4.79],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U17B_R5'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[11.4, 3.4, 3.2, 3.2, 3.4, 3.0],
+      label:'Fleet Top Avg Rank', data:[9.0, 3.0, 3.0, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[39, 43, 43, 44, 41, 41],
+,{ label:'Mhatre Mohit', data:[9, 28, 32, 34, 44, 43], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Yogesh Rajput', data:[18, 46, 45, 47, 46, 46],
+,{ label:'Yogesh Rajput', data:[45, 51, 50, 50, 50, 50], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2812,7 +3142,27 @@ new Chart(document.getElementById('legpos_U17B_R5'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U17B_R5'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[5.17, 6.77, 4.56, 3.96, 4.43, 5.73], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Mhatre Mohit', data:[4.18, 5.06, 4.22, 3.83, 4.23, 5.08], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Yogesh Rajput', data:[4.1, 5.14, 3.76, 3.59, 4.27, 4.79], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2832,7 +3182,7 @@ new Chart(document.getElementById('updown_U17B_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2842,8 +3192,8 @@ new Chart(document.getElementById('eff_U17B_R5'),{
     datasets:[{ label:'Efficiency %', data:[131.2, 140, 143],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2853,84 +3203,62 @@ new Chart(document.getElementById('eff_U17B_R5'),{
 new Chart(document.getElementById('bias_U17B_R5'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Mhatre Mohit", "Yogesh Rajput"], datasets:[
-    { label:'Port (Left)', data:[18.7, 13.0, 10.7], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[81.3, 87.0, 89.3], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[18.7, 13.0, 10.7], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[81.3, 87.0, 89.3], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U17B_R6'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[82.9, 70.4, 80.6, 82.7, 81.2, 82.3, 80.9, 83.1, 80.7],
+,{ label:'Mhatre Mohit', data:[82.3, 80.9, 83.1, 80.7, 85.1, 81.2],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Yogesh Rajput', data:[79.7, 65.9, 74.6, 71.8, 75.1, 82.9, 76.6, 79.0, 74.5],
+,{ label:'Yogesh Rajput', data:[82.9, 76.6, 79.0, 74.5, 79.3, 75.1],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17B_R6'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[4.07, 7.78, 2.33, 6.2, 3.45],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[4.07, 2.33, 3.45, 7.78],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Mhatre Mohit', data:[3.88, 6.3, 2.16, 5.9, 3.22],
+,{ label:'Mhatre Mohit', data:[3.88, 2.16, 3.22, 6.3],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Yogesh Rajput', data:[3.73, 5.9, 2.0, 5.12, 2.98],
+,{ label:'Yogesh Rajput', data:[3.73, 2.0, 2.98, 5.9],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17B_R6'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[3.52, 4.8, 4.36, 3.47, 3.94, 4.31],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Mhatre Mohit', data:[3.23, 4.56, 4.16, 3.37, 3.86, 4.08],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Yogesh Rajput', data:[3.29, 4.23, 3.86, 3.19, 3.67, 4.11],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U17B_R6'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[23.6, 3.4, 3.4, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[11.4, 3.4, 3.2, 3.2, 3.4, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[34, 11, 11, 13, 13, 17],
+,{ label:'Mhatre Mohit', data:[39, 43, 43, 44, 41, 41], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Yogesh Rajput', data:[45, 36, 40, 45, 40, 41],
+,{ label:'Yogesh Rajput', data:[18, 46, 45, 47, 46, 46], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -2938,7 +3266,27 @@ new Chart(document.getElementById('legpos_U17B_R6'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U17B_R6'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[3.52, 4.8, 4.36, 3.47, 3.94, 4.31], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Mhatre Mohit', data:[3.23, 4.56, 4.16, 3.37, 3.86, 4.08], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Yogesh Rajput', data:[3.29, 4.23, 3.86, 3.19, 3.67, 4.11], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2958,7 +3306,7 @@ new Chart(document.getElementById('updown_U17B_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -2968,8 +3316,8 @@ new Chart(document.getElementById('eff_U17B_R6'),{
     datasets:[{ label:'Efficiency %', data:[122.2, 125, 134],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -2979,54 +3327,52 @@ new Chart(document.getElementById('eff_U17B_R6'),{
 new Chart(document.getElementById('bias_U17B_R6'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Mhatre Mohit", "Yogesh Rajput"],
-    datasets:[{ label:'Starboard/Right %', data:[84.6, 90.0, 67.0],
-      backgroundColor:'rgba(16,185,129,0.6)', borderRadius:4 },
-    { label:'Port/Left %', data:[15.4, 10.0, 33.0],
-      backgroundColor:'rgba(239,68,68,0.6)', borderRadius:4 }]
+    datasets:[{ label:'Starboard (Right)', data:[84.6, 90.0, 67.0],
+      backgroundColor:'#3B82F6', borderRadius:4 },
+    { label:'Port (Left)', data:[15.4, 10.0, 33.0],
+      backgroundColor:'#FF6B00', borderRadius:4 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U17B_Avg'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 83.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Mhatre Mohit', data:[74.9, 74.2, 74.9, 87.0, 73.7, 75.2, 69.8, 74.8, 77.0],
-      backgroundColor:'rgba(59,130,246,0.3)',
-      borderColor:'#3B82F6', borderWidth:2,
+,{ label:'Mhatre Mohit', data:[75.2, 69.8, 74.8, 77.0, 83.3, 73.7],
+      backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Yogesh Rajput', data:[72.8, 67.2, 74.0, 70.2, 67.4, 74.6, 73.0, 72.2, 74.6],
-      backgroundColor:'rgba(16,185,129,0.3)',
-      borderColor:'#10B981', borderWidth:2,
+,{ label:'Yogesh Rajput', data:[74.6, 73.0, 72.2, 74.6, 78.6, 67.4],
+      backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17B_Avg'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[5.34, 11.13, 2.82, 7.83, 4.27],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[5.34, 2.82, 4.27, 11.13],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Mhatre Mohit', data:[4.6, 9.5, 2.43, 8.2, 3.62],
+,{ label:'Mhatre Mohit', data:[4.6, 2.43, 3.62, 9.5],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Yogesh Rajput', data:[4.47, 8.6, 2.4, 6.62, 3.31],
+,{ label:'Yogesh Rajput', data:[4.47, 2.4, 3.31, 8.6],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3046,7 +3392,7 @@ new Chart(document.getElementById('updown_U17B_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3056,8 +3402,8 @@ new Chart(document.getElementById('eff_U17B_Avg'),{
     datasets:[{ label:'Efficiency %', data:[131.87, 137.67, 146.0],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -3065,73 +3411,51 @@ new Chart(document.getElementById('eff_U17B_Avg'),{
 });
 
 new Chart(document.getElementById('radar_U17G_R4'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Prajapati Tejasvi', data:[60.8, 71.7, 64.4, 70.9, 64.3, 58.7, 66.0, 61.8, 63.6],
+,{ label:'Prajapati Tejasvi', data:[58.7, 66.0, 61.8, 63.6, 90.6, 64.3],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Thimiti Rashmita', data:[59.1, 46.2, 60.2, 48.9, 61.0, 62.1, 53.8, 57.8, 62.5],
+,{ label:'Thimiti Rashmita', data:[62.1, 53.8, 57.8, 62.5, 81.1, 61.0],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17G_R4'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[6.91, 14.68, 3.58, 12.33, 4.92],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[6.91, 3.58, 4.92, 14.68],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Prajapati Tejasvi', data:[4.83, 12.1, 2.65, 10.06, 3.64],
+,{ label:'Prajapati Tejasvi', data:[4.83, 2.65, 3.64, 12.1],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Thimiti Rashmita', data:[4.7, 7.8, 2.48, 6.94, 3.45],
+,{ label:'Thimiti Rashmita', data:[4.7, 2.48, 3.45, 7.8],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17G_R4'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[6.85, 8.11, 6.49, 7.97, 6.81, 5.25],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Prajapati Tejasvi', data:[4.4, 5.25, 4.59, 5.28, 4.9, 4.58],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Thimiti Rashmita', data:[4.78, 4.88, 4.73, 4.86, 4.59, 4.36],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U17G_R4'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[16.2, 4.6, 3.6, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[23.6, 3.4, 3.4, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Prajapati Tejasvi', data:[12, 34, 35, 35, 34, 35],
+,{ label:'Mhatre Mohit', data:[34, 11, 11, 13, 13, 17], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Thimiti Rashmita', data:[15, 37, 38, 37, 37, 37],
+,{ label:'Yogesh Rajput', data:[45, 36, 40, 45, 40, 41], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -3139,7 +3463,27 @@ new Chart(document.getElementById('legpos_U17G_R4'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U17G_R4'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[6.85, 8.11, 6.49, 7.97, 6.81, 5.25], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Prajapati Tejasvi', data:[4.4, 5.25, 4.59, 5.28, 4.9, 4.58], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Thimiti Rashmita', data:[4.78, 4.88, 4.73, 4.86, 4.59, 4.36], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3159,7 +3503,7 @@ new Chart(document.getElementById('updown_U17G_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3169,8 +3513,8 @@ new Chart(document.getElementById('eff_U17G_R4'),{
     datasets:[{ label:'Efficiency %', data:[152.0, 146, 163],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -3180,84 +3524,62 @@ new Chart(document.getElementById('eff_U17G_R4'),{
 new Chart(document.getElementById('bias_U17G_R4'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Prajapati Tejasvi", "Thimiti Rashmita"], datasets:[
-    { label:'Port (Left)', data:[31.3, 41.5, 23.0], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[68.7, 58.5, 77.0], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[31.3, 41.5, 23.0], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[68.7, 58.5, 77.0], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U17G_R5'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 85.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Prajapati Tejasvi', data:[72.3, 62.4, 70.3, 84.2, 66.3, 73.9, 75.6, 71.8, 69.5],
+,{ label:'Prajapati Tejasvi', data:[73.9, 75.6, 71.8, 69.5, 83.1, 66.3],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Thimiti Rashmita', data:[75.3, 64.5, 71.7, 87.0, 70.7, 75.9, 74.4, 75.3, 71.1],
+,{ label:'Thimiti Rashmita', data:[75.9, 74.4, 75.3, 71.1, 78.5, 70.7],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17G_R5'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[4.57, 8.36, 2.56, 5.96, 3.75],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[4.57, 2.56, 3.75, 8.36],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Prajapati Tejasvi', data:[3.8, 6, 2.07, 5.91, 2.86],
+,{ label:'Prajapati Tejasvi', data:[3.8, 2.07, 2.86, 6],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Thimiti Rashmita', data:[3.96, 6.2, 2.11, 6.1, 3.05],
+,{ label:'Thimiti Rashmita', data:[3.96, 2.11, 3.05, 6.2],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17G_R5'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[4.04, 4.32, 4.03, 5.92, 4.38, 4.73],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Prajapati Tejasvi', data:[3.31, 3.71, 3.4, 4.64, 3.7, 4.02],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Thimiti Rashmita', data:[3.56, 4.09, 3.69, 4.46, 3.83, 4.13],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U17G_R5'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[3.8, 3.4, 3.2, 3.2, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[16.2, 4.6, 3.6, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Prajapati Tejasvi', data:[37, 30, 37, 30, 30, 31],
+,{ label:'Prajapati Tejasvi', data:[12, 34, 35, 35, 34, 35], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Thimiti Rashmita', data:[36, 35, 34, 32, 34, 34],
+,{ label:'Thimiti Rashmita', data:[15, 37, 38, 37, 37, 37], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -3265,7 +3587,27 @@ new Chart(document.getElementById('legpos_U17G_R5'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U17G_R5'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[4.04, 4.32, 4.03, 5.92, 4.38, 4.73], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Prajapati Tejasvi', data:[3.31, 3.71, 3.4, 4.64, 3.7, 4.02], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Thimiti Rashmita', data:[3.56, 4.09, 3.69, 4.46, 3.83, 4.13], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3285,7 +3627,7 @@ new Chart(document.getElementById('updown_U17G_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3295,8 +3637,8 @@ new Chart(document.getElementById('eff_U17G_R5'),{
     datasets:[{ label:'Efficiency %', data:[129.0, 135, 143],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -3306,84 +3648,62 @@ new Chart(document.getElementById('eff_U17G_R5'),{
 new Chart(document.getElementById('bias_U17G_R5'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Prajapati Tejasvi", "Thimiti Rashmita"], datasets:[
-    { label:'Port (Left)', data:[5.4, 80.0, 73.5], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[94.6, 20.0, 26.5], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[5.4, 80.0, 73.5], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[94.6, 20.0, 26.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U17G_R6'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 84.9, 87.0, 87.0, 75.8, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Thimiti Rashmita', data:[77.4, 80.8, 79.3, 75.7, 77.8, 76.2, 87.0, 77.6, 78.2],
+,{ label:'Thimiti Rashmita', data:[76.2, 87.0, 77.6, 78.2, 85.1, 77.8],
       backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Prajapati Tejasvi', data:[77.4, 80.8, 74.8, 87.0, 74.7, 78.2, 76.8, 77.4, 74.0],
+,{ label:'Prajapati Tejasvi', data:[78.2, 76.8, 77.4, 74.0, 83.7, 74.7],
       backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17G_R6'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5', data:[4.08, 6.24, 2.37, 5.9, 3.41],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5', data:[4.08, 2.37, 3.41, 6.24],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Thimiti Rashmita', data:[3.63, 5.8, 2.16, 5.26, 3.05],
+,{ label:'Thimiti Rashmita', data:[3.63, 2.16, 3.05, 5.8],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Prajapati Tejasvi', data:[3.63, 5.8, 2.04, 6.04, 2.93],
+,{ label:'Prajapati Tejasvi', data:[3.63, 2.04, 2.93, 5.8],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17G_R6'),{
-  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg', data:[3.5, 4.11, 3.56, 4.57, 4.29, 4.45],
-      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
-,{ label:'Thimiti Rashmita', data:[2.93, 3.99, 2.97, 3.92, 4.06, 3.9],
-      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
-,{ label:'Prajapati Tejasvi', data:[2.78, 3.99, 2.84, 4.08, 4.09, 4],
-      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
-      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
-] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
-      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
-  }
-});
-
-new Chart(document.getElementById('legpos_U17G_R6'),{
-  type:'line',
-  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
-      label:'Fleet Top Avg Rank', data:[16.2, 4.4, 4.0, 3.0, 3.0, 3.0],
+      label:'Fleet Top Avg Rank', data:[3.8, 3.4, 3.2, 3.2, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Thimiti Rashmita', data:[35, 10, 14, 20, 26, 28],
+,{ label:'Prajapati Tejasvi', data:[37, 30, 37, 30, 30, 31], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Prajapati Tejasvi', data:[30, 19, 26, 32, 30, 34],
+,{ label:'Thimiti Rashmita', data:[36, 35, 34, 32, 34, 34], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
@@ -3391,7 +3711,27 @@ new Chart(document.getElementById('legpos_U17G_R6'),{
     scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+  }
+});
+
+new Chart(document.getElementById('legpos_U17G_R6'),{
+  data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
+      label:'Fleet Top Avg', data:[3.5, 4.11, 3.56, 4.57, 4.29, 4.45], tension: 0.4,
+      borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#FF6B00', borderDash:[5,3], fill:true }
+,{ label:'Thimiti Rashmita', data:[2.93, 3.99, 2.97, 3.92, 4.06, 3.9], tension: 0.4,
+      borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#3B82F6', fill:false }
+,{ label:'Prajapati Tejasvi', data:[2.78, 3.99, 2.84, 4.08, 4.09, 4], tension: 0.4,
+      borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.3)',
+      borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
+] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+      x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3411,7 +3751,7 @@ new Chart(document.getElementById('updown_U17G_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3421,8 +3761,8 @@ new Chart(document.getElementById('eff_U17G_R6'),{
     datasets:[{ label:'Efficiency %', data:[118.4, 121, 123],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -3432,54 +3772,52 @@ new Chart(document.getElementById('eff_U17G_R6'),{
 new Chart(document.getElementById('bias_U17G_R6'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Thimiti Rashmita", "Prajapati Tejasvi"],
-    datasets:[{ label:'Starboard/Right %', data:[59.4, 48.0, 82.0],
-      backgroundColor:'rgba(16,185,129,0.6)', borderRadius:4 },
-    { label:'Port/Left %', data:[40.6, 52.0, 18.0],
-      backgroundColor:'rgba(239,68,68,0.6)', borderRadius:4 }]
+    datasets:[{ label:'Starboard (Right)', data:[59.4, 48.0, 82.0],
+      backgroundColor:'#3B82F6', borderRadius:4 },
+    { label:'Port (Left)', data:[40.6, 52.0, 18.0],
+      backgroundColor:'#FF6B00', borderRadius:4 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('radar_U17G_Avg'),{
-  type:'radar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC", "UW Speed", "UW VMG", "DW Speed", "DW VMG"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
+    type:'radar',
+  data:{ labels:["UW Speed", "UW VMG", "DW Speed", "DW VMG", "Route Eff", "Avg VMC"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[87.0, 87.0, 87.0, 87.0, 87.0, 87.0],
       backgroundColor:'rgba(255,107,0,0.1)', borderColor:'#FF6B00', borderWidth:2,
       pointBackgroundColor:'#FF6B00', pointRadius:3, borderDash:[5,3] }
-,{ label:'Prajapati Tejasvi', data:[68.5, 71.0, 68.9, 79.2, 67.8, 68.7, 72.1, 68.7, 68.2],
-      backgroundColor:'rgba(59,130,246,0.3)',
-      borderColor:'#3B82F6', borderWidth:2,
+,{ label:'Prajapati Tejasvi', data:[68.7, 72.1, 68.7, 68.2, 86.0, 67.8],
+      backgroundColor:'rgba(59,130,246,0.3)', borderColor:'#3B82F6', borderWidth:2,
       pointBackgroundColor:'#3B82F6', pointRadius:3 }
-,{ label:'Thimiti Rashmita', data:[68.7, 58.8, 68.9, 65.8, 68.6, 70.2, 66.9, 68.0, 69.6],
-      backgroundColor:'rgba(16,185,129,0.3)',
-      borderColor:'#10B981', borderWidth:2,
+,{ label:'Thimiti Rashmita', data:[70.2, 66.9, 68.0, 69.6, 81.4, 68.6],
+      backgroundColor:'rgba(16,185,129,0.3)', borderColor:'#10B981', borderWidth:2,
       pointBackgroundColor:'#10B981', pointRadius:3 }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bar_U17G_Avg'),{
   type:'bar',
-  data:{ labels:["Avg Speed", "Max Speed", "Avg VMG", "Max VMG", "Avg VMC"], datasets:[{
-      label:'Fleet Top 5 Avg', data:[5.19, 9.76, 2.84, 8.06, 4.03],
+  data:{ labels:["Avg Speed", "Avg VMG", "Avg VMC", "Max Speed"], datasets:[{
+      label:'Fleet Top 5 Avg', data:[5.19, 2.84, 4.03, 9.76],
       backgroundColor:'rgba(255,107,0,0.6)', borderRadius:4 }
-,{ label:'Prajapati Tejasvi', data:[4.09, 7.97, 2.25, 7.34, 3.14],
+,{ label:'Prajapati Tejasvi', data:[4.09, 2.25, 3.14, 7.97],
       backgroundColor:'#3B82F6', borderRadius:4 }
-,{ label:'Thimiti Rashmita', data:[4.1, 6.6, 2.25, 6.1, 3.18],
+,{ label:'Thimiti Rashmita', data:[4.1, 2.25, 3.18, 6.6],
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3499,7 +3837,7 @@ new Chart(document.getElementById('updown_U17G_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3509,8 +3847,8 @@ new Chart(document.getElementById('eff_U17G_Avg'),{
     datasets:[{ label:'Efficiency %', data:[133.13, 134.67, 142.33],
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
-  options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
       grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
@@ -3535,20 +3873,20 @@ new Chart(document.getElementById('updown_U15B_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bias_U15B_R5'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Johal Udaiveer", "Prakash Vihaan"], datasets:[
-    { label:'Port (Left)', data:[15.4, 43.5, 14.5], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[84.6, 56.5, 85.5], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[15.4, 43.5, 14.5], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[84.6, 56.5, 85.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3568,20 +3906,20 @@ new Chart(document.getElementById('updown_U15B_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bias_U15B_R6'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Johal Udaiveer", "Prakash Vihaan"], datasets:[
-    { label:'Port (Left)', data:[64.0, 73.5, 34.5], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[36.0, 26.5, 65.5], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[64.0, 73.5, 34.5], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[36.0, 26.5, 65.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3601,20 +3939,20 @@ new Chart(document.getElementById('updown_U15G_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bias_U15G_R5'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Kajale Vaishnavi", "Patil Priyanshi"], datasets:[
-    { label:'Port (Left)', data:[18.5, 17.5, 14.5], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[81.5, 82.5, 85.5], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[18.5, 17.5, 14.5], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[81.5, 82.5, 85.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3634,20 +3972,20 @@ new Chart(document.getElementById('updown_U15G_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('bias_U15G_R6'),{
   type:'bar',
   data:{ labels:["Fleet Top 5", "Kajale Vaishnavi", "Patil Priyanshi"], datasets:[
-    { label:'Port (Left)', data:[37.7, 8.5, 15.5], backgroundColor:'#EF4444', borderRadius:4 },
-    { label:'Starboard (Right)', data:[62.3, 91.5, 84.5], backgroundColor:'#22C55E', borderRadius:4 }
+    { label:'Port (Left)', data:[37.7, 8.5, 15.5], backgroundColor:'#FF6B00', borderRadius:4 },
+    { label:'Starboard (Right)', data:[62.3, 91.5, 84.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
     scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{ color:'#94A3B8', font:{size:10} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
   }
 });
 
@@ -3884,4 +4222,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+
 </body></html>
