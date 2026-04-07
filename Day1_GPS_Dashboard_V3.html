@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 GPS Performance Dashboard V3 — India Team</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:#0B1120; color:#F1F5F9; min-height:100vh; padding:16px; }
+.header { text-align:center; padding:24px 20px; background:linear-gradient(135deg,#FF6B00,#FF9500,#FBBF24); border-radius:16px; margin-bottom:20px; }
+.header h1 { font-size:24px; font-weight:800; color:#0B1120; }
+.header p { font-size:13px; color:#0B1120; opacity:.8; margin-top:4px; }
+.nav-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; justify-content:center; }
+.nav-tab { padding:10px 18px; border-radius:10px; cursor:pointer; font-size:13px; font-weight:600; border:1px solid #1F2937; background:#111827; color:#94A3B8; transition:all .2s; user-select:none; }
+.nav-tab:hover { border-color:#FF6B00; color:#FF9500; }
+.nav-tab.active { background:#FF6B00; color:#0B1120; border-color:#FF6B00; }
+.sub-tabs { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; justify-content:center; }
+.sub-tab { padding:7px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #1F2937; background:#111827; color:#94A3B8; transition:all .2s; user-select:none; }
+.sub-tab:hover { border-color:#FF6B00; color:#FF9500; }
+.sub-tab.active { background:rgba(255,107,0,.25); color:#FF6B00; border-color:#FF6B00; }
+.section { display:none; }
+.section.active { display:block; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; align-items:stretch; }
+@media(max-width:800px) { .grid { grid-template-columns:1fr; } }
+.card { background:#111827; border:1px solid #1F2937; border-radius:14px; padding:18px; position:relative; overflow:hidden; }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#FF6B00,#FF9500); }
+.card.full { grid-column:1/-1; }
+.card h2 { font-size:15px; font-weight:700; color:#FF9500; margin-bottom:14px; letter-spacing:.5px; }
+table { width:100%; border-collapse:collapse; font-size:12px; }
+th { background:#1F2937; color:#FF9500; padding:8px 6px; text-align:center; font-weight:700; }
+td { padding:7px 6px; text-align:center; border-bottom:1px solid #1F2937; }
+tr:hover td { background:rgba(255,107,0,.06); }
+.ind-row { background:rgba(59,130,246,.12); }
+.ind-row td { color:#93C5FD; font-weight:600; }
+.chart-box { position:relative; height:280px; }
+.chart-box-tall { position:relative; height:340px; }
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+@media(max-width:600px) { .stat-grid { grid-template-columns:repeat(2,1fr); } }
+.stat-card { background:#1F2937; border-radius:10px; padding:14px; text-align:center; }
+.stat-card .val { font-size:22px; font-weight:800; color:#FF9500; }
+.stat-card .label { font-size:11px; color:#94A3B8; margin-top:4px; }
+.insight { background:rgba(255,107,0,.08); border:1px solid rgba(255,107,0,.25); border-radius:10px; padding:12px 14px; margin-top:12px; font-size:12px; line-height:1.6; color:#CBD5E1; }
+.insight strong { color:#FF9500; }
+.gap-pos { color:#10B981; }
+.gap-neg { color:#EF4444; }
+.no-data { text-align:center; padding:40px 20px; color:#94A3B8; font-size:13px; background:#111827; border:1px solid #1F2937; border-radius:14px; }
+
+.polar-container { position:relative; height:480px; display:flex; align-items:center; justify-content:center; }
+.polar-canvas { display:block; }
+.polar-legend { display:none; }
+.polar-legend-item { display:flex; align-items:center; gap:6px; }
+.polar-legend-color { width:16px; height:3px; border-radius:2px; }
+.no-twa-data { text-align:center; padding:40px 20px; color:#94A3B8; font-size:13px; }
+
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>DAY 1 — GPS PERFORMANCE DASHBOARD V3</h1>
+  <p>T293 World Championship 2026 · Foca, Turkey · April 5, 2026</p>
+  <p style="font-size:11px;color:#0B1120;opacity:.7;margin-top:4px">MetaSail GPS Data Analysis by Coach DannyOk</p>
+</div>
+<div class="nav-tabs">
+<div class="nav-tab active" onclick="showMainTab('overview')" id="maintab_overview">Team Overview</div>
+<div class="nav-tab" onclick="showMainTab('U15B')" id="maintab_U15B">U15 Boys</div>
+<div class="nav-tab" onclick="showMainTab('U15G')" id="maintab_U15G">U15 Girls</div>
+<div class="nav-tab" onclick="showMainTab('U17B')" id="maintab_U17B">U17 Boys</div>
+</div>
+
+<!-- ===== OVERVIEW SECTION ===== -->
+<div class="section active" id="sec_overview">
+<div class="card full" style="margin-bottom:16px">
+<h2>TEAM INDIA — AVERAGE PERFORMANCE (% of Class Top 5)</h2>
+<p style="font-size:12px;color:#94A3B8;margin-bottom:12px">Each metric normalized to class Top 5 = 100%. Metrics with no data across races are excluded.</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+<div class="stat-card"><div class="val">81.1%</div><div class="label">Avg Speed</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-18.9%</div></div>
+<div class="stat-card"><div class="val">79.2%</div><div class="label">Max Speed</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-20.8%</div></div>
+<div class="stat-card"><div class="val">80.5%</div><div class="label">Avg VMG</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-19.5%</div></div>
+<div class="stat-card"><div class="val">78.6%</div><div class="label">Avg VMC</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-21.4%</div></div>
+<div class="stat-card"><div class="val">84.3%</div><div class="label">UW Speed</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-15.7%</div></div>
+<div class="stat-card"><div class="val">77.2%</div><div class="label">UW VMG</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-22.8%</div></div>
+<div class="stat-card"><div class="val">81.7%</div><div class="label">DW Speed</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-18.3%</div></div>
+<div class="stat-card"><div class="val">81.6%</div><div class="label">DW VMG</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-18.4%</div></div>
+</div></div>
+<div class="grid">
+<div class="card"><h2>TEAM RADAR (% of Class Top 5)</h2><div class="chart-box"><canvas id="team_radar"></canvas></div>
+<div class="insight"><strong>Team Analysis:</strong> Strongest: <strong>UW Speed</strong> at 84.3%. Biggest gap: <strong>UW VMG</strong> at 77.2%.</div>
+</div>
+<div class="card"><h2>ATHLETE COMPARISON</h2><div style="font-size:11px;color:#94A3B8;margin-bottom:4px">Each bar = athlete's average across all metrics as % of their class Top 5 fleet average. <span style="color:#FF9500;font-weight:600">100% = Fleet Top 5 level</span></div><div class="chart-box-tall"><canvas id="team_athlete_bar"></canvas></div></div>
+</div>
+<div class="grid">
+<div class="card"><h2>METRIC-BY-METRIC BREAKDOWN</h2><div class="chart-box-tall"><canvas id="team_metric_bar"></canvas></div></div>
+<div class="card"><h2>ROUTE EFFICIENCY</h2><div class="chart-box-tall"><canvas id="team_eff_pos"></canvas></div></div>
+</div>
+<div class="card full"><h2>DETAILED PERFORMANCE TABLE</h2><div style="overflow-x:auto"><table>
+<tr><th>Athlete</th><th>Class</th>
+<th>Avg Speed</th>
+<th>Max Speed</th>
+<th>Avg VMG</th>
+<th>Avg VMC</th>
+<th>UW Speed</th>
+<th>UW VMG</th>
+<th>DW Speed</th>
+<th>DW VMG</th>
+<th>Route Eff</th>
+</tr>
+<tr class="ind-row"><td style="text-align:left;white-space:nowrap">Johal Udaiveer</td><td>U15B</td><td>12.3</td><td>19.6</td><td>4.67</td><td>7.11</td><td>8.88</td><td>2.63</td><td>13.9</td><td>5.68</td><td>241</td></tr>
+<tr class="ind-row"><td style="text-align:left;white-space:nowrap">Patil Priyanshi</td><td>U15G</td><td>9.64</td><td>17.4</td><td>4.46</td><td>6.01</td><td>7.35</td><td>2.54</td><td>10.79</td><td>5.42</td><td>223.67</td></tr>
+<tr class="ind-row"><td style="text-align:left;white-space:nowrap">Kajale Vaishnavi</td><td>U15G</td><td>10.44</td><td>16.1</td><td>4.47</td><td>6.25</td><td>7.85</td><td>2.82</td><td>11.73</td><td>5.29</td><td>246</td></tr>
+<tr class="ind-row"><td style="text-align:left;white-space:nowrap">Mhatre Mohit</td><td>U17B</td><td>12.43</td><td>20.07</td><td>4.92</td><td>6.61</td><td>9.68</td><td>3.26</td><td>13.81</td><td>5.79</td><td>232</td></tr>
+<tr class="ind-row"><td style="text-align:left;white-space:nowrap">Yogesh Rajput</td><td>U17B</td><td>13.91</td><td>20.43</td><td>5.58</td><td>7.2</td><td>11.55</td><td>3.17</td><td>15.19</td><td>6.92</td><td>259</td></tr>
+</table></div>
+</div>
+</div>
+
+<!-- ===== U15B SECTION ===== -->
+<div class="section" id="sec_U15B">
+<div class="sub-tabs">
+<div class="sub-tab active" onclick="showSubTab(this, 'U15B', 'R1')" id="subtab_U15B_R1">Race 1</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U15B', 'R2')" id="subtab_U15B_R2">Race 2</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U15B', 'R3')" id="subtab_U15B_R3">Race 3</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U15B', 'avg')" id="subtab_U15B_avg">Average</div>
+</div>
+
+<!-- U15B R1 -->
+<div class="subsection active" id="U15B_R1">
+<div class="grid">
+<div class="card"><h2>JOHAL UDAIVEER - RACE 1</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">13.23</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">19.30</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.84</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">14.77</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15b_r1_johal_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - JOHAL UDAIVEER</h2>
+<div class="chart-box-tall"><canvas id="u15b_r1_johal_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #6 at 17.91 kts. Rank range: 25-27, showing consistent middle-fleet performance.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS - JOHAL UDAIVEER (R1)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div class="chart-box"><canvas id="u15b_r1_johal_bias"></canvas></div></div>
+<div><div class="stat-grid"><div class="stat-card"><div class="val">42.0%</div><div class="label">Starboard (Right)</div></div><div class="stat-card"><div class="val">58.0%</div><div class="label">Port (Left)</div></div></div></div>
+</div>
+</div>
+</div>
+
+<!-- U15B R2 -->
+<div class="subsection" id="U15B_R2">
+<div class="grid">
+<div class="card"><h2>JOHAL UDAIVEER - RACE 2</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">12.48</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">19.70</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.90</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">14.50</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15b_r2_johal_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - JOHAL UDAIVEER</h2>
+<div class="chart-box-tall"><canvas id="u15b_r2_johal_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #6 at 18.43 kts. Strong improvement with #2 rank of 11 showing breakthrough moment.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS - JOHAL UDAIVEER (R2)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div class="chart-box"><canvas id="u15b_r2_johal_bias"></canvas></div></div>
+<div><div class="stat-grid"><div class="stat-card"><div class="val">74.0%</div><div class="label">Starboard (Right)</div></div><div class="stat-card"><div class="val">26.0%</div><div class="label">Port (Left)</div></div></div></div>
+</div>
+</div>
+
+<!-- U15B R3 -->
+<div class="subsection" id="U15B_R3">
+<div class="grid">
+<div class="card"><h2>JOHAL UDAIVEER - RACE 3</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">11.05</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">19.90</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.27</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">12.95</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15b_r3_johal_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - JOHAL UDAIVEER</h2>
+<div class="chart-box-tall"><canvas id="u15b_r3_johal_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 14.48 kts. Conservative race with consistent rank 25-26 placement, suggesting tactical challenge.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS - JOHAL UDAIVEER (R3)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div class="chart-box"><canvas id="u15b_r3_johal_bias"></canvas></div></div>
+<div><div class="stat-grid"><div class="stat-card"><div class="val">64.0%</div><div class="label">Starboard (Right)</div></div><div class="stat-card"><div class="val">36.0%</div><div class="label">Port (Left)</div></div></div></div>
+</div>
+</div>
+
+<!-- U15B Average -->
+<div class="subsection" id="U15B_avg">
+<div class="grid">
+<div class="card"><h2>JOHAL UDAIVEER - 3-RACE AVERAGE</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">12.25</div><div class="label">Avg Speed</div></div>
+<div class="stat-card"><div class="val">19.63</div><div class="label">Max Speed</div></div>
+<div class="stat-card"><div class="val">4.67</div><div class="label">Avg VMG</div></div>
+<div class="stat-card"><div class="val">14.07</div><div class="label">Max VMG</div></div>
+<div class="stat-card"><div class="val">7.11</div><div class="label">Avg VMC</div></div>
+<div class="stat-card"><div class="val">8.88</div><div class="label">UW Speed</div></div>
+<div class="stat-card"><div class="val">2.63</div><div class="label">UW VMG</div></div>
+<div class="stat-card"><div class="val">13.95</div><div class="label">DW Speed</div></div>
+</div>
+<div class="chart-box"><canvas id="u15b_avg_johal_radar"></canvas></div>
+<div class="insight"><strong>3-Race Summary:</strong> Johal showed consistency in upper speed range but needs improvement in VMG efficiency. Route efficiency averaged 241, suggesting optimized course management. Starboard bias of 60% overall.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== U15G SECTION ===== -->
+<div class="section" id="sec_U15G">
+<div class="sub-tabs">
+<div class="sub-tab active" onclick="showSubTab(this, 'U15G', 'R1')" id="subtab_U15G_R1">Race 1</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U15G', 'R2')" id="subtab_U15G_R2">Race 2</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U15G', 'R3')" id="subtab_U15G_R3">Race 3</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U15G', 'avg')" id="subtab_U15G_avg">Average</div>
+</div>
+
+<!-- U15G R1 -->
+<div class="subsection active" id="U15G_R1">
+<div class="grid">
+<div class="card"><h2>PATIL PRIYANSHI - RACE 1</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">9.86</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">18.10</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.45</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">14.24</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15g_r1_patil_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - PATIL PRIYANSHI</h2>
+<div class="chart-box-tall"><canvas id="u15g_r1_patil_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 14.88 kts. Consistent ranks 14-17 showing stable race management.</div>
+</div>
+</div>
+<div class="card"><h2>KAJALE VAISHNAVI - RACE 1</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">10.44</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">16.10</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.47</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">13.68</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15g_r1_kajale_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - KAJALE VAISHNAVI</h2>
+<div class="chart-box-tall"><canvas id="u15g_r1_kajale_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 13.78 kts. Steady ranks 15-21 with solid boat handling.</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS (R1)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Patil Priyanshi</div><div class="chart-box"><canvas id="u15g_r1_patil_bias"></canvas></div></div>
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Kajale Vaishnavi</div><div class="chart-box"><canvas id="u15g_r1_kajale_bias"></canvas></div></div>
+</div>
+</div>
+</div>
+
+<!-- U15G R2 -->
+<div class="subsection" id="U15G_R2">
+<div class="grid">
+<div class="card"><h2>PATIL PRIYANSHI - RACE 2</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">9.66</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">16.40</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.69</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">12.83</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15g_r2_patil_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - PATIL PRIYANSHI</h2>
+<div class="chart-box-tall"><canvas id="u15g_r2_patil_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #6 at 14.04 kts. Excellent #1 rank in Leg 1 showing tactical improvement. Consistent 14 ranks mid-race.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS - PATIL PRIYANSHI (R2)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div class="chart-box"><canvas id="u15g_r2_patil_bias"></canvas></div></div>
+<div><div class="stat-grid"><div class="stat-card"><div class="val">80.5%</div><div class="label">Starboard (Right)</div></div><div class="stat-card"><div class="val">19.5%</div><div class="label">Port (Left)</div></div></div></div>
+</div>
+</div>
+
+<!-- U15G R3 -->
+<div class="subsection" id="U15G_R3">
+<div class="grid">
+<div class="card"><h2>PATIL PRIYANSHI - RACE 3</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">9.40</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">17.70</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.24</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">14.59</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u15g_r3_patil_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - PATIL PRIYANSHI</h2>
+<div class="chart-box-tall"><canvas id="u15g_r3_patil_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 13.46 kts. Impressive #5 rank in Leg 1, demonstrating strong tactical execution. Consistent mid-fleet performance.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS - PATIL PRIYANSHI (R3)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div class="chart-box"><canvas id="u15g_r3_patil_bias"></canvas></div></div>
+<div><div class="stat-grid"><div class="stat-card"><div class="val">69.0%</div><div class="label">Starboard (Right)</div></div><div class="stat-card"><div class="val">31.0%</div><div class="label">Port (Left)</div></div></div></div>
+</div>
+</div>
+
+<!-- U15G Average -->
+<div class="subsection" id="U15G_avg">
+<div class="grid">
+<div class="card"><h2>PATIL PRIYANSHI - 3-RACE AVERAGE</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">9.64</div><div class="label">Avg Speed</div></div>
+<div class="stat-card"><div class="val">17.40</div><div class="label">Max Speed</div></div>
+<div class="stat-card"><div class="val">4.46</div><div class="label">Avg VMG</div></div>
+<div class="stat-card"><div class="val">13.89</div><div class="label">Max VMG</div></div>
+<div class="stat-card"><div class="val">6.01</div><div class="label">Avg VMC</div></div>
+<div class="stat-card"><div class="val">7.35</div><div class="label">UW Speed</div></div>
+<div class="stat-card"><div class="val">2.54</div><div class="label">UW VMG</div></div>
+<div class="stat-card"><div class="val">10.79</div><div class="label">DW Speed</div></div>
+</div>
+<div class="chart-box"><canvas id="u15g_avg_patil_radar"></canvas></div>
+<div class="insight"><strong>3-Race Summary:</strong> Patil demonstrated improving tactical execution with #1 and #5 leg finishes. Consistent route efficiency around 224. Strong starboard bias (73.2% avg) shows tactical preference development.</div>
+</div>
+</div>
+
+<div class="grid">
+<div class="card"><h2>KAJALE VAISHNAVI - R1 ONLY DATA</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">10.44</div><div class="label">Avg Speed</div></div>
+<div class="stat-card"><div class="val">16.10</div><div class="label">Max Speed</div></div>
+<div class="stat-card"><div class="val">4.47</div><div class="label">Avg VMG</div></div>
+<div class="stat-card"><div class="val">13.68</div><div class="label">Max VMG</div></div>
+<div class="stat-card"><div class="val">6.25</div><div class="label">Avg VMC</div></div>
+<div class="stat-card"><div class="val">7.85</div><div class="label">UW Speed</div></div>
+<div class="stat-card"><div class="val">2.82</div><div class="label">UW VMG</div></div>
+<div class="stat-card"><div class="val">11.73</div><div class="label">DW Speed</div></div>
+</div>
+<div class="chart-box"><canvas id="u15g_avg_kajale_radar"></canvas></div>
+<div class="insight"><strong>Note:</strong> Kajale has data only from Race 1. Route efficiency of 246 was strong. Starboard bias of 67.5% shows balanced course management.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== U17B SECTION ===== -->
+<div class="section" id="sec_U17B">
+<div class="sub-tabs">
+<div class="sub-tab active" onclick="showSubTab(this, 'U17B', 'R1')" id="subtab_U17B_R1">Race 1</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U17B', 'R2')" id="subtab_U17B_R2">Race 2</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U17B', 'R3')" id="subtab_U17B_R3">Race 3</div>
+<div class="sub-tab" onclick="showSubTab(this, 'U17B', 'avg')" id="subtab_U17B_avg">Average</div>
+</div>
+
+<!-- U17B R1 -->
+<div class="subsection active" id="U17B_R1">
+<div class="grid">
+<div class="card"><h2>MHATRE MOHIT - RACE 1</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">14.52</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">21.60</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">5.78</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">17.57</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_r1_mohit_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - MHATRE MOHIT</h2>
+<div class="chart-box-tall"><canvas id="u17b_r1_mohit_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 18.82 kts. Mid-fleet ranks 38-45 indicate fleet is very competitive in this class. Steady performance.</div>
+</div>
+</div>
+<div class="card"><h2>YOGESH RAJPUT - RACE 1</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">14.75</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">20.20</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">5.99</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">14.79</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_r1_yogesh_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - YOGESH RAJPUT</h2>
+<div class="chart-box-tall"><canvas id="u17b_r1_yogesh_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #1 at 16.18 kts. Competitive ranks 40-47 in large U17B fleet. Strong downwind leg performance.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS (R1)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Mhatre Mohit</div><div class="chart-box"><canvas id="u17b_r1_mohit_bias"></canvas></div></div>
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Yogesh Rajput</div><div class="chart-box"><canvas id="u17b_r1_yogesh_bias"></canvas></div></div>
+</div>
+</div>
+
+<!-- U17B R2 -->
+<div class="subsection" id="U17B_R2">
+<div class="grid">
+<div class="card"><h2>MHATRE MOHIT - RACE 2</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">12.29</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">20.10</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">5.16</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">15.81</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_r2_mohit_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - MHATRE MOHIT</h2>
+<div class="chart-box-tall"><canvas id="u17b_r2_mohit_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #6 at 17.52 kts. Exceptional #3 rank in Leg 1 showing strong tactical opportunity. Ranks 34-38 mid-race.</div>
+</div>
+</div>
+<div class="card"><h2>YOGESH RAJPUT - RACE 2</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">15.43</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">21.10</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">6.04</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">20.07</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_r2_yogesh_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - YOGESH RAJPUT</h2>
+<div class="chart-box-tall"><canvas id="u17b_r2_yogesh_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 19.11 kts. Excellent #2 leg rank showing optimal downwind. Consistent top-32 placement throughout.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS (R2)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Mhatre Mohit</div><div class="chart-box"><canvas id="u17b_r2_mohit_bias"></canvas></div></div>
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Yogesh Rajput</div><div class="chart-box"><canvas id="u17b_r2_yogesh_bias"></canvas></div></div>
+</div>
+</div>
+
+<!-- U17B R3 -->
+<div class="subsection" id="U17B_R3">
+<div class="grid">
+<div class="card"><h2>MHATRE MOHIT - RACE 3</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">10.50</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">18.50</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">3.83</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">16.76</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_r3_mohit_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - MHATRE MOHIT</h2>
+<div class="chart-box-tall"><canvas id="u17b_r3_mohit_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 15.50 kts. Challenging race with ranks 41-42 suggesting difficult wind conditions or tactical struggles.</div>
+</div>
+</div>
+<div class="card"><h2>YOGESH RAJPUT - RACE 3</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">11.56</div><div class="label">Avg Speed (kts)</div></div>
+<div class="stat-card"><div class="val">20.00</div><div class="label">Max Speed (kts)</div></div>
+<div class="stat-card"><div class="val">4.72</div><div class="label">Avg VMG (kts)</div></div>
+<div class="stat-card"><div class="val">16.28</div><div class="label">Max VMG (kts)</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_r3_yogesh_radar"></canvas></div>
+</div>
+<div class="card"><h2>LEG PERFORMANCE - YOGESH RAJPUT</h2>
+<div class="chart-box-tall"><canvas id="u17b_r3_yogesh_legs"></canvas></div>
+<div class="insight"><strong>Leg Analysis:</strong> Best leg: #2 at 17.33 kts. Consistent top-42 placement showing stable boat handling despite challenging conditions.</div>
+</div>
+</div>
+<div class="card full"><h2>COURSE SIDE BIAS (R3)</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Mhatre Mohit</div><div class="chart-box"><canvas id="u17b_r3_mohit_bias"></canvas></div></div>
+<div><div style="font-size:14px;font-weight:700;color:#FF9500;margin-bottom:8px">Yogesh Rajput</div><div class="chart-box"><canvas id="u17b_r3_yogesh_bias"></canvas></div></div>
+</div>
+</div>
+
+<!-- U17B Average -->
+<div class="subsection" id="U17B_avg">
+<div class="grid">
+<div class="card"><h2>MHATRE MOHIT - 3-RACE AVERAGE</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">12.43</div><div class="label">Avg Speed</div></div>
+<div class="stat-card"><div class="val">20.07</div><div class="label">Max Speed</div></div>
+<div class="stat-card"><div class="val">4.92</div><div class="label">Avg VMG</div></div>
+<div class="stat-card"><div class="val">16.71</div><div class="label">Max VMG</div></div>
+<div class="stat-card"><div class="val">6.61</div><div class="label">Avg VMC</div></div>
+<div class="stat-card"><div class="val">9.68</div><div class="label">UW Speed</div></div>
+<div class="stat-card"><div class="val">3.26</div><div class="label">UW VMG</div></div>
+<div class="stat-card"><div class="val">13.81</div><div class="label">DW Speed</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_avg_mohit_radar"></canvas></div>
+<div class="insight"><strong>3-Race Summary:</strong> Mohit demonstrated varied performance across races. Strong upwind speed (9.68) with strategic moment in R2 Leg 1 (#3 rank). Route efficiency averaged 232. Starboard bias of 86.5% suggests strong right-side preference.</div>
+</div>
+</div>
+
+<div class="card"><h2>YOGESH RAJPUT - 3-RACE AVERAGE</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="val">13.91</div><div class="label">Avg Speed</div></div>
+<div class="stat-card"><div class="val">20.43</div><div class="label">Max Speed</div></div>
+<div class="stat-card"><div class="val">5.58</div><div class="label">Avg VMG</div></div>
+<div class="stat-card"><div class="val">17.05</div><div class="label">Max VMG</div></div>
+<div class="stat-card"><div class="val">7.20</div><div class="label">Avg VMC</div></div>
+<div class="stat-card"><div class="val">11.55</div><div class="label">UW Speed</div></div>
+<div class="stat-card"><div class="val">3.17</div><div class="label">UW VMG</div></div>
+<div class="stat-card"><div class="val">15.19</div><div class="label">DW Speed</div></div>
+</div>
+<div class="chart-box"><canvas id="u17b_avg_yogesh_radar"></canvas></div>
+<div class="insight"><strong>3-Race Summary:</strong> Yogesh was the strongest performer on Day 1. Excellent speed control (13.91 avg) and VMG (5.58 avg). Route efficiency of 259 shows optimal course management. Very strong starboard bias (94.8%) with only one port-tack race.</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+function showMainTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec_' + id).classList.add('active');
+  document.getElementById('maintab_' + id).classList.add('active');
+}
+
+function showSubTab(element, classId, raceId) {
+  document.querySelectorAll('#' + classId + ' .subsection').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#subtab_' + classId + '_' + raceId + ', #subtab_' + classId + '_' + raceId.replace(/^(?!avg)/, '')).forEach(t => {
+    if(t.id === 'subtab_' + classId + '_' + raceId) t.classList.remove('active');
+  });
+  document.getElementById(classId + '_' + raceId).classList.add('active');
+  element.classList.add('active');
+}
+
+const chartConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
+
+// ===== OVERVIEW CHARTS =====
+new Chart(document.getElementById('team_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [
+      { label: 'Team Avg', data: [84.3, 77.2, 81.7, 81.6, 79.2, 89.4, 78.6], borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5 }
+    ]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('team_athlete_bar'), {
+  type: 'bar',
+  data: {
+    labels: ['Yogesh Rajput', 'Johal Udaiveer', 'Mhatre Mohit', 'Patil Priyanshi', 'Kajale Vaishnavi'],
+    datasets: [{ label: '% of Fleet Top 5', data: [89.2, 81.5, 79.3, 73.6, 75.8], backgroundColor: ['#FF6B00', '#FF7D26', '#FF9500', '#FFA500', '#FFB300'], borderRadius: 6 }]
+  },
+  options: { ...chartConfig, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('team_metric_bar'), {
+  type: 'bar',
+  data: {
+    labels: ['UW Spd', 'UW VMG', 'DW Spd', 'DW VMG', 'Max Spd', 'Avg VMG', 'Avg Spd', 'Avg VMC'],
+    datasets: [{ label: '% of Fleet Top 5', data: [84.3, 77.2, 81.7, 81.6, 79.2, 80.5, 81.1, 78.6], backgroundColor: '#FF6B00', borderRadius: 6 }]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('team_eff_pos'), {
+  type: 'bar',
+  data: {
+    labels: ['Yogesh
+U17B', 'Johal
+U15B', 'Kajale
+U15G', 'Mhatre
+U17B', 'Patil
+U15G'],
+    datasets: [{ label: 'Route Efficiency', data: [259, 241, 246, 232, 224], backgroundColor: '#22C55E', borderRadius: 6 }]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, max: 300, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+// ===== U15B CHARTS =====
+// U15B R1
+new Chart(document.getElementById('u15b_r1_johal_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Johal R1',
+      data: [101.5, 63.7, 94.2, 81.2, 91.2, 73.0, 85.0],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15b_r1_johal_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [9.54, 15.84, 12.57, 9.99, 13.53, 17.91], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [27, 26, 27, 25, 25, 25], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('u15b_r1_johal_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [42.0, 58.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true } } } }
+});
+
+// U15B R2
+new Chart(document.getElementById('u15b_r2_johal_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Johal R2',
+      data: [103.5, 83.2, 96.0, 75.8, 92.8, 81.0, 80.8],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15b_r2_johal_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [9.57, 13.84, 13.53, 8.18, 11.35, 18.43], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [28, 11, 18, 18, 17, 19], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('u15b_r2_johal_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [74.0, 26.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true } } } }
+});
+
+// U15B R3
+new Chart(document.getElementById('u15b_r3_johal_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Johal R3',
+      data: [88.8, 64.3, 83.2, 66.3, 97.5, 70.1, 65.5],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15b_r3_johal_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [8.02, 14.48, 10.27, 7.96, 10.74, 14.85], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [12, 26, 26, 25, 25, 26], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('u15b_r3_johal_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [64.0, 36.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true } } } }
+});
+
+// U15B Average
+new Chart(document.getElementById('u15b_avg_johal_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Johal 3-Race Avg',
+      data: [97.9, 70.4, 91.1, 76.4, 93.8, 74.7, 77.1],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+// ===== U15G CHARTS =====
+// U15G R1 - Patil
+new Chart(document.getElementById('u15g_r1_patil_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Patil R1',
+      data: [85.5, 66.4, 75.2, 72.9, 91.9, 77.2, 70.1],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15g_r1_patil_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [6.74, 14.88, 11.17, 7.56, 8.51, 10.29], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [17, 15, 14, 16, 15, 15], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 20, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U15G R1 - Kajale
+new Chart(document.getElementById('u15g_r1_kajale_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Kajale R1',
+      data: [93.9, 70.7, 78.6, 72.1, 81.7, 84.9, 70.1],
+      borderColor: '#FF9500', backgroundColor: 'rgba(255,149,0,0.1)', pointBackgroundColor: '#FBBF24', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15g_r1_kajale_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [8.4, 13.78, 12.37, 7.3, 8.9, 11.88], backgroundColor: '#FF9500', yAxisID: 'y' },
+      { label: 'Rank', data: [21, 16, 15, 15, 16, 16], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 25, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U15G R1 Bias
+new Chart(document.getElementById('u15g_r1_patil_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [48.0, 52.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+new Chart(document.getElementById('u15g_r1_kajale_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [67.5, 32.5], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+// U15G R2 - Patil
+new Chart(document.getElementById('u15g_r2_patil_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Patil R2',
+      data: [87.1, 65.8, 72.7, 77.6, 79.3, 68.0, 73.0],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15g_r2_patil_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [8.16, 11.3, 10.27, 6.94, 7.27, 14.04], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [8, 14, 14, 14, 14, 14], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 20, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('u15g_r2_patil_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [80.5, 19.5], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true } } } }
+});
+
+// U15G R3 - Patil
+new Chart(document.getElementById('u15g_r3_patil_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Patil R3',
+      data: [84.7, 62.4, 79.3, 81.3, 93.5, 72.8, 67.7],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15g_r3_patil_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [7.07, 13.46, 9.49, 7.62, 8.71, 10.08], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [5, 17, 16, 15, 15, 15], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 20, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('u15g_r3_patil_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [69.0, 31.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true } } } }
+});
+
+// U15G Averages
+new Chart(document.getElementById('u15g_avg_patil_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Patil 3-Race Avg',
+      data: [85.8, 64.9, 75.7, 77.3, 88.2, 72.6, 72.2],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u15g_avg_kajale_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Kajale R1 Only',
+      data: [93.9, 70.7, 78.6, 72.1, 81.7, 84.9, 70.1],
+      borderColor: '#FF9500', backgroundColor: 'rgba(255,149,0,0.1)', pointBackgroundColor: '#FBBF24', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+// ===== U17B CHARTS =====
+// U17B R1 - Mohit
+new Chart(document.getElementById('u17b_r1_mohit_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Mohit R1',
+      data: [111.0, 74.7, 86.8, 87.2, 94.0, 87.3, 66.0],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_r1_mohit_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [11.45, 18.82, 16.06, 11.91, 13.63, 15.24], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [18, 40, 39, 38, 45, 44], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U17B R1 - Yogesh
+new Chart(document.getElementById('u17b_r1_yogesh_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Yogesh R1',
+      data: [123.4, 81.5, 86.6, 94.2, 87.9, 87.9, 70.3],
+      borderColor: '#FF9500', backgroundColor: 'rgba(255,149,0,0.1)', pointBackgroundColor: '#FBBF24', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_r1_yogesh_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'N/A'],
+    datasets: [
+      { label: 'Speed (kts)', data: [16.18, 18.64, 15.17, 9.82, 13.92, 0], backgroundColor: '#FF9500', yAxisID: 'y' },
+      { label: 'Rank', data: [47, 44, 43, 43, 40, 0], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U17B R1 Bias
+new Chart(document.getElementById('u17b_r1_mohit_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [83.5, 16.5], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+new Chart(document.getElementById('u17b_r1_yogesh_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [92.5, 7.5], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+// U17B R2 - Mohit
+new Chart(document.getElementById('u17b_r2_mohit_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Mohit R2',
+      data: [87.8, 81.0, 78.2, 77.1, 92.2, 73.9, 68.0],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_r2_mohit_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [8.48, 11.84, 12.9, 9.66, 13.35, 17.52], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [3, 36, 38, 37, 34, 34], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U17B R2 - Yogesh
+new Chart(document.getElementById('u17b_r2_yogesh_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Yogesh R2',
+      data: [108.9, 69.1, 98.6, 95.1, 96.8, 81.7, 85.8],
+      borderColor: '#FF9500', backgroundColor: 'rgba(255,149,0,0.1)', pointBackgroundColor: '#FBBF24', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_r2_yogesh_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [11.18, 19.11, 15.27, 11.3, 17.0, 18.72], backgroundColor: '#FF9500', yAxisID: 'y' },
+      { label: 'Rank', data: [42, 32, 32, 32, 35, 33], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U17B R2 Bias
+new Chart(document.getElementById('u17b_r2_mohit_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [81.0, 19.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+new Chart(document.getElementById('u17b_r2_yogesh_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [92.5, 7.5], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+// U17B R3 - Mohit
+new Chart(document.getElementById('u17b_r3_mohit_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Mohit R3',
+      data: [85.1, 64.2, 71.0, 62.2, 86.0, 59.6, 75.5],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_r3_mohit_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [8.83, 15.5, 8.92, 7.78, 8.19, 13.77], backgroundColor: '#FF6B00', yAxisID: 'y' },
+      { label: 'Rank', data: [41, 41, 42, 42, 41, 42], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U17B R3 - Yogesh
+new Chart(document.getElementById('u17b_r3_yogesh_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Yogesh R3',
+      data: [106.8, 59.5, 74.5, 82.4, 93.1, 71.9, 71.2],
+      borderColor: '#FF9500', backgroundColor: 'rgba(255,149,0,0.1)', pointBackgroundColor: '#FBBF24', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_r3_yogesh_legs'), {
+  type: 'bar',
+  data: {
+    labels: ['Leg 1', 'Leg 2', 'Leg 3', 'Leg 4', 'Leg 5', 'Leg 6'],
+    datasets: [
+      { label: 'Speed (kts)', data: [11.57, 17.33, 10.51, 9.23, 12.87, 7.88], backgroundColor: '#FF9500', yAxisID: 'y' },
+      { label: 'Rank', data: [30, 42, 41, 40, 42, 41], type: 'line', borderColor: '#10B981', backgroundColor: 'transparent', pointBackgroundColor: '#10B981', yAxisID: 'y1' }
+    ]
+  },
+  options: { ...chartConfig, scales: { y: { beginAtZero: true, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } }, y1: { position: 'right', beginAtZero: true, max: 50, ticks: { color: '#94A3B8' }, grid: { display: false } } } }
+});
+
+// U17B R3 Bias
+new Chart(document.getElementById('u17b_r3_mohit_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [95.0, 5.0], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+new Chart(document.getElementById('u17b_r3_yogesh_bias'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Starboard (Right)', 'Port (Left)'],
+    datasets: [{ data: [99.5, 0.5], backgroundColor: ['#22C55E', '#EF4444'] }]
+  },
+  options: { ...chartConfig, plugins: { legend: { display: true, labels: { color: '#94A3B8', usePointStyle: true }, position: 'bottom' } } }
+});
+
+// U17B Averages
+new Chart(document.getElementById('u17b_avg_mohit_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Mohit 3-Race Avg',
+      data: [95.3, 72.2, 78.3, 75.5, 90.7, 73.9, 70.2],
+      borderColor: '#FF6B00', backgroundColor: 'rgba(255,107,0,0.1)', pointBackgroundColor: '#FF9500', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+
+new Chart(document.getElementById('u17b_avg_yogesh_radar'), {
+  type: 'radar',
+  data: {
+    labels: ['UW Speed', 'UW VMG', 'DW Speed', 'DW VMG', 'Max Speed', 'Route Eff', 'Avg VMC'],
+    datasets: [{
+      label: 'Yogesh 3-Race Avg',
+      data: [113.0, 70.0, 86.6, 90.6, 92.6, 74.0, 75.7],
+      borderColor: '#FF9500', backgroundColor: 'rgba(255,149,0,0.1)', pointBackgroundColor: '#FBBF24', borderWidth: 2.5
+    }]
+  },
+  options: { ...chartConfig, scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,107,0,.1)' } } } }
+});
+</script>
+</body>
+</html>
+
