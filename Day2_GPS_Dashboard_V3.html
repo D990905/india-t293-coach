@@ -12,11 +12,11 @@ body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:#0B
 .header h1 { font-size:24px; font-weight:800; color:#0B1120; }
 .header p { font-size:13px; color:#0B1120; opacity:.8; margin-top:4px; }
 .nav-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; justify-content:center; }
-.nav-tab { padding:10px 18px; border-radius:10px; cursor:pointer; font-size:13px; font-weight:600; border:1px solid #1F2937; background:#111827; color:#94A3B8; transition:all .2s; user-select:none; }
+.nav-tab { padding:10px 18px; border-radius:10px; cursor:pointer; font-size:13px; font-weight:600; border:1px solid #1F2937; background:#111827; color:#CBD5E1; transition:all .2s; user-select:none; }
 .nav-tab:hover { border-color:#FF6B00; color:#FF9500; }
 .nav-tab.active { background:#FF6B00; color:#0B1120; border-color:#FF6B00; }
 .sub-tabs { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; justify-content:center; }
-.sub-tab { padding:7px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #1F2937; background:#111827; color:#94A3B8; transition:all .2s; user-select:none; }
+.sub-tab { padding:7px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #1F2937; background:#111827; color:#CBD5E1; transition:all .2s; user-select:none; }
 .sub-tab:hover { border-color:#FF6B00; color:#FF9500; }
 .sub-tab.active { background:rgba(255,107,0,.25); color:#FF6B00; border-color:#FF6B00; }
 .section { display:none; }
@@ -39,22 +39,22 @@ tr:hover td { background:rgba(255,107,0,.06); }
 @media(max-width:600px) { .stat-grid { grid-template-columns:repeat(2,1fr); } }
 .stat-card { background:#1F2937; border-radius:10px; padding:14px; text-align:center; }
 .stat-card .val { font-size:22px; font-weight:800; color:#FF9500; }
-.stat-card .label { font-size:11px; color:#94A3B8; margin-top:4px; }
+.stat-card .label { font-size:11px; color:#CBD5E1; margin-top:4px; }
 .insight { background:rgba(255,107,0,.08); border:1px solid rgba(255,107,0,.25); border-radius:10px; padding:12px 14px; margin-top:12px; font-size:12px; line-height:1.6; color:#CBD5E1; }
 .insight strong { color:#FF9500; }
 .gap-pos { color:#10B981; }
 .gap-neg { color:#EF4444; }
-.no-data { text-align:center; padding:40px 20px; color:#94A3B8; font-size:13px; background:#111827; border:1px solid #1F2937; border-radius:14px; }
+.no-data { text-align:center; padding:40px 20px; color:#CBD5E1; font-size:13px; background:#111827; border:1px solid #1F2937; border-radius:14px; }
 
 .polar-container { position:relative; height:480px; display:flex; align-items:center; justify-content:center; }
 .polar-canvas { display:block; }
 .polar-legend { display:none; }
 .polar-legend-item { display:flex; align-items:center; gap:6px; }
 .polar-legend-color { width:16px; height:3px; border-radius:2px; }
-.no-twa-data { text-align:center; padding:40px 20px; color:#94A3B8; font-size:13px; }
+.no-twa-data { text-align:center; padding:40px 20px; color:#CBD5E1; font-size:13px; }
 
 
-.track-map-placeholder { background:rgba(255,107,0,.05); border:1px solid rgba(255,107,0,.2); border-radius:12px; padding:40px 20px; text-align:center; color:#94A3B8; font-size:13px; min-height:200px; display:flex; align-items:center; justify-content:center; }
+.track-map-placeholder { background:rgba(255,107,0,.05); border:1px solid rgba(255,107,0,.2); border-radius:12px; padding:40px 20px; text-align:center; color:#CBD5E1; font-size:13px; min-height:200px; display:flex; align-items:center; justify-content:center; }
 .wind-arrow { font-size:48px; margin-bottom:12px; }
 .metrics-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin-top:8px; }
 .metric-indicator { padding:8px 12px; border-radius:8px; font-size:11px; font-weight:600; text-align:center; }
@@ -76,7 +76,7 @@ tr:hover td { background:rgba(255,107,0,.06); }
 .key-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:16px; }
 .metric-card { background:#1F2937; border:1px solid #FF6B00; border-radius:10px; padding:12px; text-align:center; }
 .metric-card .metric-val { font-size:18px; font-weight:800; color:#FF9500; }
-.metric-card .metric-label { font-size:10px; color:#94A3B8; margin-top:4px; }
+.metric-card .metric-label { font-size:10px; color:#CBD5E1; margin-top:4px; }
 .metric-card .metric-comp { font-size:11px; font-weight:600; margin-top:4px; }
 
 
@@ -102,7 +102,7 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="section active" id="sec_overview">
 <div class="card full" style="margin-bottom:16px">
 <h2>TEAM INDIA — AVERAGE PERFORMANCE (% of Class Top 5)</h2>
-<p style="font-size:12px;color:#94A3B8;margin-bottom:12px">Each metric normalized to class Top 5 = 100%. Metrics with no data across races are excluded.</p>
+<p style="font-size:12px;color:#CBD5E1;margin-bottom:12px">Each metric normalized to class Top 5 = 100%. Metrics with no data across races are excluded.</p>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
 <div class="stat-card"><div class="val">83.4%</div><div class="label">Avg Speed</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-16.6%</div></div>
 <div class="stat-card"><div class="val">79.3%</div><div class="label">Max Speed</div><div style="margin-top:4px;font-size:12px;font-weight:700" class="gap-neg">-20.7%</div></div>
@@ -117,12 +117,14 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="card"><h2>TEAM RADAR (% of Class Top 5)</h2><div class="chart-box"><canvas id="team_radar"></canvas></div>
 <div class="insight"><strong>Team Analysis:</strong> Strongest: <strong>UW Speed</strong> at 85.8%. Biggest gap: <strong>UW VMG</strong> at 78.7%.</div>
 </div>
-<div class="card"><h2>ATHLETE COMPARISON</h2><div style="font-size:11px;color:#94A3B8;margin-bottom:4px">Each bar = athlete's average across all metrics as % of their class Top 5 fleet average. <span style="color:#FF9500;font-weight:600">100% = Fleet Top 5 level</span></div><div class="chart-box-tall"><canvas id="team_athlete_bar"></canvas></div></div>
+<div class="card"><h2>ATHLETE COMPARISON</h2><div style="font-size:11px;color:#CBD5E1;margin-bottom:4px">Each bar = athlete's average across all metrics as % of their class Top 5 fleet average. <span style="color:#FF9500;font-weight:600">100% = Fleet Top 5 level</span></div><div class="chart-box-tall"><canvas id="team_athlete_bar"></canvas></div></div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Radar shows skill distribution across boat angle ranges; compare individual vs fleet speeds to identify velocity changes.</div>
 <div class="grid">
 <div class="card"><h2>METRIC-BY-METRIC BREAKDOWN</h2><div class="chart-box-tall"><canvas id="team_metric_bar"></canvas></div></div>
 <div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box-tall"><canvas id="team_eff_pos"></canvas></div></div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Speed variations by leg reveal wind pattern impact; GPS track shows tactical positioning relative to optimal course.</div>
 <div class="card full"><h2>DETAILED PERFORMANCE TABLE</h2><div style="overflow-x:auto"><table>
 <tr><th>Athlete</th><th>Class</th>
 <th>Avg Speed</th>
@@ -227,26 +229,39 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">36 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Pirastu Simon (18:57)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">36 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Pirastu Simon (18:57)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Johal Udaiveer</strong>: 25:42 (#159)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Prakash Vihaan</strong>: 34:04 (#171)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U15 Boys — Race 4 (Fleet: 36)</h2>
+<h2>U15 Boys — Race 4 Result (Fleet: 36)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (18:57) · #2 Joshua (20:03) · #3 Biel (20:42) · #4 Juan-Bartolomé (21:38) · #5 Tuna (21:51) · #20 Udaiveer (25:42) · #35 Vihaan (34:04)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
 <div style="overflow-x:auto;margin-bottom:16px">
-<table style="font-size:11px;width:100%">
+<table style="font-size:13px;width:100%">
 <tr style="background:#1a2332">
 <th style="padding:8px;text-align:left;color:#FF9500">Athlete</th>
 <th style="padding:8px;text-align:center;color:#FF9500">Start Side</th>
@@ -292,37 +307,37 @@ tr:hover td { background:rgba(255,107,0,.06); }
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Best Start Speed</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Best Start Speed</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">11.3 kts</div>
 <div style="color:#10B981;font-size:11px">Dasilva-González Marcos</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Fleet Speed Gap</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Fleet Speed Gap</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">-9.8%</div>
 <div style="color:#FF9500;font-size:11px">Avg India vs Fleet</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Position Choice</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Position Choice</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">Center</div>
-<div style="color:#94A3B8;font-size:11px">3 of 4 athletes</div>
+<div style="color:#CBD5E1;font-size:11px">3 of 4 athletes</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Recovery Factor</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Recovery Factor</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">1.79x</div>
 <div style="color:#22C55E;font-size:11px">Leg 2 vs Leg 1</div>
 </div>
 </div>
 
 <div style="margin-top:16px;padding:12px;background:#1a2332;border-radius:8px;border-left:3px solid #FF6B00">
-<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:13px">COACHING ANALYSIS</div>
-<p style="color:#E2E8F0;font-size:12px;line-height:1.6;margin:0">
+<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:14px">COACHING ANALYSIS</div>
+<p style="color:#E2E8F0;font-size:13px;line-height:1.7;margin:0">
 Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 5 speed—excellent positioning for a light-wind race. Joshua matched at 96.5%, showing both athletes found clear air on the Mid-RC and Center respectively. The team's center-line preference was strategic but created congestion; Udaiveer and Vihaan dropped significantly (78% and 68% respectively). Strong 1.7x+ recovery on leg 2 shows athletes compensated downwind, but the start speed deficit proved costly. Fleet winner Simon used tactical positioning to establish early control.
 </p>
 </div>
 
 <div style="margin-top:12px;padding:12px;background:#0d1b2a;border-radius:8px;border-left:3px solid #22C55E">
-<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:13px">RECOMMENDATIONS FOR NEXT RACE</div>
-<div style="color:#E2E8F0;font-size:12px;line-height:1.8">
+<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:14px">RECOMMENDATIONS FOR NEXT RACE</div>
+<div style="color:#E2E8F0;font-size:13px;line-height:1.8">
 1. Disperse line positions: Udaiveer and Vihaan should target Mid-RC or RC end to reduce congestion and secure clearer air in this low-wind pattern.<br>
 2. Emphasize start discipline: Joshua and Dasilva-González showed excellent speed execution—maintain their approach while coaching newer athletes on timing into the line.<br>
 3. Focus on early tack: Recovery factor shows athletes found wind shifts downwind; teach recognition of pressure zones earlier to gain advantage on first beat.
@@ -345,11 +360,11 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -371,6 +386,7 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Upwind/downwind split indicates sail handling efficiency; distance deviation shows course-keeping or tactical choices.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Johal Udaiveer</th><th>Gap</th>
@@ -415,26 +431,39 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">35 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Martorell-Blasco Biel (23:02)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">35 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Martorell-Blasco Biel (23:02)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Johal Udaiveer</strong>: 26:31 (#133)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Prakash Vihaan</strong>: 34:51 (#165)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U15 Boys — Race 5 (Fleet: 35)</h2>
+<h2>U15 Boys — Race 5 Result (Fleet: 35)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Biel (23:02) · #2 Joshua (23:23) · #3 Versace (23:45) · #4 Marcos (23:48) · #5 Simon (24:13) · #15 Udaiveer (26:31) · #35 Vihaan (34:51)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
 <div style="overflow-x:auto;margin-bottom:16px">
-<table style="font-size:11px;width:100%">
+<table style="font-size:13px;width:100%">
 <tr style="background:#1a2332">
 <th style="padding:8px;text-align:left;color:#FF9500">Athlete</th>
 <th style="padding:8px;text-align:center;color:#FF9500">Start Side</th>
@@ -480,37 +509,37 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Best Start Speed</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Best Start Speed</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">8.7 kts</div>
 <div style="color:#10B981;font-size:11px">Dasilva-González Marcos</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Fleet Speed Gap</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Fleet Speed Gap</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">-6.5%</div>
 <div style="color:#FF9500;font-size:11px">Avg India vs Fleet</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Position Choice</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Position Choice</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">Pin (Port)</div>
-<div style="color:#94A3B8;font-size:11px">3 of 4 athletes</div>
+<div style="color:#CBD5E1;font-size:11px">3 of 4 athletes</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Recovery Factor</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Recovery Factor</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">1.82x</div>
 <div style="color:#22C55E;font-size:11px">Leg 2 vs Leg 1</div>
 </div>
 </div>
 
 <div style="margin-top:16px;padding:12px;background:#1a2332;border-radius:8px;border-left:3px solid #FF6B00">
-<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:13px">COACHING ANALYSIS</div>
-<p style="color:#E2E8F0;font-size:12px;line-height:1.6;margin:0">
+<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:14px">COACHING ANALYSIS</div>
+<p style="color:#E2E8F0;font-size:13px;line-height:1.7;margin:0">
 Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet top 5—a breakthrough start for the team. Pin favored in this race's pressure distribution. Joshua's Mid-Pin position (95.3%) shows the approach works but requires precision. Three athletes converged on port pin, suggesting effective scouting, but created mutual interference: Udaiveer (84.7%) and Vihaan (77.6%) paid the cost. Recovery factor of 1.82x is consistent, showing downwind improvements, but the larger start deficits for slower athletes hindered finishes. Marcos' success demonstrates that port tack start precision can be a competitive advantage.
 </p>
 </div>
 
 <div style="margin-top:12px;padding:12px;background:#0d1b2a;border-radius:8px;border-left:3px solid #22C55E">
-<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:13px">RECOMMENDATIONS FOR NEXT RACE</div>
-<div style="color:#E2E8F0;font-size:12px;line-height:1.8">
+<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:14px">RECOMMENDATIONS FOR NEXT RACE</div>
+<div style="color:#E2E8F0;font-size:13px;line-height:1.8">
 1. Pin end requires timing precision: Dasilva-González excelled on port; continue coaching his approach to maximize pin advantage but teach younger athletes timing discipline to avoid OCS penalty risk.<br>
 2. Stagger positions: Udaiveer and Vihaan should target Mid-Pin or center to spread fleet presence and reduce air-stealing competition at the congested pin end.<br>
 3. Emphasize pressure scanning: Use the entire line—top performers hit 102% efficiency by reading wind shifts before the start; integrate this into pre-race briefings.
@@ -533,11 +562,11 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -559,6 +588,7 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Side bias reveals start line/mark rounding patterns; polar shows angle-specific performance gaps.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Johal Udaiveer</th><th>Gap</th>
@@ -603,26 +633,39 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">35 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Pirastu Simon (22:17)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">35 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Pirastu Simon (22:17)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Johal Udaiveer</strong>: 27:45 (#144)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Prakash Vihaan</strong>: 34:13 (#169)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U15 Boys — Race 6 (Fleet: 35)</h2>
+<h2>U15 Boys — Race 6 Result (Fleet: 35)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (22:17) · #2 Biel (22:24) · #3 Versace (22:51) · #4 Joshua (23:31) · #5 Aren-Selim (23:48) · #26 Udaiveer (27:45) · #33 Vihaan (34:13)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
 <div style="overflow-x:auto;margin-bottom:16px">
-<table style="font-size:11px;width:100%">
+<table style="font-size:13px;width:100%">
 <tr style="background:#1a2332">
 <th style="padding:8px;text-align:left;color:#FF9500">Athlete</th>
 <th style="padding:8px;text-align:center;color:#FF9500">Start Side</th>
@@ -668,37 +711,37 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Best Start Speed</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Best Start Speed</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">7.7 kts</div>
 <div style="color:#93C5FD;font-size:11px">Castro-Jurek Joshua</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Fleet Speed Gap</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Fleet Speed Gap</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">-6.8%</div>
 <div style="color:#FF9500;font-size:11px">Avg India vs Fleet</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Position Choice</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Position Choice</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">Balanced</div>
-<div style="color:#94A3B8;font-size:11px">4 athletes, 4 sides</div>
+<div style="color:#CBD5E1;font-size:11px">4 athletes, 4 sides</div>
 </div>
 <div style="background:#1a2332;border-radius:8px;padding:12px;text-align:center">
-<div style="color:#94A3B8;font-size:10px;text-transform:uppercase;font-weight:600">Recovery Factor</div>
+<div style="color:#CBD5E1;font-size:11px;text-transform:uppercase;font-weight:600;font-weight:600">Recovery Factor</div>
 <div style="color:#FF9500;font-size:20px;font-weight:700;margin:6px 0">1.64x</div>
 <div style="color:#22C55E;font-size:11px">Leg 2 vs Leg 1</div>
 </div>
 </div>
 
 <div style="margin-top:16px;padding:12px;background:#1a2332;border-radius:8px;border-left:3px solid #FF6B00">
-<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:13px">COACHING ANALYSIS</div>
-<p style="color:#E2E8F0;font-size:12px;line-height:1.6;margin:0">
+<div style="color:#FF9500;font-weight:600;margin-bottom:8px;font-size:14px">COACHING ANALYSIS</div>
+<p style="color:#E2E8F0;font-size:13px;line-height:1.7;margin:0">
 Joshua broke through at 101.3% of fleet standard—the team's best performance in calm conditions with center-line positioning. Balanced dispersion across start sides was executed well: Joshua (center) and Vihaan (mid-RC) performed 81%+ of fleet, while Dasilva-González (mid-pin at 94.7%) showed adaptability. Udaiveer's 76.3% result on center suggests position choice wasn't the limiting factor; tactical boat handling and pressure recognition were. Lower recovery factor (1.64x) indicates the downwind gained less ground, typical of balanced wind distribution. Fleet winner Simon's consistent performance underscores importance of start discipline over position alone.
 </p>
 </div>
 
 <div style="margin-top:12px;padding:12px;background:#0d1b2a;border-radius:8px;border-left:3px solid #22C55E">
-<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:13px">RECOMMENDATIONS FOR NEXT RACE</div>
-<div style="color:#E2E8F0;font-size:12px;line-height:1.8">
+<div style="color:#22C55E;font-weight:600;margin-bottom:8px;font-size:14px">RECOMMENDATIONS FOR NEXT RACE</div>
+<div style="color:#E2E8F0;font-size:13px;line-height:1.8">
 1. Maintain balanced line distribution: This race's 4-athletes, 4-sides approach reduced mutual interference and produced Joshua's best result—replicate this strategy in heavier wind to manage fleet pressure.<br>
 2. Coach tactical positioning off the line: Joshua's 101%+ speed shows center-line success correlates with early clear air; teach boat handling to find wind pockets immediately post-start.<br>
 3. Focus on downwind pressure hunting: Reduced recovery factor suggests athletes aren't maximizing downwind speed advantage; emphasize wing mark approach angles and pressure transitions on legs 2-3.
@@ -721,11 +764,11 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -747,6 +790,7 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Radar shows skill distribution across boat angle ranges; compare individual vs fleet speeds to identify velocity changes.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Johal Udaiveer</th><th>Gap</th>
@@ -796,6 +840,7 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15B_Avg"></canvas></div></div>
 <div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15B_Avg"></canvas></div></div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Speed variations by leg reveal wind pattern impact; GPS track shows tactical positioning relative to optimal course.</div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
 <th>Johal Udaiveer</th><th>Gap</th>
@@ -839,8 +884,8 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -866,11 +911,12 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 </div>
 </div>
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Upwind/downwind split indicates sail handling efficiency; distance deviation shows course-keeping or tactical choices.</div>
 </div>
 </div>
 </div>
@@ -885,25 +931,51 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Roman-Inamahoro Jessica (23:14)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Roman-Inamahoro Jessica (23:14)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Kajale Vaishnavi</strong>: 27:28 (#145)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Patil Priyanshi</strong>: 30:28 (#160)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U15 Girls — Race 4 (Fleet: 23)</h2>
+<h2>U15 Girls — Race 4 Result (Fleet: 23)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:14) · #2 Alessandra (24:01) · #3 Chiara (24:19) · #4 Blanka (24:28) · #5 Cristina (25:00) · #11 Vaishnavi (27:28) · #23 Priyanshi (30:28)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -924,11 +996,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -950,6 +1022,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Side bias reveals start line/mark rounding patterns; polar shows angle-specific performance gaps.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Kajale Vaishnavi</th><th>Gap</th>
@@ -994,25 +1067,38 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Zisiadi Panagiota (15:51)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Zisiadi Panagiota (15:51)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Kajale Vaishnavi</strong>: 29:31 (#141)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Patil Priyanshi</strong>: 31:21 (#148)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U15 Girls — Race 5 (Fleet: 23)</h2>
+<h2>U15 Girls — Race 5 Result (Fleet: 23)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:31) · #2 Alessandra (24:09) · #3 Wing-Suet-Vince (24:51) · #4 Blanka (25:08) · #5 Cristina (25:32) · #13 Vaishnavi (29:31) · #20 Priyanshi (31:21)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1033,11 +1119,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1059,6 +1145,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Radar shows skill distribution across boat angle ranges; compare individual vs fleet speeds to identify velocity changes.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Kajale Vaishnavi</th><th>Gap</th>
@@ -1103,25 +1190,38 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Roman-Inamahoro Jessica (23:52)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Roman-Inamahoro Jessica (23:52)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Kajale Vaishnavi</strong>: 27:22 (#138)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Patil Priyanshi</strong>: 29:16 (#145)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U15 Girls — Race 6 (Fleet: 23)</h2>
+<h2>U15 Girls — Race 6 Result (Fleet: 23)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:52) · #2 Cristina (24:44) · #3 Alessandra (24:49) · #4 Chiara (25:47) · #5 Blanka (25:53) · #8 Vaishnavi (27:22) · #16 Priyanshi (29:16)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1142,11 +1242,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1168,6 +1268,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Speed variations by leg reveal wind pattern impact; GPS track shows tactical positioning relative to optimal course.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Kajale Vaishnavi</th><th>Gap</th>
@@ -1217,6 +1318,7 @@ No GPS start data available for India athletes in this race.
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U15G_Avg"></canvas></div></div>
 <div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U15G_Avg"></canvas></div></div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Upwind/downwind split indicates sail handling efficiency; distance deviation shows course-keeping or tactical choices.</div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
 <th>Kajale Vaishnavi</th><th>Gap</th>
@@ -1260,8 +1362,8 @@ No GPS start data available for India athletes in this race.
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1287,11 +1389,12 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 </div>
 </div>
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Side bias reveals start line/mark rounding patterns; polar shows angle-specific performance gaps.</div>
 </div>
 </div>
 </div>
@@ -1306,25 +1409,51 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Palamidis Orestis-Nikolaos (30:52)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Palamidis Orestis-Nikolaos (30:52)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Mhatre Mohit</strong>: 42:05 (#148)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U17 Boys — Race 4 (Fleet: 51)</h2>
+<h2>U17 Boys — Race 4 Result (Fleet: 51)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Orestis-Nikolaos (30:52) · #2 Foivos (32:38) · #3 Andrei (33:02) · #4 Spyridon (33:53) · #5 Kerem-Demir (34:31) · #43 Mohit (42:05) · #50 Rajput (44:44)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1345,11 +1474,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Yogesh Rajput</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1371,6 +1500,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Radar shows skill distribution across boat angle ranges; compare individual vs fleet speeds to identify velocity changes.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Mhatre Mohit</th><th>Gap</th>
@@ -1415,25 +1545,38 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Kyriazakos Evangelos (31:08)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Kyriazakos Evangelos (31:08)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Mhatre Mohit</strong>: 38:49 (#140)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U17 Boys — Race 5 (Fleet: 51)</h2>
+<h2>U17 Boys — Race 5 Result (Fleet: 51)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Evangelos (31:08) · #2 Dmitrii (31:26) · #3 Orestis-Nikolaos (31:56) · #4 Pankin (32:07) · #5 Curro (32:15) · #41 Mohit (38:49) · #45 Rajput (41:00)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1454,11 +1597,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Yogesh Rajput</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1480,6 +1623,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Speed variations by leg reveal wind pattern impact; GPS track shows tactical positioning relative to optimal course.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Mhatre Mohit</th><th>Gap</th>
@@ -1524,25 +1668,38 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">N/A (0:00)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">N/A (0:00)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Mhatre Mohit</strong>: 0:00 (#0)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Yogesh Rajput</strong>: 0:00 (#0)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U17 Boys — Race 6 (Fleet: 51)</h2>
+<h2>U17 Boys — Race 6 Result (Fleet: 51)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Hoi-Tik (34:45) · #2 Orestis-Nikolaos (35:45) · #3 Yanki (36:48) · #4 Kerem-Demir (36:57) · #5 Davide (37:08) · #17 Mohit (38:56) · #41 Rajput (43:45)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1560,6 +1717,7 @@ No GPS start data available for India athletes in this race.
 <div class="no-twa-data">No courseDir data available for TWA analysis</div>
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Upwind/downwind split indicates sail handling efficiency; distance deviation shows course-keeping or tactical choices.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Mhatre Mohit</th><th>Gap</th>
@@ -1609,6 +1767,7 @@ No GPS start data available for India athletes in this race.
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17B_Avg"></canvas></div></div>
 <div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17B_Avg"></canvas></div></div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Side bias reveals start line/mark rounding patterns; polar shows angle-specific performance gaps.</div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
 <th>Mhatre Mohit</th><th>Gap</th>
@@ -1652,8 +1811,8 @@ No GPS start data available for India athletes in this race.
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1679,11 +1838,12 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Yogesh Rajput</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 </div>
 </div>
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Radar shows skill distribution across boat angle ranges; compare individual vs fleet speeds to identify velocity changes.</div>
 </div>
 </div>
 </div>
@@ -1698,25 +1858,51 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">38 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Tiniakova Mariia (32:05)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">38 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Tiniakova Mariia (32:05)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Prajapati Tejasvi</strong>: 46:08 (#146)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Thimiti Rashmita</strong>: 51:36 (#163)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U17 Girls — Race 4 (Fleet: 38)</h2>
+<h2>U17 Girls — Race 4 Result (Fleet: 38)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Mariia (32:05) · #2 Olivia (32:28) · #3 Laura (33:01) · #4 Lindia-Miel (33:21) · #5 Kyriaki (33:29) · #34 Tejasvi (46:08) · #37 Rashmita (51:36)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Thimiti Rashmita</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1737,11 +1923,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Thimiti Rashmita</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1763,6 +1949,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Speed variations by leg reveal wind pattern impact; GPS track shows tactical positioning relative to optimal course.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Prajapati Tejasvi</th><th>Gap</th>
@@ -1807,25 +1994,38 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">37 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Sanchez-Moral Olivia (30:33)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">37 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Sanchez-Moral Olivia (30:33)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Prajapati Tejasvi</strong>: 39:53 (#135)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Thimiti Rashmita</strong>: 40:23 (#143)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U17 Girls — Race 5 (Fleet: 37)</h2>
+<h2>U17 Girls — Race 5 Result (Fleet: 37)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Olivia (30:33) · #2 Dalma (30:56) · #3 Johanna (31:45) · #4 Kyriaki (31:52) · #5 Irene (32:43) · #31 Tejasvi (39:53) · #34 Rashmita (40:23)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Thimiti Rashmita</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1846,11 +2046,11 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Thimiti Rashmita</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -1872,6 +2072,7 @@ No GPS start data available for India athletes in this race.
 
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Upwind/downwind split indicates sail handling efficiency; distance deviation shows course-keeping or tactical choices.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Prajapati Tejasvi</th><th>Gap</th>
@@ -1916,25 +2117,38 @@ No GPS start data available for India athletes in this race.
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
-<div><div style="color:#94A3B8;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">37 competitors</div></div>
-<div><div style="color:#94A3B8;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">N/A (0:00)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">37 competitors</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">N/A (0:00)</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
-<div style="color:#94A3B8;margin-bottom:6px">India Athletes Finish Times:</div>
+<div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
 <div><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Thimiti Rashmita</strong>: 0:00 (#0)</span><span style='display:inline-block;margin-right:16px;font-size:12px;color:#93C5FD'><strong>Prajapati Tejasvi</strong>: 0:00 (#0)</span></div>
 </div>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2>U17 Girls — Race 6 (Fleet: 37)</h2>
+<h2>U17 Girls — Race 6 Result (Fleet: 37)</h2>
 <p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Dalma (26:57) · #2 Lilia (27:23) · #3 Lili (27:34) · #4 Panna (27:45) · #5 Zeynep (27:49) · #28 Rashmita (31:58) · #34 Tejasvi (33:02)</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
+<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
+<div style="font-weight:600;color:#1F2937;font-size:13px">Thimiti Rashmita</div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+</div>
+</div>
+</div>
+<div class="card full" style="margin-bottom:16px">
 <h2>START STRATEGY ANALYSIS</h2>
-<div style="padding:20px;text-align:center;color:#94A3B8;font-size:13px">
+<div style="padding:20px;text-align:center;color:#CBD5E1;font-size:13px">
 <div style="font-size:24px;margin-bottom:8px">📡</div>
 No GPS start data available for India athletes in this race.
 </div>
@@ -1952,6 +2166,7 @@ No GPS start data available for India athletes in this race.
 <div class="no-twa-data">No courseDir data available for TWA analysis</div>
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Side bias reveals start line/mark rounding patterns; polar shows angle-specific performance gaps.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5</th>
 <th>Thimiti Rashmita</th><th>Gap</th>
@@ -2001,6 +2216,7 @@ No GPS start data available for India athletes in this race.
 <div class="card"><h2>UPWIND vs DOWNWIND</h2><div class="chart-box"><canvas id="updown_U17G_Avg"></canvas></div></div>
 <div class="card"><h2>DISTANCE vs IDEAL</h2><div class="chart-box"><canvas id="eff_U17G_Avg"></canvas></div></div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Radar shows skill distribution across boat angle ranges; compare individual vs fleet speeds to identify velocity changes.</div>
 <div class="card full"><h2>AVERAGE GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
 <tr><th>Metric</th><th>Fleet Top 5 Avg</th>
 <th>Prajapati Tejasvi</th><th>Gap</th>
@@ -2046,8 +2262,8 @@ No GPS start data available for India athletes in this race.
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size:11px">
-<tr><th rowspan="2">Sailor</th><th rowspan="2">Tack</th>
+<table style="font-size13px">
+<tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
 <tr><th style="background:#1a3a2a;color:#10B981">TWA</th><th style="background:#1a3a2a;color:#10B981">Speed</th>
@@ -2073,11 +2289,12 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Thimiti Rashmita</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
-<div style="font-size:11px;color:#94A3B8;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
+<div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 </div>
 </div>
 </div>
 </div>
+<div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Speed variations by leg reveal wind pattern impact; GPS track shows tactical positioning relative to optimal course.</div>
 </div>
 <script>
 function showMainTab(id) {
@@ -2150,9 +2367,9 @@ new Chart(document.getElementById('team_radar'),{
     }
 ]},
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ r:{ min:0, max:120, ticks:{ stepSize:20, color:'#94A3B8', font:{size:9} },
+    scales:{ r:{ min:0, max:120, ticks:{ stepSize:20, color:'#CBD5E1', font:{size:9} },
       angleLines:{ display:false }, grid:{ color:'rgba(255,107,0,0.15)' }, pointLabels:{ color:'#FF9500', font:{size:10} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2163,9 +2380,9 @@ new Chart(document.getElementById('team_athlete_bar'),{
       backgroundColor:["#3B82F6", "#10B981", "#3B82F6", "#10B981", "#3B82F6", "#10B981", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:0, max:120, grid:{ display:false }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:0, max:120, grid:{ display:false }, ticks:{ color:'#CBD5E1' } },
       y:{ ticks:{ color:'#FF9500', font:{size:11} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2190,9 +2407,9 @@ new Chart(document.getElementById('team_metric_bar'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ min:0, max:130, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ min:0, max:130, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2203,7 +2420,7 @@ new Chart(document.getElementById('team_eff_pos'),{
       backgroundColor:["#3B82F6", "#10B981", "#3B82F6", "#10B981", "#3B82F6", "#10B981", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, grid:{ display:false }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, grid:{ display:false }, ticks:{ color:'#CBD5E1' } },
       y:{ ticks:{ color:'#FF9500', font:{size:11} }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2225,7 +2442,7 @@ new Chart(document.getElementById('radar_U15B_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2240,9 +2457,9 @@ new Chart(document.getElementById('bar_U15B_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2260,10 +2477,10 @@ new Chart(document.getElementById('legspd_U15B_R4'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2281,10 +2498,10 @@ new Chart(document.getElementById('legpos_U15B_R4'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2302,9 +2519,9 @@ new Chart(document.getElementById('updown_U15B_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2315,8 +2532,8 @@ new Chart(document.getElementById('eff_U15B_R4'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2329,9 +2546,9 @@ new Chart(document.getElementById('bias_U15B_R4'),{
     { label:'Starboard (Right)', data:[62.1, 83.0, 71.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2351,7 +2568,7 @@ new Chart(document.getElementById('radar_U15B_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2366,13 +2583,14 @@ new Chart(document.getElementById('bar_U15B_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15B_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[12.6, 4.2, 3.6, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -2385,14 +2603,15 @@ new Chart(document.getElementById('legspd_U15B_R5'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U15B_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[5.45, 8.72, 5.84, 5.52, 5.98, 5.93], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -2405,10 +2624,10 @@ new Chart(document.getElementById('legpos_U15B_R5'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2419,8 +2638,8 @@ new Chart(document.getElementById('eff_U15B_R5'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2442,7 +2661,7 @@ new Chart(document.getElementById('radar_U15B_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2457,13 +2676,14 @@ new Chart(document.getElementById('bar_U15B_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15B_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[10.2, 5.4, 5.0, 4.0, 3.2, 3.2], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -2476,14 +2696,15 @@ new Chart(document.getElementById('legspd_U15B_R6'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U15B_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[4.72, 7.55, 4.93, 4.51, 4.59, 6.68], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -2496,10 +2717,10 @@ new Chart(document.getElementById('legpos_U15B_R6'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2510,8 +2731,8 @@ new Chart(document.getElementById('eff_U15B_R6'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2533,7 +2754,7 @@ new Chart(document.getElementById('radar_U15B_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2548,9 +2769,9 @@ new Chart(document.getElementById('bar_U15B_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2568,9 +2789,9 @@ new Chart(document.getElementById('updown_U15B_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2581,8 +2802,8 @@ new Chart(document.getElementById('eff_U15B_Avg'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2604,7 +2825,7 @@ new Chart(document.getElementById('radar_U15G_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2619,13 +2840,14 @@ new Chart(document.getElementById('bar_U15G_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15G_R4'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[15.8, 3.2, 3.0, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -2638,14 +2860,15 @@ new Chart(document.getElementById('legspd_U15G_R4'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U15G_R4'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[5.21, 8.1, 5.05, 4.57, 5.39, 7.39], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -2658,10 +2881,10 @@ new Chart(document.getElementById('legpos_U15G_R4'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2679,9 +2902,9 @@ new Chart(document.getElementById('updown_U15G_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2692,8 +2915,8 @@ new Chart(document.getElementById('eff_U15G_R4'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2706,9 +2929,9 @@ new Chart(document.getElementById('bias_U15G_R4'),{
     { label:'Starboard (Right)', data:[76.7, 78.0, 83.0], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2728,7 +2951,7 @@ new Chart(document.getElementById('radar_U15G_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2743,13 +2966,14 @@ new Chart(document.getElementById('bar_U15G_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15G_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[12.6, 3.4, 3.4, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -2762,14 +2986,15 @@ new Chart(document.getElementById('legspd_U15G_R5'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U15G_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[4.94, 7.85, 5.12, 4.63, 5.07, 5.74], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -2782,10 +3007,10 @@ new Chart(document.getElementById('legpos_U15G_R5'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2796,8 +3021,8 @@ new Chart(document.getElementById('eff_U15G_R5'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2819,7 +3044,7 @@ new Chart(document.getElementById('radar_U15G_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2834,13 +3059,14 @@ new Chart(document.getElementById('bar_U15G_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U15G_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[9.0, 3.4, 3.2, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -2853,14 +3079,15 @@ new Chart(document.getElementById('legspd_U15G_R6'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U15G_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[4.18, 6.03, 4.59, 3.78, 4.38, 5.55], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -2873,10 +3100,10 @@ new Chart(document.getElementById('legpos_U15G_R6'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2887,8 +3114,8 @@ new Chart(document.getElementById('eff_U15G_R6'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2910,7 +3137,7 @@ new Chart(document.getElementById('radar_U15G_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2925,9 +3152,9 @@ new Chart(document.getElementById('bar_U15G_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2945,9 +3172,9 @@ new Chart(document.getElementById('updown_U15G_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2958,8 +3185,8 @@ new Chart(document.getElementById('eff_U15G_Avg'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -2981,7 +3208,7 @@ new Chart(document.getElementById('radar_U17B_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -2996,13 +3223,14 @@ new Chart(document.getElementById('bar_U17B_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17B_R4'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[5.4, 4.2, 4.0, 3.4, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -3015,14 +3243,15 @@ new Chart(document.getElementById('legspd_U17B_R4'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U17B_R4'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[8.1, 9.8, 5.92, 5.22, 5.8, 6.19], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -3035,10 +3264,10 @@ new Chart(document.getElementById('legpos_U17B_R4'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3056,9 +3285,9 @@ new Chart(document.getElementById('updown_U17B_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3069,8 +3298,8 @@ new Chart(document.getElementById('eff_U17B_R4'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3083,9 +3312,9 @@ new Chart(document.getElementById('bias_U17B_R4'),{
     { label:'Starboard (Right)', data:[73.7, 93.0, 86.0], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3105,7 +3334,7 @@ new Chart(document.getElementById('radar_U17B_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3120,13 +3349,14 @@ new Chart(document.getElementById('bar_U17B_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17B_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[9.0, 3.0, 3.0, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -3139,14 +3369,15 @@ new Chart(document.getElementById('legspd_U17B_R5'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U17B_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[5.17, 6.77, 4.56, 3.96, 4.43, 5.73], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -3159,10 +3390,10 @@ new Chart(document.getElementById('legpos_U17B_R5'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3180,9 +3411,9 @@ new Chart(document.getElementById('updown_U17B_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3193,8 +3424,8 @@ new Chart(document.getElementById('eff_U17B_R5'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3207,9 +3438,9 @@ new Chart(document.getElementById('bias_U17B_R5'),{
     { label:'Starboard (Right)', data:[81.3, 87.0, 89.3], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3229,7 +3460,7 @@ new Chart(document.getElementById('radar_U17B_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3244,13 +3475,14 @@ new Chart(document.getElementById('bar_U17B_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17B_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[11.4, 3.4, 3.2, 3.2, 3.4, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -3263,14 +3495,15 @@ new Chart(document.getElementById('legspd_U17B_R6'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U17B_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[3.52, 4.8, 4.36, 3.47, 3.94, 4.31], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -3283,10 +3516,10 @@ new Chart(document.getElementById('legpos_U17B_R6'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3304,9 +3537,9 @@ new Chart(document.getElementById('updown_U17B_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3317,8 +3550,8 @@ new Chart(document.getElementById('eff_U17B_R6'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3333,9 +3566,9 @@ new Chart(document.getElementById('bias_U17B_R6'),{
       backgroundColor:'#FF6B00', borderRadius:4 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3355,7 +3588,7 @@ new Chart(document.getElementById('radar_U17B_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3370,9 +3603,9 @@ new Chart(document.getElementById('bar_U17B_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3390,9 +3623,9 @@ new Chart(document.getElementById('updown_U17B_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3403,8 +3636,8 @@ new Chart(document.getElementById('eff_U17B_Avg'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3426,7 +3659,7 @@ new Chart(document.getElementById('radar_U17G_R4'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3441,13 +3674,14 @@ new Chart(document.getElementById('bar_U17G_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17G_R4'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[23.6, 3.4, 3.4, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -3460,14 +3694,15 @@ new Chart(document.getElementById('legspd_U17G_R4'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U17G_R4'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[6.85, 8.11, 6.49, 7.97, 6.81, 5.25], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -3480,10 +3715,10 @@ new Chart(document.getElementById('legpos_U17G_R4'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3501,9 +3736,9 @@ new Chart(document.getElementById('updown_U17G_R4'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3514,8 +3749,8 @@ new Chart(document.getElementById('eff_U17G_R4'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3528,9 +3763,9 @@ new Chart(document.getElementById('bias_U17G_R4'),{
     { label:'Starboard (Right)', data:[68.7, 58.5, 77.0], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3550,7 +3785,7 @@ new Chart(document.getElementById('radar_U17G_R5'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3565,13 +3800,14 @@ new Chart(document.getElementById('bar_U17G_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17G_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[16.2, 4.6, 3.6, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -3584,14 +3820,15 @@ new Chart(document.getElementById('legspd_U17G_R5'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U17G_R5'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[4.04, 4.32, 4.03, 5.92, 4.38, 4.73], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -3604,10 +3841,10 @@ new Chart(document.getElementById('legpos_U17G_R5'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3625,9 +3862,9 @@ new Chart(document.getElementById('updown_U17G_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3638,8 +3875,8 @@ new Chart(document.getElementById('eff_U17G_R5'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3652,9 +3889,9 @@ new Chart(document.getElementById('bias_U17G_R5'),{
     { label:'Starboard (Right)', data:[94.6, 20.0, 26.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3674,7 +3911,7 @@ new Chart(document.getElementById('radar_U17G_R6'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3689,13 +3926,14 @@ new Chart(document.getElementById('bar_U17G_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legspd_U17G_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg Rank', data:[3.8, 3.4, 3.2, 3.2, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
@@ -3708,14 +3946,15 @@ new Chart(document.getElementById('legspd_U17G_R6'),{
       pointBackgroundColor:'#10B981' }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ reverse:true, title:{ display:true, text:'Position', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
 new Chart(document.getElementById('legpos_U17G_R6'),{
+  type:'line',
   data:{ labels:["Leg 1", "Leg 2", "Leg 3", "Leg 4", "Leg 5", "Leg 6"], datasets:[{
       label:'Fleet Top Avg', data:[3.5, 4.11, 3.56, 4.57, 4.29, 4.45], tension: 0.4,
       borderColor:'#FF6B00', backgroundColor:'rgba(255,107,0,0.1)',
@@ -3728,10 +3967,10 @@ new Chart(document.getElementById('legpos_U17G_R6'),{
       borderWidth:2, pointRadius:4, pointBackgroundColor:'#10B981', fill:false }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ title:{ display:true, text:'Speed (kts)', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3749,9 +3988,9 @@ new Chart(document.getElementById('updown_U17G_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3762,8 +4001,8 @@ new Chart(document.getElementById('eff_U17G_R6'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3778,9 +4017,9 @@ new Chart(document.getElementById('bias_U17G_R6'),{
       backgroundColor:'#FF6B00', borderRadius:4 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3800,7 +4039,7 @@ new Chart(document.getElementById('radar_U17G_Avg'),{
   options:{ responsive:true, maintainAspectRatio:false,
     scales:{ r:{ min:0, max:100, ticks:{ display:false },
       grid:{ color:'rgba(255,107,0,0.1)' }, pointLabels:{ color:'#FF9500', font:{size:9} } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3815,9 +4054,9 @@ new Chart(document.getElementById('bar_U17G_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500', font:{size:9} }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3835,9 +4074,9 @@ new Chart(document.getElementById('updown_U17G_Avg'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3848,8 +4087,8 @@ new Chart(document.getElementById('eff_U17G_Avg'),{
       backgroundColor:["#FF6B00", "#3B82F6", "#10B981"], borderRadius:6 }]
   },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#94A3B8' },
-      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ x:{ min:100, title:{ display:true, text:'Efficiency %', color:'#CBD5E1' },
+      grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
     plugins:{ legend:{ display:false } }
   }
@@ -3871,9 +4110,9 @@ new Chart(document.getElementById('updown_U15B_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3884,9 +4123,9 @@ new Chart(document.getElementById('bias_U15B_R5'),{
     { label:'Starboard (Right)', data:[84.6, 56.5, 85.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3904,9 +4143,9 @@ new Chart(document.getElementById('updown_U15B_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3917,9 +4156,9 @@ new Chart(document.getElementById('bias_U15B_R6'),{
     { label:'Starboard (Right)', data:[36.0, 26.5, 65.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3937,9 +4176,9 @@ new Chart(document.getElementById('updown_U15G_R5'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3950,9 +4189,9 @@ new Chart(document.getElementById('bias_U15G_R5'),{
     { label:'Starboard (Right)', data:[81.5, 82.5, 85.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3970,9 +4209,9 @@ new Chart(document.getElementById('updown_U15G_R6'),{
       backgroundColor:'#10B981', borderRadius:4 }
 ] },
   options:{ responsive:true, maintainAspectRatio:false,
-    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8' } },
+    scales:{ y:{ grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1' } },
       x:{ ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -3983,9 +4222,9 @@ new Chart(document.getElementById('bias_U15G_R6'),{
     { label:'Starboard (Right)', data:[62.3, 91.5, 84.5], backgroundColor:'#3B82F6', borderRadius:4 }
   ] },
   options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
-    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#94A3B8', callback:function(v){return v+'%'} } },
+    scales:{ x:{ stacked:true, max:100, grid:{ color:'rgba(255,107,0,0.1)' }, ticks:{ color:'#CBD5E1', callback:function(v){return v+'%'} } },
       y:{ stacked:true, ticks:{ color:'#FF9500' }, grid:{ display:false } } },
-    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#94A3B8', font:{size:11} } } }
+    plugins:{ legend:{ labels:{usePointStyle: true, pointStyle: 'rectRounded',  color:'#CBD5E1', font:{size:11} } } }
   }
 });
 
@@ -4042,7 +4281,7 @@ function drawTWAPolarDiagram(canvasId, indiaAthletes, topAvg, windDir) {
   }
 
   if (!hasData) {
-    ctx.fillStyle = '#94A3B8';
+    ctx.fillStyle = '#CBD5E1';
     ctx.font = 'italic 13px Segoe UI';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
