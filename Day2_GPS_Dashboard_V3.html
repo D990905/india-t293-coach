@@ -951,19 +951,6 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
 <div style="display:flex;gap:16px;flex-wrap:wrap">
 <div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
-</div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
-</div>
-</div>
-</div>
-<div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
 <div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
 <div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
 </div>
@@ -1429,19 +1416,6 @@ No GPS start data available for India athletes in this race.
 <h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
 <div style="display:flex;gap:16px;flex-wrap:wrap">
 <div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
-</div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
-</div>
-</div>
-</div>
-<div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
 <div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
 <div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
 </div>
@@ -1878,19 +1852,6 @@ No GPS start data available for India athletes in this race.
 <h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
 <div style="display:flex;gap:16px;flex-wrap:wrap">
 <div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
-</div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
-</div>
-</div>
-</div>
-<div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
 <div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
 <div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
 </div>
@@ -2306,8 +2267,15 @@ function showMainTab(id) {
 function showSubTab(cls, race) {
   document.querySelectorAll('[id^="sub_' + cls + '_"]').forEach(el => el.style.display = 'none');
   document.querySelectorAll('[id^="subtab_' + cls + '_"]').forEach(el => el.classList.remove('active'));
-  document.getElementById('sub_' + cls + '_' + race).style.display = 'block';
+  var subtabId = 'sub_' + cls + '_' + race;
+  document.getElementById(subtabId).style.display = 'block';
   document.getElementById('subtab_' + cls + '_' + race).classList.add('active');
+  // Resize all Chart.js charts in the now-visible subtab
+  var canvases = document.querySelectorAll('#' + subtabId + ' canvas');
+  canvases.forEach(function(c) {
+    var chart = Chart.getChart(c);
+    if (chart) { chart.resize(); chart.update(); }
+  });
 }
 </script>
 <script>
@@ -2852,10 +2820,10 @@ new Chart(document.getElementById('legspd_U15G_R4'),{
       label:'Fleet Top Avg Rank', data:[15.8, 3.2, 3.0, 3.0, 3.0, 3.0], tension: 0.4,
       borderColor:'#FF6B00', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#FF6B00', borderDash:[5,3] }
-,{ label:'Johal Udaiveer', data:[26, 28, 28, 29, 25, 26], tension: 0.4,
+,{ label:'Kajale Vaishnavi', data:[26, 28, 28, 29, 25, 26], tension: 0.4,
       borderColor:'#3B82F6', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#3B82F6' }
-,{ label:'Prakash Vihaan', data:[23, 35, 35, 34, 33, 33], tension: 0.4,
+,{ label:'Patil Priyanshi', data:[23, 35, 35, 34, 33, 33], tension: 0.4,
       borderColor:'#10B981', borderWidth:2, pointRadius:4,
       pointBackgroundColor:'#10B981' }
 ] },
