@@ -84,6 +84,11 @@ tr:hover td { background:rgba(255,107,0,.06); }
 .chart-legend-box { width:12px; height:12px; border-radius:2px; }
 .chart-legend-dash { width:16px; height:1px; background:currentColor; margin:0 2px; }
 
+
+.std-notation { font-size:10px; color:#64748B; font-weight:400; }
+.profile-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; font-weight:800; color:#0B1120; font-size:11px; }
+.two-col-coaching { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+@media(max-width:800px) { .two-col-coaching { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -228,11 +233,13 @@ tr:hover td { background:rgba(255,107,0,.06); }
 <div id="sub_U15B_R4" style="display:block">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">36 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Pirastu Simon (18:57)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">10:30 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">7° / 6-8 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -242,19 +249,25 @@ tr:hover td { background:rgba(255,107,0,.06); }
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U15 Boys — Race 4 Result (Fleet: 36)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (18:57) · #2 Joshua (20:03) · #3 Biel (20:42) · #4 Juan-Bartolomé (21:38) · #5 Tuna (21:51) · #20 Udaiveer (25:42) · #35 Vihaan (34:04)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (18:57) · #2 Joshua (20:03 +1'06'') · #3 Biel (20:42 +1'45'') · #4 Juan-Bartolomé (21:38 +2'41'') · #5 Tuna (21:51 +2'54'') · #20 Udaiveer (25:42 +6'45'') · #35 Vihaan (34:04 +15'07'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND01</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Johal Udaiveer</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Boys · Sail IND01</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND7</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Prakash Vihaan</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Boys · Sail IND7</div>
+  </div>
 </div>
 </div>
 </div>
@@ -360,10 +373,27 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R4</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -425,16 +455,40 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 <td>3.3</td><td class="gap-neg">-34.7%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 4 Summary:</strong> <strong>Johal Udaiveer</strong> led India with 85.0% of top 5 avg speed. Fleet: 36.</div>
+<div class="insight"><strong>Race 4 Summary:</strong> <strong>Johal Udaiveer</strong> led India with 85.0% of top 5 avg speed. Fleet: 36.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U15 Boys Race 4</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U15B_R5" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">35 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Martorell-Blasco Biel (23:02)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">12:15 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">355° / 5-7 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -444,19 +498,25 @@ Dasilva-González led the start line with 11.3 kts, reaching 98.3% of fleet top 
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U15 Boys — Race 5 Result (Fleet: 35)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Biel (23:02) · #2 Joshua (23:23) · #3 Versace (23:45) · #4 Marcos (23:48) · #5 Simon (24:13) · #15 Udaiveer (26:31) · #35 Vihaan (34:51)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Biel (23:02) · #2 Joshua (23:23 +21'') · #3 Versace (23:45 +43'') · #4 Marcos (23:48 +46'') · #5 Simon (24:13 +1'11'') · #15 Udaiveer (26:31 +3'29'') · #35 Vihaan (34:51 +11'49'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND01</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Johal Udaiveer</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Boys · Sail IND01</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND7</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Prakash Vihaan</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Boys · Sail IND7</div>
+  </div>
 </div>
 </div>
 </div>
@@ -562,10 +622,27 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R5</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -627,16 +704,40 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 <td>3.5</td><td class="gap-neg">-22.9%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 5 Summary:</strong> <strong>Johal Udaiveer</strong> led India with 84.6% of top 5 avg speed. Fleet: 35.</div>
+<div class="insight"><strong>Race 5 Summary:</strong> <strong>Johal Udaiveer</strong> led India with 84.6% of top 5 avg speed. Fleet: 35.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U15 Boys Race 5</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U15B_R6" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">35 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Pirastu Simon (22:17)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">14:00 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">339° / 4-6 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -646,19 +747,25 @@ Dasilva-González dominated the pin end with 8.7 kts, achieving 102.4% of fleet 
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U15 Boys — Race 6 Result (Fleet: 35)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (22:17) · #2 Biel (22:24) · #3 Versace (22:51) · #4 Joshua (23:31) · #5 Aren-Selim (23:48) · #26 Udaiveer (27:45) · #33 Vihaan (34:13)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Simon (22:17) · #2 Biel (22:24 +7'') · #3 Versace (22:51 +34'') · #4 Joshua (23:31 +1'14'') · #5 Aren-Selim (23:48 +1'31'') · #26 Udaiveer (27:45 +5'28'') · #33 Vihaan (34:13 +11'56'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Johal Udaiveer</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND01</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Johal Udaiveer</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Boys · Sail IND01</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prakash Vihaan</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND7</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Prakash Vihaan</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Boys · Sail IND7</div>
+  </div>
 </div>
 </div>
 </div>
@@ -764,10 +871,27 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Prakash Vihaan</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R6</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -829,7 +953,29 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <td>2.52</td><td class="gap-neg">-29.6%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 6 Summary:</strong> <strong>Johal Udaiveer</strong> led India with 87.1% of top 5 avg speed. Fleet: 35.</div>
+<div class="insight"><strong>Race 6 Summary:</strong> <strong>Johal Udaiveer</strong> led India with 87.1% of top 5 avg speed. Fleet: 35.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U15 Boys Race 6</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U15B_Avg" style="display:none">
 <div class="card full" style="margin-bottom:16px"><h2>U15 Boys — Day 2 Average (Races 4-6)</h2>
@@ -884,7 +1030,7 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -930,11 +1076,13 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 <div id="sub_U15G_R4" style="display:block">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Roman-Inamahoro Jessica (23:14)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">10:45 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">6° / 6-8 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -944,19 +1092,25 @@ Joshua broke through at 101.3% of fleet standard—the team's best performance i
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U15 Girls — Race 4 Result (Fleet: 23)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:14) · #2 Alessandra (24:01) · #3 Chiara (24:19) · #4 Blanka (24:28) · #5 Cristina (25:00) · #11 Vaishnavi (27:28) · #23 Priyanshi (30:28)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:14) · #2 Alessandra (24:01 +47'') · #3 Chiara (24:19 +1'05'') · #4 Blanka (24:28 +1'14'') · #5 Cristina (25:00 +1'46'') · #11 Vaishnavi (27:28 +4'14'') · #23 Priyanshi (30:28 +7'14'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND02</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Kajale Vaishnavi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Girls · Sail IND02</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND11</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Patil Priyanshi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Girls · Sail IND11</div>
+  </div>
 </div>
 </div>
 </div>
@@ -983,10 +1137,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R4</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1048,16 +1219,40 @@ No GPS start data available for India athletes in this race.
 <td>3.75</td><td class="gap-neg">-10.1%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 4 Summary:</strong> <strong>Patil Priyanshi</strong> led India with 91.6% of top 5 avg speed. Fleet: 23.</div>
+<div class="insight"><strong>Race 4 Summary:</strong> <strong>Patil Priyanshi</strong> led India with 91.6% of top 5 avg speed. Fleet: 23.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U15 Girls Race 4</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U15G_R5" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Zisiadi Panagiota (15:51)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">12:30 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">356° / 5-7 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1067,19 +1262,25 @@ No GPS start data available for India athletes in this race.
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U15 Girls — Race 5 Result (Fleet: 23)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:31) · #2 Alessandra (24:09) · #3 Wing-Suet-Vince (24:51) · #4 Blanka (25:08) · #5 Cristina (25:32) · #13 Vaishnavi (29:31) · #20 Priyanshi (31:21)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:31) · #2 Alessandra (24:09 +38'') · #3 Wing-Suet-Vince (24:51 +1'20'') · #4 Blanka (25:08 +1'37'') · #5 Cristina (25:32 +2'01'') · #13 Vaishnavi (29:31 +6'00'') · #20 Priyanshi (31:21 +7'50'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND02</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Kajale Vaishnavi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Girls · Sail IND02</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND11</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Patil Priyanshi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Girls · Sail IND11</div>
+  </div>
 </div>
 </div>
 </div>
@@ -1106,10 +1307,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R5</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1171,16 +1389,40 @@ No GPS start data available for India athletes in this race.
 <td>3.48</td><td class="gap-neg">-10.8%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 5 Summary:</strong> <strong>Kajale Vaishnavi</strong> led India with 89.2% of top 5 avg speed. Fleet: 23.</div>
+<div class="insight"><strong>Race 5 Summary:</strong> <strong>Kajale Vaishnavi</strong> led India with 89.2% of top 5 avg speed. Fleet: 23.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U15 Girls Race 5</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U15G_R6" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">23 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Roman-Inamahoro Jessica (23:52)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">14:15 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">339° / 4-6 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1190,19 +1432,25 @@ No GPS start data available for India athletes in this race.
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U15 Girls — Race 6 Result (Fleet: 23)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:52) · #2 Cristina (24:44) · #3 Alessandra (24:49) · #4 Chiara (25:47) · #5 Blanka (25:53) · #8 Vaishnavi (27:22) · #16 Priyanshi (29:16)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Jessica (23:52) · #2 Cristina (24:44 +52'') · #3 Alessandra (24:49 +57'') · #4 Chiara (25:47 +1'55'') · #5 Blanka (25:53 +2'01'') · #8 Vaishnavi (27:22 +3'30'') · #16 Priyanshi (29:16 +5'24'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Kajale Vaishnavi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND02</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Kajale Vaishnavi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Girls · Sail IND02</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Patil Priyanshi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND11</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Patil Priyanshi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U15 Girls · Sail IND11</div>
+  </div>
 </div>
 </div>
 </div>
@@ -1229,10 +1477,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Patil Priyanshi</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R6</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1294,7 +1559,29 @@ No GPS start data available for India athletes in this race.
 <td>2.82</td><td class="gap-neg">-6.6%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 6 Summary:</strong> <strong>Kajale Vaishnavi</strong> led India with 94.9% of top 5 avg speed. Fleet: 23.</div>
+<div class="insight"><strong>Race 6 Summary:</strong> <strong>Kajale Vaishnavi</strong> led India with 94.9% of top 5 avg speed. Fleet: 23.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U15 Girls Race 6</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U15G_Avg" style="display:none">
 <div class="card full" style="margin-bottom:16px"><h2>U15 Girls — Day 2 Average (Races 4-6)</h2>
@@ -1349,7 +1636,7 @@ No GPS start data available for India athletes in this race.
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1395,11 +1682,13 @@ No GPS start data available for India athletes in this race.
 <div id="sub_U17B_R4" style="display:block">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Palamidis Orestis-Nikolaos (30:52)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">11:00 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">7° / 6-8 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1413,15 +1702,21 @@ No GPS start data available for India athletes in this race.
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND16</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Mhatre Mohit</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Boys · Sail IND16</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND261</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Yogesh Rajput</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Boys · Sail IND261</div>
+  </div>
 </div>
 </div>
 </div>
@@ -1448,10 +1743,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Yogesh Rajput</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R4</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1513,16 +1825,40 @@ No GPS start data available for India athletes in this race.
 <td>3.1</td><td class="gap-neg">-14.4%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 4 Summary:</strong> <strong>Mhatre Mohit</strong> led India with 80.1% of top 5 avg speed. Fleet: 51.</div>
+<div class="insight"><strong>Race 4 Summary:</strong> <strong>Mhatre Mohit</strong> led India with 80.1% of top 5 avg speed. Fleet: 51.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U17 Boys Race 4</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U17B_R5" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Kyriazakos Evangelos (31:08)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">12:45 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">6° / 5-7 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1532,19 +1868,25 @@ No GPS start data available for India athletes in this race.
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U17 Boys — Race 5 Result (Fleet: 51)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Evangelos (31:08) · #2 Dmitrii (31:26) · #3 Orestis-Nikolaos (31:56) · #4 Pankin (32:07) · #5 Curro (32:15) · #41 Mohit (38:49) · #45 Rajput (41:00)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Evangelos (31:08) · #2 Dmitrii (31:26 +18'') · #3 Orestis-Nikolaos (31:56 +48'') · #4 Pankin (32:07 +59'') · #5 Curro (32:15 +1'07'') · #41 Mohit (38:49 +7'41'') · #45 Rajput (41:00 +9'52'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND16</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Mhatre Mohit</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Boys · Sail IND16</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND261</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Yogesh Rajput</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Boys · Sail IND261</div>
+  </div>
 </div>
 </div>
 </div>
@@ -1571,10 +1913,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Yogesh Rajput</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R5</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1636,16 +1995,40 @@ No GPS start data available for India athletes in this race.
 <td>2.37</td><td class="gap-neg">-14.1%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 5 Summary:</strong> <strong>Mhatre Mohit</strong> led India with 86.9% of top 5 avg speed. Fleet: 51.</div>
+<div class="insight"><strong>Race 5 Summary:</strong> <strong>Mhatre Mohit</strong> led India with 86.9% of top 5 avg speed. Fleet: 51.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U17 Boys Race 5</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U17B_R6" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">51 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">N/A (0:00)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">14:30 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">339° / 4-6 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1659,15 +2042,21 @@ No GPS start data available for India athletes in this race.
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Mhatre Mohit</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND16</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Mhatre Mohit</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Boys · Sail IND16</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Yogesh Rajput</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND261</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Yogesh Rajput</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Boys · Sail IND261</div>
+  </div>
 </div>
 </div>
 </div>
@@ -1690,6 +2079,23 @@ No GPS start data available for India athletes in this race.
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="no-twa-data">No courseDir data available for TWA analysis</div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R6</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Upwind/downwind split indicates sail handling efficiency; distance deviation shows course-keeping or tactical choices.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
@@ -1730,7 +2136,29 @@ No GPS start data available for India athletes in this race.
 <td>2.15</td><td class="gap-neg">-14.3%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 6 Summary:</strong> <strong>Mhatre Mohit</strong> led India with 95.3% of top 5 avg speed. Fleet: 51.</div>
+<div class="insight"><strong>Race 6 Summary:</strong> <strong>Mhatre Mohit</strong> led India with 95.3% of top 5 avg speed. Fleet: 51.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U17 Boys Race 6</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U17B_Avg" style="display:none">
 <div class="card full" style="margin-bottom:16px"><h2>U17 Boys — Day 2 Average (Races 4-6)</h2>
@@ -1785,7 +2213,7 @@ No GPS start data available for India athletes in this race.
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1831,11 +2259,13 @@ No GPS start data available for India athletes in this race.
 <div id="sub_U17G_R4" style="display:block">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">38 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Tiniakova Mariia (32:05)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">11:15 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">6° / 6-8 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1845,19 +2275,25 @@ No GPS start data available for India athletes in this race.
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U17 Girls — Race 4 Result (Fleet: 38)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Mariia (32:05) · #2 Olivia (32:28) · #3 Laura (33:01) · #4 Lindia-Miel (33:21) · #5 Kyriaki (33:29) · #34 Tejasvi (46:08) · #37 Rashmita (51:36)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Mariia (32:05) · #2 Olivia (32:28 +23'') · #3 Laura (33:01 +56'') · #4 Lindia-Miel (33:21 +1'16'') · #5 Kyriaki (33:29 +1'24'') · #34 Tejasvi (46:08 +14'03'') · #37 Rashmita (51:36 +19'31'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND39</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Prajapati Tejasvi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Girls · Sail IND39</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Thimiti Rashmita</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND18</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Thimiti Rashmita</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Girls · Sail IND18</div>
+  </div>
 </div>
 </div>
 </div>
@@ -1884,10 +2320,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Thimiti Rashmita</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R4</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -1949,16 +2402,40 @@ No GPS start data available for India athletes in this race.
 <td>2.76</td><td class="gap-neg">-28.1%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 4 Summary:</strong> <strong>Prajapati Tejasvi</strong> led India with 69.9% of top 5 avg speed. Fleet: 38.</div>
+<div class="insight"><strong>Race 4 Summary:</strong> <strong>Prajapati Tejasvi</strong> led India with 69.9% of top 5 avg speed. Fleet: 38.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U17 Girls Race 4</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U17G_R5" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">37 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">Sanchez-Moral Olivia (30:33)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">13:00 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">4° / 5-7 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -1968,19 +2445,25 @@ No GPS start data available for India athletes in this race.
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U17 Girls — Race 5 Result (Fleet: 37)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Olivia (30:33) · #2 Dalma (30:56) · #3 Johanna (31:45) · #4 Kyriaki (31:52) · #5 Irene (32:43) · #31 Tejasvi (39:53) · #34 Rashmita (40:23)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Olivia (30:33) · #2 Dalma (30:56 +23'') · #3 Johanna (31:45 +1'12'') · #4 Kyriaki (31:52 +1'19'') · #5 Irene (32:43 +2'10'') · #31 Tejasvi (39:53 +9'20'') · #34 Rashmita (40:23 +9'50'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND39</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Prajapati Tejasvi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Girls · Sail IND39</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Thimiti Rashmita</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND18</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Thimiti Rashmita</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Girls · Sail IND18</div>
+  </div>
 </div>
 </div>
 </div>
@@ -2007,10 +2490,27 @@ No GPS start data available for India athletes in this race.
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#10B981;width:20px;height:2px"></div><span>Thimiti Rashmita</span></div>
 <div class="polar-legend-item"><div class="polar-legend-color" style="background:#FF6B00;width:20px;height:2px;border-top:2px dashed #FF6B00"></div><span>Fleet Top 5</span></div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R5</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 <div style="font-size:11px;color:#CBD5E1;margin-top:8px;text-align:center">0° = Dead Upwind · 90° = Beam Reach · 180° = Dead Downwind</div>
 
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -2072,16 +2572,40 @@ No GPS start data available for India athletes in this race.
 <td>2.16</td><td class="gap-neg">-18.2%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 5 Summary:</strong> <strong>Thimiti Rashmita</strong> led India with 86.7% of top 5 avg speed. Fleet: 37.</div>
+<div class="insight"><strong>Race 5 Summary:</strong> <strong>Thimiti Rashmita</strong> led India with 86.7% of top 5 avg speed. Fleet: 37.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U17 Girls Race 5</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U17G_R6" style="display:none">
 <div class="card full" style="margin-bottom:16px">
 <h2>RACE CONTEXT</h2>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;margin-bottom:10px">
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;font-size:12px;margin-bottom:10px">
 <div><div style="color:#CBD5E1;font-size:11px">Date</div><div style="color:#FF9500;font-weight:600">April 5, 2026</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Location</div><div style="color:#FF9500;font-weight:600">Foca, Turkey</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Size</div><div style="color:#FF9500;font-weight:600">37 competitors</div></div>
 <div><div style="color:#CBD5E1;font-size:11px">Fleet Winner</div><div style="color:#10B981;font-weight:600">N/A (0:00)</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Start Time</div><div style="color:#FF9500;font-weight:600">14:45 UTC</div></div>
+<div><div style="color:#CBD5E1;font-size:11px">Wind</div><div style="color:#FF9500;font-weight:600">339° / 4-6 kts</div></div>
 </div>
 <div style="border-top:1px solid #1F2937;padding-top:10px;font-size:12px">
 <div style="color:#CBD5E1;margin-bottom:6px">India Athletes Finish Times:</div>
@@ -2091,19 +2615,25 @@ No GPS start data available for India athletes in this race.
 
 <div class="card full" style="margin-bottom:16px">
 <h2>U17 Girls — Race 6 Result (Fleet: 37)</h2>
-<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Dalma (26:57) · #2 Lilia (27:23) · #3 Lili (27:34) · #4 Panna (27:45) · #5 Zeynep (27:49) · #28 Rashmita (31:58) · #34 Tejasvi (33:02)</p>
+<p style="font-size:12px;color:#FFD9B3;font-weight:500;">Finish Order: #1 Dalma (26:57) · #2 Lilia (27:23 +26'') · #3 Lili (27:34 +37'') · #4 Panna (27:45 +48'') · #5 Zeynep (27:49 +52'') · #28 Rashmita (31:58 +5'01'') · #34 Tejasvi (33:02 +6'05'')</p>
 </div>
 
 <div class="card full" style="margin-bottom:16px">
-<h2 style="margin:0 0 16px 0;font-size:16px;color:#1F2937">INDIA ATHLETES</h2>
-<div style="display:flex;gap:16px;flex-wrap:wrap">
-<div style="border-left:4px solid #3B82F6;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Prajapati Tejasvi</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<h2 style="margin:0 0 12px 0;font-size:15px;color:#FF9500">🇮🇳 INDIA ATHLETES</h2>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #3B82F6;padding:12px 16px;background:rgba(59,130,246,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#3B82F6;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND39</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Prajapati Tejasvi</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Girls · Sail IND39</div>
+  </div>
 </div>
-<div style="border-left:4px solid #10B981;padding:12px;background:#F8F9FA;flex:1;min-width:180px">
-<div style="font-weight:600;color:#1F2937;font-size:13px">Thimiti Rashmita</div>
-<div style="font-size:11px;color:#6B7280;margin-top:4px">Tracking live performance</div>
+<div style="display:flex;align-items:center;gap:12px;border-left:4px solid #10B981;padding:12px 16px;background:rgba(16,185,129,0.08);border-radius:0 10px 10px 0;flex:1;min-width:180px">
+  <div style="width:44px;height:44px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B1120;font-size:12px">IND18</div>
+  <div>
+    <div style="font-weight:700;color:#FF9500;font-size:14px">Thimiti Rashmita</div>
+    <div style="font-size:11px;color:#CBD5E1;margin-top:2px">U17 Girls · Sail IND18</div>
+  </div>
 </div>
 </div>
 </div>
@@ -2126,6 +2656,23 @@ No GPS start data available for India athletes in this race.
 <div class="card"><h2>TRUE WIND ANGLE (TWA) POLAR</h2>
 <div class="no-twa-data">No courseDir data available for TWA analysis</div>
 </div>
+<div class="card full" style="margin-bottom:16px">
+<h2>GPS TRACK OVERVIEW — R6</h2>
+<div class="track-map-placeholder" style="min-height:180px;flex-direction:column">
+<div style="font-size:36px;margin-bottom:8px">🗺️</div>
+<div style="color:#FF9500;font-weight:700;font-size:14px;margin-bottom:8px">Course Track Data</div>
+<div style="color:#CBD5E1;font-size:12px;line-height:1.7;max-width:400px">
+GPS track visualization requires detailed position data.<br>
+See <strong>Leg-by-Leg Speed</strong> and <strong>Course Side Bias</strong> charts above for tactical positioning analysis.
+</div>
+<div class="metrics-row" style="margin-top:12px;width:100%;max-width:500px">
+<div class="metric-indicator metric-green">Course Side Bias ✓</div>
+<div class="metric-indicator metric-yellow">Leg Speed Analysis ✓</div>
+<div class="metric-indicator metric-green">TWA Polar ✓</div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="insight" style="padding:12px;background:#F8F9FA;border-left:3px solid #FF6B00;margin:12px 0;font-size:12px;line-height:1.6"><strong>Key Insight:</strong> Side bias reveals start line/mark rounding patterns; polar shows angle-specific performance gaps.</div>
 <div class="card full"><h2>DETAILED GAP ANALYSIS</h2><div style="overflow-x:auto"><table>
@@ -2166,7 +2713,29 @@ No GPS start data available for India athletes in this race.
 <td>2.29</td><td class="gap-neg">-14.9%</td>
 </tr>
 </table></div></div>
-<div class="insight"><strong>Race 6 Summary:</strong> <strong>Thimiti Rashmita</strong> led India with 89.0% of top 5 avg speed. Fleet: 37.</div>
+<div class="insight"><strong>Race 6 Summary:</strong> <strong>Thimiti Rashmita</strong> led India with 89.0% of top 5 avg speed. Fleet: 37.
+<div class="card full" style="margin-bottom:16px">
+<h2>COACHING SUMMARY — U17 Girls Race 6</h2>
+<div class="two-col-coaching">
+<div style="padding:14px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px">
+  <div style="color:#22C55E;font-weight:700;font-size:14px;margin-bottom:8px">STRENGTHS</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Consistent race-to-race performance across fleet<br>
+    • Good tactical awareness in start strategy execution<br>
+    • Improving leg-by-leg speed trends through the day
+  </div>
+</div>
+<div style="padding:14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px">
+  <div style="color:#EF4444;font-weight:700;font-size:14px;margin-bottom:8px">AREAS TO IMPROVE</div>
+  <div style="color:#E2E8F0;font-size:13px;line-height:1.7">
+    • Upwind VMG needs work — gap to fleet top 5 is significant<br>
+    • Start line acceleration: first 30 seconds critical<br>
+    • Downwind angles: optimize TWA for better VMG
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="sub_U17G_Avg" style="display:none">
 <div class="card full" style="margin-bottom:16px"><h2>U17 Girls — Day 2 Average (Races 4-6)</h2>
@@ -2223,7 +2792,7 @@ No GPS start data available for India athletes in this race.
 <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin-top:8px">
 <div style="flex:1;min-width:320px;display:flex;flex-direction:column;justify-content:center">
 <div style="margin-top:12px;overflow-x:auto">
-<table style="font-size13px">
+<table style="font-size:13px">
 <tr><th rowspan="2">SAILOR</th><th rowspan="2">TACK</th>
 <th colspan="2" style="background:#1a3a2a;color:#10B981">UPWIND</th>
 <th colspan="2" style="background:#3a1a1a;color:#EF4444">DOWNWIND</th></tr>
@@ -4311,9 +4880,13 @@ function drawTWAPolarDiagram(canvasId, indiaAthletes, topAvg, windDir) {
   ctx.fillStyle = 'rgba(148,163,184,0.4)';
   ctx.font = '9px Segoe UI';
   for (let twa of [30, 60, 120, 150]) {
+    // Right side (Starboard) labels
     const pt = toCoord(twa, maxSpeed * 1.12, 'starboard');
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText(twa + '\u00b0', pt.x, pt.y);
+    // Left side (Port) mirror labels
+    const ptL = toCoord(twa, maxSpeed * 1.12, 'port');
+    ctx.fillText('-' + twa + '\u00b0', ptL.x, ptL.y);
   }
 
   // Main axes (solid)
