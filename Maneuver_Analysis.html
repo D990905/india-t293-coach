@@ -18,7 +18,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .grid-2>.card{margin-bottom:0;display:flex;flex-direction:column;}
 .grid-2>.card .split-table{flex:1;}
 .grid-2>.polar-card{margin-bottom:0;}
-@media(max-width:900px){.grid-2{grid-template-columns:1fr;}}
 .card{background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.3);padding:20px;margin-bottom:20px;color:var(--text);}
 .card-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:#fff;}
 .badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;}
@@ -75,11 +74,83 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* ── TWA Polar card ── */
 .polar-card{background:var(--card-bg);border-radius:16px;padding:24px;margin-bottom:20px;overflow:hidden;}
 .polar-card .card-title{color:#fff;margin-bottom:14px;}
-.polar-chart-wrap{position:relative;overflow:hidden;}
+.polar-chart-wrap{position:relative;overflow:hidden;height:380px;}
+.chart-wrap{height:380px;}
 .polar-legend-row{display:flex;gap:20px;justify-content:center;margin-top:14px;font-size:12px;}
 .polar-legend-row .pli{display:flex;align-items:center;gap:6px;}
 .polar-legend-row .pls{width:14px;height:4px;border-radius:2px;}
 /* ── Band Performance section ── */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE RESPONSIVE — phones (<600px) and tablets (<900px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Tablet */
+@media(max-width:900px){
+  .header{padding:16px 16px;}
+  .header h1{font-size:18px;}
+  .controls{padding:12px 16px;gap:8px;}
+  .main{padding:16px 16px;}
+  .grid-2{grid-template-columns:1fr !important;}
+  .stat-grid{grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;}
+  .stat-box .value{font-size:18px;}
+  .card{padding:16px;}
+  .violin-card,.avg-maneuver-card,.polar-card{padding:16px;}
+  .violin-container{height:300px;}
+  .avg-maneuver-container{height:280px;}
+  .polar-chart-wrap{height:320px !important;}
+  .split-table{font-size:12px;}
+  .split-table th,.split-table td{padding:6px 8px;}
+}
+
+/* Phone */
+@media(max-width:600px){
+  .header{padding:12px 12px;}
+  .header h1{font-size:15px;}
+  .header .sub{font-size:11px;}
+  .controls{padding:10px 12px;gap:6px;flex-direction:column;align-items:stretch;}
+  .controls select{width:100%;min-width:unset;font-size:13px;padding:10px 12px;}
+  .controls label{font-size:12px;}
+  .main{padding:12px 8px;}
+  .card{padding:12px;border-radius:10px;margin-bottom:14px;}
+  .card-title{font-size:14px;gap:4px;flex-wrap:wrap;}
+  .badge{font-size:10px;padding:2px 6px;}
+  .stat-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
+  .stat-box{padding:8px 4px;border-radius:6px;}
+  .stat-box .label{font-size:9px;letter-spacing:0.3px;}
+  .stat-box .value{font-size:16px;}
+  .stat-box .subv{font-size:9px;}
+  .split-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .split-table th,.split-table td{padding:5px 6px;white-space:nowrap;}
+  .violin-card,.avg-maneuver-card,.polar-card{padding:12px;border-radius:12px;margin-bottom:14px;}
+  .violin-container{height:260px;}
+  .avg-maneuver-container{height:240px;}
+  .polar-chart-wrap{height:280px !important;}
+  .violin-toggle,.avg-m-toggle{padding:5px 12px;font-size:12px;}
+  .violin-stats-row{flex-direction:column;align-items:center;gap:12px;}
+  .violin-stat-cell{padding:0 12px;}
+  .violin-stat-cell .val{font-size:14px;}
+  .violin-stat-cell .vals{gap:16px;}
+  .polar-legend-row{gap:12px;flex-wrap:wrap;font-size:11px;}
+  .avg-maneuver-legend{gap:12px;flex-wrap:wrap;font-size:11px;}
+  .cbar{font-size:11px;}
+  .cbar .bl{width:70px;font-size:11px;}
+  .cbar .bv{width:50px;font-size:11px;}
+  .chart-wrap{height:300px !important;}
+  /* Radar cards stacked */
+  .grid.grid-2{grid-template-columns:1fr !important;}
+}
+
+/* Very small phones */
+@media(max-width:380px){
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-box .value{font-size:14px;}
+  .violin-container{height:220px;}
+  .avg-maneuver-container{height:200px;}
+  .polar-chart-wrap{height:240px !important;}
+  .chart-wrap{height:260px !important;}
+  .controls select{font-size:12px;padding:8px 10px;}
+}
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -1408,14 +1479,14 @@ function buildRadarHTML(selectedKey, cls, band) {
       <div class="card" style="display:flex;flex-direction:column;">
         <div class="card-title">Class Performance Radar \u00b7 ${cls} <span class="badge badge-orange">${cls}</span> ${bandBadge}</div>
         <div style="color:rgba(255,255,255,0.5);font-size:11px;margin:-8px 0 8px 0;">${athStr}</div>
-        <div class="chart-wrap" style="height:380px;flex:1;"><canvas id="radarClass"></canvas></div>
+        <div class="chart-wrap" style="flex:1;"><canvas id="radarClass"></canvas></div>
         <div class="polar-legend-row" style="margin-top:10px;justify-content:center;flex-wrap:wrap;">
           ${clsLegend}
         </div>
       </div>
       <div class="card" style="display:flex;flex-direction:column;">
         <div class="card-title">Individual Performance Radar \u00b7 ${displayName(selectedKey)} <span class="badge badge-blue">${displayName(selectedKey)}</span> ${bandBadge}</div>
-        <div class="chart-wrap" style="height:380px;flex:1;margin-top:20px;"><canvas id="radarIndividual"></canvas></div>
+        <div class="chart-wrap" style="flex:1;margin-top:20px;"><canvas id="radarIndividual"></canvas></div>
         <div class="polar-legend-row" style="margin-top:10px;justify-content:center;flex-wrap:wrap;">
           ${indLegend}
         </div>
@@ -1663,7 +1734,7 @@ function updateDashboard(){
     <div class="grid-2">
         <div class="polar-card">
             <div class="card-title">Speed Polar <span class="badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)">${ath['class']}</span></div>
-            <div class="polar-chart-wrap" style="height:380px;"><canvas id="polarCanvas"></canvas></div>
+            <div class="polar-chart-wrap"><canvas id="polarCanvas"></canvas></div>
             <div class="polar-legend-row">
                 <div class="pli"><div class="pls" style="background:#34D399"></div><span style="color:#34D399">STBD</span></div>
                 <div class="pli"><div class="pls" style="background:#EF4444"></div><span style="color:#EF4444">PORT</span></div>
@@ -1672,7 +1743,7 @@ function updateDashboard(){
         </div>
         <div class="polar-card">
             <div class="card-title">VMG Polar <span class="badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)">${ath['class']}</span></div>
-            <div class="polar-chart-wrap" style="height:380px;"><canvas id="polarCanvasVmg"></canvas></div>
+            <div class="polar-chart-wrap"><canvas id="polarCanvasVmg"></canvas></div>
             <div class="polar-legend-row">
                 <div class="pli"><div class="pls" style="background:#34D399"></div><span style="color:#34D399">STBD</span></div>
                 <div class="pli"><div class="pls" style="background:#EF4444"></div><span style="color:#EF4444">PORT</span></div>
