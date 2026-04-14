@@ -79,6 +79,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .polar-legend-row{display:flex;gap:20px;justify-content:center;margin-top:14px;font-size:12px;}
 .polar-legend-row .pli{display:flex;align-items:center;gap:6px;}
 .polar-legend-row .pls{width:14px;height:4px;border-radius:2px;}
+/* ── Radar section ── */
+.radar-section{margin-top:24px;border-top:2px solid rgba(255,255,255,0.1);padding-top:20px;}
 /* ── Band Performance section ── */
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -87,69 +89,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* Tablet */
 @media(max-width:900px){
-  .header{padding:16px 16px;}
+  .header{padding:14px 12px;}
   .header h1{font-size:18px;}
-  .controls{padding:12px 16px;gap:8px;}
-  .main{padding:16px 16px;}
-  .grid-2{grid-template-columns:1fr !important;}
+  .controls{padding:10px 12px;gap:8px;}
+  .main{padding:12px 10px;max-width:100%;}
+  .grid-2{grid-template-columns:1fr !important;gap:12px !important;}
   .stat-grid{grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;}
   .stat-box .value{font-size:18px;}
-  .card{padding:16px;}
-  .violin-card,.avg-maneuver-card,.polar-card{padding:16px;}
+  .card{padding:14px;margin-bottom:12px;border-radius:10px;}
+  .violin-card,.avg-maneuver-card,.polar-card{padding:14px;margin-bottom:12px;border-radius:10px;}
   .violin-container{height:300px;}
   .avg-maneuver-container{height:280px;}
   .polar-chart-wrap{height:320px !important;}
-  .split-table{font-size:12px;}
+  .chart-wrap{height:340px !important;}
+  .split-table{font-size:12px;width:100%;}
   .split-table th,.split-table td{padding:6px 8px;}
+  .card-title{flex-wrap:wrap;}
 }
 
 /* Phone */
 @media(max-width:600px){
-  .header{padding:12px 12px;}
+  .header{padding:10px 8px;}
   .header h1{font-size:15px;}
   .header .sub{font-size:11px;}
-  .controls{padding:10px 12px;gap:6px;flex-direction:column;align-items:stretch;}
-  .controls select{width:100%;min-width:unset;font-size:13px;padding:10px 12px;}
+  .controls{padding:8px 8px;gap:6px;flex-direction:column;align-items:stretch;}
+  .controls select{width:100%;min-width:unset;font-size:14px;padding:10px 12px;}
   .controls label{font-size:12px;}
-  .main{padding:12px 8px;}
-  .card{padding:12px;border-radius:10px;margin-bottom:14px;}
-  .card-title{font-size:14px;gap:4px;flex-wrap:wrap;}
-  .badge{font-size:10px;padding:2px 6px;}
-  .stat-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
-  .stat-box{padding:8px 4px;border-radius:6px;}
-  .stat-box .label{font-size:9px;letter-spacing:0.3px;}
-  .stat-box .value{font-size:16px;}
+  .main{padding:8px 4px;max-width:100%;}
+  .card{padding:10px 8px;border-radius:8px;margin-bottom:10px;}
+  .card-title{font-size:13px;gap:4px;flex-wrap:wrap;}
+  .badge{font-size:9px;padding:2px 5px;}
+  .stat-grid{grid-template-columns:repeat(3,1fr);gap:4px;}
+  .stat-box{padding:6px 3px;border-radius:6px;}
+  .stat-box .label{font-size:9px;letter-spacing:0.2px;}
+  .stat-box .value{font-size:15px;}
   .stat-box .subv{font-size:9px;}
-  .split-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  .split-table th,.split-table td{padding:5px 6px;white-space:nowrap;}
-  .violin-card,.avg-maneuver-card,.polar-card{padding:12px;border-radius:12px;margin-bottom:14px;}
-  .violin-container{height:260px;}
-  .avg-maneuver-container{height:240px;}
+  .split-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
+  .split-table th,.split-table td{padding:5px 5px;white-space:nowrap;}
+  .grid-2{gap:10px !important;}
+  .violin-card,.avg-maneuver-card,.polar-card{padding:10px 8px;border-radius:8px;margin-bottom:10px;}
+  .violin-container{height:260px;margin:8px 0;}
+  .avg-maneuver-container{height:240px;margin:8px 0;}
   .polar-chart-wrap{height:280px !important;}
-  .violin-toggle,.avg-m-toggle{padding:5px 12px;font-size:12px;}
-  .violin-stats-row{flex-direction:column;align-items:center;gap:12px;}
-  .violin-stat-cell{padding:0 12px;}
-  .violin-stat-cell .val{font-size:14px;}
-  .violin-stat-cell .vals{gap:16px;}
-  .polar-legend-row{gap:12px;flex-wrap:wrap;font-size:11px;}
-  .avg-maneuver-legend{gap:12px;flex-wrap:wrap;font-size:11px;}
-  .cbar{font-size:11px;}
-  .cbar .bl{width:70px;font-size:11px;}
-  .cbar .bv{width:50px;font-size:11px;}
   .chart-wrap{height:300px !important;}
-  /* Radar cards stacked */
-  .grid.grid-2{grid-template-columns:1fr !important;}
+  .violin-toggle,.avg-m-toggle{padding:5px 10px;font-size:12px;}
+  .violin-toggle-row,.avg-maneuver-toggle-row{gap:6px;margin:6px 0;}
+  .violin-stats-row{flex-direction:column;align-items:center;gap:10px;margin-top:8px;padding-top:8px;}
+  .violin-stat-cell{padding:0 8px;}
+  .violin-stat-cell .val{font-size:14px;}
+  .violin-stat-cell .vals{gap:14px;}
+  .polar-legend-row{gap:10px;flex-wrap:wrap;font-size:11px;margin-top:8px;}
+  .avg-maneuver-legend{gap:10px;flex-wrap:wrap;font-size:11px;}
+  .cbar{font-size:11px;min-height:28px;}
+  .cbar .bl{width:60px;font-size:10px;}
+  .cbar .bv{width:45px;font-size:10px;}
+  /* All canvases full width */
+  canvas{width:100% !important;}
 }
 
 /* Very small phones */
 @media(max-width:380px){
-  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .header{padding:8px 6px;}
+  .controls{padding:6px 6px;}
+  .main{padding:6px 2px;}
+  .card{padding:8px 6px;}
+  .violin-card,.avg-maneuver-card,.polar-card{padding:8px 6px;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);gap:4px;}
+  .stat-box{padding:5px 2px;}
   .stat-box .value{font-size:14px;}
+  .stat-box .label{font-size:8px;}
+  .card-title{font-size:12px;}
   .violin-container{height:220px;}
   .avg-maneuver-container{height:200px;}
   .polar-chart-wrap{height:240px !important;}
   .chart-wrap{height:260px !important;}
-  .controls select{font-size:12px;padding:8px 10px;}
+  .controls select{font-size:13px;padding:8px 8px;}
 }
 
 </style>
@@ -1474,8 +1488,8 @@ function buildRadarHTML(selectedKey, cls, band) {
   const indLegend = radarLegendHTML('individual', indNames, indColors, indDash);
 
   return `
-  <div style="margin-top:32px;border-top:2px solid rgba(255,255,255,0.1);padding-top:24px;">
-    <div class="grid grid-2" style="gap:20px;">
+  <div class="radar-section">
+    <div class="grid grid-2">
       <div class="card" style="display:flex;flex-direction:column;">
         <div class="card-title">Class Performance Radar \u00b7 ${cls} <span class="badge badge-orange">${cls}</span> ${bandBadge}</div>
         <div style="color:rgba(255,255,255,0.5);font-size:11px;margin:-8px 0 8px 0;">${athStr}</div>
