@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athlete Self-Assessment | Techno 293 World Championship 2026</title>
+    <title>India T293 — Pre-Event Survey</title>
     <style>
         :root {
             --green-d: #1b5e20;
@@ -198,6 +198,12 @@
         .scale-3 { --color: #f9a825; }  /* Yellow */
         .scale-4 { --color: #43a047; }  /* Light green */
         .scale-5 { --color: #1b5e20; }  /* Dark green */
+        .grade-block{border:1px solid #e3e8ef;border-left-width:4px;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+        .grade-a{border-left-color:#9db4cc}.grade-b{border-left-color:#FF9933}.grade-c{border-left-color:#F2B233}.grade-d{border-left-color:#138808}.grade-x{border-left-color:#c0392b}
+        .grade-block h3{margin:0 0 10px;font-size:15px}
+        .grade-tag{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:#0A2540;color:#fff;font-family:monospace;font-weight:700;font-size:13px;vertical-align:middle;margin-right:4px}
+        .grade-b .grade-tag{background:#FF9933}.grade-c .grade-tag{background:#F2B233;color:#0A2540}.grade-d .grade-tag{background:#138808}.grade-x .grade-tag{background:#c0392b}
+
 
         .scale-btn.active {
             background: var(--color);
@@ -434,7 +440,7 @@
 </head>
 <body>
     <header>
-        <h1>🏄 Athlete Self-Assessment</h1>
+        <h1>🏄 Pre-Event Survey</h1>
         <p>India Techno 293 · World Championship 2026</p>
     </header>
 
@@ -459,10 +465,10 @@
         <form id="assessmentForm">
             <!-- Section 0: Header & Identity -->
             <div class="card">
-                <h2>Assessment Details</h2>
+                <h2>Survey Details</h2>
 
                 <div class="form-group">
-                    <label>Assessment Type</label>
+                    <label>Survey Type</label>
                     <div class="toggle-group">
                         <button type="button" class="toggle-btn active" data-type="pre">
                             📋 PRE Event
@@ -761,76 +767,37 @@
 
             <!-- Section 2b: Wind Condition Skills -->
             <div class="card">
-                <h2>2b. Wind Condition Skills</h2>
+                <h2>2b. Technique by Wind Band <small style="font-weight:400;color:#7a8aa0">— ABCDX grade</small></h2>
+                <p style="color:#5b6b7e;font-size:14px;margin:-4px 0 14px">Rate yourself in each of Coach Danny's wind grades (A–X). This maps directly to the GPS band analysis (% of Top 5) so self-perception can be checked against measured speed.</p>
 
-                <h3>Light Wind (&lt;10 kts)</h3>
-                <div class="form-group">
-                    <label>Upwind Ability (1=Struggle → 5=Strong)</label>
-                    <div class="scale-container">
-                        <button type="button" class="scale-btn scale-1" data-field="light_wind_upwind" data-value="1">1</button>
-                        <button type="button" class="scale-btn scale-2" data-field="light_wind_upwind" data-value="2">2</button>
-                        <button type="button" class="scale-btn scale-3" data-field="light_wind_upwind" data-value="3">3</button>
-                        <button type="button" class="scale-btn scale-4" data-field="light_wind_upwind" data-value="4">4</button>
-                        <button type="button" class="scale-btn scale-5" data-field="light_wind_upwind" data-value="5">5</button>
-                    </div>
-                    <input type="hidden" id="light_wind_upwind" name="light_wind_upwind">
-                </div>
-                <div class="form-group">
-                    <label>Downwind Ability (1=Struggle → 5=Strong)</label>
-                    <div class="scale-container">
-                        <button type="button" class="scale-btn scale-1" data-field="light_wind_downwind" data-value="1">1</button>
-                        <button type="button" class="scale-btn scale-2" data-field="light_wind_downwind" data-value="2">2</button>
-                        <button type="button" class="scale-btn scale-3" data-field="light_wind_downwind" data-value="3">3</button>
-                        <button type="button" class="scale-btn scale-4" data-field="light_wind_downwind" data-value="4">4</button>
-                        <button type="button" class="scale-btn scale-5" data-field="light_wind_downwind" data-value="5">5</button>
-                    </div>
-                    <input type="hidden" id="light_wind_downwind" name="light_wind_downwind">
-                </div>
-                <div class="form-group">
-                    <label>Overall Light Wind Confidence (1=Low → 5=High)</label>
-                    <div class="scale-container">
-                        <button type="button" class="scale-btn scale-1" data-field="light_wind_confidence" data-value="1">1</button>
-                        <button type="button" class="scale-btn scale-2" data-field="light_wind_confidence" data-value="2">2</button>
-                        <button type="button" class="scale-btn scale-3" data-field="light_wind_confidence" data-value="3">3</button>
-                        <button type="button" class="scale-btn scale-4" data-field="light_wind_confidence" data-value="4">4</button>
-                        <button type="button" class="scale-btn scale-5" data-field="light_wind_confidence" data-value="5">5</button>
-                    </div>
-                    <input type="hidden" id="light_wind_confidence" name="light_wind_confidence">
+                <div class="grade-block grade-a">
+                  <h3><span class="grade-tag">A</span> ≤ 5 kt  <small style="font-weight:400;color:#7a8aa0">Drifting / sub-planing — light-air technique</small></h3>
+                  <div class="form-group"><label>Confidence in this band (1=Avoid → 5=Strong)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_a_conf" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_a_conf" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_a_conf" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_a_conf" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_a_conf" data-value="5">5</button></div><input type="hidden" id="band_a_conf" name="band_a_conf"></div>
+                  <div class="form-group"><label>Boardspeed vs fleet (1=Slow → 5=Fast)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_a_speed" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_a_speed" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_a_speed" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_a_speed" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_a_speed" data-value="5">5</button></div><input type="hidden" id="band_a_speed" name="band_a_speed"></div>
                 </div>
 
-                <h3>Heavy Wind (&gt;15 kts)</h3>
-                <div class="form-group">
-                    <label>Upwind Ability (1=Struggle → 5=Strong)</label>
-                    <div class="scale-container">
-                        <button type="button" class="scale-btn scale-1" data-field="heavy_wind_upwind" data-value="1">1</button>
-                        <button type="button" class="scale-btn scale-2" data-field="heavy_wind_upwind" data-value="2">2</button>
-                        <button type="button" class="scale-btn scale-3" data-field="heavy_wind_upwind" data-value="3">3</button>
-                        <button type="button" class="scale-btn scale-4" data-field="heavy_wind_upwind" data-value="4">4</button>
-                        <button type="button" class="scale-btn scale-5" data-field="heavy_wind_upwind" data-value="5">5</button>
-                    </div>
-                    <input type="hidden" id="heavy_wind_upwind" name="heavy_wind_upwind">
+                <div class="grade-block grade-b">
+                  <h3><span class="grade-tag">B</span> 6–8 kt  <small style="font-weight:400;color:#7a8aa0">Marginal planing — pump-to-plane window</small></h3>
+                  <div class="form-group"><label>Confidence in this band (1=Avoid → 5=Strong)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_b_conf" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_b_conf" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_b_conf" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_b_conf" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_b_conf" data-value="5">5</button></div><input type="hidden" id="band_b_conf" name="band_b_conf"></div>
+                  <div class="form-group"><label>Boardspeed vs fleet (1=Slow → 5=Fast)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_b_speed" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_b_speed" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_b_speed" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_b_speed" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_b_speed" data-value="5">5</button></div><input type="hidden" id="band_b_speed" name="band_b_speed"></div>
                 </div>
-                <div class="form-group">
-                    <label>Downwind Ability (1=Struggle → 5=Strong)</label>
-                    <div class="scale-container">
-                        <button type="button" class="scale-btn scale-1" data-field="heavy_wind_downwind" data-value="1">1</button>
-                        <button type="button" class="scale-btn scale-2" data-field="heavy_wind_downwind" data-value="2">2</button>
-                        <button type="button" class="scale-btn scale-3" data-field="heavy_wind_downwind" data-value="3">3</button>
-                        <button type="button" class="scale-btn scale-4" data-field="heavy_wind_downwind" data-value="4">4</button>
-                        <button type="button" class="scale-btn scale-5" data-field="heavy_wind_downwind" data-value="5">5</button>
-                    </div>
-                    <input type="hidden" id="heavy_wind_downwind" name="heavy_wind_downwind">
+
+                <div class="grade-block grade-c">
+                  <h3><span class="grade-tag">C</span> 9–12 kt  <small style="font-weight:400;color:#7a8aa0">Steady planing — your bread-and-butter range</small></h3>
+                  <div class="form-group"><label>Confidence in this band (1=Avoid → 5=Strong)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_c_conf" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_c_conf" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_c_conf" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_c_conf" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_c_conf" data-value="5">5</button></div><input type="hidden" id="band_c_conf" name="band_c_conf"></div>
+                  <div class="form-group"><label>Boardspeed vs fleet (1=Slow → 5=Fast)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_c_speed" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_c_speed" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_c_speed" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_c_speed" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_c_speed" data-value="5">5</button></div><input type="hidden" id="band_c_speed" name="band_c_speed"></div>
                 </div>
-                <div class="form-group">
-                    <label>Overall Heavy Wind Confidence (1=Low → 5=High)</label>
-                    <div class="scale-container">
-                        <button type="button" class="scale-btn scale-1" data-field="heavy_wind_confidence" data-value="1">1</button>
-                        <button type="button" class="scale-btn scale-2" data-field="heavy_wind_confidence" data-value="2">2</button>
-                        <button type="button" class="scale-btn scale-3" data-field="heavy_wind_confidence" data-value="3">3</button>
-                        <button type="button" class="scale-btn scale-4" data-field="heavy_wind_confidence" data-value="4">4</button>
-                        <button type="button" class="scale-btn scale-5" data-field="heavy_wind_confidence" data-value="5">5</button>
-                    </div>
-                    <input type="hidden" id="heavy_wind_confidence" name="heavy_wind_confidence">
+
+                <div class="grade-block grade-d">
+                  <h3><span class="grade-tag">D</span> 13–16 kt  <small style="font-weight:400;color:#7a8aa0">Powered up — control & survival track</small></h3>
+                  <div class="form-group"><label>Confidence in this band (1=Avoid → 5=Strong)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_d_conf" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_d_conf" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_d_conf" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_d_conf" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_d_conf" data-value="5">5</button></div><input type="hidden" id="band_d_conf" name="band_d_conf"></div>
+                  <div class="form-group"><label>Boardspeed vs fleet (1=Slow → 5=Fast)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_d_speed" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_d_speed" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_d_speed" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_d_speed" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_d_speed" data-value="5">5</button></div><input type="hidden" id="band_d_speed" name="band_d_speed"></div>
+                </div>
+
+                <div class="grade-block grade-x">
+                  <h3><span class="grade-tag">X</span> 17+ kt  <small style="font-weight:400;color:#7a8aa0">Overpowered — P1 survival, max physical</small></h3>
+                  <div class="form-group"><label>Confidence in this band (1=Avoid → 5=Strong)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_x_conf" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_x_conf" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_x_conf" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_x_conf" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_x_conf" data-value="5">5</button></div><input type="hidden" id="band_x_conf" name="band_x_conf"></div>
+                  <div class="form-group"><label>Boardspeed vs fleet (1=Slow → 5=Fast)</label><div class="scale-container"><button type="button" class="scale-btn scale-1" data-field="band_x_speed" data-value="1">1</button><button type="button" class="scale-btn scale-2" data-field="band_x_speed" data-value="2">2</button><button type="button" class="scale-btn scale-3" data-field="band_x_speed" data-value="3">3</button><button type="button" class="scale-btn scale-4" data-field="band_x_speed" data-value="4">4</button><button type="button" class="scale-btn scale-5" data-field="band_x_speed" data-value="5">5</button></div><input type="hidden" id="band_x_speed" name="band_x_speed"></div>
                 </div>
             </div>
 
@@ -1041,6 +1008,15 @@
                 </div>
 
                 <h3>Mental State</h3>
+                <div class="form-group">
+                    <label>Stress Level (1=Low stress (good) → 5=High stress (bad))</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn red-field scale-1" data-field="stress" data-value="1">1</button>
+                        <button type="button" class="scale-btn red-field scale-2" data-field="stress" data-value="2">2</button>
+                        <button type="button" class="scale-btn red-field scale-3" data-field="stress" data-value="3">3</button>
+                        <button type="button" class="scale-btn red-field scale-4" data-field="stress" data-value="4">4</button>
+                        <button type="button" class="scale-btn red-field scale-5" data-field="stress" data-value="5">5</button>
+                    </div>
                     <input type="hidden" id="stress" name="stress">
                 </div>
 
@@ -1116,10 +1092,96 @@
                 <input type="hidden" id="priority_ranking" name="priority_ranking" value="">
             </div>
 
+            <!-- Section 8: Project Review (POST only) -->
+            <div class="card hidden" id="post_section">
+                <h2>8. Project Review <small style="font-weight:400;color:#7a8aa0">— POST event only</small></h2>
+                <p style="color:#5b6b7e;font-size:13px;margin:-4px 0 14px">Reflect on the project you just completed — how satisfied you are, whether you hit your goal, and how each leader supported you.</p>
+
+                <div class="form-group">
+                    <label>Overall Project Satisfaction (1=Very unsatisfied → 5=Very satisfied)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="post_project_satisfaction" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="post_project_satisfaction" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="post_project_satisfaction" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="post_project_satisfaction" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="post_project_satisfaction" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="post_project_satisfaction" name="post_project_satisfaction">
+                </div>
+
+                <div class="form-group">
+                    <label>Goal Achievement — did you reach the goal you set? (1=Not at all → 5=Fully achieved)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="post_goal_achievement" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="post_goal_achievement" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="post_goal_achievement" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="post_goal_achievement" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="post_goal_achievement" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="post_goal_achievement" name="post_goal_achievement">
+                </div>
+
+                <h3>Leader Support Satisfaction (1=Poor → 5=Excellent)</h3>
+                <div class="form-group">
+                    <label>Danny Ok — Head Coach (training plan, coaching, equipment)</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="post_support_danny" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="post_support_danny" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="post_support_danny" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="post_support_danny" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="post_support_danny" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="post_support_danny" name="post_support_danny">
+                </div>
+                <div class="form-group">
+                    <label>Prakash Alexander — Safety & Prep Coach</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="post_support_prakash" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="post_support_prakash" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="post_support_prakash" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="post_support_prakash" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="post_support_prakash" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="post_support_prakash" name="post_support_prakash">
+                </div>
+                <div class="form-group">
+                    <label>Meenu Dhaiya — Health, Wellness & Nutrition</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="post_support_meenu" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="post_support_meenu" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="post_support_meenu" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="post_support_meenu" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="post_support_meenu" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="post_support_meenu" name="post_support_meenu">
+                </div>
+                <div class="form-group">
+                    <label>Association (YAI) — logistics, parents, budget</label>
+                    <div class="scale-container">
+                        <button type="button" class="scale-btn scale-1" data-field="post_support_yai" data-value="1">1</button>
+                        <button type="button" class="scale-btn scale-2" data-field="post_support_yai" data-value="2">2</button>
+                        <button type="button" class="scale-btn scale-3" data-field="post_support_yai" data-value="3">3</button>
+                        <button type="button" class="scale-btn scale-4" data-field="post_support_yai" data-value="4">4</button>
+                        <button type="button" class="scale-btn scale-5" data-field="post_support_yai" data-value="5">5</button>
+                    </div>
+                    <input type="hidden" id="post_support_yai" name="post_support_yai">
+                </div>
+
+                <div class="form-group">
+                    <label for="next_foundation">Foundation for next training — what should you carry into the next cycle?</label>
+                    <textarea id="next_foundation" name="next_foundation" placeholder="e.g. Keep building heavy-air endurance, lock in the new start routine, follow the nutrition plan..."></textarea>
+                </div>
+            </div>
+
             <!-- Summary Section (auto-generated) -->
             <div class="summary-card hidden" id="summary_section">
-                <h2>Assessment Summary</h2>
-                <p class="info-text" style="margin-bottom: 16px;">Click "Complete Assessment" to see priority classification</p>
+                <h2>Survey Summary</h2>
+                <p class="info-text" style="margin-bottom: 16px;">Click "Complete Survey" to see priority classification</p>
+
+                <div class="priority-section hidden" id="delta_section">
+                    <h3>Growth Since Pre-Event</h3>
+                    <div id="delta_body"></div>
+                </div>
 
                 <div class="priority-section" id="priority_critical">
                     <h3>Priority 1 - Critical (1-2 rating)</h3>
@@ -1141,14 +1203,20 @@
             <div class="card">
                 <div class="button-group">
                     <button type="button" class="btn btn-secondary" id="reset_btn">Clear Form</button>
-                    <button type="submit" class="btn btn-primary">Complete Assessment</button>
+                    <button type="submit" class="btn btn-primary">Complete Survey</button>
                 </div>
             </div>
         </form>
     </div>
 
     <script>
-        const SUBMIT_URL = localStorage.getItem('india_t293_script_url') || 'https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec';
+        if (localStorage.getItem('india_t293_script_url')==='https://script.google.com/macros/s/AKfycbyohyVgFDxczhO4l3S60RjTy01IBJ83bCdOpIhgZnCEPT-r98T_dQ9t-5bK2y1qsN_t9w/exec') {
+            localStorage.setItem('india_t293_script_url','https://script.google.com/macros/s/AKfycbz-SbUkvSftVIrPNfwx8asGjbUz2Z7m6-GWg_zd7i4Db2-0FWTqXnljwoVODwbpxvRWxg/exec');
+        }
+        if (!localStorage.getItem('india_t293_script_url')) {
+            localStorage.setItem('india_t293_script_url', 'https://script.google.com/macros/s/AKfycbz-SbUkvSftVIrPNfwx8asGjbUz2Z7m6-GWg_zd7i4Db2-0FWTqXnljwoVODwbpxvRWxg/exec');
+        }
+        const SUBMIT_URL = localStorage.getItem('india_t293_script_url') || 'https://script.google.com/macros/s/AKfycbz-SbUkvSftVIrPNfwx8asGjbUz2Z7m6-GWg_zd7i4Db2-0FWTqXnljwoVODwbpxvRWxg/exec';
 
         const ROSTER = [
             { id: 'IND16', name: 'Mohit Mhatre', cls: 'T293 Youth (U17)', gender: 'M' },
@@ -1164,12 +1232,17 @@
         const SCALE_FIELDS = [
             'fitness_level', 'energy', 'flexibility', 'endurance', 'strength_upper', 'strength_core', 'strength_legs',
             'upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality',
-            'light_wind_upwind', 'light_wind_downwind', 'light_wind_confidence', 'heavy_wind_upwind', 'heavy_wind_downwind', 'heavy_wind_confidence',
             'equip_sail_tuning', 'equip_board_setup', 'equip_maintenance', 'equip_wind_reading',
             'rules_right_of_way', 'rules_penalties', 'rules_marks', 'rules_protest',
             'tactical_upwind', 'tactical_downwind', 'tactical_start', 'tactical_current',
             'confidence', 'confidence_technical', 'confidence_tactical', 'confidence_physical',
             'stress', 'focus', 'goal_clarity', 'motivation'
+        ];
+
+        // POST-only fields (Section 8)
+        const POST_FIELDS = [
+            'post_project_satisfaction', 'post_goal_achievement',
+            'post_support_danny', 'post_support_prakash', 'post_support_meenu', 'post_support_yai'
         ];
 
         // Initialize
@@ -1241,6 +1314,10 @@
                         coachLabel.textContent = 'What was the most valuable thing you learned during this championship?';
                         goalLabel.textContent = 'Did you achieve your goal? What would you do differently?';
                     }
+
+                    const postSection = document.getElementById('post_section');
+                    if (postSection) postSection.classList.toggle('hidden', type !== 'post');
+                    updateProgressBar();
                 });
             });
         }
@@ -1461,15 +1538,27 @@
                 payload.race_goal = formData.get('race_goal');
                 payload.pain_areas = formData.get('pain_areas');
 
+                if (payload.assessment_type === 'post') {
+                    POST_FIELDS.forEach(field => {
+                        const val = formData.get(field);
+                        payload[field] = val ? parseInt(val) : null;
+                    });
+                    payload.next_foundation = formData.get('next_foundation');
+                }
+
                 // Priority ranking (from reorder list)
                 payload.priority_ranking = document.getElementById('priority_ranking').value;
                 payload.submitted_at = new Date().toISOString();
+
+                try {
+                    if (payload.athlete_id) localStorage.setItem('t293_assess_' + payload.athlete_id + '_' + payload.assessment_type, JSON.stringify(payload));
+                } catch (err) {}
 
                 console.log('Payload:', payload);
 
                 if (!SUBMIT_URL) {
                     showSummary();
-                    alert('Assessment complete! (Google Apps Script URL not configured yet)\n\nPayload logged to console.');
+                    alert('Survey complete! (Google Apps Script URL not configured yet)\n\nPayload logged to console.');
                 } else {
                     submitToGoogleSheets(payload);
                 }
@@ -1501,13 +1590,15 @@
                 alert('Saved locally. Will sync when online.');
             })
             .finally(() => {
-                if (btn) { btn.disabled = false; btn.textContent = 'Submit Assessment'; }
+                if (btn) { btn.disabled = false; btn.textContent = 'Complete Survey'; }
             });
         }
 
         function showSummary() {
             const summary = document.getElementById('summary_section');
             summary.classList.remove('hidden');
+
+            renderDelta();
 
             const criticalBadges = document.getElementById('critical_badges');
             const improveBadges = document.getElementById('improve_badges');
@@ -1519,8 +1610,7 @@
 
             const categories = {
                 'Physical': ['fitness_level', 'energy', 'flexibility', 'endurance', 'strength_upper', 'strength_core', 'strength_legs'],
-                'Technical': ['upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality',
-                    'light_wind_upwind', 'light_wind_downwind', 'light_wind_confidence', 'heavy_wind_upwind', 'heavy_wind_downwind', 'heavy_wind_confidence'],
+                'Technical': ['upwind_speed', 'upwind_control', 'downwind_speed', 'downwind_control', 'tacking_quality', 'gybing_quality', 'pumping_tech', 'start_quality'],
                 'Equipment': ['equip_sail_tuning', 'equip_board_setup', 'equip_maintenance', 'equip_wind_reading'],
                 'Racing': ['rules_right_of_way', 'rules_penalties', 'rules_marks', 'rules_protest', 'tactical_upwind', 'tactical_downwind', 'tactical_start', 'tactical_current'],
                 'Mental': ['confidence', 'confidence_technical', 'confidence_tactical', 'confidence_physical', 'stress', 'focus', 'goal_clarity', 'motivation']
@@ -1588,6 +1678,45 @@
             summary.scrollIntoView({ behavior: 'smooth' });
         }
 
+        // Compare current POST values against the stored PRE for this athlete
+        function renderDelta() {
+            const section = document.getElementById('delta_section');
+            const body = document.getElementById('delta_body');
+            const type = document.getElementById('assessment_type').value;
+            const athleteId = document.getElementById('athlete_id').value;
+            if (type !== 'post' || !athleteId) { section.classList.add('hidden'); return; }
+
+            let pre = null;
+            try { pre = JSON.parse(localStorage.getItem('t293_assess_' + athleteId + '_pre') || 'null'); } catch (e) {}
+            if (!pre) {
+                section.classList.remove('hidden');
+                body.innerHTML = '<p class="info-text">No pre-event assessment found for this athlete, so growth cannot be computed.</p>';
+                return;
+            }
+
+            const rows = [];
+            let up = 0, down = 0, sumDelta = 0, counted = 0;
+            SCALE_FIELDS.forEach(field => {
+                const el = document.getElementById(field);
+                const nowVal = el ? parseInt(el.value) : NaN;
+                const preVal = pre[field] != null ? parseInt(pre[field]) : NaN;
+                if (isNaN(nowVal) || isNaN(preVal)) return;
+                const d = nowVal - preVal;
+                counted++; sumDelta += d;
+                if (d > 0) up++; else if (d < 0) down++;
+                if (d === 0) return;
+                const color = d > 0 ? '#2e7d32' : '#c62828';
+                const arrow = d > 0 ? '▲' : '▼';
+                rows.push(`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-radius:6px;margin-bottom:4px;background:${d>0?'#e8f5e9':'#ffebee'};font-size:12px;font-weight:600"><span>${field.replace(/_/g,' ').toUpperCase()}</span><span style="color:${color}">${preVal} → ${nowVal} &nbsp; ${arrow} ${d>0?'+':''}${d}</span></div>`);
+            });
+
+            const avg = counted ? (sumDelta / counted).toFixed(2) : '0';
+            section.classList.remove('hidden');
+            body.innerHTML =
+                `<p class="info-text" style="margin-bottom:10px">${up} improved · ${down} declined · avg change ${sumDelta>=0?'+':''}${avg} across ${counted} rated items.</p>` +
+                (rows.length ? rows.join('') : '<p class="info-text">No individual changes recorded.</p>');
+        }
+
         function updateProgressBar() {
             const filledCount = SCALE_FIELDS.filter(f => document.getElementById(f).value).length;
             const textFieldsFilled = [
@@ -1597,8 +1726,14 @@
                 document.getElementById('race_goal').value
             ].filter(v => v).length;
 
-            const totalFields = SCALE_FIELDS.length + 4; // scale fields + text fields (priority always complete)
-            const filled = filledCount + textFieldsFilled;
+            let filled = filledCount + textFieldsFilled;
+            let totalFields = SCALE_FIELDS.length + 4; // scale + text (priority always complete)
+
+            if (document.getElementById('assessment_type').value === 'post') {
+                filled += POST_FIELDS.filter(f => document.getElementById(f) && document.getElementById(f).value).length;
+                if (document.getElementById('next_foundation') && document.getElementById('next_foundation').value) filled += 1;
+                totalFields += POST_FIELDS.length + 1;
+            }
 
             const percentage = Math.round((filled / totalFields) * 100);
             document.querySelector('.progress-fill').style.width = percentage + '%';
